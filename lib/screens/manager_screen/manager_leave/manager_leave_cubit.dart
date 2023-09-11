@@ -1,29 +1,29 @@
 import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:finaldemo/screens/main_screen/main_screen_view.dart';
+import 'package:finaldemo/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import 'manager_leave_state.dart';
 
-
 class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   ManagerScreenCubit()
       : super(
-    ManagerScreenState(
-      empList: [
-        Leave(name: "Devang", surname: "Sabalpara"),
-        Leave(name: "Pritesh", surname: "Tala"),
-        Leave(name: "Deep", surname: "Vaghani"),
-        Leave(name: "Kuldeep", surname: "Ghoghari"),
-        Leave(name: "Nemanshu", surname: "Bhalala"),
-        Leave(name: "Akash", surname: "Valani"),
-        Leave(name: "Khushali", surname: "Sutariya"),
-        Leave(name: "Nensi", surname: "Tala"),
-      ],
-      dateController: TextEditingController(),
-    ),
-  );
+          ManagerScreenState(
+            leaveList: [
+              Leave(name: "Devang", surname: "Sabalpara"),
+              Leave(name: "Pritesh", surname: "Tala"),
+              Leave(name: "Deep", surname: "Vaghani"),
+              Leave(name: "Kuldeep", surname: "Ghoghari"),
+              Leave(name: "Nemanshu", surname: "Bhalala"),
+              Leave(name: "Akash", surname: "Valani"),
+              Leave(name: "Khushali", surname: "Sutariya"),
+              Leave(name: "Nensi", surname: "Tala"),
+            ],
+            dateController: TextEditingController(),
+          ),
+        );
 
   void dateTime(context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -64,5 +64,9 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
         );
       },
     );
+  }
+
+  void navigateToDepartmentView(context) {
+    Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);
   }
 }

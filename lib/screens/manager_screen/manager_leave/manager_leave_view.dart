@@ -60,6 +60,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             ],
           ),
           body: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -71,7 +72,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   height: 100,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: state.empList.length,
+                    itemCount: state.leaveList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Column(
@@ -82,14 +83,15 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               radius: 27,
                               backgroundColor: Colors.primaries[index],
                               child: Text(
-                                "${state.empList[index].name[0]}${state.empList[index].surname[0]}",
+                                "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
                           Column(
                             children: [
-                              Text("${state.empList[index].name}..", overflow: TextOverflow.ellipsis),
+                              SizedBox(height: 5),
+                              Text("${state.leaveList[index].name}..", overflow: TextOverflow.ellipsis),
                             ],
                           ),
                         ],
@@ -124,7 +126,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     // padding: EdgeInsets.only(top: 15),
-                    itemCount: state.empList.length,
+                    itemCount: state.leaveList.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Column(
@@ -134,13 +136,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                             child: CircleAvatar(
                                 radius: 27,
                                 backgroundColor: Colors.primaries[index],
-                                child: Text("${state.empList[index].name[0]}${state.empList[index].surname[0]}",
+                                child: Text("${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
                                     style: TextStyle(color: Colors.white))),
                           ),
                           Column(
                             children: [
+                              SizedBox(height: 5),
                               Text(
-                                "${state.empList[index].name}..",
+                                "${state.leaveList[index].name}..",
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
@@ -156,58 +159,66 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.green.shade200,
-                        ),
-                        height: 150,
-                        width: 150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Employee",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green.shade200,
+                          ),
+                          height: 150,
+                          width: 150,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Employee",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "${state.empList.length}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                              Text(
+                                "${state.leaveList.length}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.green.shade200,
-                        ),
-                        height: 150,
-                        width: 150,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Department",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                      GestureDetector(
+                        onTap: () {
+                          context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.green.shade200,
+                          ),
+                          height: 150,
+                          width: 150,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Department",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "${state.empList.length}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                              Text(
+                                "${state.leaveList.length}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
