@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomSearch extends StatelessWidget {
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
 
   const CustomSearch({
     super.key,
     this.controller,
+    this.onChanged
   });
 
   @override
@@ -13,6 +15,7 @@ class CustomSearch extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        onChanged: onChanged,
         controller: controller,
         decoration: InputDecoration(
           suffixIcon: const Icon(Icons.search_rounded),

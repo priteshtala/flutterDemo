@@ -1,15 +1,21 @@
+import 'package:finaldemo/keka_project/comman/comman_button.dart';
 import 'package:finaldemo/keka_project/comman/common_search.dart';
+import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.dart';
+import 'package:finaldemo/screens/manager_screen/department_details/department_details_cubit.dart';
+import 'package:finaldemo/screens/manager_screen/department_details/department_details_state.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class EmployeeDetailsView extends StatefulWidget {
   static const String routeName = "/Employee_details_view";
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => EmployeeDetailsCubit(EmployeeDetailsState()),
+      create: (context) => EmployeeDetailsCubit(),
       child: const EmployeeDetailsView(),
     );
   }
@@ -22,29 +28,136 @@ class EmployeeDetailsView extends StatefulWidget {
 
 class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
   @override
+  // void initState() {
+  //   super.initState();
+  // }
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Employee-Details"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomSearch(),
-            SizedBox(height: 5),
-            Divider(color: Colors.black),
-            Row(
+    return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Employee-List"),
+          ),
+          body: SingleChildScrollView(
+            // physics: ClampingScrollPhysics(),
+            padding: const EdgeInsets.all(8),
+            child: Column(
               children: [
-                Text(
-                  "Department",
-                  textScaleFactor: 1.5,
+                CustomSearch(
+                  controller: state.searchController,
+                  onChanged: (query) {
+                    context.read<EmployeeDetailsCubit>().runFilter(query);
+                  },
                 ),
-                // DropdownButton(items: items, onChanged: onChanged)
+                const SizedBox(height: 5),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 0),
+                    color: Colors.white,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Expanded(
+                        flex: 2,
+                        child: Text(
+                          "Department",
+                          textScaleFactor: 1.5,
+                        ),
+                      ),
+                      Expanded(
+                          flex: 2,
+                          child: Theme(
+                            data: Theme.of(context).copyWith(
+                                inputDecorationTheme: InputDecorationTheme(
+                              isDense: true,
+                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding: EdgeInsets.all(8),
+                            )),
+                            child: DropdownButtonFormField<String>(
+                              alignment: Alignment.center,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                              ),
+                              isDense: true,
+                              hint: const Text('All'),
+                              value: state.selectedValue,
+                              onChanged: (value) {
+                                context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                              },
+                              items: state.departmentList
+                                  .map((user) => DropdownMenuItem<String>(
+                                        value: user.department,
+                                        child: Text(user.department.toString()),
+                                      ))
+                                  .toList(),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
+                ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.filtterdUserList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var employee = state.filtterdUserList[index];
+                    return Card(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                      child: ListTile(
+                        // title: Text("${employee.name}"),
+                        leading: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.primaries[index],
+                          child:
+                              Text(state.filtterdUserList[index].name[0], style: const TextStyle(color: Colors.black)),
+                        ),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(employee.name, style: const TextStyle(color: Colors.black)),
+                            const SizedBox(height: 8),
+                            Text(employee.role),
+                            const SizedBox(height: 16),
+                            Text("Location : ${employee.location}"),
+                            Text("Department : ${employee.department}"),
+                            Text("Email : ${employee.email}"),
+                            Text("Mobile : ${employee.number}"),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
-          ],
-        ),
-      ),
+          ),
+          bottomNavigationBar: SafeArea(
+            minimum: const EdgeInsets.only(bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AddEmployeeView.routeName);
+                  },
+                  minWidth: 300,
+                  child: const Text(
+                    "Add-Employee",
+                    textScaleFactor: 1.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
