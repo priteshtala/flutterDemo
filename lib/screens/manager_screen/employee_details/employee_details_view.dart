@@ -35,7 +35,10 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
             Divider(color: Colors.black),
             Row(
               children: [
-                Text("Department"),
+                Text(
+                  "Department",
+                  textScaleFactor: 1.5,
+                ),
                 // DropdownButton(items: items, onChanged: onChanged)
               ],
             ),

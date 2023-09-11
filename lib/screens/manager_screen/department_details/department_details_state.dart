@@ -3,7 +3,7 @@ import 'package:finaldemo/keka_project/model/department_model/department_model.d
 
 class  DepartmentDetailsState extends Equatable{
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [departmentList];
   List<Department> departmentList = [];
 
   DepartmentDetailsState({required this.departmentList});
