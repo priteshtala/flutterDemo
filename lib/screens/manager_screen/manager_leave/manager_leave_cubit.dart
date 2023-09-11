@@ -30,7 +30,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2025),
     );
     if (pickedDate != null) {
       String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
@@ -69,4 +69,5 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   void navigateToDepartmentView(context) {
     Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);
   }
+
 }

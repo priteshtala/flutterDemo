@@ -1,8 +1,6 @@
 import 'package:finaldemo/keka_project/comman/comman_button.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
@@ -43,7 +41,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   color: Colors.green.shade300,
                   minWidth: 150,
                   onPressed: () {},
-                  child: const Text("Request Leaves"),
+                  child: const Text("Leave Requests"),
                 ),
               ],
             ),
@@ -60,104 +58,132 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             ],
           ),
           body: SingleChildScrollView(
+            padding: const EdgeInsets.all(8),
             physics: const ClampingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Text("On Leave Today", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17)),
-                ),
-                SizedBox(
-                  height: 100,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.leaveList.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: CircleAvatar(
-                              radius: 27,
-                              backgroundColor: Colors.primaries[index],
-                              child: Text(
-                                "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(height: 5),
-                              Text("${state.leaveList[index].name}..", overflow: TextOverflow.ellipsis),
-                            ],
-                          ),
-                        ],
-                      );
-                    },
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black),
                   ),
-                ),
-                const Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Leave",
-                        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+                      const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          "On Leave Today",
+                          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+                        ),
                       ),
-                      CustomButtonChange(
-                        textColor: Colors.white,
-                        color: Colors.deepPurple,
-                        minWidth: 100,
-                        child: const Text("Select Date"),
-                        onPressed: () {
-                          context.read<ManagerScreenCubit>().dateTime(context);
-                        },
+                      Container(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        height: 120,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.leaveList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: CircleAvatar(
+                                    radius: 27,
+                                    backgroundColor: Colors.primaries[index],
+                                    child: Text(
+                                      "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
+                                      style: const TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    const SizedBox(height: 5),
+                                    Text("${state.leaveList[index].name}..", overflow: TextOverflow.ellipsis),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 100,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    // padding: EdgeInsets.only(top: 15),
-                    itemCount: state.leaveList.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: CircleAvatar(
-                                radius: 27,
-                                backgroundColor: Colors.primaries[index],
-                                child: Text("${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
-                                    style: TextStyle(color: Colors.white))),
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(height: 5),
-                              Text(
-                                "${state.leaveList[index].name}..",
-                                overflow: TextOverflow.ellipsis,
+                const SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Leave",
+                              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+                            ),
+                            Container(
+                              width: 200,
+                              alignment: Alignment.center,
+                              child: TextField(
+                                controller: state.dateController,
+                                decoration: const InputDecoration(
+                                  icon: Icon(Icons.calendar_today, color: Colors.deepPurple),
+                                ),
+                                readOnly: true,
+                                onTap: () {
+                                  context.read<ManagerScreenCubit>().dateTime(context);
+                                },
                               ),
-                            ],
-                          ),
-                        ],
-                      );
-                    },
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        height: 120,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.leaveList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  child: CircleAvatar(
+                                      radius: 27,
+                                      backgroundColor: Colors.primaries[index],
+                                      child: Text(
+                                          "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
+                                          style: const TextStyle(color: Colors.white))),
+                                ),
+                                Column(
+                                  children: [
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      "${state.leaveList[index].name}..",
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const Divider(),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
                         onTap: () {},

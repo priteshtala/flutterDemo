@@ -1,4 +1,5 @@
 import 'package:finaldemo/keka_project/splash/splash_screen.dart';
+import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_view.dart';
 import 'package:finaldemo/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_view.dart';
@@ -20,10 +21,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         appBarTheme: const AppBarTheme(color: Colors.green, foregroundColor: Colors.white),
-        useMaterial3: false,
+        useMaterial3: true,
       ),
       routes: routes,
-      initialRoute: SplashScreenView.routeName,
+      initialRoute: ApplyLeaveView.routeName,
+      // home: ApplyLeaveView(),
     );
   }
 
@@ -33,5 +35,6 @@ class MyApp extends StatelessWidget {
         EmployeeLoginView.routeName: EmployeeLoginView.builder,
         ManagerLeaveView.routeName: ManagerLeaveView.builder,
         DepartmentDetailsView.routeName: DepartmentDetailsView.builder,
+        ApplyLeaveView.routeName: ApplyLeaveView.builder,
       };
 }

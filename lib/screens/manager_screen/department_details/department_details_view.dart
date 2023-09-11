@@ -1,3 +1,5 @@
+import 'package:finaldemo/keka_project/comman/comman_button.dart';
+import 'package:finaldemo/keka_project/comman/common_search.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_cubit.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_state.dart';
 import 'package:flutter/material.dart';
@@ -25,25 +27,49 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
     return BlocBuilder<DepartmentDetailsCubit, DepartmentDetailsState>(
       builder: (context, state) {
         return Scaffold(
-          bottomNavigationBar: MaterialButton(
-            child: Text("Add Department"),
-            onPressed: () {},
+          bottomNavigationBar: Padding(
+            padding: const EdgeInsets.all(10),
+            child: CustomButtonChange(
+              color: Colors.green,
+              onPressed: () {
+                context.read<DepartmentDetailsCubit>().addDepartment(context);
+              },
+              minWidth: 200,
+              textColor: Colors.white,
+              child: const Text("Add Department"),
+            ),
           ),
           appBar: AppBar(
             title: const Text("Department"),
           ),
-          body: ListView.builder(
-            itemCount: state.departmentList.length,
-            itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  ListTile(
-                    tileColor: Colors.grey,
-                    title: Text(state.departmentList[index].department),
-                  )
-                ],
-              );
-            },
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                 CustomSearch(
+              onChanged: (query) {
+                context.read<DepartmentDetailsCubit>().departmentSearch(query);
+              },
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: state.leaveSearchList.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.primaries[index],
+                            child: Text(state.leaveSearchList[index].department[0]),
+                          ),
+                          title: Text(state.leaveSearchList[index].department),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         );
       },

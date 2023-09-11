@@ -4,20 +4,24 @@ import 'package:flutter/material.dart';
 
 class ManagerScreenState extends Equatable {
   @override
-  List<Object?> get props => [leaveList];
+  List<Object?> get props => [leaveList, dateController, searchController,];
 
   List<Leave> leaveList = [];
   TextEditingController dateController = TextEditingController();
+  TextEditingController? searchController;
 
-  ManagerScreenState({required this.leaveList, required this.dateController});
+  ManagerScreenState(
+      {required this.leaveList, required this.dateController, this.searchController,});
 
   ManagerScreenState copyWith({
     List<Leave>? leaveList,
     TextEditingController? dateController,
+    TextEditingController? searchController,
   }) {
     return ManagerScreenState(
       leaveList: leaveList ?? this.leaveList,
       dateController: dateController ?? this.dateController,
+      searchController: searchController ?? this.searchController,
     );
   }
 }
