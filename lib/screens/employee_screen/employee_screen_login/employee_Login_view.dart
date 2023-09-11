@@ -1,9 +1,11 @@
 import 'package:finaldemo/keka_project/comman/comman_button.dart';
 import 'package:finaldemo/keka_project/comman/comman_textformfield.dart';
-import 'package:finaldemo/screens/employeeScreen/employee_screen_login/employee_login_cubit.dart';
-import 'package:finaldemo/screens/employeeScreen/employee_screen_login/employee_login_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'employee_login_cubit.dart';
+import 'employee_login_state.dart';
 
 class EmployeeLoginView extends StatefulWidget {
   static const String routeName = "/Employee_Login_View";
