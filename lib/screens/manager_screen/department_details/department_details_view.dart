@@ -37,12 +37,9 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.green,
-                    ),
-                    child: Text(state.departmentList[index].department),
+                  ListTile(
+                    tileColor: Colors.grey,
+                    title: Text(state.departmentList[index].department),
                   )
                 ],
               );
