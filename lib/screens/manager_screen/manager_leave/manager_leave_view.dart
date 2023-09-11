@@ -186,7 +186,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          context.read<ManagerScreenCubit>().navigateToEmployeeListView(context);
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),

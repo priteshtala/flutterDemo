@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
         MainScreenView.routeName: MainScreenView.builder,
         EmployeeLoginView.routeName: EmployeeLoginView.builder,
         ManagerLeaveView.routeName: ManagerLeaveView.builder,
+        EmployeeDetailsView.routeName: EmployeeDetailsView.builder,
+    AddEmployeeView.routeName : AddEmployeeView.builder,
         DepartmentDetailsView.routeName: DepartmentDetailsView.builder,
         ApplyLeaveView.routeName: ApplyLeaveView.builder,
       };
