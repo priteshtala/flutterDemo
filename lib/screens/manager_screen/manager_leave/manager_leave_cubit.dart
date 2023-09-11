@@ -1,14 +1,16 @@
 import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
-import 'package:finaldemo/screens/employeeScreen/emoloyee_leave/employee_leave_state.dart';
+import 'package:finaldemo/screens/main_screen/main_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import 'manager_leave_state.dart';
 
-class EmployeeScreenCubit extends Cubit<EmployeeScreenState> {
-  EmployeeScreenCubit()
+
+class ManagerScreenCubit extends Cubit<ManagerScreenState> {
+  ManagerScreenCubit()
       : super(
-    EmployeeScreenState(
+    ManagerScreenState(
       empList: [
         Leave(name: "Devang", surname: "Sabalpara"),
         Leave(name: "Pritesh", surname: "Tala"),
@@ -35,5 +37,32 @@ class EmployeeScreenCubit extends Cubit<EmployeeScreenState> {
       state.dateController.text = formattedDate;
     }
     emit(state.copyWith(dateController: state.dateController));
+  }
+
+  alert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          alignment: Alignment.center,
+          title: const Text("Log Out?"),
+          actions: [
+            MaterialButton(
+              splashColor: Colors.red,
+              shape: Border.all(color: Colors.black),
+              onPressed: () {
+                Navigator.of(context).pushNamed(MainScreenView.routeName);
+              },
+              child: const Text("Yes", style: TextStyle(color: Colors.red)),
+            ),
+            MaterialButton(
+              shape: Border.all(color: Colors.black),
+              onPressed: () => Navigator.pop(context),
+              child: const Text("No"),
+            )
+          ],
+        );
+      },
+    );
   }
 }

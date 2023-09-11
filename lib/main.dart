@@ -1,8 +1,7 @@
-import 'package:finaldemo/keka_project/splash/splashScreen.dart';
-import 'package:finaldemo/screens/employeeScreen/emoloyee_leave/employe_leave_view.dart';
-import 'package:finaldemo/screens/employeeScreen/employee_screen_login/employee_Login_view.dart';
+import 'package:finaldemo/keka_project/splash/splash_screen.dart';
+import 'package:finaldemo/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
+import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
-
 import 'screens/main_screen/main_screen_view.dart';
 
 void main() {
@@ -31,6 +30,6 @@ class MyApp extends StatelessWidget {
         SplashScreenView.routeName: SplashScreenView.builder,
         MainScreenView.routeName: MainScreenView.builder,
         EmployeeLoginView.routeName: EmployeeLoginView.builder,
-        EmployeeScreenView.routeName: EmployeeScreenView.builder,
+        ManagerLeaveView.routeName: ManagerLeaveView.builder,
       };
 }

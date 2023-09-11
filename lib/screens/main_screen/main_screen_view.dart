@@ -1,11 +1,11 @@
 import 'package:finaldemo/keka_project/comman/comman_button.dart';
-import 'package:finaldemo/screens/employeeScreen/emoloyee_leave/employe_leave_view.dart';
-import 'package:finaldemo/screens/employeeScreen/employee_screen_login/employee_Login_view.dart';
+import 'package:finaldemo/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
 import 'package:finaldemo/screens/main_screen/main_screen_cubit.dart';
 import 'package:finaldemo/screens/main_screen/main_screen_state.dart';
+import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+
 
 class MainScreenView extends StatefulWidget {
   static const String routeName = "/Main_Screen_View";
@@ -97,7 +97,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                       } else if (state.isSelected == 0) {
                         // debugPrint("Done......!");
                         Navigator.of(context)
-                            .pushNamed(EmployeeScreenView.routeName);
+                            .pushNamed(ManagerLeaveView.routeName);
                       } else {
                         Navigator.of(context)
                             .pushNamed(EmployeeLoginView.routeName);

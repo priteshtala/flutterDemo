@@ -1,32 +1,32 @@
-
 import 'package:finaldemo/keka_project/comman/comman_button.dart';
-import 'package:finaldemo/screens/employeeScreen/emoloyee_leave/employee_leave_cubit.dart';
-import 'package:finaldemo/screens/employeeScreen/emoloyee_leave/employee_leave_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class EmployeeScreenView extends StatefulWidget {
+import 'manager_leave_cubit.dart';
+import 'manager_leave_state.dart';
+
+class ManagerLeaveView extends StatefulWidget {
   static const String routeName = '/Employee_Screen_View';
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => EmployeeScreenCubit(),
-      child: const EmployeeScreenView(),
+      create: (context) => ManagerScreenCubit(),
+      child: const ManagerLeaveView(),
     );
   }
 
-  const EmployeeScreenView({super.key});
+  const ManagerLeaveView({super.key});
 
   @override
-  State<EmployeeScreenView> createState() => _EmployeeScreenViewState();
+  State<ManagerLeaveView> createState() => _ManagerLeaveViewState();
 }
 
-class _EmployeeScreenViewState extends State<EmployeeScreenView> {
+class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EmployeeScreenCubit, EmployeeScreenState>(
+    return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
-        debugPrint("empList=====================${state.empList}");
         return Scaffold(
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -52,7 +52,9 @@ class _EmployeeScreenViewState extends State<EmployeeScreenView> {
             title: const Text("Elaunch Solution"),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<ManagerScreenCubit>().alert(context);
+                },
                 icon: const Icon(Icons.logout),
               ),
             ],
@@ -111,7 +113,7 @@ class _EmployeeScreenViewState extends State<EmployeeScreenView> {
                         minWidth: 100,
                         child: const Text("Select Date"),
                         onPressed: () {
-                          context.read<EmployeeScreenCubit>().dateTime(context);
+                          context.read<ManagerScreenCubit>().dateTime(context);
                         },
                       ),
                     ],
