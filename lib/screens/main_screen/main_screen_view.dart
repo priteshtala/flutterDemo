@@ -30,6 +30,46 @@ class _MainScreenViewState extends State<MainScreenView> {
     return BlocBuilder<MainScreenCubit, MainScreenState>(
       builder: (context, state) {
         return Scaffold(
+          bottomNavigationBar: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomButton(
+                    onPressed: () {
+                      if (state.isSelected == -1) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            duration: Duration(seconds: 1),
+                            padding: EdgeInsets.all(3),
+                            backgroundColor: Colors.red,
+                            content: Text(
+                              "Select Type",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textScaleFactor: 1.3,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      } else if (state.isSelected == 0) {
+                        // debugPrint("Done......!");
+                        Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
+                      } else {
+                        Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
+                      }
+                    },
+                    minWidth: 300,
+                    child: const Text("Next", textScaleFactor: 1.5),
+                    // minWidth: 300,
+                  )
+                ],
+              ),
+            ),
+          ),
           body: Center(
             child: SingleChildScrollView(
               physics: const ClampingScrollPhysics(),
@@ -66,114 +106,36 @@ class _MainScreenViewState extends State<MainScreenView> {
                       ),
                       height: 200,
                       width: 200,
-                      child: const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {
-                    context.read<MainScreenCubit>().isSelectedColor(0);
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: state.isSelected == 0 ? Colors.green.shade300 : Colors.grey.shade300,
-                    ),
-                    height: 200,
-                    width: 200,
-                    child: const Center(
-                        child: Text(
-                      "Manager",
-                      textScaleFactor: 2,
-                    )),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    context.read<MainScreenCubit>().isSelectedColor(1);
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      color: state.isSelected == 1 ? Colors.green.shade300 : Colors.grey.shade300,
-                    ),
-                    height: 200,
-                    width: 200,
-                    child: const Center(
-                        child: Text(
-                          "Employee",
-                          textScaleFactor: 2,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                context.read<MainScreenCubit>().isSelectedColor(1);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14),
+                                  color: state.isSelected == 1 ? Colors.green.shade300 : Colors.grey.shade300,
+                                ),
+                                height: 200,
+                                width: 200,
+                                child: const Center(
+                                  child: Text(
+                                    "Employee",
+                                    textScaleFactor: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
-          bottomNavigationBar: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomButton(
-                    onPressed: () {
-                      if (state.isSelected == -1) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            duration: Duration(seconds: 1),
-                            padding: EdgeInsets.all(3),
-                            backgroundColor: Colors.red,
-                            content: Text(
-                              "Select Type",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textScaleFactor: 1.3,
-                              textAlign: TextAlign.center,
-                            )));
-                      } else if (state.isSelected == 0) {
-                        // debugPrint("Done......!");
-                        Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
-                      } else {
-                        Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
-                      }
-                    },
-                    minWidth: 300,
-                    child: const Text("Next", textScaleFactor: 1.5),
-                    // minWidth: 300,
-                  )
-                ],
-              ),
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomButton(
-                  onPressed: () {
-                    if (state.isSelected == -1) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            "Selected Type",
-                            textScaleFactor: 2,
-                          ),
-                        ),
-                      );
-                    } else if (state.isSelected == 0) {
-                      // debugPrint("Done......!");
-                      Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
-                    } else {
-                      Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
-                    }
-                  },
-                  minWidth: 300,
-                  child: const Text("Next", textScaleFactor: 1.5),
-                  // minWidth: 300,
-                )
-              ],
             ),
           ),
         );
