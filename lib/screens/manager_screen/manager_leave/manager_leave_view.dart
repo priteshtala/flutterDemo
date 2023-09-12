@@ -1,6 +1,6 @@
-import 'package:finaldemo/keka_project/comman/comman_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../keka_project/comman/common_button.dart';
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
@@ -35,7 +35,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   color: Colors.green.shade300,
                   minWidth: 150,
                   child: const Text("Add Leave"),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
+                  },
                 ),
                 CustomButtonChange(
                   color: Colors.green.shade300,
