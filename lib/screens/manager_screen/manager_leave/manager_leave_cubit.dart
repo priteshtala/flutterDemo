@@ -71,4 +71,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);
   }
 
+  void navigateToEmployeeView(context) {
+    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName);
+  }
 }

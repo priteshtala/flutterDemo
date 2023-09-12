@@ -188,6 +188,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       GestureDetector(
                         onTap: () {
                           // context.read<ManagerScreenCubit>().navigateToEmployeeListView(context);
+                          context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
                         },
                         child: Container(
                           decoration: BoxDecoration(
