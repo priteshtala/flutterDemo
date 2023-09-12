@@ -1,7 +1,9 @@
 import 'package:finaldemo/keka_project/splash/splash_screen.dart';
 import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_view.dart';
 import 'package:finaldemo/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
+import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_view.dart';
+import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'screens/main_screen/main_screen_view.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: routes,
-      initialRoute: ApplyLeaveView.routeName,
+      initialRoute: SplashScreenView.routeName,
       // home: ApplyLeaveView(),
     );
   }
@@ -34,9 +36,9 @@ class MyApp extends StatelessWidget {
         MainScreenView.routeName: MainScreenView.builder,
         EmployeeLoginView.routeName: EmployeeLoginView.builder,
         ManagerLeaveView.routeName: ManagerLeaveView.builder,
-        EmployeeDetailsView.routeName: EmployeeDetailsView.builder,
-    AddEmployeeView.routeName : AddEmployeeView.builder,
+        AddEmployeeView.routeName: AddEmployeeView.builder,
         DepartmentDetailsView.routeName: DepartmentDetailsView.builder,
         ApplyLeaveView.routeName: ApplyLeaveView.builder,
+        EmployeeDetailsView.routeName: EmployeeDetailsView.builder,
       };
 }
