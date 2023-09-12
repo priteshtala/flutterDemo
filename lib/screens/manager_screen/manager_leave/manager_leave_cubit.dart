@@ -1,4 +1,5 @@
 import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
+import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_view.dart';
 import 'package:finaldemo/screens/main_screen/main_screen_view.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_view.dart';
@@ -22,20 +23,26 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
               Leave(name: "Khushali", surname: "Sutariya"),
               Leave(name: "Nensi", surname: "Tala"),
             ],
-            dateController: TextEditingController(),
+            dateController: TextEditingController(
+                text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
+            yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
           ),
         );
 
   void dateTime(context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: DateTime.now().subtract(const Duration(days: 1)),
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
+    String formattedDate1 = DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)));
+    state.yesterdayDate = formattedDate1;
     if (pickedDate != null) {
-      String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
+      String formattedDate = DateFormat.yMd('en_US').format(pickedDate);
       state.dateController.text = formattedDate;
+    } else {
+      state.yesterdayDate = formattedDate1;
     }
     emit(state.copyWith(dateController: state.dateController));
   }
@@ -69,6 +76,10 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void navigateToDepartmentView(context) {
     Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);
+  }
+
+  void navigateToApplyLeave(context) {
+    Navigator.of(context).pushNamed(ApplyLeaveView.routeName);
   }
 
   void navigateToEmployeeView(context) {

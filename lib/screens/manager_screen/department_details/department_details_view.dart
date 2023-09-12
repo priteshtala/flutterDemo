@@ -1,4 +1,4 @@
-import 'package:finaldemo/keka_project/comman/comman_button.dart';
+import 'package:finaldemo/keka_project/comman/common_button.dart';
 import 'package:finaldemo/keka_project/comman/common_search.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_cubit.dart';
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_state.dart';
@@ -43,6 +43,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
             title: const Text("Department"),
           ),
           body: SingleChildScrollView(
+            padding: EdgeInsets.all(8),
             child: Column(
               children: [
                  CustomSearch(

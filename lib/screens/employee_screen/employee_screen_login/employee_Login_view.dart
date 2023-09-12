@@ -1,5 +1,5 @@
-import 'package:finaldemo/keka_project/comman/comman_button.dart';
-import 'package:finaldemo/keka_project/comman/comman_textformfield.dart';
+import 'package:finaldemo/keka_project/comman/common_button.dart';
+import 'package:finaldemo/keka_project/comman/common_textformfield.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
