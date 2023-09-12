@@ -45,172 +45,184 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
+              // clipBehavior: Clip.hardEdge,
               children: [
-                const Text(
-                  "Notify Employee",
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
-                CustomSearch(
-                  controller: state.searchController,
-                  onChanged: (query) {
-                    context.read<ApplyLeaveCubit>().notifyEmp(query);
-                  },
-                ),
-                Visibility(
-                  visible: state.searchController.text.length > 2 ? true : false,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: state.filtterdUserList.length,
-                    itemBuilder: (context, index) {
-                      var employee = state.filtterdUserList[index];
-                      return Card(
-                        elevation: 3,
-                        shadowColor: Colors.white,
-                        color: Colors.white,
-                        child: ListTile(
-                          onTap: () {
-                            Chip(
-                              label: Text(
-                                state.searchController.text = state.filtterdUserList[index].name.toString(),
-                              ),
-                              avatar: const CircleAvatar(child: Text("23")),
-                            );
-                          },
-                          title: Text(employee.name,
-                              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-                              textScaleFactor: 1),
-                          subtitle: Text(employee.role),
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.primaries[index],
-                            child: Text(
-                              style: const TextStyle(color: Colors.white),
-                              state.filtterdUserList[index].name[0],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "Start Date",
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        height: 70,
-                        alignment: Alignment.center,
-                        child: TextFormField(
-                          onChanged: (value) {
-
-                          },
-                          controller: state.dateController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              borderSide: BorderSide(color: Colors.green, width: 2),
-                            ),
-                            icon: Icon(Icons.calendar_today, color: Colors.green),
-                          ),
-                          onTap: () {
-                            context.read<ApplyLeaveCubit>().dateTimePicker(context);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "End Date",
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.black),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 70,
-                        padding: const EdgeInsets.all(8),
-                        alignment: Alignment.center,
-                        child: TextField(
-                          cursorColor: Colors.green,
-                          controller: state.dateTimeController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              borderSide: BorderSide(color: Colors.green, width: 2),
-                            ),
-                            icon: Icon(Icons.calendar_today, color: Colors.green),
-                          ),
-                          onTap: () {
-                            context.read<ApplyLeaveCubit>().datePicker(context);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  "Reason",
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextField(
-                      maxLines: 5,
-                      controller: state.reasonController,
-                      decoration: const InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          borderSide: BorderSide(color: Colors.green, width: 2),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
+                    const Text(
+                      "Notify Employee",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    CustomSearch(
+                      controller: state.searchController,
+                      onChanged: (query) {
+                        context.read<ApplyLeaveCubit>().notifyEmp(query);
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Start Date",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.black),
                       ),
-                      onTap: () {},
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            height: 70,
+                            alignment: Alignment.center,
+                            child: TextFormField(
+                              onChanged: (value) {},
+                              controller: state.dateController,
+                              decoration: const InputDecoration(
+                                hintText: "Enter Date",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.green),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  borderSide: BorderSide(color: Colors.green, width: 2),
+                                ),
+                                icon: Icon(Icons.calendar_today, color: Colors.green),
+                              ),
+                              onTap: () {
+                                context.read<ApplyLeaveCubit>().dateTimePicker(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "End Date",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.black),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 70,
+                            padding: const EdgeInsets.all(8),
+                            alignment: Alignment.center,
+                            child: TextFormField(
+                              cursorColor: Colors.green,
+                              controller: state.dateTimeController,
+                              decoration: const InputDecoration(
+                                hintText: "Enter Date",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.green),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  borderSide: BorderSide(color: Colors.green, width: 2),
+                                ),
+                                icon: Icon(Icons.calendar_today, color: Colors.green),
+                              ),
+                              onTap: () {
+                                context.read<ApplyLeaveCubit>().datePicker(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Reason",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          maxLines: 5,
+                          controller: state.reasonController,
+                          decoration: const InputDecoration(
+                            hintText: "Enter Valid Reason..",
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                              borderSide: BorderSide(color: Colors.green, width: 2),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                      ],
                     ),
                   ],
+                ),
+                Positioned(
+                  top: 70,
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Visibility(
+                    visible: state.searchController.text.length > 2 ? true : false,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.filtterdUserList.length,
+                      itemBuilder: (context, index) {
+                        var employee = state.filtterdUserList[index];
+                        return Card(
+                          elevation: 3,
+                          shadowColor: Colors.white,
+                          color: Colors.white,
+                          child: ListTile(
+                            onTap: () {
+                              Chip(
+                                label: Text(
+                                  state.searchController.text = state.filtterdUserList[index].name.toString(),
+                                ),
+                                avatar: const CircleAvatar(child: Text("23")),
+                              );
+                            },
+                            title: Text(employee.name,
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                                textScaleFactor: 1),
+                            subtitle: Text(employee.role),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.primaries[index],
+                              child: Text(
+                                style: const TextStyle(color: Colors.white),
+                                state.filtterdUserList[index].name[0],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
