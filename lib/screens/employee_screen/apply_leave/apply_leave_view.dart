@@ -113,6 +113,9 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                         height: 70,
                         alignment: Alignment.center,
                         child: TextFormField(
+                          onChanged: (value) {
+
+                          },
                           controller: state.dateController,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
