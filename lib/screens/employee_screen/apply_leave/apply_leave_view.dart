@@ -1,5 +1,5 @@
-import 'package:finaldemo/keka_project/comman/common_button.dart';
-import 'package:finaldemo/keka_project/comman/common_search.dart';
+import 'package:finaldemo/keka_project/common/common_button.dart';
+import 'package:finaldemo/keka_project/common/common_search.dart';
 import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_cubit.dart';
 import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_state.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +55,44 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                 CustomSearch(
                   controller: state.searchController,
                   onChanged: (query) {
-                     context.read<ApplyLeaveCubit>().notifyEmp(query);
+                    context.read<ApplyLeaveCubit>().notifyEmp(query);
                   },
+                ),
+                Visibility(
+                  visible: state.searchController.text.length > 2 ? true : false,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.filtterdUserList.length,
+                    itemBuilder: (context, index) {
+                      var employee = state.filtterdUserList[index];
+                      return Card(
+                        elevation: 3,
+                        shadowColor: Colors.white,
+                        color: Colors.white,
+                        child: ListTile(
+                          onTap: () {
+                            Chip(
+                              label: Text(
+                                state.searchController.text = state.filtterdUserList[index].name.toString(),
+                              ),
+                              avatar: const CircleAvatar(child: Text("23")),
+                            );
+                          },
+                          title: Text(employee.name,
+                              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                              textScaleFactor: 1),
+                          subtitle: Text(employee.role),
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.primaries[index],
+                            child: Text(
+                              style: const TextStyle(color: Colors.white),
+                              state.filtterdUserList[index].name[0],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const Text(
@@ -138,7 +174,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                             icon: Icon(Icons.calendar_today, color: Colors.green),
                           ),
                           onTap: () {
-                            context.read<ApplyLeaveCubit>().dateTimePicker(context);
+                            context.read<ApplyLeaveCubit>().datePicker(context);
                           },
                         ),
                       ),

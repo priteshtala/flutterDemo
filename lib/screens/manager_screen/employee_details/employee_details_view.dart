@@ -1,5 +1,5 @@
-import 'package:finaldemo/keka_project/comman/common_button.dart';
-import 'package:finaldemo/keka_project/comman/common_search.dart';
+import 'package:finaldemo/keka_project/common/common_button.dart';
+import 'package:finaldemo/keka_project/common/common_search.dart';
 import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_state.dart';

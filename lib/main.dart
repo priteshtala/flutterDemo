@@ -1,4 +1,4 @@
-import 'package:finaldemo/keka_project/splash/splash_screen.dart';
+import 'package:finaldemo/keka_project/splash/splash_screen_view.dart';
 import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_view.dart';
 import 'package:finaldemo/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
 import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.dart';

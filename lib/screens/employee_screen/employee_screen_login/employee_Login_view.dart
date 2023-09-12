@@ -1,9 +1,7 @@
-import 'package:finaldemo/keka_project/comman/common_button.dart';
-import 'package:finaldemo/keka_project/comman/common_textformfield.dart';
-
+import 'package:finaldemo/keka_project/common/common_button.dart';
+import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'employee_login_cubit.dart';
 import 'employee_login_state.dart';
 

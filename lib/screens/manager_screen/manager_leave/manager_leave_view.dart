@@ -1,6 +1,6 @@
+import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../keka_project/comman/common_button.dart';
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
@@ -130,7 +130,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
                             ),
                             Container(
-                              width: 200,
+                              width: 150,
                               alignment: Alignment.center,
                               child: TextField(
                                 controller: state.dateController,

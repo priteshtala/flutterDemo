@@ -8,13 +8,12 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
   ApplyLeaveCubit()
       : super(
           ApplyLeaveState(
-            dateController: TextEditingController(),
-            dateTimeController: TextEditingController(),
-            reasonController: TextEditingController(),
-            searchController: TextEditingController(),
+              dateController: TextEditingController(),
+              dateTimeController: TextEditingController(),
+              reasonController: TextEditingController(),
+              searchController: TextEditingController(),
               employeeList: empList,
-
-          ),
+              filtterdUserList: empList),
         );
 
   void dateTimePicker(context) async {
@@ -24,32 +23,40 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
+    if (pickedDate != null) {
+      String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
+      state.dateController.text = formattedDate;
+    }
+    emit(state.copyWith(dateController: state.dateController,));
+  }
+
+  void datePicker(context) async {
     DateTime? pickedDate2 = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
-    if (pickedDate != null || pickedDate2 != null) {
-      String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate!);
-      String formattedDate2 = DateFormat.yMMMMd('en_US').format(pickedDate2!);
-      state.dateController.text = formattedDate;
+    if (pickedDate2 != null) {
+      String formattedDate2 = DateFormat.yMMMMd('en_US').format(pickedDate2);
       state.dateTimeController.text = formattedDate2;
     }
-    emit(state.copyWith(dateController: state.dateController, dateTimeController: state.dateTimeController));
+    emit(state.copyWith(dateTimeController: state.dateTimeController));
   }
 
+
   void notifyEmp(String query) {
-    List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);
-    employeeList = employeeList
+    // List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);
+    List<EmployeeData> employeeList = state.employeeList
         .where((e) =>
-    e.name.toLowerCase().contains(query.toLowerCase()) || e.email.toLowerCase().contains(query.toLowerCase()))
+            e.name.toLowerCase().contains(query.toLowerCase()) || e.email.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
-    emit(state.copyWith(employeeList: employeeList));
+    emit(state.copyWith(filtterdUserList: employeeList));
     debugPrint("============================$employeeList");
   }
 }
+
 List<EmployeeData> empList = [
   EmployeeData(
     name: "Pritesh Dineshbhai Tala",

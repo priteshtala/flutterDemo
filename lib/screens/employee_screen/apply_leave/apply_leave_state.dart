@@ -6,7 +6,15 @@ import '../../../keka_project/model/employee_model/employee_model.dart';
 
 class ApplyLeaveState extends Equatable {
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [
+        searchController,
+        dateController,
+        dateTimeController,
+        reasonController,
+        departmentList,
+        employeeList,
+        filtterdUserList
+      ];
   TextEditingController searchController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController dateTimeController = TextEditingController();
