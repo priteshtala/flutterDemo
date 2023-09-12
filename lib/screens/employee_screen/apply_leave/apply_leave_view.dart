@@ -46,6 +46,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
             child: Stack(
+              // clipBehavior: Clip.hardEdge,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,6 +83,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                               onChanged: (value) {},
                               controller: state.dateController,
                               decoration: const InputDecoration(
+                                hintText: "Enter Date",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.green),
                                   borderRadius: BorderRadius.all(
@@ -122,10 +124,11 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                             height: 70,
                             padding: const EdgeInsets.all(8),
                             alignment: Alignment.center,
-                            child: TextField(
+                            child: TextFormField(
                               cursorColor: Colors.green,
                               controller: state.dateTimeController,
                               decoration: const InputDecoration(
+                                hintText: "Enter Date",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.green),
                                   borderRadius: BorderRadius.all(
@@ -156,10 +159,11 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextField(
+                        TextFormField(
                           maxLines: 5,
                           controller: state.reasonController,
                           decoration: const InputDecoration(
+                            hintText: "Enter Valid Reason..",
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -178,8 +182,11 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 70),
+                Positioned(
+                  top: 70,
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
                   child: Visibility(
                     visible: state.searchController.text.length > 2 ? true : false,
                     child: ListView.builder(
