@@ -55,7 +55,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                 CustomSearch(
                   controller: state.searchController,
                   onChanged: (query) {
-                     context.read<ApplyLeaveCubit>().notifyEmp(query);
+                    context.read<ApplyLeaveCubit>().notifyEmp(query);
                   },
                 ),
                 const SizedBox(height: 20),
@@ -77,6 +77,9 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                         height: 70,
                         alignment: Alignment.center,
                         child: TextFormField(
+                          onChanged: (value) {
+
+                          },
                           controller: state.dateController,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(

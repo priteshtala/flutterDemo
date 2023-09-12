@@ -6,7 +6,6 @@ import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_vie
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class MainScreenView extends StatefulWidget {
   static const String routeName = "/Main_Screen_View";
 
@@ -43,9 +42,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
-                      color: state.isSelected == 0
-                          ? Colors.green.shade300
-                          : Colors.grey.shade300,
+                      color: state.isSelected == 0 ? Colors.green.shade300 : Colors.grey.shade300,
                     ),
                     height: 200,
                     width: 200,
@@ -63,9 +60,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(14),
-                      color: state.isSelected == 1
-                          ? Colors.green.shade300
-                          : Colors.grey.shade300,
+                      color: state.isSelected == 1 ? Colors.green.shade300 : Colors.grey.shade300,
                     ),
                     height: 200,
                     width: 200,
@@ -88,19 +83,24 @@ class _MainScreenViewState extends State<MainScreenView> {
                   CustomButton(
                     onPressed: () {
                       if (state.isSelected == -1) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                                content: Text(
-                          "Selected Type",
-                          textScaleFactor: 2,
-                        )));
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            duration: Duration(seconds: 1),
+                            padding: EdgeInsets.all(3),
+                            backgroundColor: Colors.red,
+                            content: Text(
+                              "Select Type",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textScaleFactor: 1.3,
+                              textAlign: TextAlign.center,
+                            )));
                       } else if (state.isSelected == 0) {
                         // debugPrint("Done......!");
-                        Navigator.of(context)
-                            .pushNamed(ManagerLeaveView.routeName);
+                        Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
                       } else {
-                        Navigator.of(context)
-                            .pushNamed(EmployeeLoginView.routeName);
+                        Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
                       }
                     },
                     minWidth: 300,

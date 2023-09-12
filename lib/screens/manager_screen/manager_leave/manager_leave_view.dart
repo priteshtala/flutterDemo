@@ -42,7 +42,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                 CustomButtonChange(
                   color: Colors.green.shade300,
                   minWidth: 150,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
+                  },
                   child: const Text("Leave Requests"),
                 ),
               ],

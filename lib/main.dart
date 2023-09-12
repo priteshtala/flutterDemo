@@ -5,6 +5,7 @@ import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.
 import 'package:finaldemo/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_view.dart';
+import 'package:finaldemo/screens/manager_screen/manager_leave_request/manager_leave_request_view.dart';
 import 'package:flutter/material.dart';
 import 'screens/main_screen/main_screen_view.dart';
 
@@ -40,5 +41,6 @@ class MyApp extends StatelessWidget {
         AddEmployeeView.routeName: AddEmployeeView.builder,
         DepartmentDetailsView.routeName: DepartmentDetailsView.builder,
         ApplyLeaveView.routeName: ApplyLeaveView.builder,
+        ManagerLeaveRequest.routeName: ManagerLeaveRequest.builder,
       };
 }
