@@ -1,3 +1,4 @@
+import 'package:finaldemo/keka_project/comman/comman_button.dart';
 import 'package:finaldemo/keka_project/comman/comman_textformfield.dart';
 import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_cubit.dart';
 import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_state.dart';
@@ -11,8 +12,14 @@ class AddEmployeeView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddEmployeeCubit(AddEmployeeState()),
-      child: AddEmployeeView(),
+      create: (context) => AddEmployeeCubit(AddEmployeeState(
+        emailController: TextEditingController(),
+        passwordController: TextEditingController(),
+        nameController: TextEditingController(),
+        mobileController: TextEditingController(),
+        dateController: TextEditingController(),
+      )),
+      child: const AddEmployeeView(),
     );
   }
 
@@ -29,22 +36,24 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("Add-Employee"),
+            title: const Text("Add-Employee"),
           ),
           body: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
-                  height: 16,
-                ),
                 CustomTextForm(
+                    keyboardType: TextInputType.name,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ]+')),
+                    ],
+                    controller: state.nameController,
                     readOnly: false,
                     textCapitalization: TextCapitalization.none,
                     obscureText: false,
                     hintText: "Enter Your Name",
-                    prefixIcon: Icon(Icons.person)),
+                    prefixIcon: const Icon(Icons.person)),
                 CustomTextForm(
-                  // controller: state.emailController,
+                  controller: state.emailController,
                   readOnly: false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
@@ -53,7 +62,8 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   prefixIcon: const Icon(Icons.email),
                 ),
                 CustomTextForm(
-                  // controller: state.passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: state.passwordController,
                   readOnly: false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: state.iconShowHide,
@@ -65,8 +75,48 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                        inputDecorationTheme: InputDecorationTheme(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      fillColor: Colors.grey.withOpacity(0.3),
+                      filled: true,
+                      contentPadding: const EdgeInsets.all(12),
+                    )),
+                    child: DropdownButtonFormField<String>(
+                      // alignment: Alignment.topCenter,
+                      decoration: InputDecoration(
+                        focusedBorder:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
+                        // prefixIcon: const Icon(Icons.arrow_drop_down_circle_sharp),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      isDense: true,
+                      hint: const Text('Select Your Department'),
+                      value: state.selectedValue,
+                      onChanged: (value) {
+                        // context.read<AddEmployeeCubit>().dropdownSelected(value);
+                      },
+                      items: state.departmentList
+                          .map((user) => DropdownMenuItem<String>(
+                                value: user.department,
+                                child: Text(user.department.toString()),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: IntlPhoneField(
+                    controller: state.mobileController,
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     validator: (index) {
@@ -83,11 +133,8 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                       fillColor: Colors.grey.withOpacity(0.3),
                       isDense: true,
                       hintText: 'Phone Number',
-                      // prefixIcon: prefixIcon,
-                      // suffixIcon: suffixIcon,
                       prefixIconColor: Colors.black,
                       hintStyle: const TextStyle(color: Colors.grey),
-                      // fillColor: Colors.white70,
                       border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(14.0)),
                         borderSide: BorderSide.none,
@@ -98,16 +145,30 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                       ),
                     ),
                     initialCountryCode: 'IN',
-                    // onChanged: (phone) {
-                    //
-                    // },
                   ),
                 ),
                 CustomTextForm(
+                  controller: state.dateController,
                   readOnly: false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
+                  prefixIcon: const Icon(Icons.calendar_month),
+                  hintText: "Enter Your Birth-Date",
+                  onTap: () => context.read<AddEmployeeCubit>().dateTime(context),
                 ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: SafeArea(
+            minimum: const EdgeInsets.only(bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  onPressed: () {},
+                  minWidth: 300,
+                  child: const Text("ADD"),
+                )
               ],
             ),
           ),

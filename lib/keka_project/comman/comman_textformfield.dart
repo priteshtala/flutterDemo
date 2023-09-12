@@ -35,37 +35,34 @@ class CustomTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 25),
-      child: Container(
-        margin: const EdgeInsets.all(0.1),
-        child: TextFormField(
-          obscureText: obscureText,
-          onChanged: onChanged,
-          validator: validator,
-          controller: controller,
-          onTap: onTap,
-          readOnly: readOnly,
-          keyboardType: keyboardType,
-          textInputAction: TextInputAction.next,
-          textCapitalization: textCapitalization,
-          inputFormatters: inputFormatters,
-          decoration: InputDecoration(
-            prefixIcon: prefixIcon,
-            prefixIconColor: Colors.black,
-            suffixIcon: suffixIcon,
-            hintStyle: TextStyle(color: Colors.grey[600]),
-            hintText: hintText,
-            filled: true,
-            fillColor: Colors.grey.withOpacity(0.3),
-            label: label,
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14.0)),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14.0)),
-              borderSide: BorderSide.none,
-            ),
+      padding: const EdgeInsets.only(left: 10.0,right: 10.0,top: 10.0),
+      child: TextFormField(
+        obscureText: obscureText,
+        onChanged: onChanged,
+        validator: validator,
+        controller: controller,
+        onTap: onTap,
+        readOnly: readOnly,
+        keyboardType: keyboardType,
+        textInputAction: TextInputAction.next,
+        textCapitalization: textCapitalization,
+        inputFormatters: inputFormatters,
+        decoration: InputDecoration(
+          prefixIcon: prefixIcon,
+          prefixIconColor: Colors.black,
+          suffixIcon: suffixIcon,
+          hintStyle: TextStyle(color: Colors.grey[600]),
+          hintText: hintText,
+          filled: true,
+          fillColor: Colors.grey.withOpacity(0.3),
+          label: label,
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(14.0)),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(14.0)),
+            borderSide: BorderSide.none,
           ),
         ),
       ),
