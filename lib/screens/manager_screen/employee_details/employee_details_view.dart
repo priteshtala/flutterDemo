@@ -1,9 +1,6 @@
 import 'package:finaldemo/keka_project/comman/comman_button.dart';
 import 'package:finaldemo/keka_project/comman/common_search.dart';
-import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.dart';
-import 'package:finaldemo/screens/manager_screen/department_details/department_details_cubit.dart';
-import 'package:finaldemo/screens/manager_screen/department_details/department_details_state.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_state.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +47,11 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                     context.read<EmployeeDetailsCubit>().runFilter(query);
                   },
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 0),
+                    borderRadius: BorderRadius.circular(14),
                     color: Colors.white,
                   ),
                   padding: const EdgeInsets.all(8),
@@ -76,7 +74,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
                               fillColor: Colors.white,
                               filled: true,
-                              contentPadding: EdgeInsets.all(8),
+                              contentPadding: const EdgeInsets.all(8),
                             )),
                             child: DropdownButtonFormField<String>(
                               alignment: Alignment.center,
@@ -102,6 +100,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 8),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: state.filtterdUserList.length,
@@ -109,6 +108,9 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                   itemBuilder: (context, index) {
                     var employee = state.filtterdUserList[index];
                     return Card(
+                      color: Colors.white,
+                      elevation: 3,
+                      shadowColor: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                       child: ListTile(
                         // title: Text("${employee.name}"),
@@ -121,10 +123,12 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(employee.name, style: const TextStyle(color: Colors.black)),
+                            Text(employee.name,
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                                textScaleFactor: 1),
                             const SizedBox(height: 8),
                             Text(employee.role),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 8),
                             Text("Location : ${employee.location}"),
                             Text("Department : ${employee.department}"),
                             Text("Email : ${employee.email}"),

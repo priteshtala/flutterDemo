@@ -26,8 +26,8 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () {
-       Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
+    Timer(const Duration(seconds: 4), () {
+      Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
     });
   }
 
