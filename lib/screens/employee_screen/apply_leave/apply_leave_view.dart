@@ -27,6 +27,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
     return BlocBuilder<ApplyLeaveCubit, ApplyLeaveState>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: Colors.white,
           bottomNavigationBar: SafeArea(
             minimum: const EdgeInsets.symmetric(vertical: 10),
             child: Row(
@@ -54,39 +55,58 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Notify Employee",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    state.setSelectedEmployee.isEmpty
+                    state.notifyEmployee.isEmpty
                         ? CustomSearch(
                             controller: state.searchController,
                             onChanged: (query) {
                               context.read<ApplyLeaveCubit>().notifyEmp(query);
                             },
-                            // onTap: ,
                           )
-                        : Card(
-                            elevation: 3,
-                            shadowColor: Colors.white,
-                            color: Colors.white,
-                            child: ListTile(
-                              onTap: () {
-                                // state.searchController.text = state.filtterdUserList[index].name.toString();
-                              },
-                              title: Text(state.setSelectedEmployee.first.name,
-                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-                                  textScaleFactor: 1),
-                              subtitle: Text(state.setSelectedEmployee.first.role),
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                child: Text(
-                                  style: const TextStyle(color: Colors.black),
-                                  state.setSelectedEmployee.first.name.split("").first,
-                                ),
+                        // : Container(
+                        //     decoration: BoxDecoration(
+                        //       border: Border.all(color: Colors.black),
+                        //       gradient: LinearGradient(
+                        //           colors: [Colors.green.shade400, Colors.grey.shade200],
+                        //           begin: Alignment.topRight,
+                        //           end: Alignment.bottomRight),
+                        //       color: Colors.white,
+                        //     ),
+                        //     child: ListTile(
+                        //       title: Text(state.notifyEmployee.first.name,
+                        //           style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                        //           textScaleFactor: 1),
+                        //       subtitle: Text(state.notifyEmployee.first.role),
+                        //       leading: CircleAvatar(
+                        //         radius: 30,
+                        //         backgroundColor: Colors.white,
+                        //         child: Text(
+                        //           style: const TextStyle(color: Colors.black),
+                        //           state.notifyEmployee.first.name.split("").first,
+                        //         ),
+                        //       ),
+                        //       trailing: IconButton(
+                        //         onPressed: () {
+                        //           context.read<ApplyLeaveCubit>().clearSearch();
+                        //         },
+                        //         icon: const Icon(Icons.close),
+                        //       ),
+                        //     ),
+                        //   ),
+                        : Chip(
+                            deleteButtonTooltipMessage: "Remove",
+                            onDeleted: () {
+                              context.read<ApplyLeaveCubit>().clearSearch();
+                            },
+                            avatar: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.green,
+                              child: Text(
+                                style: const TextStyle(color: Colors.white),
+                                state.notifyEmployee.first.name.split("").first,
                               ),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  context.read<ApplyLeaveCubit>().clearSearch();
-                                },
-                                icon: const Icon(Icons.close),
-                              ),
+                            ),
+                            label: Text(
+                              state.notifyEmployee.first.name,
                             ),
                           ),
                     const SizedBox(height: 20),
@@ -211,7 +231,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                   ],
                 ),
                 Positioned(
-                  top: 70,
+                  top: 75,
                   bottom: 0,
                   right: 0,
                   left: 0,
@@ -222,13 +242,18 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       itemCount: state.filtterdUserList.length,
                       itemBuilder: (context, index) {
                         var employee = state.filtterdUserList[index];
-                        return Card(
-                          elevation: 3,
-                          shadowColor: Colors.white,
-                          color: Colors.white,
+                        return Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black.withOpacity(0.2), blurRadius: 2, offset: const Offset(-2, 4)),
+                            ],
+                            color: Colors.white,
+                          ),
                           child: ListTile(
+                            tileColor: Colors.grey,
                             onTap: () {
-                              context.read<ApplyLeaveCubit>().setSelectedEmployee(employee);
+                              context.read<ApplyLeaveCubit>().notifyEmployee(employee);
                             },
                             title: Text(employee.name,
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
