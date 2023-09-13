@@ -47,10 +47,10 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
             padding: EdgeInsets.all(8),
             child: Column(
               children: [
-                 CustomSearch(
-              onChanged: (query) {
-                context.read<DepartmentDetailsCubit>().departmentSearch(query);
-              },
+                CustomSearch(
+                  onChanged: (query) {
+                    context.read<DepartmentDetailsCubit>().departmentSearch(query);
+                  },
                 ),
                 ListView.builder(
                   shrinkWrap: true,

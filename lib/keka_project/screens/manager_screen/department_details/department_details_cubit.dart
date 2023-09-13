@@ -7,7 +7,9 @@ import 'department_details_state.dart';
 class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   DepartmentDetailsCubit()
       : super(
-          DepartmentDetailsState(leaveSearchList: leaveEmpList,
+          DepartmentDetailsState(
+            departmentController: TextEditingController(),
+            leaveSearchList: leaveEmpList,
             departmentList: [
               Department(department: "Flutter"),
               Department(department: "Android"),
@@ -42,7 +44,10 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                 MaterialButton(
                   splashColor: Colors.blue,
                   shape: Border.all(color: Colors.black),
-                  onPressed: () {},
+                  onPressed: () {
+                    staticList();
+                    print("ADDD::${state.departmentList}");
+                  },
                   child: const Text("Add", style: TextStyle(color: Colors.blue)),
                 ),
                 MaterialButton(
@@ -63,7 +68,15 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
     leaveList = leaveList.where((element) => element.department.toLowerCase().contains(query.toLowerCase())).toList();
     emit(state.copyWith(leaveSearchList: leaveList));
   }
+
+  void staticList() {
+    state.departmentList.add(Department(department: state.departmentController.text));
+    emit(state.copyWith(departmentList: state.departmentList));
+    print("ADDD::${state.departmentList}");
+
+  }
 }
+
 List<Department> leaveEmpList = [
   Department(department: "Flutter"),
   Department(department: "Android"),
