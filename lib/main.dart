@@ -1,13 +1,16 @@
-import 'package:finaldemo/keka_project/splash/splash_screen_view.dart';
-import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_view.dart';
-import 'package:finaldemo/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
-import 'package:finaldemo/screens/manager_screen/add_employee/add_employee_view.dart';
-import 'package:finaldemo/screens/manager_screen/department_details/department_details_view.dart';
-import 'package:finaldemo/screens/manager_screen/employee_details/employee_details_view.dart';
-import 'package:finaldemo/screens/manager_screen/manager_leave/manager_leave_view.dart';
-import 'package:finaldemo/screens/manager_screen/manager_leave_request/manager_leave_request_view.dart';
+
+
 import 'package:flutter/material.dart';
-import 'screens/main_screen/main_screen_view.dart';
+
+import 'keka_project/screens/employee_screen/apply_leave/apply_leave_view.dart';
+import 'keka_project/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
+import 'keka_project/screens/main_screen/main_screen_view.dart';
+import 'keka_project/screens/manager_screen/add_employee/add_employee_view.dart';
+import 'keka_project/screens/manager_screen/department_details/department_details_view.dart';
+import 'keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
+import 'keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
+import 'keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_view.dart';
+import 'keka_project/screens/splash/splash_screen_view.dart';
 
 void main() {
   runApp(const MyApp());
