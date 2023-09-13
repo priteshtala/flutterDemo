@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:flutter/material.dart';
 import 'department_details_state.dart';
 
 class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   DepartmentDetailsCubit()
       : super(
-          DepartmentDetailsState(leaveSearchList: leaveEmpList,
+          DepartmentDetailsState(
+            leaveSearchList: leaveEmpList,
             departmentList: [
               Department(department: "Flutter"),
               Department(department: "Android"),
@@ -28,30 +28,32 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          actionsPadding: EdgeInsets.all(10),
+          actionsPadding: const EdgeInsets.all(10),
           alignment: Alignment.center,
           title: const Text("Add Department"),
           actions: [
             TextFormField(
-              decoration: InputDecoration(hintText: "Enter Department"),
+              decoration: const InputDecoration(hintText: "Enter Department"),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MaterialButton(
                   splashColor: Colors.blue,
                   shape: Border.all(color: Colors.black),
-                  onPressed: () {},
+                  onPressed: () {
+                    // state.departmentList.add(Department(department: state.addDepartmentController?.text ?? ''));
+                  },
                   child: const Text("Add", style: TextStyle(color: Colors.blue)),
                 ),
                 MaterialButton(
                   shape: Border.all(color: Colors.black),
                   onPressed: () => Navigator.pop(context),
                   child: const Text("No"),
-                )
+                ),
               ],
-            )
+            ),
           ],
         );
       },
@@ -64,6 +66,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
     emit(state.copyWith(leaveSearchList: leaveList));
   }
 }
+
 List<Department> leaveEmpList = [
   Department(department: "Flutter"),
   Department(department: "Android"),

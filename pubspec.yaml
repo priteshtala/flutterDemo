@@ -42,7 +42,7 @@ dependencies:
   gap: ^3.0.1
   json_annotation: ^4.8.1
   intl_phone_field: ^3.2.0
-  textfield_search: ^0.10.0
+
 
 
 

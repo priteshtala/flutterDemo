@@ -43,13 +43,13 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
             title: const Text("Department"),
           ),
           body: SingleChildScrollView(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                 CustomSearch(
-              onChanged: (query) {
-                context.read<DepartmentDetailsCubit>().departmentSearch(query);
-              },
+                CustomSearch(
+                  onChanged: (query) {
+                    context.read<DepartmentDetailsCubit>().departmentSearch(query);
+                  },
                 ),
                 ListView.builder(
                   shrinkWrap: true,
