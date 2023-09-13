@@ -67,7 +67,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                         ListTile(
                           leading: CircleAvatar(
                             backgroundColor: Colors.primaries[index],
-                            child: Text(state.leaveSearchList[index].department[0]),
+                            child: Text(state.leaveSearchList[index].department.split('').first,style: TextStyle(color: Colors.black)),
                           ),
                           title: Text(state.leaveSearchList[index].department),
                         ),

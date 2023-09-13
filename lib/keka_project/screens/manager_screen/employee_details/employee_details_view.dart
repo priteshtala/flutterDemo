@@ -90,7 +90,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               onChanged: (value) {
                                 context.read<EmployeeDetailsCubit>().dropdownSelected(value);
                               },
-                              items: state.departmentList
+                              items: state.filterDepartmentList
                                   .map((user) => DropdownMenuItem<String>(
                                         value: user.department,
                                         child: Text(user.department.toString()),

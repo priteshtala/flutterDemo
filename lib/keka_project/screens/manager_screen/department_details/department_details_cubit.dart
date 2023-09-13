@@ -10,15 +10,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           DepartmentDetailsState(
             departmentController: TextEditingController(),
             leaveSearchList: leaveEmpList,
-            departmentList: [
-              Department(department: "Flutter"),
-              Department(department: "Android"),
-              Department(department: "Laravel"),
-              Department(department: "PHP"),
-              Department(department: "NodeJs"),
-              Department(department: "IOS"),
-              Department(department: "ReactJS"),
-            ],
+            departmentList: leaveEmpList,
           ),
         );
 
@@ -30,7 +22,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          actionsPadding: EdgeInsets.all(10),
+          actionsPadding: const EdgeInsets.all(10),
           alignment: Alignment.center,
           title: const Text("Add Department"),
           actions: [
@@ -46,6 +38,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
                     staticList();
+
                     print("ADDD::${state.departmentList}");
                   },
                   child: const Text("Add", style: TextStyle(color: Colors.blue)),
@@ -63,25 +56,26 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
     );
   }
 
-  void departmentSearch(String query) {
+  void departmentSearch(query) {
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList = leaveList.where((element) => element.department.toLowerCase().contains(query.toLowerCase())).toList();
     sort();
     emit(state.copyWith(leaveSearchList: leaveList));
   }
 
-  void sort(){
+  void sort() {
     List<Department> leaveList = List<Department>.from(state.departmentList);
-    leaveList.sort((a, b) => a.department.compareTo(b.department),);
-    emit(state.copyWith(departmentList: leaveList));
-
+    leaveList.sort(
+      (a, b) => a.department.compareTo(b.department),
+    );
+    emit(state.copyWith(departmentList: leaveList, leaveSearchList: leaveList));
   }
 
   void staticList() {
     state.departmentList.add(Department(department: state.departmentController.text));
-    emit(state.copyWith(departmentList: state.departmentList));
-    print("ADDD::${state.departmentList}");
+    emit(state.copyWith(leaveSearchList: state.departmentList));
 
+    // print("ADDD::${state.departmentList}");
   }
 }
 

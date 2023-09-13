@@ -10,7 +10,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       : super(
           EmployeeDetailsState(
             searchController: TextEditingController(),
-            departmentList: [
+            filterDepartmentList: [
               Department(department: "All"),
               Department(department: "Flutter"),
               Department(department: "Android"),
