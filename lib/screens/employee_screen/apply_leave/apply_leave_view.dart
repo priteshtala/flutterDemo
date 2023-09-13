@@ -200,12 +200,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                           color: Colors.white,
                           child: ListTile(
                             onTap: () {
-                              Chip(
-                                label: Text(
-                                  state.searchController.text = state.filtterdUserList[index].name.toString(),
-                                ),
-                                avatar: const CircleAvatar(child: Text("23")),
-                              );
+                              state.searchController.text = state.filtterdUserList[index].name.toString();
                             },
                             title: Text(employee.name,
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),

@@ -8,12 +8,13 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
   ApplyLeaveCubit()
       : super(
           ApplyLeaveState(
-              dateController: TextEditingController(),
-              dateTimeController: TextEditingController(),
-              reasonController: TextEditingController(),
-              searchController: TextEditingController(),
-              employeeList: empList,
-              filtterdUserList: empList),
+            dateController: TextEditingController(),
+            dateTimeController: TextEditingController(),
+            reasonController: TextEditingController(),
+            searchController: TextEditingController(),
+            employeeList: empList,
+            filtterdUserList: empList,
+          ),
         );
 
   void dateTimePicker(context) async {
@@ -27,7 +28,9 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
       String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
       state.dateController.text = formattedDate;
     }
-    emit(state.copyWith(dateController: state.dateController,));
+    emit(state.copyWith(
+      dateController: state.dateController,
+    ));
   }
 
   void datePicker(context) async {
@@ -43,7 +46,6 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
     }
     emit(state.copyWith(dateTimeController: state.dateTimeController));
   }
-
 
   void notifyEmp(String query) {
     // List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);

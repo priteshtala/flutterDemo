@@ -13,7 +13,8 @@ class ApplyLeaveState extends Equatable {
         reasonController,
         departmentList,
         employeeList,
-        filtterdUserList
+        filtterdUserList,
+
       ];
   TextEditingController searchController = TextEditingController();
   TextEditingController dateController = TextEditingController();
@@ -23,14 +24,16 @@ class ApplyLeaveState extends Equatable {
   List<EmployeeData> employeeList;
   List<EmployeeData> filtterdUserList;
 
-  ApplyLeaveState(
-      {required this.dateController,
-      required this.dateTimeController,
-      required this.reasonController,
-      required this.searchController,
-      this.departmentList = const [],
-      this.employeeList = const [],
-      this.filtterdUserList = const []});
+
+  ApplyLeaveState({
+    required this.dateController,
+    required this.dateTimeController,
+    required this.reasonController,
+    required this.searchController,
+    this.departmentList = const [],
+    this.employeeList = const [],
+    this.filtterdUserList = const [],
+  });
 
   ApplyLeaveState copyWith({
     TextEditingController? searchController,
