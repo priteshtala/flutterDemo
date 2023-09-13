@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -24,12 +26,12 @@ class ApplyLeaveState extends Equatable {
   List<Department> departmentList;
   List<EmployeeData> employeeList;
   List<EmployeeData> filtterdUserList;
-  EmployeeData? setSelectedEmployee;
+  List<EmployeeData> setSelectedEmployee;
   bool? isSearch;
 
   ApplyLeaveState({
     this.isSearch,
-    this.setSelectedEmployee,
+    this.setSelectedEmployee = const [],
     required this.dateController,
     required this.dateTimeController,
     required this.reasonController,
@@ -47,7 +49,7 @@ class ApplyLeaveState extends Equatable {
     List<Department>? departmentList,
     List<EmployeeData>? employeeList,
     List<EmployeeData>? filtterdUserList,
-    EmployeeData? setSelectedEmployee,
+    List<EmployeeData>? setSelectedEmployee,
     bool? isSearch,
   }) {
     return ApplyLeaveState(

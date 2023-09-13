@@ -54,7 +54,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Notify Employee",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    state.employeeList.isNotEmpty
+                    state.setSelectedEmployee.isEmpty
                         ? CustomSearch(
                             controller: state.searchController,
                             onChanged: (query) {
@@ -62,37 +62,32 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                             },
                             // onTap: ,
                           )
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: state.filtterdUserList.length,
-                            itemBuilder: (context, index) {
-                              var employee = state.filtterdUserList[index];
-                              return Card(
-                                elevation: 3,
-                                shadowColor: Colors.white,
-                                color: Colors.white,
-                                child: ListTile(
-                                  onTap: () {
-                                    
-                                    // state.searchController.text = state.filtterdUserList[index].name.toString();
-                                  },
-                                  title: Text(employee.name,
-                                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-                                      textScaleFactor: 1),
-                                  subtitle: Text(employee.role),
-                                  leading: CircleAvatar(
-                                    backgroundColor: Colors.primaries[index],
-                                    child: Text(
-                                      style: const TextStyle(color: Colors.white),
-                                      state.filtterdUserList[index].name[0],
-                                    ),
-                                  ),
-                                  trailing: IconButton(onPressed: (){
-                                    context.read<ApplyLeaveCubit>().clearSearch();
-                                  },icon: const Icon(Icons.close),),
+                        : Card(
+                            elevation: 3,
+                            shadowColor: Colors.white,
+                            color: Colors.white,
+                            child: ListTile(
+                              onTap: () {
+                                // state.searchController.text = state.filtterdUserList[index].name.toString();
+                              },
+                              title: Text(state.setSelectedEmployee.first.name,
+                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                                  textScaleFactor: 1),
+                              subtitle: Text(state.setSelectedEmployee.first.role),
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                child: Text(
+                                  style: const TextStyle(color: Colors.black),
+                                  state.setSelectedEmployee.first.name.split("").first,
                                 ),
-                              );
-                            },
+                              ),
+                              trailing: IconButton(
+                                onPressed: () {
+                                  context.read<ApplyLeaveCubit>().clearSearch();
+                                },
+                                icon: const Icon(Icons.close),
+                              ),
+                            ),
                           ),
                     const SizedBox(height: 20),
                     const Text(
@@ -116,7 +111,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                               onChanged: (value) {},
                               controller: state.dateController,
                               decoration: const InputDecoration(
-                                hintText: "Enter Date",
+                                hintText: "Select Date",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.green),
                                   borderRadius: BorderRadius.all(
@@ -161,7 +156,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                               cursorColor: Colors.green,
                               controller: state.dateTimeController,
                               decoration: const InputDecoration(
-                                hintText: "Enter Date",
+                                hintText: "Select Date",
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.green),
                                   borderRadius: BorderRadius.all(

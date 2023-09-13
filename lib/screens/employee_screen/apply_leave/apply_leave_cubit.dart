@@ -8,12 +8,13 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
   ApplyLeaveCubit()
       : super(
           ApplyLeaveState(
-              dateController: TextEditingController(),
-              dateTimeController: TextEditingController(),
-              reasonController: TextEditingController(),
-              searchController: TextEditingController(),
-              employeeList: empList,
-              filtterdUserList: empList),
+            dateController: TextEditingController(),
+            dateTimeController: TextEditingController(),
+            reasonController: TextEditingController(),
+            searchController: TextEditingController(),
+            employeeList: empList,
+            filtterdUserList: empList,
+          ),
         );
 
   void dateTimePicker(context) async {
@@ -64,9 +65,9 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
   void clearSearch({EmployeeData? employeeData}) {
     state.searchController.text = '';
     if (employeeData != null) {
-      emit(state.copyWith(setSelectedEmployee: employeeData, employeeList: [], isSearch: false));
+      emit(state.copyWith(setSelectedEmployee: [employeeData], employeeList: [], isSearch: false));
     } else {
-      emit(state.copyWith(setSelectedEmployee: null, employeeList: [], isSearch: true));
+      // emit(state.copyWith(setSelectedEmployee: [], employeeList: null, isSearch: true));
     }
   }
 }
