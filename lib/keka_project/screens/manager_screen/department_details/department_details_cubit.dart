@@ -67,7 +67,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   void sort(){
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList.sort((a, b) => a.department.compareTo(b.department),);
-    emit(state.copyWith(departmentList: leaveList));
+    emit(state.copyWith(departmentList: leaveList,leaveSearchList: leaveList));
 
   }
 }
