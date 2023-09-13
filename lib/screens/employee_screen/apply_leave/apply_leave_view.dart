@@ -46,7 +46,6 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(10),
             child: Stack(
-              // clipBehavior: Clip.hardEdge,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,12 +54,49 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Notify Employee",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    CustomSearch(
-                      controller: state.searchController,
-                      onChanged: (query) {
-                        context.read<ApplyLeaveCubit>().notifyEmp(query);
-                      },
-                    ),
+                    state.employeeList.isNotEmpty
+                        ? CustomSearch(
+                            controller: state.searchController,
+                            onChanged: (query) {
+                              context.read<ApplyLeaveCubit>().notifyEmp(query);
+                            },
+                            // onTap: ,
+                          )
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.filtterdUserList.length,
+                            itemBuilder: (context, index) {
+                              var employee = state.filtterdUserList[index];
+                              return Card(
+                                elevation: 3,
+                                shadowColor: Colors.white,
+                                color: Colors.white,
+                                child: ListTile(
+                                  onTap: () {
+                                    // context.read<ApplyLeaveCubit>().setSelectedEmployee(employee);
+                                  },
+                                  title: Text(employee.name,
+                                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                                      textScaleFactor: 1),
+                                  subtitle: Text(employee.role),
+                                  leading: CircleAvatar(
+                                    backgroundColor: Colors.primaries[index],
+                                    child: Text(
+                                      style: const TextStyle(color: Colors.white),
+                                      state.filtterdUserList[index].name[0],
+                                    ),
+                                  ),
+                                  trailing: IconButton(
+                                    onPressed: () {
+                                      // state.searchController.text = state.filtterdUserList[index].name.toString();
+                                      context.read<ApplyLeaveCubit>().clearSearch();
+                                    },
+                                    icon: const Icon(Icons.close),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                     const SizedBox(height: 20),
                     const Text(
                       "Start Date",
@@ -201,6 +237,8 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                           child: ListTile(
                             onTap: () {
                               state.searchController.text = state.filtterdUserList[index].name.toString();
+
+                              context.read<ApplyLeaveCubit>().setSelectedEmployee(employee);
                             },
                             title: Text(employee.name,
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
