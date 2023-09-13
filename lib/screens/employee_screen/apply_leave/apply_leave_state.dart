@@ -17,7 +17,7 @@ class ApplyLeaveState extends Equatable {
         employeeList,
         filtterdUserList,
         isSearch,
-        setSelectedEmployee
+        notifyEmployee
       ];
   TextEditingController searchController;
   TextEditingController dateController;
@@ -26,12 +26,12 @@ class ApplyLeaveState extends Equatable {
   List<Department> departmentList;
   List<EmployeeData> employeeList;
   List<EmployeeData> filtterdUserList;
-  List<EmployeeData> setSelectedEmployee;
+  List<EmployeeData> notifyEmployee;
   bool? isSearch;
 
   ApplyLeaveState({
     this.isSearch,
-    this.setSelectedEmployee = const [],
+    this.notifyEmployee = const [],
     required this.dateController,
     required this.dateTimeController,
     required this.reasonController,
@@ -49,7 +49,7 @@ class ApplyLeaveState extends Equatable {
     List<Department>? departmentList,
     List<EmployeeData>? employeeList,
     List<EmployeeData>? filtterdUserList,
-    List<EmployeeData>? setSelectedEmployee,
+    List<EmployeeData>? notifyEmployee,
     bool? isSearch,
   }) {
     return ApplyLeaveState(
@@ -60,7 +60,7 @@ class ApplyLeaveState extends Equatable {
       departmentList: departmentList ?? this.departmentList,
       employeeList: employeeList ?? this.employeeList,
       filtterdUserList: filtterdUserList ?? this.filtterdUserList,
-      setSelectedEmployee: setSelectedEmployee ?? this.setSelectedEmployee,
+      notifyEmployee: notifyEmployee ?? this.notifyEmployee,
       isSearch: isSearch ?? this.isSearch,
     );
   }

@@ -58,16 +58,16 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
     // debugPrint("============================$employeeList");
   }
 
-  void setSelectedEmployee(EmployeeData employeeData) {
+  void notifyEmployee(EmployeeData employeeData) {
     clearSearch(employeeData: employeeData);
   }
 
   void clearSearch({EmployeeData? employeeData}) {
     state.searchController.text = '';
     if (employeeData != null) {
-      emit(state.copyWith(setSelectedEmployee: [employeeData], employeeList: [], isSearch: false));
+      emit(state.copyWith(notifyEmployee: [employeeData], isSearch: false));
     } else {
-      // emit(state.copyWith(setSelectedEmployee: [], employeeList: null, isSearch: true));
+      emit(state.copyWith(notifyEmployee: [], isSearch: true));
     }
   }
 }

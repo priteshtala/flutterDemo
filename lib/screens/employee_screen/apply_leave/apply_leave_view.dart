@@ -54,7 +54,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Notify Employee",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    state.setSelectedEmployee.isEmpty
+                    state.notifyEmployee.isEmpty
                         ? CustomSearch(
                             controller: state.searchController,
                             onChanged: (query) {
@@ -70,15 +70,15 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                               onTap: () {
                                 // state.searchController.text = state.filtterdUserList[index].name.toString();
                               },
-                              title: Text(state.setSelectedEmployee.first.name,
+                              title: Text(state.notifyEmployee.first.name,
                                   style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
                                   textScaleFactor: 1),
-                              subtitle: Text(state.setSelectedEmployee.first.role),
+                              subtitle: Text(state.notifyEmployee.first.role),
                               leading: CircleAvatar(
                                 backgroundColor: Colors.white,
                                 child: Text(
                                   style: const TextStyle(color: Colors.black),
-                                  state.setSelectedEmployee.first.name.split("").first,
+                                  state.notifyEmployee.first.name.split("").first,
                                 ),
                               ),
                               trailing: IconButton(
@@ -228,7 +228,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                           color: Colors.white,
                           child: ListTile(
                             onTap: () {
-                              context.read<ApplyLeaveCubit>().setSelectedEmployee(employee);
+                              context.read<ApplyLeaveCubit>().notifyEmployee(employee);
                             },
                             title: Text(employee.name,
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
