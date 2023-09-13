@@ -64,6 +64,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void sort() {
+
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList.sort(
       (a, b) => a.department.compareTo(b.department),
@@ -72,9 +73,9 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void staticList() {
-
-    state.departmentList.add(Department(department: state.departmentController.text));
-    emit(state.copyWith(departmentList:  state.departmentList));
+    List<Department> leaveList = List<Department>.from(state.departmentList);
+    leaveList.add(Department(department: state.departmentController.text));
+    emit(state.copyWith(departmentList: leaveList,leaveSearchList: leaveList,departmentController: state.departmentController),);
 
     print("ADDD::${state.departmentList}");
     print("text::${state.departmentController.text}");
