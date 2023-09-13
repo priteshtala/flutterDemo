@@ -77,6 +77,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
     leaveList.add(Department(department: state.departmentController.text));
     emit(state.copyWith(departmentList: leaveList,leaveSearchList: leaveList,departmentController: state.departmentController),);
 
+
     print("ADDD::${state.departmentList}");
     print("text::${state.departmentController.text}");
   }
