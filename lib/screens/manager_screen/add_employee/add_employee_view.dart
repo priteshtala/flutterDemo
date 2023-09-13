@@ -42,16 +42,19 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
             child: Column(
               children: [
                 CustomTextForm(
-                    keyboardType: TextInputType.name,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ]+')),
-                    ],
-                    controller: state.nameController,
-                    readOnly: false,
-                    textCapitalization: TextCapitalization.none,
-                    obscureText: false,
-                    hintText: "Enter Your Name",
-                    prefixIcon: const Icon(Icons.person)),
+                  keyboardType: TextInputType.name,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp('[a-z A-Z ]+'),
+                    ),
+                  ],
+                  controller: state.nameController,
+                  readOnly: false,
+                  textCapitalization: TextCapitalization.none,
+                  obscureText: false,
+                  hintText: "Enter Your Name",
+                  prefixIcon: const Icon(Icons.person),
+                ),
                 CustomTextForm(
                   controller: state.emailController,
                   readOnly: false,
@@ -105,10 +108,14 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                         // context.read<AddEmployeeCubit>().dropdownSelected(value);
                       },
                       items: state.departmentList
-                          .map((user) => DropdownMenuItem<String>(
-                                value: user.department,
-                                child: Text(user.department.toString()),
-                              ))
+                          .map(
+                            (user) => DropdownMenuItem<String>(
+                              value: user.department,
+                              child: Text(
+                                user.department.toString(),
+                              ),
+                            ),
+                          )
                           .toList(),
                     ),
                   ),
@@ -136,11 +143,15 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                       prefixIconColor: Colors.black,
                       hintStyle: const TextStyle(color: Colors.grey),
                       border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(14.0),
+                        ),
                         borderSide: BorderSide.none,
                       ),
                       focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(14.0)),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(14.0),
+                        ),
                         borderSide: BorderSide.none,
                       ),
                     ),

@@ -4,6 +4,7 @@ import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_cubit.
 import 'package:finaldemo/screens/employee_screen/apply_leave/apply_leave_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class ApplyLeaveView extends StatefulWidget {
   static const String routeName = '/Apply_Leave_View';
@@ -55,6 +56,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Notify Employee",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
+                    const Gap(6),
                     state.notifyEmployee.isEmpty
                         ? CustomSearch(
                             controller: state.searchController,
@@ -93,6 +95,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                         //     ),
                         //   ),
                         : Chip(
+                            backgroundColor: Colors.green.shade100,
                             deleteButtonTooltipMessage: "Remove",
                             onDeleted: () {
                               context.read<ApplyLeaveCubit>().clearSearch();
@@ -114,6 +117,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Start Date",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
+                    const Gap(6),
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -159,6 +163,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "End Date",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
+                    const Gap(6),
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -204,6 +209,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                       "Reason",
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
+                    const Gap(6),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
