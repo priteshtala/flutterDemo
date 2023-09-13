@@ -35,9 +35,9 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           title: const Text("Add Department"),
           actions: [
             TextFormField(
-              decoration: InputDecoration(hintText: "Enter Department"),
+              decoration: const InputDecoration(hintText: "Enter Department"),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -66,7 +66,15 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   void departmentSearch(String query) {
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList = leaveList.where((element) => element.department.toLowerCase().contains(query.toLowerCase())).toList();
+    sort();
     emit(state.copyWith(leaveSearchList: leaveList));
+  }
+
+  void sort(){
+    List<Department> leaveList = List<Department>.from(state.departmentList);
+    leaveList.sort((a, b) => a.department.compareTo(b.department),);
+    emit(state.copyWith(departmentList: leaveList));
+
   }
 
   void staticList() {
