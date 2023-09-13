@@ -14,7 +14,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           ),
         );
 
-  addDepartment(BuildContext context) {
+  void addDepartment(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
