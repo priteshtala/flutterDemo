@@ -62,12 +62,13 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                   scrollDirection: Axis.vertical,
                   itemCount: state.leaveSearchList.length,
                   itemBuilder: (context, index) {
+                  print("lenth:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}" );
                     return Column(
                       children: [
                         ListTile(
                           leading: CircleAvatar(
                             backgroundColor: Colors.primaries[index],
-                            child: Text(state.leaveSearchList[index].department.split('').first,style: const TextStyle(color: Colors.black)),
+                            child: Text(index.toString(),style: const TextStyle(color: Colors.black)),
                           ),
                           title: Text(state.leaveSearchList[index].department),
                         ),

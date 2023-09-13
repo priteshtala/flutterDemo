@@ -72,10 +72,12 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void staticList() {
-    state.departmentList.add(Department(department: state.departmentController.text));
-    emit(state.copyWith(leaveSearchList: state.departmentList));
 
-    // print("ADDD::${state.departmentList}");
+    state.departmentList.add(Department(department: state.departmentController.text));
+    emit(state.copyWith(departmentList:  state.departmentList));
+
+    print("ADDD::${state.departmentList}");
+    print("text::${state.departmentController.text}");
   }
 }
 
