@@ -24,6 +24,11 @@ class DepartmentDetailsView extends StatefulWidget {
 
 class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
   @override
+  void initState() {
+    context.read<DepartmentDetailsCubit>().sort();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<DepartmentDetailsCubit, DepartmentDetailsState>(
       builder: (context, state) {
@@ -52,7 +57,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                 context.read<DepartmentDetailsCubit>().departmentSearch(query);
               },
                 ),
-                ListView.builder(
+                ListView.builder(physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: state.leaveSearchList.length,

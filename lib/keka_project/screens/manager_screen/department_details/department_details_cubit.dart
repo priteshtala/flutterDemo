@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:flutter/material.dart';
 import 'department_details_state.dart';
 
@@ -28,14 +27,14 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          actionsPadding: EdgeInsets.all(10),
+          actionsPadding: const EdgeInsets.all(10),
           alignment: Alignment.center,
           title: const Text("Add Department"),
           actions: [
             TextFormField(
-              decoration: InputDecoration(hintText: "Enter Department"),
+              decoration: const InputDecoration(hintText: "Enter Department"),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -61,7 +60,15 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   void departmentSearch(String query) {
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList = leaveList.where((element) => element.department.toLowerCase().contains(query.toLowerCase())).toList();
+    sort();
     emit(state.copyWith(leaveSearchList: leaveList));
+  }
+
+  void sort(){
+    List<Department> leaveList = List<Department>.from(state.departmentList);
+    leaveList.sort((a, b) => a.department.compareTo(b.department),);
+    emit(state.copyWith(departmentList: leaveList));
+
   }
 }
 List<Department> leaveEmpList = [
