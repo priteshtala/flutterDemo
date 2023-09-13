@@ -52,6 +52,12 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo/keka.png"
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
