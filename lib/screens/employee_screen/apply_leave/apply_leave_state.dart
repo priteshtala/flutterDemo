@@ -13,24 +13,31 @@ class ApplyLeaveState extends Equatable {
         reasonController,
         departmentList,
         employeeList,
-        filtterdUserList
+        filtterdUserList,
+        isSearch,
+        setSelectedEmployee
       ];
-  TextEditingController searchController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController dateTimeController = TextEditingController();
-  TextEditingController reasonController = TextEditingController();
+  TextEditingController searchController;
+  TextEditingController dateController;
+  TextEditingController dateTimeController;
+  TextEditingController reasonController;
   List<Department> departmentList;
   List<EmployeeData> employeeList;
   List<EmployeeData> filtterdUserList;
+  EmployeeData? setSelectedEmployee;
+  bool? isSearch;
 
-  ApplyLeaveState(
-      {required this.dateController,
-      required this.dateTimeController,
-      required this.reasonController,
-      required this.searchController,
-      this.departmentList = const [],
-      this.employeeList = const [],
-      this.filtterdUserList = const []});
+  ApplyLeaveState({
+    this.isSearch,
+    this.setSelectedEmployee,
+    required this.dateController,
+    required this.dateTimeController,
+    required this.reasonController,
+    required this.searchController,
+    this.departmentList = const [],
+    this.employeeList = const [],
+    this.filtterdUserList = const [],
+  });
 
   ApplyLeaveState copyWith({
     TextEditingController? searchController,
@@ -40,6 +47,8 @@ class ApplyLeaveState extends Equatable {
     List<Department>? departmentList,
     List<EmployeeData>? employeeList,
     List<EmployeeData>? filtterdUserList,
+    EmployeeData? setSelectedEmployee,
+    bool? isSearch,
   }) {
     return ApplyLeaveState(
       searchController: searchController ?? this.searchController,
@@ -49,6 +58,8 @@ class ApplyLeaveState extends Equatable {
       departmentList: departmentList ?? this.departmentList,
       employeeList: employeeList ?? this.employeeList,
       filtterdUserList: filtterdUserList ?? this.filtterdUserList,
+      setSelectedEmployee: setSelectedEmployee ?? this.setSelectedEmployee,
+      isSearch: isSearch ?? this.isSearch,
     );
   }
 }

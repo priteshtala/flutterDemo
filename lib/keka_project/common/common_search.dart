@@ -4,12 +4,14 @@ class CustomSearch extends StatelessWidget {
   final TextEditingController? controller;
   final void Function()? onTap;
   final void Function(String)? onChanged;
+  final String? initialValue;
 
-  const CustomSearch({super.key, this.controller, this.onTap, this.onChanged});
+  const CustomSearch({super.key, this.controller, this.onTap, this.onChanged, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       textInputAction: TextInputAction.next,
       onTap: onTap,
       controller: controller,

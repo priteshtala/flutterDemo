@@ -27,7 +27,9 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
       String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
       state.dateController.text = formattedDate;
     }
-    emit(state.copyWith(dateController: state.dateController,));
+    emit(state.copyWith(
+      dateController: state.dateController,
+    ));
   }
 
   void datePicker(context) async {
@@ -44,7 +46,6 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
     emit(state.copyWith(dateTimeController: state.dateTimeController));
   }
 
-
   void notifyEmp(String query) {
     // List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);
     List<EmployeeData> employeeList = state.employeeList
@@ -54,6 +55,19 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
 
     emit(state.copyWith(filtterdUserList: employeeList));
     // debugPrint("============================$employeeList");
+  }
+
+  void setSelectedEmployee(EmployeeData employeeData) {
+    clearSearch(employeeData: employeeData);
+  }
+
+  void clearSearch({EmployeeData? employeeData}) {
+    state.searchController.text = '';
+    if (employeeData != null) {
+      emit(state.copyWith(setSelectedEmployee: employeeData, employeeList: [], isSearch: false));
+    } else {
+      emit(state.copyWith(setSelectedEmployee: null, employeeList: [], isSearch: true));
+    }
   }
 }
 
