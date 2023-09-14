@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: routes,
       initialRoute: SplashScreenView.routeName,
-      // home: ApplyLeaveView(),
+      // home: MyCustomSplashScreen(),
     );
   }
 
