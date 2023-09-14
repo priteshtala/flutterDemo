@@ -53,6 +53,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             ),
           ),
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text("Elaunch Solution"),
             actions: [
               IconButton(

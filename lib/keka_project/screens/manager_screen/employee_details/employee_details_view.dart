@@ -7,7 +7,6 @@ import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/e
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class EmployeeDetailsView extends StatefulWidget {
   static const String routeName = "/Employee_details_view";
 
@@ -102,44 +101,46 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.filtterdUserList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    var employee = state.filtterdUserList[index];
-                    return Card(
-                      color: Colors.white,
-                      elevation: 3,
-                      shadowColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                      child: ListTile(
-                        // title: Text("${employee.name}"),
-                        leading: CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.primaries[index],
-                          child:
-                              Text(state.filtterdUserList[index].name[0], style: const TextStyle(color: Colors.black)),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(employee.name,
-                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-                                textScaleFactor: 1),
-                            const SizedBox(height: 8),
-                            Text(employee.role),
-                            const SizedBox(height: 8),
-                            Text("Location : ${employee.location}"),
-                            Text("Department : ${employee.department}"),
-                            Text("Email : ${employee.email}"),
-                            Text("Mobile : ${employee.number}"),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                state.filtterdUserList.isNotEmpty
+                    ? ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.filtterdUserList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var employee = state.filtterdUserList[index];
+                          return Card(
+                            color: Colors.white,
+                            elevation: 3,
+                            shadowColor: Colors.white,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                            child: ListTile(
+                              // title: Text("${employee.name}"),
+                              leading: CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.primaries[index],
+                                child: Text(state.filtterdUserList[index].name[0],
+                                    style: const TextStyle(color: Colors.black)),
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(employee.name,
+                                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                                      textScaleFactor: 1),
+                                  const SizedBox(height: 8),
+                                  Text(employee.role),
+                                  const SizedBox(height: 8),
+                                  Text("Location : ${employee.location}"),
+                                  Text("Department : ${employee.department}"),
+                                  Text("Email : ${employee.email}"),
+                                  Text("Mobile : ${employee.number}"),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : Text("No-Data", textScaleFactor: 1.5),
               ],
             ),
           ),
