@@ -70,7 +70,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                       }
                     },
                     minWidth: 300,
-                    child: const Text("Next", textScaleFactor: 1.5),
+                    child: const Text("Next", textScaleFactor: 1.3),
                     // minWidth: 300,
                   )
                 ],
@@ -94,11 +94,12 @@ class _MainScreenViewState extends State<MainScreenView> {
                       ),
                       height: 200,
                       width: 200,
-                      child: const Center(
+                      child: Center(
                           child: Text(
                         "Manager",
                         textScaleFactor: 2,
-                      )),
+                            style: TextStyle(color: state.isSelected == 0 ? Colors.white : Colors.black),
+                      ),),
                     ),
                   ),
                   const SizedBox(height: 70),
@@ -128,10 +129,11 @@ class _MainScreenViewState extends State<MainScreenView> {
                                 ),
                                 height: 200,
                                 width: 200,
-                                child: const Center(
+                                child: Center(
                                   child: Text(
                                     "Employee",
-                                    textScaleFactor: 2,
+                                    textScaleFactor: 2,  style: TextStyle(color: state.isSelected == 1 ? Colors.white : Colors.black),
+
                                   ),
                                 ),
                               ),

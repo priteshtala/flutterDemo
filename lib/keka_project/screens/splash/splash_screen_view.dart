@@ -287,7 +287,7 @@ class _SplashScreenViewState extends State<SplashScreenView> with TickerProvider
                   width: width / containerSize,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Image.network(

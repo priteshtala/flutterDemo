@@ -83,7 +83,6 @@ class _EmployeeLoginViewState extends State<EmployeeLoginView> {
                   minWidth: 300,
                   child: const Text(
                     "Log-in",
-                    textScaleFactor: 1.5,
                   ),
                 ),
               ],

@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: Colors.green,
           foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
         ),
         // useMaterial3: true,
       ),
