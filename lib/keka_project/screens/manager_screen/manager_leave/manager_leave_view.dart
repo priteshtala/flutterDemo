@@ -53,6 +53,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             ),
           ),
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text("Elaunch Solution"),
             actions: [
               IconButton(
@@ -193,7 +194,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // context.read<ManagerScreenCubit>().navigateToEmployeeListView(context);
                           context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
                         },
                         child: Container(

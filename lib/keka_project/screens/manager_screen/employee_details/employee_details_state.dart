@@ -5,20 +5,18 @@ import 'package:flutter/material.dart';
 
 class EmployeeDetailsState extends Equatable {
   @override
-  List<Object?> get props => [selectedValue, filterDepartmentList, name, selectedValue, filtterdUserList];
+  List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList];
 
   List<Department> filterDepartmentList;
   List<EmployeeData> employeeList;
   List<EmployeeData> filtterdUserList;
   final TextEditingController searchController;
   String? selectedValue;
-  String? name;
 
   EmployeeDetailsState({
     this.filterDepartmentList = const [],
     this.employeeList = const [],
     this.selectedValue,
-    this.name,
     this.filtterdUserList = const [],
     required this.searchController,
   });
@@ -27,7 +25,6 @@ class EmployeeDetailsState extends Equatable {
     List<Department>? filterDepartmentList,
     String? selectedValue,
     List<EmployeeData>? employeeList,
-    String? name,
     List<EmployeeData>? filtterdUserList,
     TextEditingController? searchController,
   }) {
@@ -35,7 +32,6 @@ class EmployeeDetailsState extends Equatable {
       filterDepartmentList: filterDepartmentList ?? this.filterDepartmentList,
       selectedValue: selectedValue ?? this.selectedValue,
       employeeList: employeeList ?? this.employeeList,
-      name: name ?? this.name,
       filtterdUserList: filtterdUserList ?? this.filtterdUserList,
       searchController: searchController ?? this.searchController,
     );

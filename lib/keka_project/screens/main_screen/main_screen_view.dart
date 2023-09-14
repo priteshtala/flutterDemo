@@ -33,6 +33,7 @@ class _MainScreenViewState extends State<MainScreenView> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             centerTitle: true,
             backgroundColor: Colors.green,
             title: Text("Keka"),
@@ -94,11 +95,12 @@ class _MainScreenViewState extends State<MainScreenView> {
                       height: 200,
                       width: 200,
                       child: Center(
-                          child: Text(
-                        "Manager",
-                        textScaleFactor: 2,
-                            style: TextStyle(color: state.isSelected == 0 ? Colors.white : Colors.black),
-                      ),),
+                        child: Text(
+                          "Manager",
+                          textScaleFactor: 2,
+                          style: TextStyle(color: state.isSelected == 0 ? Colors.white : Colors.black),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 70),
@@ -131,8 +133,8 @@ class _MainScreenViewState extends State<MainScreenView> {
                                 child: Center(
                                   child: Text(
                                     "Employee",
-                                    textScaleFactor: 2,  style: TextStyle(color: state.isSelected == 1 ? Colors.white : Colors.black),
-
+                                    textScaleFactor: 2,
+                                    style: TextStyle(color: state.isSelected == 1 ? Colors.white : Colors.black),
                                   ),
                                 ),
                               ),

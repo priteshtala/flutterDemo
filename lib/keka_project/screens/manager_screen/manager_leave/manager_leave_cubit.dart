@@ -34,16 +34,16 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   void dateTime(context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().subtract(const Duration(days: 1)),
+      initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
-    String formattedDate1 = DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)));
-    state.yesterdayDate = formattedDate1;
+
     if (pickedDate != null) {
       String formattedDate = DateFormat.yMd('en_US').format(pickedDate);
       state.dateController.text = formattedDate;
     } else {
+      String formattedDate1 = DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
     }
     emit(state.copyWith(dateController: state.dateController));
@@ -61,7 +61,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
               splashColor: Colors.red,
               shape: Border.all(color: Colors.black),
               onPressed: () {
-                Navigator.of(context).pushNamed(MainScreenView.routeName);
+                Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
               },
               child: const Text("Yes", style: TextStyle(color: Colors.red)),
             ),
