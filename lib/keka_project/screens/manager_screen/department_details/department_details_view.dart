@@ -29,6 +29,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
     // context.read<DepartmentDetailsCubit>().staticListAdd();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DepartmentDetailsCubit, DepartmentDetailsState>(
@@ -36,11 +37,19 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
         return Scaffold(
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(10),
-            child: CustomButton(
-              onPressed: () {
-                context.read<DepartmentDetailsCubit>().addDepartment(context);
-              },
-              child: const Text("Add Department"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  onPressed: () {
+                    context.read<DepartmentDetailsCubit>().addDepartment(context);
+                  },
+                  child: const Text(
+                    "Add Department",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ),
+              ],
             ),
           ),
           appBar: AppBar(
@@ -55,12 +64,13 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                     context.read<DepartmentDetailsCubit>().departmentSearch(query);
                   },
                 ),
-                ListView.builder(physics: const ClampingScrollPhysics(),
+                ListView.builder(
+                  physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: state.leaveSearchList.length,
                   itemBuilder: (context, index) {
-                  print("lenth:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}" );
+                    print("lenth:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}");
                     return Column(
                       children: [
                         Card(
@@ -70,7 +80,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor: Colors.primaries[index],
-                              child: Text(index.toString(),style: const TextStyle(color: Colors.black)),
+                              child: Text(index.toString(), style: const TextStyle(color: Colors.black)),
                             ),
                             title: Text(state.leaveSearchList[index].department),
                           ),
