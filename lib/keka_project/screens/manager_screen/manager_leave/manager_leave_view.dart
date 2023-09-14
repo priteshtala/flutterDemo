@@ -32,7 +32,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomButtonChange(
-                  color: Colors.green.shade300,
+                  textColor: Colors.white,
+                  color: Colors.green,
                   minWidth: 150,
                   child: const Text("Add Leave"),
                   onPressed: () {
@@ -40,7 +41,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   },
                 ),
                 CustomButtonChange(
-                  color: Colors.green.shade300,
+                  textColor: Colors.white,
+                  color: Colors.green,
                   minWidth: 150,
                   onPressed: () {
                     context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
