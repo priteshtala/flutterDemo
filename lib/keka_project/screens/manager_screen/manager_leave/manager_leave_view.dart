@@ -33,7 +33,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
               children: [
                 CustomButtonChange(
                   color: Colors.green,
-                  child: const Text("Add Leave",style: TextStyle(color: Colors.white, fontSize: 20)),
+                  child: const Text("Add Leave",style: TextStyle(color: Colors.white)),
                   onPressed: () {
                     context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
                   }, width: 150, height: 40,
@@ -46,7 +46,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   },
                   width: 150,
                   height: 40,
-                  child: const Text("Leave Requests",style: TextStyle(color: Colors.white, fontSize: 20)),
+                  child: const Text("Leave Requests",style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),

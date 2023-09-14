@@ -37,8 +37,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  minWidth: 300,
-                  child: const Text("Add", style: TextStyle(color: Colors.white, fontSize: 18),),
+                  child: const Text("Add", style: TextStyle(color: Colors.white, fontSize: 20),),
                   onPressed: () {},
                 ),
               ],

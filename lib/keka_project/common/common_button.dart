@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
       child: child,
       shadowDegree: ShadowDegree.light,
       width: 300,
-      height: 50,
+      height: 45,
     );
   }
 }
