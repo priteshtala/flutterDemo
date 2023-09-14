@@ -104,49 +104,22 @@ class _SplashScreenViewState extends State<SplashScreenView> with TickerProvider
               curve: Curves.fastLinearToSlowEaseIn,
               opacity: _containerOpacity,
               child: AnimatedContainer(
-                  duration: Duration(milliseconds: 2000),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  height: 250,
-                  width: 250,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Image.network(
-                      'https://yt3.googleusercontent.com/k6Kwwm3mCkN_xqh3rDtHP9eCWDspjVLCILs6cbAwt1ypGNTn12AX98kiixw-ZLZMntag90jEv20=s900-c-k-c0x00ffffff-no-rj')
-//                 child: Text(
-//                   'keka',
-//                 ),
-                  ),
+                duration: Duration(milliseconds: 2000),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: 250,
+                width: 250,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Image.network(
+                    'https://yt3.googleusercontent.com/k6Kwwm3mCkN_xqh3rDtHP9eCWDspjVLCILs6cbAwt1ypGNTn12AX98kiixw-ZLZMntag90jEv20=s900-c-k-c0x00ffffff-no-rj'),
+              ),
             ),
           ),
         ],
       ),
     );
   }
-}
-
-class PageTransition extends PageRouteBuilder {
-  final Widget page;
-
-  PageTransition(this.page)
-      : super(
-          pageBuilder: (context, animation, anotherAnimation) => page,
-          transitionDuration: Duration(milliseconds: 2000),
-          transitionsBuilder: (context, animation, anotherAnimation, child) {
-            animation = CurvedAnimation(
-              curve: Curves.fastLinearToSlowEaseIn,
-              parent: animation,
-            );
-            return Align(
-              alignment: Alignment.bottomCenter,
-              child: SizeTransition(
-                sizeFactor: animation,
-                child: page,
-                axisAlignment: 0,
-              ),
-            );
-          },
-        );
 }
