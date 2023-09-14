@@ -32,6 +32,10 @@ class _MainScreenViewState extends State<MainScreenView> {
     return BlocBuilder<MainScreenCubit, MainScreenState>(
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.green,
+            title: Text("Keka"),
+          ),
           bottomNavigationBar: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
@@ -58,7 +62,6 @@ class _MainScreenViewState extends State<MainScreenView> {
                           ),
                         );
                       } else if (state.isSelected == 0) {
-                        // debugPrint("Done......!");
                         Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
                       } else {
                         Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
