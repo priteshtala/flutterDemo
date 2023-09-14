@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'add_employee_state.dart';
 
 class AddEmployeeCubit extends Cubit<AddEmployeeState> {

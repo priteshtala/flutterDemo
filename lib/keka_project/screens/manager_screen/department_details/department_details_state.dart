@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 class DepartmentDetailsState extends Equatable {
   @override
   List<Object?> get props => [departmentList, leaveSearchList, staticList, departmentController];
-  List<Department> departmentList;
-  TextEditingController departmentController;
-  List<Department> leaveSearchList;
-  List<Department> staticList;
+  final List<Department> departmentList;
+  final TextEditingController departmentController;
+  final List<Department> leaveSearchList;
+  final List<Department> staticList;
 
   DepartmentDetailsState(
       { this.departmentList = const [],

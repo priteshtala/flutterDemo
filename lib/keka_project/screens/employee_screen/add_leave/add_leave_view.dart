@@ -1,10 +1,8 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-
 import 'add_leave_cubit.dart';
 import 'add_leave_state.dart';
 
@@ -37,7 +35,10 @@ class _AddLeaveViewState extends State<AddLeaveView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  child: const Text("Add", style: TextStyle(color: Colors.white, fontSize: 20),),
+                  child: const Text(
+                    "Add",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                   onPressed: () {},
                 ),
               ],

@@ -1,12 +1,10 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-
 import 'add_employee_state.dart';
 
 class AddEmployeeView extends StatefulWidget {
@@ -180,7 +178,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 CustomButton(
                   onPressed: () {},
                   minWidth: 300,
-                  child: const Text("ADD",style: TextStyle(color: Colors.white, fontSize: 20)),
+                  child: const Text("ADD", style: TextStyle(color: Colors.white, fontSize: 20)),
                 )
               ],
             ),

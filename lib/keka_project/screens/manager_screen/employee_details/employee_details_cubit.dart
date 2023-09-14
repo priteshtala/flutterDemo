@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'employee_details_state.dart';
 
 class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {

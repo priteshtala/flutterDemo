@@ -2,7 +2,6 @@ import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/department_details/department_details_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/department_details/department_details_state.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -70,7 +69,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                   scrollDirection: Axis.vertical,
                   itemCount: state.leaveSearchList.length,
                   itemBuilder: (context, index) {
-                    print("lenth:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}");
+                    print("Length:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}");
                     return Column(
                       children: [
                         Card(

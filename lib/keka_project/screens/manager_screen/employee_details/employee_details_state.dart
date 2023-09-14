@@ -7,11 +7,11 @@ class EmployeeDetailsState extends Equatable {
   @override
   List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList];
 
-  List<Department> filterDepartmentList;
-  List<EmployeeData> employeeList;
-  List<EmployeeData> filtterdUserList;
-  final TextEditingController searchController;
-  String? selectedValue;
+   List<Department> filterDepartmentList;
+   List<EmployeeData> employeeList;
+   List<EmployeeData> filtterdUserList;
+   TextEditingController searchController;
+   String? selectedValue;
 
   EmployeeDetailsState({
     this.filterDepartmentList = const [],
