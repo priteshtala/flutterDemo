@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          toolbarHeight: 80,
+          toolbarHeight: 70,
           color: Colors.green,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
