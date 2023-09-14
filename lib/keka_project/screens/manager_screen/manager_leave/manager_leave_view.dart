@@ -70,6 +70,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -187,55 +188,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     ],
                   ),
                 ),
-                // const SizedBox(height: 10),
-                // Container(
-                //   decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       Padding(
-                //         padding: const EdgeInsets.all(16),
-                //         child: const Text(
-                //           "Today Birthday",
-                //           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
-                //         ),
-                //       ),
-                //       Container(
-                //         padding: const EdgeInsets.only(top: 10, bottom: 10),
-                //         height: 120,
-                //         child: ListView.builder(
-                //           scrollDirection: Axis.horizontal,
-                //           itemCount: state.leaveList.length,
-                //           shrinkWrap: true,
-                //           itemBuilder: (context, index) {
-                //             return Column(
-                //               children: [
-                //                 Padding(
-                //                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                //                   child: CircleAvatar(
-                //                       radius: 27,
-                //                       backgroundColor: Colors.primaries[index],
-                //                       child: Text(
-                //                           "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
-                //                           style: const TextStyle(color: Colors.white))),
-                //                 ),
-                //                 Column(
-                //                   children: [
-                //                     const SizedBox(height: 5),
-                //                     Text(
-                //                       "${state.leaveList[index].name}..",
-                //                       overflow: TextOverflow.ellipsis,
-                //                     ),
-                //                   ],
-                //                 ),
-                //               ],
-                //             );
-                //           },
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Row(

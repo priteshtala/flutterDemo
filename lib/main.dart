@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         appBarTheme: AppBarTheme(
+          toolbarHeight: 80,
           color: Colors.green,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
