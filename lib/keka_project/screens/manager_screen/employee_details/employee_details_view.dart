@@ -116,7 +116,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             child: ListTile(
                               // title: Text("${employee.name}"),
                               leading: CircleAvatar(
-                                radius: 40,
+                                radius: 30,
                                 backgroundColor: Colors.primaries[index],
                                 child: Text(state.filtterdUserList[index].name[0],
                                     style: const TextStyle(color: Colors.black)),
@@ -124,9 +124,11 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(employee.name,
-                                      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-                                      textScaleFactor: 1),
+                                  Text(
+                                    employee.name,
+                                    style:
+                                        const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
+                                  ),
                                   const SizedBox(height: 8),
                                   Text(employee.role),
                                   const SizedBox(height: 8),

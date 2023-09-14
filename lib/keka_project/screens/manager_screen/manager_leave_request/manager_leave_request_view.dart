@@ -32,7 +32,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
         child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: 5,
+          itemCount: 7,
           itemBuilder: (context, index) {
             return Card(
               child: ListTile(
@@ -49,15 +49,17 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                     Text("Department : Flutter"),
                     Text("DOB : 15-11-2002"),
                     Text("Reason : Fever"),
+                    SizedBox(height: 10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         CustomButtonChange(
                           color: Colors.green.shade100,
                           child: Icon(Icons.done),
                           onPressed: () {}, width: 50, height: 35,
                         ),
-                        Gap(8),
+
+                        Gap(15),
                         CustomButtonChange(
                           color: Colors.red.shade100,
                           child: Icon(Icons.close),

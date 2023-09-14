@@ -33,20 +33,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
               children: [
                 CustomButtonChange(
                   color: Colors.green,
-                  child: const Text("Add Leave",style: TextStyle(color: Colors.white)),
+                  child: const Text("Add Leave", style: TextStyle(color: Colors.white)),
                   onPressed: () {
                     context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
-                  }, width: 150, height: 40,
+                  },
+                  width: 150,
+                  height: 40,
                 ),
                 CustomButtonChange(
                   color: Colors.green,
-
                   onPressed: () {
                     context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
                   },
                   width: 150,
                   height: 40,
-                  child: const Text("Leave Requests",style: TextStyle(color: Colors.white)),
+                  child: const Text("Leave Requests", style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
@@ -245,7 +246,12 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
                         },
                         child: Container(
+                          padding: EdgeInsets.all(24),
                           decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
+                                begin: Alignment.bottomRight,
+                                end: Alignment.topLeft),
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.green.shade200,
                           ),
@@ -257,14 +263,17 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               const Text(
                                 "Employee",
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 20,
                                 ),
                               ),
+                              Divider(color: Colors.white),
                               Text(
                                 "${state.leaveList.length}",
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
                                   fontSize: 20,
                                 ),
                               ),
@@ -277,7 +286,12 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
                         },
                         child: Container(
+                          padding: EdgeInsets.all(13),
                           decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
+                                begin: Alignment.bottomRight,
+                                end: Alignment.topLeft),
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.green.shade200,
                           ),
@@ -288,15 +302,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                             children: [
                               const Text(
                                 "Department",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
                               ),
+                              Divider(color: Colors.white),
                               Text(
                                 "${state.leaveList.length}",
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
                                   fontSize: 20,
                                 ),
                               ),
