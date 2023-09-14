@@ -2,12 +2,12 @@ import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'apply_leave_state.dart';
+import 'add_leave_state.dart';
 
-class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
-  ApplyLeaveCubit()
+class AddLeaveCubit extends Cubit<AddLeaveState> {
+  AddLeaveCubit()
       : super(
-          ApplyLeaveState(
+          AddLeaveState(
             dateController: TextEditingController(),
             dateTimeController: TextEditingController(),
             reasonController: TextEditingController(),

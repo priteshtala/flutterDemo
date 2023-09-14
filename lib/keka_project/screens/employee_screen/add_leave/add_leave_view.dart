@@ -5,29 +5,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-import 'apply_leave_cubit.dart';
-import 'apply_leave_state.dart';
+import 'add_leave_cubit.dart';
+import 'add_leave_state.dart';
 
-class ApplyLeaveView extends StatefulWidget {
+class AddLeaveView extends StatefulWidget {
   static const String routeName = '/Apply_Leave_View';
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => ApplyLeaveCubit(),
-      child: const ApplyLeaveView(),
+      create: (context) => AddLeaveCubit(),
+      child: const AddLeaveView(),
     );
   }
 
-  const ApplyLeaveView({super.key});
+  const AddLeaveView({super.key});
 
   @override
-  State<ApplyLeaveView> createState() => _ApplyLeaveViewState();
+  State<AddLeaveView> createState() => _AddLeaveViewState();
 }
 
-class _ApplyLeaveViewState extends State<ApplyLeaveView> {
+class _AddLeaveViewState extends State<AddLeaveView> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ApplyLeaveCubit, ApplyLeaveState>(
+    return BlocBuilder<AddLeaveCubit, AddLeaveState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -62,7 +62,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                         ? CustomSearch(
                             controller: state.searchController,
                             onChanged: (query) {
-                              context.read<ApplyLeaveCubit>().notifyEmp(query);
+                              context.read<AddLeaveCubit>().notifyEmp(query);
                             },
                           )
                         // : Container(
@@ -99,7 +99,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                             backgroundColor: Colors.green.shade100,
                             deleteButtonTooltipMessage: "Remove",
                             onDeleted: () {
-                              context.read<ApplyLeaveCubit>().clearSearch();
+                              context.read<AddLeaveCubit>().clearSearch();
                             },
                             avatar: CircleAvatar(
                               radius: 30,
@@ -152,7 +152,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                                 icon: Icon(Icons.calendar_today, color: Colors.green),
                               ),
                               onTap: () {
-                                context.read<ApplyLeaveCubit>().dateTimePicker(context);
+                                context.read<AddLeaveCubit>().dateTimePicker(context);
                               },
                             ),
                           ),
@@ -198,7 +198,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                                 icon: Icon(Icons.calendar_today, color: Colors.green),
                               ),
                               onTap: () {
-                                context.read<ApplyLeaveCubit>().datePicker(context);
+                                context.read<AddLeaveCubit>().datePicker(context);
                               },
                             ),
                           ),
@@ -260,7 +260,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
                           child: ListTile(
                             tileColor: Colors.grey,
                             onTap: () {
-                              context.read<ApplyLeaveCubit>().notifyEmployee(employee);
+                              context.read<AddLeaveCubit>().notifyEmployee(employee);
                             },
                             title: Text(employee.name,
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),

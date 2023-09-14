@@ -1,5 +1,5 @@
 import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
-import 'package:finaldemo/keka_project/screens/employee_screen/apply_leave/apply_leave_view.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
 import 'package:finaldemo/keka_project/screens/main_screen/main_screen_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
@@ -81,7 +81,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void navigateToApplyLeave(context) {
-    Navigator.of(context).pushNamed(ApplyLeaveView.routeName);
+    Navigator.of(context).pushNamed(AddLeaveView.routeName);
   }
 
   void navigateToManagerRequest(context) {

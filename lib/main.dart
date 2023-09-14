@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'keka_project/screens/employee_screen/apply_leave/apply_leave_view.dart';
+import 'keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
 import 'keka_project/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
 import 'keka_project/screens/main_screen/main_screen_view.dart';
 import 'keka_project/screens/manager_screen/add_employee/add_employee_view.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
           color: Colors.green,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(30),bottomRight: Radius.circular(30)),
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
           ),
         ),
         // useMaterial3: true,
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
         EmployeeDetailsView.routeName: EmployeeDetailsView.builder,
         AddEmployeeView.routeName: AddEmployeeView.builder,
         DepartmentDetailsView.routeName: DepartmentDetailsView.builder,
-        ApplyLeaveView.routeName: ApplyLeaveView.builder,
+        AddLeaveView.routeName: AddLeaveView.builder,
         ManagerLeaveRequest.routeName: ManagerLeaveRequest.builder,
       };
 }

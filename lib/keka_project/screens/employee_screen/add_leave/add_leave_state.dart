@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 
 
 
-class ApplyLeaveState extends Equatable {
+class AddLeaveState extends Equatable {
   @override
   List<Object?> get props => [
         searchController,
@@ -30,7 +30,7 @@ class ApplyLeaveState extends Equatable {
   List<EmployeeData> notifyEmployee;
   bool? isSearch;
 
-  ApplyLeaveState({
+  AddLeaveState({
     this.isSearch,
     this.notifyEmployee = const [],
     required this.dateController,
@@ -42,7 +42,7 @@ class ApplyLeaveState extends Equatable {
     this.filtterdUserList = const [],
   });
 
-  ApplyLeaveState copyWith({
+  AddLeaveState copyWith({
     TextEditingController? searchController,
     TextEditingController? dateController,
     TextEditingController? dateTimeController,
@@ -53,7 +53,7 @@ class ApplyLeaveState extends Equatable {
     List<EmployeeData>? notifyEmployee,
     bool? isSearch,
   }) {
-    return ApplyLeaveState(
+    return AddLeaveState(
       searchController: searchController ?? this.searchController,
       dateController: dateController ?? this.dateController,
       dateTimeController: dateTimeController ?? this.dateTimeController,
