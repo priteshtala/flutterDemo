@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           color: Colors.green,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(30),bottomRight: Radius.circular(30)),
           ),
         ),
         // useMaterial3: true,
