@@ -57,19 +57,24 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
           alignment: Alignment.center,
           title: const Text("Log Out?"),
           actions: [
-            MaterialButton(
-              splashColor: Colors.red,
-              shape: Border.all(color: Colors.black),
-              onPressed: () {
-                Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
-              },
-              child: const Text("Yes", style: TextStyle(color: Colors.red)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MaterialButton(
+                  splashColor: Colors.red,
+                  shape: Border.all(color: Colors.black),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
+                  },
+                  child: const Text("Yes", style: TextStyle(color: Colors.red)),
+                ),
+                MaterialButton(
+                  shape: Border.all(color: Colors.black),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("No"),
+                ),
+              ],
             ),
-            MaterialButton(
-              shape: Border.all(color: Colors.black),
-              onPressed: () => Navigator.pop(context),
-              child: const Text("No"),
-            )
           ],
         );
       },
