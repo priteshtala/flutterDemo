@@ -156,7 +156,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                   minWidth: 300,
                   child: const Text(
                     "Add-Employee",
-                    textScaleFactor: 1.5,
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
               ],

@@ -32,22 +32,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomButtonChange(
-                  textColor: Colors.white,
                   color: Colors.green,
-                  minWidth: 150,
-                  child: const Text("Add Leave"),
+                  child: const Text("Add Leave",style: TextStyle(color: Colors.white, fontSize: 20)),
                   onPressed: () {
                     context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
-                  },
+                  }, width: 150, height: 40,
                 ),
                 CustomButtonChange(
-                  textColor: Colors.white,
                   color: Colors.green,
-                  minWidth: 150,
+
                   onPressed: () {
                     context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
                   },
-                  child: const Text("Leave Requests"),
+                  width: 150,
+                  height: 40,
+                  child: const Text("Leave Requests",style: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
               ],
             ),

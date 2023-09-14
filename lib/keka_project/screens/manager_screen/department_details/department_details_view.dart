@@ -36,13 +36,10 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
         return Scaffold(
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.all(10),
-            child: CustomButtonChange(
-              color: Colors.green,
+            child: CustomButton(
               onPressed: () {
                 context.read<DepartmentDetailsCubit>().addDepartment(context);
               },
-              minWidth: 200,
-              textColor: Colors.white,
               child: const Text("Add Department"),
             ),
           ),

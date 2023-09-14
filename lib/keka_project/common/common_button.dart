@@ -1,48 +1,83 @@
+import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 
 // customButton
 class CustomButton extends StatelessWidget {
-  final Widget? child;
-  final void Function()? onPressed;
+  final Widget child;
+  final void Function() onPressed;
   final double? minWidth;
   final Color? splashColor;
 
-  const CustomButton({super.key, this.child, this.onPressed, this.minWidth,this.splashColor});
+  const CustomButton({super.key, required this.child, required this.onPressed, this.minWidth, this.splashColor});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return AnimatedButton(
       onPressed: onPressed,
-      minWidth: minWidth,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
       color: Colors.green,
       child: child,
-      textColor: Colors.white,
-      splashColor: splashColor,
+      shadowDegree: ShadowDegree.light,
+      width: 300,
+      height: 50,
     );
   }
 }
 
 class CustomButtonChange extends StatelessWidget {
-  final Color? splashColor;
-  final Widget? child;
-  final void Function()? onPressed;
-  final double? minWidth;
-  final Color? color;
-  final Color? textColor;
+  final Widget child;
+  final void Function() onPressed;
+  final double width;
+  final double height;
+  final Color color;
 
-  const CustomButtonChange({super.key, this.child, this.onPressed, this.minWidth, this.color, this.textColor, this.splashColor});
+  const CustomButtonChange(
+      {super.key,
+      required this.child,
+      required this.onPressed,
+      required this.width, required this.height, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      splashColor: splashColor,
-      textColor: textColor,
+    return AnimatedButton(color: color,
       onPressed: onPressed,
-      minWidth: minWidth,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
-      color: color,
       child: child,
+      width: width,
+      height: height,
     );
   }
 }
+
+//   animated_button: ^0.1.3
+
+// import 'package:animated_button/animated_button.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+//
+// class MyCustomWidget extends StatefulWidget {
+// @override
+// MyCustomWidgetState createState() => MyCustomWidgetState();
+// }
+//
+// class _MyCustomWidgetState extends State<MyCustomWidget> {
+// @override
+// Widget build(BuildContext context) {
+// return Scaffold(
+// body: Center(
+// child: AnimatedButton(
+// child: Text(
+// 'Simple button',
+// style: TextStyle(
+// fontSize: 22,
+// color: Colors.white,
+// fontWeight: FontWeight.w500,
+// ),
+// ),
+// color: Colors.blue,
+// onPressed: () {},
+// enabled: true,
+// shadowDegree: ShadowDegree.light,
+// ),
+// ),
+// );
+// }
+// }

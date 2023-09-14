@@ -3,6 +3,7 @@ import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_requ
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class ManagerLeaveRequest extends StatefulWidget {
   static const String routeName = "/Manager_Leave_Request";
@@ -49,19 +50,18 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                     Text("DOB : 15-11-2002"),
                     Text("Reason : Fever"),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomButtonChange(
-                          splashColor: Colors.green,
-                          child: Text("Accept"),
                           color: Colors.green.shade100,
-                          onPressed: () {},
+                          child: Icon(Icons.done),
+                          onPressed: () {}, width: 50, height: 35,
                         ),
+                        Gap(8),
                         CustomButtonChange(
-                          splashColor: Colors.red,
                           color: Colors.red.shade100,
-                          child: Text("Reject"),
-                          onPressed: () {},
+                          child: Icon(Icons.close),
+                          onPressed: () {}, width: 50, height: 35,
                         ),
                       ],
                     ),

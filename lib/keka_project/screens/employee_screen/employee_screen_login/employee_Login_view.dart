@@ -82,7 +82,7 @@ class _EmployeeLoginViewState extends State<EmployeeLoginView> {
                   onPressed: () {},
                   minWidth: 300,
                   child: const Text(
-                    "Log-in",
+                    "Log-in",style: TextStyle(color: Colors.white,fontSize: 20),
                   ),
                 ),
               ],

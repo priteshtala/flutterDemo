@@ -70,7 +70,10 @@ class _MainScreenViewState extends State<MainScreenView> {
                       }
                     },
                     minWidth: 300,
-                    child: const Text("Next", textScaleFactor: 1.3),
+                    child: const Text(
+                      "Next",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
                     // minWidth: 300,
                   )
                 ],

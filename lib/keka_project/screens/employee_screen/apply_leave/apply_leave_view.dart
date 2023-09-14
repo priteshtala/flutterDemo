@@ -38,7 +38,7 @@ class _ApplyLeaveViewState extends State<ApplyLeaveView> {
               children: [
                 CustomButton(
                   minWidth: 300,
-                  child: const Text("Add"),
+                  child: const Text("Add", style: TextStyle(color: Colors.white, fontSize: 18),),
                   onPressed: () {},
                 ),
               ],

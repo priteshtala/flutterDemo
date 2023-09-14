@@ -180,7 +180,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 CustomButton(
                   onPressed: () {},
                   minWidth: 300,
-                  child: const Text("ADD"),
+                  child: const Text("ADD",style: TextStyle(color: Colors.white, fontSize: 20)),
                 )
               ],
             ),
