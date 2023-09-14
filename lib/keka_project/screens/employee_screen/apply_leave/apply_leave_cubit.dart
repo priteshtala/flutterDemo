@@ -48,14 +48,13 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
   }
 
   void notifyEmp(String query) {
-    // List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);
-    List<EmployeeData> employeeList = state.employeeList
+    List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);
+    employeeList = employeeList
         .where((e) =>
             e.name.toLowerCase().contains(query.toLowerCase()) || e.email.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     emit(state.copyWith(filtterdUserList: employeeList));
-    // debugPrint("============================$employeeList");
   }
 
   void notifyEmployee(EmployeeData employeeData) {
@@ -63,11 +62,11 @@ class ApplyLeaveCubit extends Cubit<ApplyLeaveState> {
   }
 
   void clearSearch({EmployeeData? employeeData}) {
-    state.searchController.text = '';
+    state.searchController.clear();
     if (employeeData != null) {
-      emit(state.copyWith(notifyEmployee: [employeeData], isSearch: false));
+      emit(state.copyWith(notifyEmployee: [employeeData]));
     } else {
-      emit(state.copyWith(notifyEmployee: [], isSearch: true));
+      emit(state.copyWith(notifyEmployee: []));
     }
   }
 }

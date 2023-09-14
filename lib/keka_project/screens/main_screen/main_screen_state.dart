@@ -6,7 +6,7 @@ class MainScreenState extends Equatable {
 
   final int isSelected;
 
-  const MainScreenState({
+  MainScreenState({
     this.isSelected = -1,
   });
 

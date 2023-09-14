@@ -14,7 +14,7 @@ class MainScreenView extends StatefulWidget {
   static Widget builder(BuildContext context) {
     return BlocProvider(
       create: (context) => MainScreenCubit(
-        const MainScreenState(),
+        MainScreenState(),
       ),
       child: const MainScreenView(),
     );
@@ -87,13 +87,14 @@ class _MainScreenViewState extends State<MainScreenView> {
                     onTap: () {
                       context.read<MainScreenCubit>().isSelectedColor(0);
                     },
-                    child: Container(
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
                         color: state.isSelected == 0 ? Colors.green.shade300 : Colors.grey.shade300,
                       ),
-                      height: 200,
-                      width: 200,
+                      height: state.isSelected == 0 ? 220 : 200,
+                      width: state.isSelected == 0 ? 220 : 200,
                       child: Center(
                         child: Text(
                           "Manager",
@@ -108,38 +109,19 @@ class _MainScreenViewState extends State<MainScreenView> {
                     onTap: () {
                       context.read<MainScreenCubit>().isSelectedColor(1);
                     },
-                    child: Container(
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
                         color: state.isSelected == 1 ? Colors.green.shade300 : Colors.grey.shade300,
                       ),
-                      height: 200,
-                      width: 200,
+                      height: state.isSelected == 1 ? 220 : 200,
+                      width: state.isSelected == 1 ? 220 : 200,
                       child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                context.read<MainScreenCubit>().isSelectedColor(1);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(14),
-                                  color: state.isSelected == 1 ? Colors.green.shade300 : Colors.grey.shade300,
-                                ),
-                                height: 200,
-                                width: 200,
-                                child: Center(
-                                  child: Text(
-                                    "Employee",
-                                    textScaleFactor: 2,
-                                    style: TextStyle(color: state.isSelected == 1 ? Colors.white : Colors.black),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          "Employee",
+                          textScaleFactor: 2,
+                          style: TextStyle(color: state.isSelected == 1 ? Colors.white : Colors.black),
                         ),
                       ),
                     ),

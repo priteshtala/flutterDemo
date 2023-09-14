@@ -16,5 +16,4 @@ class MainScreenCubit extends Cubit<MainScreenState> {
     debugPrint("IsChange ::: ${state.isSelected}");
   }
 
-
 }
