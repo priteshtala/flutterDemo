@@ -39,9 +39,12 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                     staticListAdd();
                     Navigator.pop(context);
 
-                    print("ADDD::${state.departmentList}");
+                    print("Add::${state.departmentList}");
                   },
-                  child: const Text("Add", style: TextStyle(color: Colors.blue)),
+                  child: const Text(
+                    "Add",
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 ),
                 MaterialButton(
                   shape: Border.all(color: Colors.black),
@@ -74,13 +77,17 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
 
   void staticListAdd() {
     List<Department> leaveList = List<Department>.from(state.departmentList);
-    leaveList.add(Department(department: state.departmentController.text));
+    leaveList.add(
+      Department(department: state.departmentController.text),
+    );
     emit(
       state.copyWith(
-          departmentList: leaveList, leaveSearchList: leaveList, departmentController: state.departmentController,staticList: leaveList),
+          departmentList: leaveList,
+          leaveSearchList: leaveList,
+          departmentController: state.departmentController,
+          staticList: leaveList),
     );
-
-    print("ADDD::${state.staticList}");
+    print("Add::${state.staticList}");
     print("text::${state.departmentController.text}");
   }
 }
