@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:flutter/material.dart';
 import 'department_details_state.dart';
 
@@ -37,7 +36,8 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                   splashColor: Colors.blue,
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
-                    staticList();
+                    staticListAdd();
+                    Navigator.pop(context);
 
                     print("ADDD::${state.departmentList}");
                   },
@@ -64,21 +64,23 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void sort() {
-
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList.sort(
       (a, b) => a.department.compareTo(b.department),
     );
+    // staticListAdd();
     emit(state.copyWith(departmentList: leaveList, leaveSearchList: leaveList));
   }
 
-  void staticList() {
+  void staticListAdd() {
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList.add(Department(department: state.departmentController.text));
-    emit(state.copyWith(departmentList: leaveList,leaveSearchList: leaveList,departmentController: state.departmentController),);
+    emit(
+      state.copyWith(
+          departmentList: leaveList, leaveSearchList: leaveList, departmentController: state.departmentController,staticList: leaveList),
+    );
 
-
-    print("ADDD::${state.departmentList}");
+    print("ADDD::${state.staticList}");
     print("text::${state.departmentController.text}");
   }
 }

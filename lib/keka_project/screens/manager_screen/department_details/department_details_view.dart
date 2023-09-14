@@ -26,6 +26,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
   @override
   void initState() {
     context.read<DepartmentDetailsCubit>().sort();
+    // context.read<DepartmentDetailsCubit>().staticListAdd();
     super.initState();
   }
   @override
@@ -65,12 +66,17 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                   print("lenth:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}" );
                     return Column(
                       children: [
-                        ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.primaries[index],
-                            child: Text(index.toString(),style: const TextStyle(color: Colors.black)),
+                        Card(
+                          color: Colors.white,
+                          elevation: 3,
+                          shadowColor: Colors.white,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.primaries[index],
+                              child: Text(index.toString(),style: const TextStyle(color: Colors.black)),
+                            ),
+                            title: Text(state.leaveSearchList[index].department),
                           ),
-                          title: Text(state.leaveSearchList[index].department),
                         ),
                       ],
                     );

@@ -177,13 +177,11 @@ import 'package:finaldemo/keka_project/screens/main_screen/main_screen_view.dart
 import 'package:finaldemo/keka_project/screens/splash/splash_screen_cubit.dart';
 import 'package:finaldemo/keka_project/screens/splash/splash_screen_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreenView extends StatefulWidget {
   static const String routeName = "Splash_Screen";
 
-//
   static Widget builder(BuildContext context) {
     return BlocProvider(
       create: (context) => SplashScreenCubit(SplashScreenState()),

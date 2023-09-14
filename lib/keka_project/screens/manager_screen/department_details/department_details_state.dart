@@ -1,18 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:flutter/material.dart';
 
 class DepartmentDetailsState extends Equatable {
   @override
   List<Object?> get props => [departmentList, leaveSearchList, staticList, departmentController];
-  List<Department> departmentList = [];
+  List<Department> departmentList;
   TextEditingController departmentController;
   List<Department> leaveSearchList;
   List<Department> staticList;
 
   DepartmentDetailsState(
-      {required this.departmentList,
+      { this.departmentList = const [],
       this.leaveSearchList = const [],
       this.staticList = const [],
       required this.departmentController});
