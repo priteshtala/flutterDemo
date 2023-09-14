@@ -33,6 +33,7 @@ class _MainScreenViewState extends State<MainScreenView> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             centerTitle: true,
             backgroundColor: Colors.green,
             title: Text("Keka"),

@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        appBarTheme: const AppBarTheme(color: Colors.green, foregroundColor: Colors.white),
+        appBarTheme: AppBarTheme(
+          color: Colors.green,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        ),
         // useMaterial3: true,
       ),
       routes: routes,
