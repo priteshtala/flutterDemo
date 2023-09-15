@@ -10,7 +10,12 @@ class EmployeeLoginView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => EmployeeLoginCubit(EmployeeLoginState()),
+      create: (context) => EmployeeLoginCubit(
+        EmployeeLoginState(
+          emailController: TextEditingController(),
+          passwordController: TextEditingController(),
+        ),
+      ),
       child: const EmployeeLoginView(),
     );
   }
@@ -79,10 +84,13 @@ class _EmployeeLoginViewState extends State<EmployeeLoginView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<EmployeeLoginCubit>().validation(context);
+                  },
                   minWidth: 300,
                   child: const Text(
-                    "Log-in",style: TextStyle(color: Colors.white,fontSize: 20),
+                    "Log-in",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ],

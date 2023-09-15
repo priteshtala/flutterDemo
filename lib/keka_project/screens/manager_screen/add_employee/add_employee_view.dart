@@ -81,21 +81,20 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   padding: const EdgeInsets.all(10.0),
                   child: Theme(
                     data: Theme.of(context).copyWith(
+                        dividerColor: Colors.black,
                         inputDecorationTheme: InputDecorationTheme(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      fillColor: Colors.grey.withOpacity(0.3),
-                      filled: true,
-                      contentPadding: const EdgeInsets.all(12),
-                    )),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          fillColor: Colors.grey.withOpacity(0.3),
+                          filled: true,
+                          contentPadding: const EdgeInsets.all(12),
+                        )),
                     child: DropdownButtonFormField<String>(
-                      // alignment: Alignment.topCenter,
                       decoration: InputDecoration(
                         focusedBorder:
                             OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
-                        // prefixIcon: const Icon(Icons.arrow_drop_down_circle_sharp),
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(14),
@@ -176,7 +175,9 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AddEmployeeCubit>().validation(context);
+                  },
                   minWidth: 300,
                   child: const Text("ADD", style: TextStyle(color: Colors.white, fontSize: 20)),
                 )

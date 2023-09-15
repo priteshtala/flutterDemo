@@ -10,6 +10,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
             departmentController: TextEditingController(),
             leaveSearchList: leaveEmpList,
             departmentList: leaveEmpList,
+            staticList: leaveEmpList,
           ),
         );
 
@@ -50,7 +51,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                   shape: Border.all(color: Colors.black),
                   onPressed: () => Navigator.pop(context),
                   child: const Text("No"),
-                )
+                ),
               ],
             )
           ],

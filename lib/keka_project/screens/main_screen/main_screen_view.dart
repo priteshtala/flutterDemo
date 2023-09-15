@@ -1,5 +1,5 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
-import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/employee_Login_view.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/employee_login_view.dart';
 import 'package:finaldemo/keka_project/screens/main_screen/main_screen_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
@@ -44,28 +44,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                 children: [
                   CustomButton(
                     onPressed: () {
-                      if (state.isSelected == -1) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            duration: Duration(seconds: 1),
-                            padding: EdgeInsets.all(3),
-                            backgroundColor: Colors.red,
-                            content: Text(
-                              "Select Type",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textScaleFactor: 1.3,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                      } else if (state.isSelected == 0) {
-                        Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
-                      } else {
-                        Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
-                      }
+                     context.read<MainScreenCubit>().validation(context);
                     },
                     minWidth: 300,
                     child: const Text(

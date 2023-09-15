@@ -123,7 +123,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                  ),
                   child: Column(
                     children: [
                       Padding(
@@ -193,13 +195,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
                         },
                         child: Container(
                           padding: EdgeInsets.all(24),
                           decoration: BoxDecoration(
+                            boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
                             gradient: LinearGradient(
                                 colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
                                 begin: Alignment.bottomRight,
@@ -233,13 +236,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           ),
                         ),
                       ),
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
                           context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
                         },
                         child: Container(
                           padding: EdgeInsets.all(13),
                           decoration: BoxDecoration(
+                            boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
                             gradient: LinearGradient(
                                 colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
                                 begin: Alignment.bottomRight,

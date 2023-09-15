@@ -29,6 +29,32 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     }
     emit(state.copyWith(dateController: state.dateController));
   }
+
+  void validation(context) {
+    if (state.nameController.text.isEmpty ||
+        state.emailController.text.isEmpty ||
+        state.passwordController.text.isEmpty ||
+        state.selectedValue.toString().isEmpty ||
+        state.mobileController.text.isEmpty ||
+        state.dateController.text.isEmpty) {
+       ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 1),
+          padding: EdgeInsets.all(3),
+          backgroundColor: Colors.red,
+          content: Text(
+            "Please fill all the fields",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+            textScaleFactor: 1.3,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
 }
 
 List<Department> depList = [

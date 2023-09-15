@@ -5,11 +5,11 @@ class EmployeeLoginState extends Equatable {
   @override
   List<Object?> get props => [emailController, passwordController, iconShowHide];
 
-  final TextEditingController? emailController;
-  final TextEditingController? passwordController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
   final bool iconShowHide;
 
-  EmployeeLoginState({this.emailController, this.passwordController, this.iconShowHide = false});
+  EmployeeLoginState({required this.emailController, required this.passwordController, this.iconShowHide = false});
 
   EmployeeLoginState copyWith({
     TextEditingController? emailController,
