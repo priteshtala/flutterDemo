@@ -119,19 +119,19 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               leading: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: Colors.grey.shade300,
-                                child: Text(state.filtterdUserList[index].category.toString()[0],
+                                child: Text(state.filtterdUserList[index].api.toString()[0],
                                     style: const TextStyle(color: Colors.black)),
                               ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    employee.category.toString(),
+                                    employee.api.toString(),
                                     style:
                                         const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                                   ),
                                   const SizedBox(height: 8),
-                                  Text(employee.api.toString()),
+                                  Text(employee.category.toString()),
                                   const SizedBox(height: 8),
                                   Text("Location : ${employee.auth}"),
                                   Text("Department : ${employee.description}"),

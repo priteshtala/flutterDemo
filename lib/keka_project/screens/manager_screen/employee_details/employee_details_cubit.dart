@@ -26,19 +26,20 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
 
   void dropdownSelected(value) {
     state.selectedValue = value.toString();
-    List<Entry> employeeList = List<Entry>.from(state.employeeList);
+    List<Entry> employeeList = List<Entry>.from(state.filtterdUserList);
     employeeList = value == "All" ? employeeList : employeeList.where((e) => e.category == value).toList();
     emit(state.copyWith(selectedValue: value.toString(), filtterdUserList: employeeList));
   }
 
   void runFilter(String query) {
-    List<Entry> employeeList = List<Entry>.from(state.employeeList);
-    employeeList = employeeList
-        .where((e) =>
-            e.category.toString().toLowerCase().contains(query.toLowerCase()) || e.description.toString().toLowerCase().contains(query.toLowerCase()))
-        .toList();
+    if (query.isNotEmpty) {
+      List<Entry> employeeList = List<Entry>.from(state.filtterdUserList);
+      employeeList =
+          employeeList.where((e) => e.category.toString().toLowerCase().contains(query.toLowerCase())).toList();
 
-    emit(state.copyWith(filtterdUserList: employeeList));
+      emit(state.copyWith(filtterdUserList: employeeList));
+      print("filter=====================${state.filtterdUserList}");
+    }
   }
 
   void getApi() async {
@@ -52,7 +53,9 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     } else {
       throw Exception("Data not Found");
     }
-    emit(state.copyWith(filtterdUserList: animalList));
+    emit(state.copyWith(
+      filtterdUserList: animalList,
+    ));
   }
 }
 
