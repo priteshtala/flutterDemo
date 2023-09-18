@@ -118,24 +118,24 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               leading: CircleAvatar(
                                 radius: 30,
                                 backgroundColor: Colors.primaries[index],
-                                child: Text(state.filtterdUserList[index].name[0],
+                                child: Text(state.filtterdUserList[index].category.toString()[0],
                                     style: const TextStyle(color: Colors.black)),
                               ),
                               subtitle: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    employee.name,
+                                    employee.category.toString(),
                                     style:
                                         const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                                   ),
                                   const SizedBox(height: 8),
-                                  Text(employee.role),
+                                  Text(employee.api.toString()),
                                   const SizedBox(height: 8),
-                                  Text("Location : ${employee.location}"),
-                                  Text("Department : ${employee.department}"),
-                                  Text("Email : ${employee.email}"),
-                                  Text("Mobile : ${employee.number}"),
+                                  Text("Location : ${employee.auth}"),
+                                  Text("Department : ${employee.description}"),
+                                  Text("Email : ${employee.https}"),
+                                  Text("Mobile : ${employee.link}"),
                                 ],
                               ),
                             ),

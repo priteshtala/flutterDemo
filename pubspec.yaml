@@ -44,6 +44,7 @@ dependencies:
   intl_phone_field: ^3.2.0
   simple_animations: ^5.0.2
   animated_button: ^0.2.0
+  dio: ^5.3.2
 
 
 

@@ -15,7 +15,8 @@ EmployeeData _$EmployeeDataFromJson(Map<String, dynamic> json) => EmployeeData(
       number: json['number'] as String,
     );
 
-Map<String, dynamic> _$EmployeeDataToJson(EmployeeData instance) => <String, dynamic>{
+Map<String, dynamic> _$EmployeeDataToJson(EmployeeData instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'role': instance.role,
       'location': instance.location,

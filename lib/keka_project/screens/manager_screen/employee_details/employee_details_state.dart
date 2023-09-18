@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
+import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeDetailsState extends Equatable {
@@ -8,8 +8,8 @@ class EmployeeDetailsState extends Equatable {
   List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList];
 
    List<Department> filterDepartmentList;
-   List<EmployeeData> employeeList;
-   List<EmployeeData> filtterdUserList;
+   List<Entry> employeeList;
+   List<Entry> filtterdUserList;
    TextEditingController searchController;
    String? selectedValue;
 
@@ -24,8 +24,8 @@ class EmployeeDetailsState extends Equatable {
   EmployeeDetailsState copyWith({
     List<Department>? filterDepartmentList,
     String? selectedValue,
-    List<EmployeeData>? employeeList,
-    List<EmployeeData>? filtterdUserList,
+    List<Entry>? employeeList,
+    List<Entry>? filtterdUserList,
     TextEditingController? searchController,
   }) {
     return EmployeeDetailsState(
