@@ -25,9 +25,10 @@ class EmployeeDetailsView extends StatefulWidget {
 
 class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
   @override
-  // void initState() {
-  //   super.initState();
-  // }
+  void initState() {
+    context.read<EmployeeDetailsCubit>().getApi();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
@@ -117,7 +118,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               // title: Text("${employee.name}"),
                               leading: CircleAvatar(
                                 radius: 30,
-                                backgroundColor: Colors.primaries[index],
+                                backgroundColor: Colors.grey.shade300,
                                 child: Text(state.filtterdUserList[index].category.toString()[0],
                                     style: const TextStyle(color: Colors.black)),
                               ),
@@ -142,7 +143,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                           );
                         },
                       )
-                    : Text("No-Data", textScaleFactor: 1.5),
+                    : CircularProgressIndicator()
               ],
             ),
           ),
