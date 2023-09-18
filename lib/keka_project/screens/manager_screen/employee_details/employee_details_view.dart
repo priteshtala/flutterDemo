@@ -88,7 +88,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               hint: const Text('All'),
                               value: state.selectedValue,
                               onChanged: (value) {
-                                context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                                // context.read<EmployeeDetailsCubit>().dropdownSelected(value);
                               },
                               items: state.filterDepartmentList
                                   .map((user) => DropdownMenuItem<String>(
@@ -133,10 +133,10 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                                   const SizedBox(height: 8),
                                   Text(employee.category.toString()),
                                   const SizedBox(height: 8),
-                                  Text("Location : ${employee.auth}"),
-                                  Text("Department : ${employee.description}"),
-                                  Text("Email : ${employee.https}"),
-                                  Text("Mobile : ${employee.link}"),
+                                  Text("auth : ${employee.auth}"),
+                                  Text("description : ${employee.description}"),
+                                  Text("https : ${employee.https}"),
+                                  Text("link : ${employee.link}"),
                                 ],
                               ),
                             ),

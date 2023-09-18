@@ -32,16 +32,17 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   }
 
   void runFilter(String query) {
-    if (query.isNotEmpty) {
-      List<Entry> employeeList = List<Entry>.from(state.filtterdUserList);
-      employeeList =
-          employeeList.where((e) => e.category.toString().toLowerCase().contains(query.toLowerCase())).toList();
+    List<Entry> filtterdUserList = List<Entry>.from(state.filtterdUserList);
+    List<Entry> employeeList = List<Entry>.from(state.employeeList);
+    filtterdUserList = query.isEmpty
+        ? state.employeeList
+        : employeeList.where((e) {
+            print(e.toJson());
+            return e.category.toString().toLowerCase().contains(query.toLowerCase());
+          }).toList();
 
-      emit(state.copyWith(filtterdUserList: employeeList));
-      print("filter=====================${state.filtterdUserList}");
-    }
+    emit(state.copyWith(filtterdUserList: filtterdUserList));
   }
-
   void getApi() async {
     final response = await Dio().get("https://api.publicapis.org/entries");
     var animalList = List<Entry>.from(state.filtterdUserList);
@@ -55,57 +56,58 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     }
     emit(state.copyWith(
       filtterdUserList: animalList,
+      employeeList: animalList,
     ));
   }
 }
 
-List<EmployeeData> empList = [
-  EmployeeData(
-    name: "Pritesh Dineshbhai Tala",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "pritesh.t@elaunchinfotech.in",
-    number: "9510670968",
-  ),
-  EmployeeData(
-    name: "Devang Vijaybhai Sabalpara",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "devang.s@elaunchinfotech.in",
-    number: "7777947638",
-  ),
-  EmployeeData(
-    name: "Deep Jitandrabhai Vaghani",
-    role: "jr.Flutter Developer",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "deep.v@elaunchinfotech.in",
-    number: "7041454545",
-  ),
-  EmployeeData(
-    name: "Nensi Dineshbhai Tala",
-    role: "PHP/React-js",
-    location: "Katargam",
-    department: "IOS",
-    email: "pritesh.t@elaunchinfotech.in",
-    number: "95106 70968",
-  ),
-  EmployeeData(
-    name: "Kuldeep Ghoghari",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "kuldeep.g@elaunchinfotech.in",
-    number: "7542541245",
-  ),
-  EmployeeData(
-    name: "Pritesh Dineshbhai Tala",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "PHP",
-    email: "pritesh.t@elaunchinfotech.in",
-    number: "9510670968",
-  ),
-];
+// List<EmployeeData> empList = [
+//   EmployeeData(
+//     name: "Pritesh Dineshbhai Tala",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "pritesh.t@elaunchinfotech.in",
+//     number: "9510670968",
+//   ),
+//   EmployeeData(
+//     name: "Devang Vijaybhai Sabalpara",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "devang.s@elaunchinfotech.in",
+//     number: "7777947638",
+//   ),
+//   EmployeeData(
+//     name: "Deep Jitandrabhai Vaghani",
+//     role: "jr.Flutter Developer",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "deep.v@elaunchinfotech.in",
+//     number: "7041454545",
+//   ),
+//   EmployeeData(
+//     name: "Nensi Dineshbhai Tala",
+//     role: "PHP/React-js",
+//     location: "Katargam",
+//     department: "IOS",
+//     email: "pritesh.t@elaunchinfotech.in",
+//     number: "95106 70968",
+//   ),
+//   EmployeeData(
+//     name: "Kuldeep Ghoghari",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "kuldeep.g@elaunchinfotech.in",
+//     number: "7542541245",
+//   ),
+//   EmployeeData(
+//     name: "Pritesh Dineshbhai Tala",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "PHP",
+//     email: "pritesh.t@elaunchinfotech.in",
+//     number: "9510670968",
+//   ),
+// ];
