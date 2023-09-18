@@ -4,6 +4,7 @@ import 'package:finaldemo/keka_project/model/department_model/department_model.d
 import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'employee_details_state.dart';
 
 class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
@@ -43,6 +44,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
 
     emit(state.copyWith(filtterdUserList: filtterdUserList));
   }
+
   void getApi() async {
     final response = await Dio().get("https://api.publicapis.org/entries");
     var animalList = List<Entry>.from(state.filtterdUserList);
@@ -52,7 +54,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
         animalList.add(Entry.fromJson(entry));
       }
     } else {
-      throw Exception("Data not Found");
+      Text("No-Data");
     }
     emit(state.copyWith(
       filtterdUserList: animalList,

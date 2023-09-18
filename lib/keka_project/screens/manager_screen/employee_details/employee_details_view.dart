@@ -143,7 +143,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                           );
                         },
                       )
-                    : CircularProgressIndicator()
+                    : CircularProgressIndicator(),
               ],
             ),
           ),
