@@ -29,6 +29,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
     context.read<EmployeeDetailsCubit>().getApi();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
@@ -67,37 +68,38 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                         ),
                       ),
                       Expanded(
-                          flex: 2,
-                          child: Theme(
-                            data: Theme.of(context).copyWith(
-                                inputDecorationTheme: InputDecorationTheme(
-                              isDense: true,
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
-                              fillColor: Colors.white,
-                              filled: true,
-                              contentPadding: const EdgeInsets.all(8),
-                            )),
-                            child: DropdownButtonFormField<String>(
-                              alignment: Alignment.center,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(14),
-                                ),
-                              ),
-                              isDense: true,
-                              hint: const Text('All'),
-                              value: state.selectedValue,
-                              onChanged: (value) {
-                                // context.read<EmployeeDetailsCubit>().dropdownSelected(value);
-                              },
-                              items: state.filterDepartmentList
-                                  .map((user) => DropdownMenuItem<String>(
-                                        value: user.department,
-                                        child: Text(user.department.toString()),
-                                      ))
-                                  .toList(),
-                            ),
+                        flex: 2,
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                              inputDecorationTheme: InputDecorationTheme(
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+                            fillColor: Colors.white,
+                            filled: true,
+                            contentPadding: const EdgeInsets.all(8),
                           )),
+                          child: DropdownButtonFormField<String>(
+                            alignment: Alignment.center,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                            ),
+                            isDense: true,
+                            hint: const Text('All'),
+                            value: state.selectedValue,
+                            onChanged: (value) {
+                              // context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                            },
+                            items: state.filterDepartmentList
+                                .map((user) => DropdownMenuItem<String>(
+                                      value: user.department,
+                                      child: Text(user.department.toString()),
+                                    ))
+                                .toList(),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -142,9 +144,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                     },
                   )
                 ] else if (state.employeeList.isEmpty) ...[
-                  Center(
-                    child: CircularProgressIndicator()
-                  ),
+                  Center(child: CircularProgressIndicator()),
                 ] else ...[
                   Text("Data Not Found"),
                 ]
