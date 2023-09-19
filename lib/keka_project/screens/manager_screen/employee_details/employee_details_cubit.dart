@@ -15,8 +15,8 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
               Department(department: "All"),
               Department(department: "Flutter"),
               Department(department: "Android"),
-              Department(department: "Laravel"),
-              Department(department: "PHP"),
+              Department(department: "Animals"),
+              Department(department: "Anime"),
               Department(department: "NodeJs"),
               Department(department: "IOS"),
               Department(department: "ReactJS"),
@@ -39,7 +39,6 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     filtterdUserList = query.isEmpty
         ? state.employeeList
         : employeeList.where((e) {
-            // print(e.toJson());
             return e.category.toString().toLowerCase().contains(query.toLowerCase());
           }).toList();
 
