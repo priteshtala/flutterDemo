@@ -15,8 +15,8 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
               Department(department: "All"),
               Department(department: "Flutter"),
               Department(department: "Android"),
-              Department(department: "Laravel"),
-              Department(department: "PHP"),
+              Department(department: "Animals"),
+              Department(department: "Anime"),
               Department(department: "NodeJs"),
               Department(department: "IOS"),
               Department(department: "ReactJS"),
@@ -26,9 +26,11 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
 
   void dropdownSelected(value) {
     state.selectedValue = value.toString();
-    List<Entry> employeeList = List<Entry>.from(state.filtterdUserList);
-    employeeList = value == "All" ? employeeList : employeeList.where((e) => e.category == value).toList();
-    emit(state.copyWith(selectedValue: value.toString(), filtterdUserList: employeeList));
+    List<Entry> filtterdUserList = List<Entry>.from(state.filtterdUserList);
+    List<Entry> employeeList = List<Entry>.from(state.employeeList);
+    filtterdUserList = value.toString().isEmpty ? state.employeeList :
+    filtterdUserList = value == "All" ? employeeList : employeeList.where((e) => e.category == value).toList();
+    emit(state.copyWith(selectedValue: value.toString(), filtterdUserList: filtterdUserList));
   }
 
   void runFilter(String query) {
@@ -37,7 +39,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     filtterdUserList = query.isEmpty
         ? state.employeeList
         : employeeList.where((e) {
-            print(e.toJson());
+            // print(e.toJson());
             return e.category.toString().toLowerCase().contains(query.toLowerCase());
           }).toList();
 

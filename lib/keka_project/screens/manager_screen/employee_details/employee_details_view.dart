@@ -89,7 +89,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             hint: const Text('All'),
                             value: state.selectedValue,
                             onChanged: (value) {
-                              // context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                              context.read<EmployeeDetailsCubit>().dropdownSelected(value);
                             },
                             items: state.filterDepartmentList
                                 .map((user) => DropdownMenuItem<String>(
