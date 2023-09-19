@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class EmployeeDetailsState extends Equatable {
   @override
-  List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList];
+  List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList,employeeList];
 
    List<Department> filterDepartmentList;
    List<Entry> employeeList;

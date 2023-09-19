@@ -37,7 +37,6 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     filtterdUserList = query.isEmpty
         ? state.employeeList
         : employeeList.where((e) {
-            print(e.toJson());
             return e.category.toString().toLowerCase().contains(query.toLowerCase());
           }).toList();
 
