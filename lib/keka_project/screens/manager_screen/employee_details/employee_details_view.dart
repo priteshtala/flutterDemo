@@ -29,7 +29,6 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
     context.read<EmployeeDetailsCubit>().getApi();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
