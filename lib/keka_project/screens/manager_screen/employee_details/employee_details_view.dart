@@ -29,6 +29,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
     context.read<EmployeeDetailsCubit>().getApi();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
@@ -102,48 +103,52 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                state.filtterdUserList.isNotEmpty
-                    ? ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.filtterdUserList.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          var employee = state.filtterdUserList[index];
-                          return Card(
-                            color: Colors.white,
-                            elevation: 3,
-                            shadowColor: Colors.white,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                            child: ListTile(
-                              // title: Text("${employee.name}"),
-                              leading: CircleAvatar(
-                                radius: 30,
-                                backgroundColor: Colors.grey.shade300,
-                                child: Text(state.filtterdUserList[index].api.toString()[0],
-                                    style: const TextStyle(color: Colors.black)),
+                if (state.filtterdUserList.isNotEmpty) ...[
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.filtterdUserList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      var employee = state.filtterdUserList[index];
+                      return Card(
+                        color: Colors.white,
+                        elevation: 3,
+                        shadowColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.grey.shade300,
+                            child: Text(state.filtterdUserList[index].api.toString()[0],
+                                style: const TextStyle(color: Colors.black)),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                employee.api.toString(),
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                               ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    employee.api.toString(),
-                                    style:
-                                        const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(employee.category.toString()),
-                                  const SizedBox(height: 8),
-                                  Text("auth : ${employee.auth}"),
-                                  Text("description : ${employee.description}"),
-                                  Text("https : ${employee.https}"),
-                                  Text("link : ${employee.link}"),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      )
-                    : CircularProgressIndicator()
+                              const SizedBox(height: 8),
+                              Text(employee.category.toString()),
+                              const SizedBox(height: 8),
+                              Text("Location : ${employee.auth}"),
+                              Text("Department : ${employee.description}"),
+                              Text("Email : ${employee.https}"),
+                              Text("Mobile : ${employee.link}"),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ] else if (state.employeeList.isEmpty) ...[
+                  Center(
+                    child: CircularProgressIndicator()
+                  ),
+                ] else ...[
+                  Text("Data Not Found"),
+                ]
               ],
             ),
           ),
