@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,60 +55,6 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     } else {
       Text("No-Data");
     }
-    emit(state.copyWith(
-      filtterdUserList: animalList,
-      employeeList: animalList,
-    ));
+    emit(state.copyWith(filtterdUserList: animalList, employeeList: animalList));
   }
 }
-
-// List<EmployeeData> empList = [
-//   EmployeeData(
-//     name: "Pritesh Dineshbhai Tala",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "pritesh.t@elaunchinfotech.in",
-//     number: "9510670968",
-//   ),
-//   EmployeeData(
-//     name: "Devang Vijaybhai Sabalpara",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "devang.s@elaunchinfotech.in",
-//     number: "7777947638",
-//   ),
-//   EmployeeData(
-//     name: "Deep Jitandrabhai Vaghani",
-//     role: "jr.Flutter Developer",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "deep.v@elaunchinfotech.in",
-//     number: "7041454545",
-//   ),
-//   EmployeeData(
-//     name: "Nensi Dineshbhai Tala",
-//     role: "PHP/React-js",
-//     location: "Katargam",
-//     department: "IOS",
-//     email: "pritesh.t@elaunchinfotech.in",
-//     number: "95106 70968",
-//   ),
-//   EmployeeData(
-//     name: "Kuldeep Ghoghari",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "kuldeep.g@elaunchinfotech.in",
-//     number: "7542541245",
-//   ),
-//   EmployeeData(
-//     name: "Pritesh Dineshbhai Tala",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "PHP",
-//     email: "pritesh.t@elaunchinfotech.in",
-//     number: "9510670968",
-//   ),
-// ];
