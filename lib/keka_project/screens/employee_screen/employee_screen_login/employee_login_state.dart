@@ -3,23 +3,26 @@ import 'package:flutter/cupertino.dart';
 
 class EmployeeLoginState extends Equatable {
   @override
-  List<Object?> get props => [emailController, passwordController, iconShowHide];
+  List<Object?> get props => [emailController, passwordController, iconShowHide,formKey,iconShowHide];
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final bool iconShowHide;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  EmployeeLoginState({required this.emailController, required this.passwordController, this.iconShowHide = false});
+  EmployeeLoginState({required this.emailController, required this.passwordController, this.iconShowHide = true,  required this.formKey});
 
   EmployeeLoginState copyWith({
     TextEditingController? emailController,
     TextEditingController? passwordController,
     bool? iconShowHide,
+    GlobalKey<FormState>? formKey,
   }) {
     return EmployeeLoginState(
       emailController: emailController ?? this.emailController,
       passwordController: passwordController ?? this.passwordController,
       iconShowHide: iconShowHide ?? this.iconShowHide,
+      formKey: formKey ?? this.formKey
     );
   }
 }
