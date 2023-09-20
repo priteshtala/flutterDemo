@@ -137,8 +137,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.green,
+        foregroundColor: Colors.white, backgroundColor: Colors.green,
         title: const Text('Log-In'),
       ),
       body: BlocBuilder<EmployeeLoginCubit, EmployeeLoginState>(
