@@ -155,7 +155,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                       "Login to your account",
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                     ),
-                    Image.network("https://knowledgemission.kerala.gov.in/img/login.jpg", height: 250),
+                    Image.asset("assets/images/login.jpg", height: 250),
                     const SizedBox(height: 20),
                     CustomTextForm(
                       validator: (p0) {
@@ -208,19 +208,19 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      "------------------------------ or ------------------------------",
+                      "------------ or ------------",
                       style: TextStyle(color: Colors.black),
                     ),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Image.network("https://cdn-icons-png.flaticon.com/512/2504/2504739.png", width: 35),
-                        Image.network(
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png",
+                        Image.asset("assets/images/google.png", width: 35),
+                        Image.asset(
+                            "assets/images/facebook.png.webp",
                             width: 35),
-                        Image.network(
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/292px-Logo_of_Twitter.svg.png",
+                        Image.asset(
+                            "assets/images/twitter.png",
                             width: 35),
                       ],
                     ),

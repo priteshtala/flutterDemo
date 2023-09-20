@@ -113,8 +113,7 @@ class _SplashScreenViewState extends State<SplashScreenView> with TickerProvider
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
                 ),
-                child: Image.network(
-                    'https://yt3.googleusercontent.com/k6Kwwm3mCkN_xqh3rDtHP9eCWDspjVLCILs6cbAwt1ypGNTn12AX98kiixw-ZLZMntag90jEv20=s900-c-k-c0x00ffffff-no-rj'),
+                child: Image.asset("assets/images/keka.jpg"),
               ),
             ),
           ),
