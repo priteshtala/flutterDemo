@@ -106,9 +106,9 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                     const SizedBox(height: 20),
                     Row(
                       children: [
-                        Expanded(child: Divider(thickness: 1,indent: 40, endIndent: 10)),
+                        Expanded(child: Divider(thickness: 1, indent: 40, endIndent: 10)),
                         Text("or"),
-                        Expanded(child: Divider(thickness: 1,indent: 10, endIndent: 40)),
+                        Expanded(child: Divider(thickness: 1, indent: 10, endIndent: 40)),
                       ],
                     ),
                     const SizedBox(height: 20),
