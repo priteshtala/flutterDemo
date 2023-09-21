@@ -39,7 +39,9 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     "Add",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AddLeaveCubit>().validation(context);
+                  },
                 ),
               ],
             ),
@@ -90,7 +92,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                         //       ),
                         //       trailing: IconButton(
                         //         onPressed: () {
-                        //           context.read<ApplyLeaveCubit>().clearSearch();
+                        //           context.read<AddLeaveCubit>().clearSearch();
                         //         },
                         //         icon: const Icon(Icons.close),
                         //       ),
@@ -114,7 +116,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                               state.notifyEmployee.first.name,
                             ),
                           ),
-                    const SizedBox(height: 20),
+                    const Gap(20),
                     const Text(
                       "Start Date",
                       style: TextStyle(fontWeight: FontWeight.w500),
@@ -160,7 +162,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const Gap(20),
                     const Text(
                       "End Date",
                       style: TextStyle(fontWeight: FontWeight.w500),
@@ -206,7 +208,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const Gap(20),
                     const Text(
                       "Reason",
                       style: TextStyle(fontWeight: FontWeight.w500),

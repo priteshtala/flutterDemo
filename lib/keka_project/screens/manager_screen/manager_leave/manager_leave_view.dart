@@ -1,6 +1,7 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
@@ -70,7 +71,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(height: 10),
+                // const Gap(10),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -109,7 +110,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 ),
                                 Column(
                                   children: [
-                                    const SizedBox(height: 5),
+                                    const Gap(5),
                                     Text("${state.leaveList[index].name}..", overflow: TextOverflow.ellipsis),
                                   ],
                                 ),
@@ -121,7 +122,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
+                const Gap(10),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
@@ -175,7 +176,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 ),
                                 Column(
                                   children: [
-                                    const SizedBox(height: 5),
+                                    const Gap(5),
                                     Text(
                                       "${state.leaveList[index].name}..",
                                       overflow: TextOverflow.ellipsis,

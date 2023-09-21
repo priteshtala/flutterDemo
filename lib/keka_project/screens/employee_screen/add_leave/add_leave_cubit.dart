@@ -57,6 +57,31 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     emit(state.copyWith(filtterdUserList: employeeList));
   }
 
+  void validation(context) {
+    if (state.notifyEmployee.isEmpty ||
+        state.dateController.text.isEmpty ||
+        state.dateTimeController.text.isEmpty ||
+        state.reasonController.text.isEmpty
+    ) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(seconds: 1),
+          padding: EdgeInsets.all(3),
+          backgroundColor: Colors.red,
+          content: Text(
+            "Please fill all the fields",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+            ),
+            textScaleFactor: 1.3,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
+
   void notifyEmployee(EmployeeData employeeData) {
     clearSearch(employeeData: employeeData);
   }

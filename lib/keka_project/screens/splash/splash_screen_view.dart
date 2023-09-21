@@ -81,11 +81,11 @@ class _SplashScreenViewState extends State<SplashScreenView> with TickerProvider
           Column(
             children: [
               AnimatedContainer(
-                  duration: Duration(milliseconds: 2000),
-                  curve: Curves.fastLinearToSlowEaseIn,
+                  duration: Duration(milliseconds: 3000),
+                  curve: Curves.easeInOutCubicEmphasized,
                   height: height / fontSize),
               AnimatedOpacity(
-                duration: Duration(milliseconds: 1000),
+                duration: Duration(milliseconds: 2000),
                 opacity: _textOpacity,
                 child: Text(
                   'Here We Go!',
@@ -101,13 +101,13 @@ class _SplashScreenViewState extends State<SplashScreenView> with TickerProvider
           Center(
             child: AnimatedOpacity(
               duration: Duration(milliseconds: 2000),
-              curve: Curves.fastLinearToSlowEaseIn,
+              curve: Curves.easeInOutBack,
               opacity: _containerOpacity,
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 2000),
-                curve: Curves.fastLinearToSlowEaseIn,
-                height: 250,
-                width: 250,
+                curve: Curves.easeInOutBack,
+                height: 300,
+                width: 300,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white,

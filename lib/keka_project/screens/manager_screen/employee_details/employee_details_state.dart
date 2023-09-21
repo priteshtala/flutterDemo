@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';

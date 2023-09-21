@@ -2,6 +2,7 @@ import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'employee_login_cubit.dart';
 import 'employee_login_state.dart';
 
@@ -53,7 +54,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                     ),
                     Image.asset("assets/images/login.jpg", height: 250),
-                    const SizedBox(height: 20),
+                    const Gap(20),
                     CustomTextForm(
                       validator: (p0) {
                         if (state.passwordController.text.isEmpty) {
@@ -69,9 +70,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                       keyboardType: TextInputType.emailAddress,
                       prefixIcon: const Icon(Icons.email),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    const Gap(10),
                     CustomTextForm(
                       validator: (p0) {
                         if (state.passwordController.text.isEmpty) {
@@ -91,9 +90,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                             state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
                       ),
                     ),
-                    const SizedBox(
-                      height: 70,
-                    ),
+                    const Gap(70),
                     CustomButtonChange(
                       onPressed: () {
                         state.formKey.currentState?.validate();
@@ -103,7 +100,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                       color: Colors.green,
                       child: Text("Login", style: TextStyle(color: Colors.white)),
                     ),
-                    const SizedBox(height: 20),
+                    const Gap(20),
                     Row(
                       children: [
                         Expanded(child: Divider(thickness: 1, indent: 40, endIndent: 10)),
@@ -111,7 +108,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                         Expanded(child: Divider(thickness: 1, indent: 10, endIndent: 40)),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const Gap(20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

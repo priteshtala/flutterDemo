@@ -49,7 +49,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                     Text("Department : Flutter"),
                     Text("DOB : 15-11-2002"),
                     Text("Reason : Fever"),
-                    SizedBox(height: 10),
+                    const Gap(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

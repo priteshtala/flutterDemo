@@ -6,6 +6,7 @@ import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/e
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class EmployeeDetailsView extends StatefulWidget {
   static const String routeName = "/Employee_details_view";
@@ -39,7 +40,6 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
             title: const Text("Employee-List"),
           ),
           body: SingleChildScrollView(
-            // physics: ClampingScrollPhysics(),
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
@@ -49,7 +49,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                     context.read<EmployeeDetailsCubit>().runFilter(query);
                   },
                 ),
-                const SizedBox(height: 8),
+                const Gap(8),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 0),
@@ -103,7 +103,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 8),
+                const Gap(8),
                 if (state.filtterdUserList.isNotEmpty) ...[
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
@@ -119,9 +119,11 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 30,
-                            backgroundColor: Colors.grey.shade300,
-                            child: Text(state.filtterdUserList[index].api.toString()[0],
-                                style: const TextStyle(color: Colors.black)),
+                            backgroundColor: Colors.green.shade500,
+                            child: Text(
+                              state.filtterdUserList[index].api.toString()[0],
+                              style: const TextStyle(color: Colors.white, fontSize: 20),
+                            ),
                           ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,9 +132,9 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                                 employee.api.toString(),
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                               ),
-                              const SizedBox(height: 8),
+                              const Gap(8),
                               Text(employee.category.toString()),
-                              const SizedBox(height: 8),
+                              const Gap(8),
                               Text("Location : ${employee.auth}"),
                               Text("Department : ${employee.description}"),
                               Text("Email : ${employee.https}"),

@@ -81,20 +81,23 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   padding: const EdgeInsets.all(10.0),
                   child: Theme(
                     data: Theme.of(context).copyWith(
-                        dividerColor: Colors.black,
-                        inputDecorationTheme: InputDecorationTheme(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          fillColor: Colors.grey.withOpacity(0.3),
-                          filled: true,
-                          contentPadding: const EdgeInsets.all(12),
-                        )),
+                      dividerColor: Colors.black,
+                      inputDecorationTheme: InputDecorationTheme(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        fillColor: Colors.grey.withOpacity(0.3),
+                        filled: true,
+                        contentPadding: const EdgeInsets.all(12),
+                      ),
+                    ),
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        focusedBorder:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(14),

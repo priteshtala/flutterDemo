@@ -4,6 +4,7 @@ import 'package:finaldemo/keka_project/screens/manager_screen/department_details
 import 'package:finaldemo/keka_project/screens/manager_screen/department_details/department_details_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 class DepartmentDetailsView extends StatefulWidget {
   static const String routeName = "/Department_Details_View";
@@ -63,6 +64,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                     context.read<DepartmentDetailsCubit>().departmentSearch(query);
                   },
                 ),
+                Gap(10),
                 ListView.builder(
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
@@ -79,7 +81,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundColor: Colors.primaries[index],
-                              child: Text(index.toString(), style: const TextStyle(color: Colors.black)),
+                              child: Text(index.toString(), style: const TextStyle(color: Colors.white)),
                             ),
                             title: Text(state.leaveSearchList[index].department),
                           ),

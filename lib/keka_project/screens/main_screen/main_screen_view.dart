@@ -4,6 +4,7 @@ import 'package:finaldemo/keka_project/screens/main_screen/main_screen_cubit.dar
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'main_screen_state.dart';
 
 class MainScreenView extends StatefulWidget {
@@ -44,7 +45,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                 children: [
                   CustomButton(
                     onPressed: () {
-                     context.read<MainScreenCubit>().validation(context);
+                      context.read<MainScreenCubit>().validation(context);
                     },
                     minWidth: 300,
                     child: const Text(
@@ -84,7 +85,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 70),
+                  const Gap(70),
                   InkWell(
                     onTap: () {
                       context.read<MainScreenCubit>().isSelectedColor(1);
