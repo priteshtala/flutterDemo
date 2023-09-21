@@ -5,8 +5,6 @@ import 'package:finaldemo/keka_project/model/department_model/department_model.d
 import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
 import 'package:flutter/cupertino.dart';
 
-
-
 class AddLeaveState extends Equatable {
   @override
   List<Object?> get props => [
@@ -17,8 +15,8 @@ class AddLeaveState extends Equatable {
         departmentList,
         employeeList,
         filtterdUserList,
+        notifyEmployee,
         isSearch,
-        notifyEmployee
       ];
   TextEditingController searchController;
   TextEditingController dateController;
@@ -31,15 +29,15 @@ class AddLeaveState extends Equatable {
   bool? isSearch;
 
   AddLeaveState({
-    this.isSearch,
-    this.notifyEmployee = const [],
+    required this.searchController,
     required this.dateController,
     required this.dateTimeController,
     required this.reasonController,
-    required this.searchController,
     this.departmentList = const [],
     this.employeeList = const [],
     this.filtterdUserList = const [],
+    this.notifyEmployee = const [],
+    this.isSearch,
   });
 
   AddLeaveState copyWith({

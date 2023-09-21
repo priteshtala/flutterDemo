@@ -16,45 +16,45 @@ class AddEmployeeState extends Equatable {
         selectedValue,
         iconShowHide,
       ];
+  TextEditingController nameController;
   TextEditingController emailController;
   TextEditingController passwordController;
-  TextEditingController nameController;
   TextEditingController mobileController;
   TextEditingController dateController;
-  bool iconShowHide;
   List<Department> departmentList;
   String? selectedValue;
+  bool iconShowHide;
 
   AddEmployeeState({
+    required this.nameController,
     required this.emailController,
     required this.passwordController,
-    this.iconShowHide = false,
-    required this.nameController,
     required this.mobileController,
     required this.dateController,
     this.departmentList = const [],
     this.selectedValue,
+    this.iconShowHide = false,
   });
 
   AddEmployeeState copyWith({
+    TextEditingController? nameController,
     TextEditingController? emailController,
     TextEditingController? passwordController,
-    TextEditingController? nameController,
     TextEditingController? mobileController,
     TextEditingController? dateController,
-    bool? iconShowHide,
     List<Department>? departmentList,
     String? selectedValue,
+    bool? iconShowHide,
   }) {
     return AddEmployeeState(
+      nameController: nameController ?? this.nameController,
       emailController: emailController ?? this.emailController,
       passwordController: passwordController ?? this.passwordController,
-      iconShowHide: iconShowHide ?? this.iconShowHide,
-      nameController: nameController ?? this.nameController,
       mobileController: mobileController ?? this.mobileController,
       dateController: dateController ?? this.dateController,
       departmentList: departmentList ?? this.departmentList,
       selectedValue: selectedValue ?? this.selectedValue,
+      iconShowHide: iconShowHide ?? this.iconShowHide,
     );
   }
 }
