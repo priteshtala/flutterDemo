@@ -77,51 +77,51 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     icon: state.iconShowHide ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_sharp),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Theme(
-                    data: Theme.of(context).copyWith(
-                      dividerColor: Colors.black,
-                      inputDecorationTheme: InputDecorationTheme(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        fillColor: Colors.grey.withOpacity(0.3),
-                        filled: true,
-                        contentPadding: const EdgeInsets.all(12),
-                      ),
-                    ),
-                    child: DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                      isDense: true,
-                      hint: const Text('Select Your Department'),
-                      value: state.selectedValue,
-                      onChanged: (value) {
-                        // context.read<AddEmployeeCubit>().dropdownSelected(value);
-                      },
-                      items: state.departmentList
-                          .map(
-                            (user) => DropdownMenuItem<String>(
-                              value: user.department,
-                              child: Text(
-                                user.department.toString(),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(10.0),
+                //   child: Theme(
+                //     data: Theme.of(context).copyWith(
+                //       dividerColor: Colors.black,
+                //       inputDecorationTheme: InputDecorationTheme(
+                //         enabledBorder: OutlineInputBorder(
+                //           borderSide: BorderSide.none,
+                //           borderRadius: BorderRadius.circular(14),
+                //         ),
+                //         fillColor: Colors.grey.withOpacity(0.3),
+                //         filled: true,
+                //         contentPadding: const EdgeInsets.all(12),
+                //       ),
+                //     ),
+                //     child: DropdownButtonFormField<String>(
+                //       decoration: InputDecoration(
+                //         focusedBorder: OutlineInputBorder(
+                //           borderSide: BorderSide.none,
+                //           borderRadius: BorderRadius.circular(14),
+                //         ),
+                //         border: OutlineInputBorder(
+                //           borderSide: BorderSide.none,
+                //           borderRadius: BorderRadius.circular(14),
+                //         ),
+                //       ),
+                //       isDense: true,
+                //       hint: const Text('Select Your Department'),
+                //       value: state.selectedValue,
+                //       onChanged: (value) {
+                //         // context.read<AddEmployeeCubit>().dropdownSelected(value);
+                //       },
+                //       items: state.departmentList
+                //           .map(
+                //             (user) => DropdownMenuItem<String>(
+                //               value: user.department,
+                //               child: Text(
+                //                 user.department.toString(),
+                //               ),
+                //             ),
+                //           )
+                //           .toList(),
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: IntlPhoneField(

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:flutter/material.dart';
 import 'department_details_state.dart';
@@ -8,9 +9,9 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
       : super(
           DepartmentDetailsState(
             departmentController: TextEditingController(),
-            leaveSearchList: leaveEmpList,
-            departmentList: leaveEmpList,
-            staticList: leaveEmpList,
+            // leaveSearchList: leaveEmpList,
+            // departmentList: leaveEmpList,
+            // staticList: leaveEmpList,
           ),
         );
 
@@ -37,7 +38,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                   splashColor: Colors.blue,
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
-                    staticListAdd();
+                    // staticListAdd();
                     Navigator.pop(context);
 
                     print("Add::${state.departmentList}");
@@ -62,43 +63,57 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
 
   void departmentSearch(query) {
     List<Department> leaveList = List<Department>.from(state.departmentList);
-    leaveList = leaveList.where((element) => element.department.toLowerCase().contains(query.toLowerCase())).toList();
-    sort();
+    leaveList = leaveList.where((element) => element.name.toLowerCase().contains(query.toLowerCase())).toList();
+    // sort();
     emit(state.copyWith(leaveSearchList: leaveList));
   }
 
-  void sort() {
-    List<Department> leaveList = List<Department>.from(state.departmentList);
-    leaveList.sort(
-      (a, b) => a.department.compareTo(b.department),
-    );
-    // staticListAdd();
-    emit(state.copyWith(departmentList: leaveList, leaveSearchList: leaveList));
+  void getDepartmentApi() async {
+    final response = await Dio().get("https://e9af-136-232-118-126.ngrok-free.app/api/user");
+    var animalList = List<Department>.from(state.departmentList);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      print("object=d=a=======${data}");
+      for (var entry in data) {
+        animalList.add(Department.fromJson(entry));
+      }
+    } else {
+      Text("No-Data");
+    }
+    emit(state.copyWith(departmentList:  animalList));
   }
+  // void sort() {
+  //   List<Department> leaveList = List<Department>.from(state.departmentList);
+  //   leaveList.sort(
+  //     (a, b) => a.department.compareTo(b.department),
+  //   );
+  //   // staticListAdd();
+  //   emit(state.copyWith(departmentList: leaveList, leaveSearchList: leaveList));
+  // }
 
-  void staticListAdd() {
-    List<Department> leaveList = List<Department>.from(state.departmentList);
-    leaveList.add(
-      Department(department: state.departmentController.text),
-    );
-    emit(
-      state.copyWith(
-          departmentList: leaveList,
-          leaveSearchList: leaveList,
-          departmentController: state.departmentController,
-          staticList: leaveList),
-    );
-    print("Add::${state.staticList}");
-    print("text::${state.departmentController.text}");
-  }
+  // void staticListAdd() {
+  //   List<Department> leaveList = List<Department>.from(state.departmentList);
+  //   leaveList.add(
+  //     Department(department: state.departmentController.text),
+  //   );
+  //   emit(
+  //     state.copyWith(
+  //         departmentList: leaveList,
+  //         leaveSearchList: leaveList,
+  //         departmentController: state.departmentController,
+  //         staticList: leaveList),
+  //   );
+  //   print("Add::${state.staticList}");
+  //   print("text::${state.departmentController.text}");
+  // }
 }
-
-List<Department> leaveEmpList = [
-  Department(department: "Flutter"),
-  Department(department: "Android"),
-  Department(department: "Laravel"),
-  Department(department: "PHP"),
-  Department(department: "NodeJs"),
-  Department(department: "IOS"),
-  Department(department: "ReactJS"),
-];
+//
+// List<Department> leaveEmpList = [
+//   Department(department: "Flutter"),
+//   Department(department: "Android"),
+//   Department(department: "Laravel"),
+//   Department(department: "PHP"),
+//   Department(department: "NodeJs"),
+//   Department(department: "IOS"),
+//   Department(department: "ReactJS"),
+// ];

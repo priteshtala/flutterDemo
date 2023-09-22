@@ -93,8 +93,8 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             },
                             items: state.filterDepartmentList
                                 .map((user) => DropdownMenuItem<String>(
-                                      value: user.department,
-                                      child: Text(user.department.toString()),
+                                      value: user.name,
+                                      child: Text(user.name.toString()),
                                     ))
                                 .toList(),
                           ),

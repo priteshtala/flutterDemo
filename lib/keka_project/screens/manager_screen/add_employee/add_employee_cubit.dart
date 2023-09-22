@@ -12,7 +12,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
           nameController: TextEditingController(),
           mobileController: TextEditingController(),
           passwordController: TextEditingController(),
-          departmentList: depList,
+          // departmentList: depList,
         ));
 
   void visibility() {
@@ -57,13 +57,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 }
 
-List<Department> depList = [
-  Department(department: "All"),
-  Department(department: "Flutter"),
-  Department(department: "Android"),
-  Department(department: "Laravel"),
-  Department(department: "PHP"),
-  Department(department: "NodeJs"),
-  Department(department: "IOS"),
-  Department(department: "ReactJS"),
-];
+// List<Department> depList = [
+//   Department(department: "All"),
+//   Department(department: "Flutter"),
+//   Department(department: "Android"),
+//   Department(department: "Laravel"),
+//   Department(department: "PHP"),
+//   Department(department: "NodeJs"),
+//   Department(department: "IOS"),
+//   Department(department: "ReactJS"),
+// ];

@@ -7,10 +7,15 @@ part of 'department_model.dart';
 // **************************************************************************
 
 Department _$DepartmentFromJson(Map<String, dynamic> json) => Department(
-      department: json['department'] as String,
-    );
+      name: json['name'] as String,
+      createAt: json['created_at'] as String,
+      updateAt: json['updated_at'] as String,
+    )..id = json['id'] as int?;
 
 Map<String, dynamic> _$DepartmentToJson(Department instance) =>
     <String, dynamic>{
-      'department': instance.department,
+      'id': instance.id,
+      'name': instance.name,
+      'created_at': instance.createAt,
+      'updated_at': instance.updateAt,
     };

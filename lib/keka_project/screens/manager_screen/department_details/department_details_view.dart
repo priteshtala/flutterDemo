@@ -25,7 +25,7 @@ class DepartmentDetailsView extends StatefulWidget {
 class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
   @override
   void initState() {
-    context.read<DepartmentDetailsCubit>().sort();
+    // context.read<DepartmentDetailsCubit>().sort();
     // context.read<DepartmentDetailsCubit>().staticListAdd();
     super.initState();
   }
@@ -83,7 +83,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                               backgroundColor: Colors.primaries[index],
                               child: Text(index.toString(), style: const TextStyle(color: Colors.white)),
                             ),
-                            title: Text(state.leaveSearchList[index].department),
+                            title: Text(state.leaveSearchList[index].name),
                           ),
                         ),
                       ],
