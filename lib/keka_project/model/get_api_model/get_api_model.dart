@@ -3,48 +3,60 @@ import 'package:json_annotation/json_annotation.dart';
 part 'get_api_model.g.dart';
 
 @JsonSerializable()
-class ApiAnimal {
-  int? count;
-  List<Entry>? entries;
+class Employee {
+  int id;
+  String name;
+  String role;
+  String location;
+  @JsonKey(name: "department_id")
+  int departmentId;
+  String email;
+  @JsonKey(name: "mobile_no")
+  String mobileNo;
+  @JsonKey(name: "birth_date")
+  DateTime birthDate;
+  @JsonKey(name: "created_at")
+  DateTime createdAt;
+  @JsonKey(name: "updated_at")
+  DateTime updatedAt;
+  Departments department;
 
-  ApiAnimal({
-    this.count,
-    this.entries,
+  Employee({
+    required this.id,
+    required this.name,
+    required this.role,
+    required this.location,
+    required this.departmentId,
+    required this.email,
+    required this.mobileNo,
+    required this.birthDate,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.department,
   });
 
-  factory ApiAnimal.fromJson(Map<String, dynamic> data) => _$ApiAnimalFromJson(data);
+  factory Employee.fromJson(Map<String, dynamic> data) => _$EmployeeFromJson(data);
 
-  Map<String, dynamic> toJson() => _$ApiAnimalToJson(this);
+  Map<String, dynamic> toJson() => _$EmployeeToJson(this);
 }
 
 @JsonSerializable()
-class Entry {
-  @JsonKey(name: "API")
-  String? api;
-  @JsonKey(name: "Description")
-  String? description;
-  @JsonKey(name: "Auth")
-  String? auth;
-  @JsonKey(name: "HTTPS")
-  bool? https;
-  @JsonKey(name: "Cors")
-  String? cors;
-  @JsonKey(name: "Link")
-  String? link;
-  @JsonKey(name: "Category")
-  String? category;
+class Departments {
+  int id;
+  String name;
+  @JsonKey(name: "created_at")
+  dynamic createdAt;
+  @JsonKey(name: "updated_at")
+  dynamic updatedAt;
 
-  Entry({
-    this.api,
-    this.description,
-    this.auth,
-    this.https,
-    this.cors,
-    this.link,
-    this.category,
+  Departments({
+    required this.id,
+    required this.name,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
-  factory Entry.fromJson(Map<String, dynamic> data) => _$EntryFromJson(data);
+  factory Departments.fromJson(Map<String, dynamic> data) => _$DepartmentsFromJson(data);
 
-  Map<String, dynamic> toJson() => _$EntryToJson(this);
+  Map<String, dynamic> toJson() => _$DepartmentsToJson(this);
 }

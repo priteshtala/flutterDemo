@@ -205,6 +205,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           decoration: BoxDecoration(
                             boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
                             gradient: LinearGradient(
+                                // colors: [Colors.green, Colors.lightGreen, Colors.lightGreenAccent],
                                 colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
                                 begin: Alignment.bottomRight,
                                 end: Alignment.topLeft),

@@ -9,8 +9,8 @@ class EmployeeDetailsState extends Equatable {
   List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList, employeeList];
 
   List<Department> filterDepartmentList;
-  List<Entry> employeeList;
-  List<Entry> filtterdUserList;
+  List<Employee> employeeList;
+  List<Employee> filtterdUserList;
   TextEditingController searchController;
   String? selectedValue;
 
@@ -24,8 +24,8 @@ class EmployeeDetailsState extends Equatable {
 
   EmployeeDetailsState copyWith({
     List<Department>? filterDepartmentList,
-    List<Entry>? employeeList,
-    List<Entry>? filtterdUserList,
+    List<Employee>? employeeList,
+    List<Employee>? filtterdUserList,
     TextEditingController? searchController,
     String? selectedValue,
   }) {

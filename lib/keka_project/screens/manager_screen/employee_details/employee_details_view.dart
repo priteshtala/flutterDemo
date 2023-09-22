@@ -46,7 +46,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                 CustomSearch(
                   controller: state.searchController,
                   onChanged: (query) {
-                    context.read<EmployeeDetailsCubit>().runFilter(query);
+                    // context.read<EmployeeDetailsCubit>().runFilter(query);
                   },
                 ),
                 const Gap(8),
@@ -89,7 +89,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             hint: const Text('All'),
                             value: state.selectedValue,
                             onChanged: (value) {
-                              context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                              // context.read<EmployeeDetailsCubit>().dropdownSelected(value);
                             },
                             items: state.filterDepartmentList
                                 .map((user) => DropdownMenuItem<String>(
@@ -121,7 +121,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             radius: 30,
                             backgroundColor: Colors.green.shade500,
                             child: Text(
-                              state.filtterdUserList[index].api.toString()[0],
+                              state.filtterdUserList[index].name.toString()[0],
                               style: const TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           ),
@@ -129,16 +129,16 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                employee.api.toString(),
+                                employee.department.toString(),
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                               ),
                               const Gap(8),
-                              Text(employee.category.toString()),
+                              Text(employee.name.toString()),
                               const Gap(8),
-                              Text("Location : ${employee.auth}"),
-                              Text("Department : ${employee.description}"),
-                              Text("Email : ${employee.https}"),
-                              Text("Mobile : ${employee.link}"),
+                              Text("Location : ${employee.birthDate}"),
+                              Text("Department : ${employee.mobileNo}"),
+                              Text("Email : ${employee.location}"),
+                              Text("Mobile : ${employee.email}"),
                             ],
                           ),
                         ),
