@@ -7,9 +7,9 @@ class Department {
   int? id;
   String name;
   @JsonKey(name: "created_at")
-  String createAt;
+  dynamic createAt;
   @JsonKey(name: "updated_at")
-  String updateAt;
+  dynamic updateAt;
 
   Department({required this.name, required this.createAt, required this.updateAt});
 

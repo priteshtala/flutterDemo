@@ -26,6 +26,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
   @override
   void initState() {
     // context.read<DepartmentDetailsCubit>().sort();
+    context.read<DepartmentDetailsCubit>().getDepartmentApi();
     // context.read<DepartmentDetailsCubit>().staticListAdd();
     super.initState();
   }
@@ -65,31 +66,39 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                   },
                 ),
                 Gap(10),
-                ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: state.leaveSearchList.length,
-                  itemBuilder: (context, index) {
-                    print("Length:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}");
-                    return Column(
-                      children: [
-                        Card(
-                          color: Colors.white,
-                          elevation: 3,
-                          shadowColor: Colors.white,
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.primaries[index],
-                              child: Text(index.toString(), style: const TextStyle(color: Colors.white)),
+                if (state.leaveSearchList.isNotEmpty) ...[
+                  ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: state.leaveSearchList.length,
+                    itemBuilder: (context, index) {
+                      // print("Length:: ${state.leaveSearchList.length} :::::: ${state.leaveSearchList}");
+                      return Column(
+                        children: [
+                          Card(
+                            color: Colors.white,
+                            elevation: 3,
+                            shadowColor: Colors.white,
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.primaries[index],
+                                child: Text(state.leaveSearchList[index].name[0], style: const TextStyle(color: Colors.white)),
+                              ),
+                              title: Text(state.leaveSearchList[index].name),
                             ),
-                            title: Text(state.leaveSearchList[index].name),
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                        ],
+                      );
+                    },
+                  ),
+                ] else if (state.departmentList.isEmpty) ...[
+                  Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ] else ...[
+                  Text("Data Not Found"),
+                ]
               ],
             ),
           ),

@@ -8,8 +8,8 @@ part of 'department_model.dart';
 
 Department _$DepartmentFromJson(Map<String, dynamic> json) => Department(
       name: json['name'] as String,
-      createAt: json['created_at'] as String,
-      updateAt: json['updated_at'] as String,
+      createAt: json['created_at'] as dynamic,
+      updateAt: json['updated_at'] as dynamic,
     )..id = json['id'] as int?;
 
 Map<String, dynamic> _$DepartmentToJson(Department instance) =>
