@@ -46,7 +46,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                 CustomSearch(
                   controller: state.searchController,
                   onChanged: (query) {
-                    // context.read<EmployeeDetailsCubit>().runFilter(query);
+                    context.read<EmployeeDetailsCubit>().runFilter(query);
                   },
                 ),
                 const Gap(8),
@@ -89,7 +89,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             hint: const Text('All'),
                             value: state.selectedValue,
                             onChanged: (value) {
-                              // context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                              context.read<EmployeeDetailsCubit>().dropdownSelected(value);
                             },
                             items: state.filterDepartmentList
                                 .map((user) => DropdownMenuItem<String>(
@@ -129,16 +129,16 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                employee.department.toString(),
+                                employee.name.toString(),
                                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                               ),
                               const Gap(8),
-                              Text(employee.name.toString()),
+                              Text(employee.role.toString()),
                               const Gap(8),
-                              Text("Location : ${employee.birthDate}"),
-                              Text("Department : ${employee.mobileNo}"),
-                              Text("Email : ${employee.location}"),
-                              Text("Mobile : ${employee.email}"),
+                              Text("Location : ${employee.location}"),
+                              Text("Department : ${employee.department.name}"),
+                              Text("Email : ${employee.email}"),
+                              Text("Mobile : ${employee.mobileNo}"),
                             ],
                           ),
                         ),

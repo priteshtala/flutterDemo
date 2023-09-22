@@ -24,26 +24,26 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
           ),
         );
 
-  // void dropdownSelected(value) {
-  //   state.selectedValue = value.toString();
-  //   List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-  //   List<Employee> employeeList = List<Employee>.from(state.employeeList);
-  //   filtterdUserList = value.toString().isEmpty ? state.employeeList :
-  //   filtterdUserList = value == "All" ? employeeList : employeeList.where((e) => e.department == value).toList();
-  //   emit(state.copyWith(selectedValue: value.toString(), filtterdUserList: filtterdUserList));
-  // }
+  void dropdownSelected(value) {
+    state.selectedValue = value.toString();
+    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
+    List<Employee> employeeList = List<Employee>.from(state.employeeList);
+    filtterdUserList = value.toString().isEmpty ? state.employeeList :
+    filtterdUserList = value == "All" ? employeeList : employeeList.where((e) => e.department == value).toList();
+    emit(state.copyWith(selectedValue: value.toString(), filtterdUserList: filtterdUserList));
+  }
 
-  // void runFilter(String query) {
-  //   List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-  //   List<Employee> employeeList = List<Employee>.from(state.employeeList);
-  //   filtterdUserList = query.isEmpty
-  //       ? state.employeeList
-  //       : employeeList.where((e) {
-  //           return e.category.toString().toLowerCase().contains(query.toLowerCase());
-  //         }).toList();
-  //
-  //   emit(state.copyWith(filtterdUserList: filtterdUserList));
-  // }
+  void runFilter(String query) {
+    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
+    List<Employee> employeeList = List<Employee>.from(state.employeeList);
+    filtterdUserList = query.isEmpty
+        ? state.employeeList
+        : employeeList.where((e) {
+            return e.name.toString().toLowerCase().contains(query.toLowerCase());
+          }).toList();
+
+    emit(state.copyWith(filtterdUserList: filtterdUserList));
+  }
 
   void getApi() async {
     final response = await Dio().get("https://e9af-136-232-118-126.ngrok-free.app/api/user");
