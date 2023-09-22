@@ -54,7 +54,7 @@ class _SplashScreenViewState extends State<SplashScreenView> with TickerProvider
       setState(() {
         containerSize = 2;
         _containerOpacity = 1;
-      });
+      },);
     });
 
     Timer(Duration(seconds: 4), () {

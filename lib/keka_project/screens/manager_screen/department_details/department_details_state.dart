@@ -5,28 +5,29 @@ import 'package:flutter/material.dart';
 class DepartmentDetailsState extends Equatable {
   @override
   List<Object?> get props => [departmentList, leaveSearchList, staticList, departmentController];
-  final List<Department> departmentList;
   final TextEditingController departmentController;
+  final List<Department> departmentList;
   final List<Department> leaveSearchList;
   final List<Department> staticList;
 
-  DepartmentDetailsState(
-      { this.departmentList = const [],
-      this.leaveSearchList = const [],
-      this.staticList = const [],
-      required this.departmentController});
+  DepartmentDetailsState({
+    required this.departmentController,
+    this.departmentList = const [],
+    this.leaveSearchList = const [],
+    this.staticList = const [],
+  });
 
   DepartmentDetailsState copyWith({
+    TextEditingController? departmentController,
     List<Department>? departmentList,
     List<Department>? leaveSearchList,
     List<Department>? staticList,
-    TextEditingController? departmentController,
   }) {
     return DepartmentDetailsState(
+      departmentController: departmentController ?? this.departmentController,
       departmentList: departmentList ?? this.departmentList,
       leaveSearchList: leaveSearchList ?? this.leaveSearchList,
       staticList: staticList ?? this.staticList,
-      departmentController: departmentController ?? this.departmentController,
     );
   }
 }
