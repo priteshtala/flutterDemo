@@ -74,7 +74,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     onPressed: () => context.read<AddEmployeeCubit>().visibility(),
-                    icon: state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
+                    icon: state.iconShowHide ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_sharp),
                   ),
                 ),
                 Padding(
