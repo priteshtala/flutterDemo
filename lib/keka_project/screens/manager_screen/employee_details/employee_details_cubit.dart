@@ -45,7 +45,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     emit(state.copyWith(filtterdUserList: filtterdUserList));
   }
 
-  void getApi() async {
+  void getEmployeeApi() async {
     final response = await Dio().get("https://e9af-136-232-118-126.ngrok-free.app/api/user");
     var animalList = List<Employee>.from(state.filtterdUserList);
     if (response.statusCode == 200) {
@@ -59,4 +59,19 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     }
     emit(state.copyWith(filtterdUserList: animalList, employeeList: animalList));
   }
+
+  // void getDepartmentApi() async {
+  //   final response = await Dio().get("https://6a45-136-232-118-126.ngrok-free.app/api/department");
+  //   var animalList = List<Department>.from(state.departmentList);
+  //   if (response.statusCode == 200) {
+  //     var data = response.data;
+  //     print("object=d=a=======${data}");
+  //     for (var entry in data) {
+  //       animalList.add(Department.fromJson(entry));
+  //     }
+  //   } else {
+  //     Text("No-Data");
+  //   }
+  //   emit(state.copyWith(departmentList:  animalList));
+  // }
 }

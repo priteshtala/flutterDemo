@@ -11,6 +11,7 @@ class EmployeeDetailsState extends Equatable {
   List<Department> filterDepartmentList;
   List<Employee> employeeList;
   List<Employee> filtterdUserList;
+  List<Department> departmentList;
   TextEditingController searchController;
   String? selectedValue;
 
@@ -18,6 +19,7 @@ class EmployeeDetailsState extends Equatable {
     this.filterDepartmentList = const [],
     this.employeeList = const [],
     this.filtterdUserList = const [],
+    this.departmentList = const [],
     required this.searchController,
     this.selectedValue,
   });
@@ -26,6 +28,7 @@ class EmployeeDetailsState extends Equatable {
     List<Department>? filterDepartmentList,
     List<Employee>? employeeList,
     List<Employee>? filtterdUserList,
+    List<Department>? departmentList,
     TextEditingController? searchController,
     String? selectedValue,
   }) {
@@ -35,6 +38,7 @@ class EmployeeDetailsState extends Equatable {
       filtterdUserList: filtterdUserList ?? this.filtterdUserList,
       searchController: searchController ?? this.searchController,
       selectedValue: selectedValue ?? this.selectedValue,
+      departmentList: departmentList ?? this.departmentList,
     );
   }
 }

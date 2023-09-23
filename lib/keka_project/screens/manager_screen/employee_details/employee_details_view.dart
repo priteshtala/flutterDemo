@@ -27,7 +27,7 @@ class EmployeeDetailsView extends StatefulWidget {
 class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
   @override
   void initState() {
-    context.read<EmployeeDetailsCubit>().getApi();
+    context.read<EmployeeDetailsCubit>().getEmployeeApi();
     super.initState();
   }
 
