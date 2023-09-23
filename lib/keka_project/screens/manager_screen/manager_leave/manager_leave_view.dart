@@ -264,6 +264,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               ),
                               Divider(color: Colors.white),
                               Text(
+
                                 "${state.leaveList.length}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,

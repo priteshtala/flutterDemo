@@ -81,6 +81,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
       Text("No-Data");
     }
     emit(state.copyWith(departmentList:  animalList,leaveSearchList: animalList));
+    print("object======,ojoipo,lpokokpopokoijikpo0popopokpokpokoioi${state.departmentList}");
   }
   // void sort() {
   //   List<Department> leaveList = List<Department>.from(state.departmentList);
