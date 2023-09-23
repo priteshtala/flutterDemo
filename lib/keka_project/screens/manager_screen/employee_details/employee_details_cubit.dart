@@ -46,7 +46,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   }
 
   void getEmployeeApi() async {
-    final response = await Dio().get("https://e9af-136-232-118-126.ngrok-free.app/api/user");
+    final response = await Dio().get("https://6a45-136-232-118-126.ngrok-free.app/api/user");
     var animalList = List<Employee>.from(state.filtterdUserList);
     if (response.statusCode == 200) {
       var data = response.data;
