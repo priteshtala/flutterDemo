@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'add_employee_state.dart';
@@ -12,6 +12,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
           nameController: TextEditingController(),
           mobileController: TextEditingController(),
           passwordController: TextEditingController(),
+          roleController: TextEditingController(),
+          locationController: TextEditingController(),
+          token: dynamic,
           // departmentList: depList,
         ));
 
@@ -30,6 +33,67 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     emit(state.copyWith(dateController: state.dateController));
   }
 
+  Future dioPostApi(String name, String role, String location, String email, String password, String mobile_no,
+      String department_id, String birth_date) async {
+    try {
+      var response = await Dio().post(
+        'https://89bd-136-232-118-126.ngrok-free.app/api/user',
+        data: {
+          'name': name,
+          'role': role,
+          'location': location,
+          'email': email,
+          'password': password,
+          'mobile_no': mobile_no,
+          'department_id': department_id,
+          'birth_date': birth_date,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var login = response.data;
+        debugPrint("=========================${login["token"]}");
+        state.token = login["token"];
+        debugPrint('Login successfully');
+      } else {
+        debugPrint('failed');
+      }
+    } catch (e) {
+      debugPrint("Data Failed");
+    }
+  }
+
+  // Future<void> onLogIn() async {
+  //   await ApiCallRepository().loginPostDio(state.emailController.text, state.passwordController.text).then(
+  //         (v) {
+  //       if (v["code"] == 0) {
+  //         UserPreferences().setToken(v["data"]["Token"]);
+  //         Navigator.of(context).pushNamed(
+  //           '/mainView',
+  //           // (route) => false,
+  //         );
+  //       } else {
+  //         showDialog(
+  //           context: context,
+  //           builder: (context) => AlertDialog(
+  //             shape: RoundedRectangleBorder(
+  //               borderRadius: BorderRadius.circular(20),
+  //             ),
+  //             alignment: Alignment.bottomCenter,
+  //             title: Text(v["message"]),
+  //             actions: [
+  //               TextButton(
+  //                 onPressed: () => Navigator.pop(context),
+  //                 child: const Text("Oky"),
+  //               ),
+  //             ],
+  //           ),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
+
   void validation(context) {
     if (state.nameController.text.isEmpty ||
         state.emailController.text.isEmpty ||
@@ -37,7 +101,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         state.selectedValue.toString().isEmpty ||
         state.mobileController.text.isEmpty ||
         state.dateController.text.isEmpty) {
-       ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           duration: Duration(seconds: 1),
           padding: EdgeInsets.all(3),

@@ -15,46 +15,58 @@ class AddEmployeeState extends Equatable {
         departmentList,
         selectedValue,
         iconShowHide,
+        roleController
       ];
   TextEditingController nameController;
   TextEditingController emailController;
   TextEditingController passwordController;
+  TextEditingController roleController;
   TextEditingController mobileController;
   TextEditingController dateController;
+  TextEditingController locationController;
   List<Department> departmentList;
   String? selectedValue;
   bool iconShowHide;
+  dynamic token;
 
-  AddEmployeeState({
-    required this.nameController,
-    required this.emailController,
-    required this.passwordController,
-    required this.mobileController,
-    required this.dateController,
-    this.departmentList = const [],
-    this.selectedValue,
-    this.iconShowHide = false,
-  });
+  AddEmployeeState(
+      {required this.nameController,
+      required this.emailController,
+      required this.passwordController,
+      required this.roleController,
+      required this.mobileController,
+      required this.dateController,
+      required this.locationController,
+      this.departmentList = const [],
+      this.selectedValue,
+      this.iconShowHide = false,
+      required this.token});
 
   AddEmployeeState copyWith({
     TextEditingController? nameController,
     TextEditingController? emailController,
     TextEditingController? passwordController,
+    TextEditingController? roleController,
     TextEditingController? mobileController,
     TextEditingController? dateController,
+    TextEditingController? locationController,
     List<Department>? departmentList,
     String? selectedValue,
     bool? iconShowHide,
+    dynamic token,
   }) {
     return AddEmployeeState(
       nameController: nameController ?? this.nameController,
       emailController: emailController ?? this.emailController,
       passwordController: passwordController ?? this.passwordController,
+      roleController: roleController ?? this.roleController,
       mobileController: mobileController ?? this.mobileController,
       dateController: dateController ?? this.dateController,
+      locationController: locationController ?? this.locationController,
       departmentList: departmentList ?? this.departmentList,
       selectedValue: selectedValue ?? this.selectedValue,
       iconShowHide: iconShowHide ?? this.iconShowHide,
+      token: token ?? this.token,
     );
   }
 }

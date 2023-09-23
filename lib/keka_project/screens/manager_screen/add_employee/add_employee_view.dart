@@ -18,11 +18,13 @@ class AddEmployeeView extends StatefulWidget {
         nameController: TextEditingController(),
         mobileController: TextEditingController(),
         dateController: TextEditingController(),
+        roleController: TextEditingController(),
+        locationController: TextEditingController(),
+        token: dynamic,
       )),
       child: const AddEmployeeView(),
     );
   }
-
   const AddEmployeeView({super.key});
 
   @override
@@ -30,6 +32,11 @@ class AddEmployeeView extends StatefulWidget {
 }
 
 class _AddEmployeeViewState extends State<AddEmployeeView> {
+  @override
+  void initState() {
+    context.read<AddEmployeeCubit>().dioPostApi;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddEmployeeCubit, AddEmployeeState>(
@@ -76,6 +83,19 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     onPressed: () => context.read<AddEmployeeCubit>().visibility(),
                     icon: state.iconShowHide ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_sharp),
                   ),
+                ),
+                CustomTextForm(
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: state.roleController,
+                  readOnly: false,
+                  textCapitalization: TextCapitalization.none,
+                  obscureText: false,
+                  hintText: "Enter Your Role",
+                  // prefixIcon: const Icon(Icons.account_circle_outlined),
+                  // suffixIcon: IconButton(
+                  // onPressed: () => context.read<AddEmployeeCubit>().visibility(),
+                  // icon: state.iconShowHide ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_sharp),
+                  // ),
                 ),
                 // Padding(
                 //   padding: const EdgeInsets.all(10.0),
@@ -179,7 +199,17 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    context.read<AddEmployeeCubit>().validation(context);
+                    // context.read<AddEmployeeCubit>().validation(context);
+                    context.read<AddEmployeeCubit>().dioPostApi(
+                        state.nameController.text,
+                        state.roleController.text,
+                        state.locationController.text,
+                        state.emailController.text,
+                        state.passwordController.text,
+                        state.mobileController.text,
+                      state.selectedValue.toString(),
+                      state.dateController.text,
+                      );
                   },
                   minWidth: 300,
                   child: const Text("ADD", style: TextStyle(color: Colors.white, fontSize: 20)),
