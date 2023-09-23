@@ -13,7 +13,7 @@ class EmployeeDetailsState extends Equatable {
   List<Employee> filtterdUserList;
   List<Department> departmentList;
   TextEditingController searchController;
-  String? selectedValue;
+  Department? selectedValue;
 
   EmployeeDetailsState({
     this.filterDepartmentList = const [],
@@ -30,7 +30,7 @@ class EmployeeDetailsState extends Equatable {
     List<Employee>? filtterdUserList,
     List<Department>? departmentList,
     TextEditingController? searchController,
-    String? selectedValue,
+    Department? selectedValue,
   }) {
     return EmployeeDetailsState(
       filterDepartmentList: filterDepartmentList ?? this.filterDepartmentList,

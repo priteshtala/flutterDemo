@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
+import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_state.dart';
@@ -28,6 +29,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
   @override
   void initState() {
     context.read<EmployeeDetailsCubit>().getEmployeeApi();
+    context.read<EmployeeDetailsCubit>().getDepartmentApi();
     super.initState();
   }
 
@@ -78,7 +80,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             filled: true,
                             contentPadding: const EdgeInsets.all(8),
                           )),
-                          child: DropdownButtonFormField<String>(
+                          child: DropdownButtonFormField<Department>(
                             alignment: Alignment.center,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -89,13 +91,15 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             hint: const Text('All'),
                             value: state.selectedValue,
                             onChanged: (value) {
-                              context.read<EmployeeDetailsCubit>().dropdownSelected(value);
+                              context.read<EmployeeDetailsCubit>().dropdownSelected(value!);
                             },
-                            items: state.filterDepartmentList
-                                .map((user) => DropdownMenuItem<String>(
-                                      value: user.name,
-                                      child: Text(user.name.toString()),
-                                    ))
+                            items: state.departmentList
+                                .map(
+                                  (user) => DropdownMenuItem<Department>(
+                                    value: user,
+                                    child: Text(user.name.toString()),
+                                  ),
+                                )
                                 .toList(),
                           ),
                         ),

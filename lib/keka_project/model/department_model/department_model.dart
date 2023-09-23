@@ -11,7 +11,7 @@ class Department {
   @JsonKey(name: "updated_at")
   dynamic updateAt;
 
-  Department({required this.name, required this.createAt, required this.updateAt});
+  Department({this.id, required this.name, required this.createAt, required this.updateAt});
 
   factory Department.fromJson(Map<String, dynamic> data) => _$DepartmentFromJson(data);
 

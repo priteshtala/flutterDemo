@@ -11,26 +11,14 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       : super(
           EmployeeDetailsState(
             searchController: TextEditingController(),
-            // filterDepartmentList: [
-            //   Department(department: "All"),
-            //   Department(department: "Flutter"),
-            //   Department(department: "Android"),
-            //   Department(department: "Animals"),
-            //   Department(department: "Anime"),
-            //   Department(department: "NodeJs"),
-            //   Department(department: "IOS"),
-            //   Department(department: "ReactJS"),
-            // ],
           ),
         );
 
-  void dropdownSelected(value) {
-    state.selectedValue = value.toString();
+  void dropdownSelected(Department value) {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-    List<Employee> employeeList = List<Employee>.from(state.employeeList);
-    filtterdUserList = value.toString().isEmpty ? state.employeeList :
-    filtterdUserList = value == "All" ? employeeList : employeeList.where((e) => e.department == value).toList();
-    emit(state.copyWith(selectedValue: value.toString(), filtterdUserList: filtterdUserList));
+    filtterdUserList =
+        value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
+    emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList));
   }
 
   void runFilter(String query) {
@@ -46,32 +34,33 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   }
 
   void getEmployeeApi() async {
-    final response = await Dio().get("https://6a45-136-232-118-126.ngrok-free.app/api/user");
-    var animalList = List<Employee>.from(state.filtterdUserList);
+    final response = await Dio().get("https://89bd-136-232-118-126.ngrok-free.app/api/user");
+    var employeeDetails = List<Employee>.from(state.filtterdUserList);
     if (response.statusCode == 200) {
       var data = response.data;
-      print("object=d=a=======${data}");
+      // print("object=d=a=======${data}");
       for (var entry in data) {
-        animalList.add(Employee.fromJson(entry));
+        employeeDetails.add(Employee.fromJson(entry));
       }
     } else {
       Text("No-Data");
     }
-    emit(state.copyWith(filtterdUserList: animalList, employeeList: animalList));
+    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
   }
 
-  // void getDepartmentApi() async {
-  //   final response = await Dio().get("https://6a45-136-232-118-126.ngrok-free.app/api/department");
-  //   var animalList = List<Department>.from(state.departmentList);
-  //   if (response.statusCode == 200) {
-  //     var data = response.data;
-  //     print("object=d=a=======${data}");
-  //     for (var entry in data) {
-  //       animalList.add(Department.fromJson(entry));
-  //     }
-  //   } else {
-  //     Text("No-Data");
-  //   }
-  //   emit(state.copyWith(departmentList:  animalList));
-  // }
+  void getDepartmentApi() async {
+    final response = await Dio().get("https://89bd-136-232-118-126.ngrok-free.app/api/department");
+    var DepartmentListData = List<Department>.from(state.departmentList);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      print("departmentDetails====$data");
+      for (var entry in data) {
+        DepartmentListData.add(Department.fromJson(entry));
+      }
+      DepartmentListData.insert(0, Department(id: 0, name: "All", createAt: '', updateAt: ''));
+    } else {
+      Text("No-Data");
+    }
+    emit(state.copyWith(departmentList: DepartmentListData, filterDepartmentList: DepartmentListData));
+  }
 }
