@@ -15,7 +15,7 @@ class AddEmployeeState extends Equatable {
         departmentList,
         selectedValue,
         iconShowHide,
-        roleController
+        roleController,
       ];
   TextEditingController nameController;
   TextEditingController emailController;
@@ -25,7 +25,7 @@ class AddEmployeeState extends Equatable {
   TextEditingController dateController;
   TextEditingController locationController;
   List<Department> departmentList;
-  String? selectedValue;
+  Department? selectedValue;
   bool iconShowHide;
   dynamic token;
 
@@ -51,7 +51,7 @@ class AddEmployeeState extends Equatable {
     TextEditingController? dateController,
     TextEditingController? locationController,
     List<Department>? departmentList,
-    String? selectedValue,
+    Department? selectedValue,
     bool? iconShowHide,
     dynamic token,
   }) {

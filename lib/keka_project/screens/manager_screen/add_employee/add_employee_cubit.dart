@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'add_employee_state.dart';
@@ -119,15 +120,24 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       );
     }
   }
-}
 
-// List<Department> depList = [
-//   Department(department: "All"),
-//   Department(department: "Flutter"),
-//   Department(department: "Android"),
-//   Department(department: "Laravel"),
-//   Department(department: "PHP"),
-//   Department(department: "NodeJs"),
-//   Department(department: "IOS"),
-//   Department(department: "ReactJS"),
-// ];
+  void getDepartmentApi() async {
+    final response = await Dio().get("https://89bd-136-232-118-126.ngrok-free.app/api/department");
+    var DepartmentListData = List<Department>.from(state.departmentList);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      print("departmentDetails====$data");
+      for (var entry in data) {
+        DepartmentListData.add(Department.fromJson(entry));
+      }
+    } else {
+      Text("No-Data");
+    }
+    emit(state.copyWith(departmentList: DepartmentListData));
+  }
+
+// void dropdownSelected(Department value) {
+//   List<Department> department = List<Department>.from(state.departmentList);
+//   emit(state.copyWith(departmentList: department, selectedValue: value));
+// }
+}

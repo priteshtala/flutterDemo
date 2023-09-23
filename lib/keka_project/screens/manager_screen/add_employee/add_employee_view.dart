@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
+import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ class AddEmployeeView extends StatefulWidget {
       child: const AddEmployeeView(),
     );
   }
+
   const AddEmployeeView({super.key});
 
   @override
@@ -35,8 +37,10 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   @override
   void initState() {
     context.read<AddEmployeeCubit>().dioPostApi;
+    context.read<AddEmployeeCubit>().getDepartmentApi();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddEmployeeCubit, AddEmployeeState>(
@@ -63,6 +67,15 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   prefixIcon: const Icon(Icons.person),
                 ),
                 CustomTextForm(
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: state.roleController,
+                  readOnly: false,
+                  textCapitalization: TextCapitalization.none,
+                  obscureText: false,
+                  hintText: "Enter Your Role",
+                  prefixIcon: Icon(Icons.accessibility_sharp),
+                ),
+                CustomTextForm(
                   controller: state.emailController,
                   readOnly: false,
                   textCapitalization: TextCapitalization.none,
@@ -70,6 +83,14 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   hintText: "Enter Your Email",
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Icon(Icons.email),
+                ),
+                CustomTextForm(
+                  controller: state.locationController,
+                  readOnly: false,
+                  textCapitalization: TextCapitalization.none,
+                  obscureText: false,
+                  hintText: "Enter Your Location",
+                  prefixIcon: const Icon(Icons.location_pin),
                 ),
                 CustomTextForm(
                   keyboardType: TextInputType.visiblePassword,
@@ -81,67 +102,55 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     onPressed: () => context.read<AddEmployeeCubit>().visibility(),
-                    icon: state.iconShowHide ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_sharp),
+                    icon: state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
                   ),
                 ),
-                CustomTextForm(
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: state.roleController,
-                  readOnly: false,
-                  textCapitalization: TextCapitalization.none,
-                  obscureText: false,
-                  hintText: "Enter Your Role",
-                  // prefixIcon: const Icon(Icons.account_circle_outlined),
-                  // suffixIcon: IconButton(
-                  // onPressed: () => context.read<AddEmployeeCubit>().visibility(),
-                  // icon: state.iconShowHide ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off_sharp),
-                  // ),
+
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Theme(
+                    data: Theme.of(context).copyWith(
+                      dividerColor: Colors.black,
+                      inputDecorationTheme: InputDecorationTheme(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        fillColor: Colors.grey.withOpacity(0.3),
+                        filled: true,
+                        contentPadding: const EdgeInsets.all(12),
+                      ),
+                    ),
+                    child: DropdownButtonFormField<Department>(
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      isDense: true,
+                      hint: const Text('Select Your Department'),
+                      value: state.selectedValue,
+                      onChanged: (value) {
+                        // context.read<AddEmployeeCubit>().dropdownSelected(value!);
+                      },
+                      items: state.departmentList
+                          .map(
+                            (user) => DropdownMenuItem<Department>(
+                              value: user,
+                              child: Text(
+                                user.name.toString(),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.all(10.0),
-                //   child: Theme(
-                //     data: Theme.of(context).copyWith(
-                //       dividerColor: Colors.black,
-                //       inputDecorationTheme: InputDecorationTheme(
-                //         enabledBorder: OutlineInputBorder(
-                //           borderSide: BorderSide.none,
-                //           borderRadius: BorderRadius.circular(14),
-                //         ),
-                //         fillColor: Colors.grey.withOpacity(0.3),
-                //         filled: true,
-                //         contentPadding: const EdgeInsets.all(12),
-                //       ),
-                //     ),
-                //     child: DropdownButtonFormField<String>(
-                //       decoration: InputDecoration(
-                //         focusedBorder: OutlineInputBorder(
-                //           borderSide: BorderSide.none,
-                //           borderRadius: BorderRadius.circular(14),
-                //         ),
-                //         border: OutlineInputBorder(
-                //           borderSide: BorderSide.none,
-                //           borderRadius: BorderRadius.circular(14),
-                //         ),
-                //       ),
-                //       isDense: true,
-                //       hint: const Text('Select Your Department'),
-                //       value: state.selectedValue,
-                //       onChanged: (value) {
-                //         // context.read<AddEmployeeCubit>().dropdownSelected(value);
-                //       },
-                //       items: state.departmentList
-                //           .map(
-                //             (user) => DropdownMenuItem<String>(
-                //               value: user.department,
-                //               child: Text(
-                //                 user.department.toString(),
-                //               ),
-                //             ),
-                //           )
-                //           .toList(),
-                //     ),
-                //   ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: IntlPhoneField(
@@ -201,15 +210,15 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   onPressed: () {
                     // context.read<AddEmployeeCubit>().validation(context);
                     context.read<AddEmployeeCubit>().dioPostApi(
-                        state.nameController.text,
-                        state.roleController.text,
-                        state.locationController.text,
-                        state.emailController.text,
-                        state.passwordController.text,
-                        state.mobileController.text,
-                      state.selectedValue.toString(),
-                      state.dateController.text,
-                      );
+                          state.nameController.text,
+                          state.roleController.text,
+                          state.locationController.text,
+                          state.emailController.text,
+                          state.passwordController.text,
+                          state.mobileController.text,
+                          state.selectedValue.toString(),
+                          state.dateController.text,
+                        );
                   },
                   minWidth: 300,
                   child: const Text("ADD", style: TextStyle(color: Colors.white, fontSize: 20)),
