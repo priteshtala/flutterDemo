@@ -21,7 +21,8 @@ class AddEmployeeView extends StatefulWidget {
         dateController: TextEditingController(),
         roleController: TextEditingController(),
         locationController: TextEditingController(),
-        token: dynamic,
+
+        // token: dynamic,
       )),
       child: const AddEmployeeView(),
     );
@@ -36,7 +37,6 @@ class AddEmployeeView extends StatefulWidget {
 class _AddEmployeeViewState extends State<AddEmployeeView> {
   @override
   void initState() {
-    context.read<AddEmployeeCubit>().dioPostApi;
     context.read<AddEmployeeCubit>().getDepartmentApi();
     super.initState();
   }
@@ -105,7 +105,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     icon: state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Theme(
@@ -136,7 +135,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                       hint: const Text('Select Your Department'),
                       value: state.selectedValue,
                       onChanged: (value) {
-                        // context.read<AddEmployeeCubit>().dropdownSelected(value!);
+                        context.read<AddEmployeeCubit>().dropdownSelected(value!);
                       },
                       items: state.departmentList
                           .map(
@@ -208,15 +207,23 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
+                    print(state.nameController.text);
+                    print(state.roleController.text);
+                    print(state.emailController.text);
+                    print(state.locationController.text);
+                    print(state.passwordController.text);
+                    print(state.selectedValue!.id);
+                    print(state.mobileController.text);
+                    print(state.dateController.text);
                     // context.read<AddEmployeeCubit>().validation(context);
-                    context.read<AddEmployeeCubit>().dioPostApi(
+                    context.read<AddEmployeeCubit>().AddEmployeePost(
                           state.nameController.text,
                           state.roleController.text,
-                          state.locationController.text,
                           state.emailController.text,
+                          state.locationController.text,
                           state.passwordController.text,
+                          state.selectedValue!.id.toString(),
                           state.mobileController.text,
-                          state.selectedValue.toString(),
                           state.dateController.text,
                         );
                   },

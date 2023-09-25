@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/employee_login_view.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class MainScreenCubit extends Cubit<MainScreenState> {
     debugPrint("IsChange ::: ${state.isSelected}");
   }
 
-  void validation(context) {
+  void validation(context) async {
     if (state.isSelected == -1) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -38,9 +40,14 @@ class MainScreenCubit extends Cubit<MainScreenState> {
         ),
       );
     } else if (state.isSelected == 0) {
-      Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
+      Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: Profile.manager);
     } else {
-      Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
+      var getToken = await Helper().getToken();
+      getToken.isNotEmpty
+          ? Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: Profile.employee)
+          : Navigator.of(context).pushNamed(
+              EmployeeLoginView.routeName,
+            );
     }
   }
 }

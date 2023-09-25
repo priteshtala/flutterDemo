@@ -3,6 +3,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
+import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddLeaveState extends Equatable {
@@ -23,9 +24,9 @@ class AddLeaveState extends Equatable {
   TextEditingController dateTimeController;
   TextEditingController reasonController;
   List<Department> departmentList;
-  List<EmployeeData> employeeList;
-  List<EmployeeData> filtterdUserList;
-  List<EmployeeData> notifyEmployee;
+  List<Employee> employeeList;
+  List<Employee> filtterdUserList;
+  List<Employee> notifyEmployee;
   bool? isSearch;
 
   AddLeaveState({
@@ -46,9 +47,9 @@ class AddLeaveState extends Equatable {
     TextEditingController? dateTimeController,
     TextEditingController? reasonController,
     List<Department>? departmentList,
-    List<EmployeeData>? employeeList,
-    List<EmployeeData>? filtterdUserList,
-    List<EmployeeData>? notifyEmployee,
+    List<Employee>? employeeList,
+    List<Employee>? filtterdUserList,
+    List<Employee>? notifyEmployee,
     bool? isSearch,
   }) {
     return AddLeaveState(

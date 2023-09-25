@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
+import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -12,8 +14,8 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
             dateTimeController: TextEditingController(),
             reasonController: TextEditingController(),
             searchController: TextEditingController(),
-            employeeList: empList,
-            filtterdUserList: empList,
+            // employeeList: empList,
+            // filtterdUserList: empList,
           ),
         );
 
@@ -48,7 +50,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void notifyEmp(String query) {
-    List<EmployeeData> employeeList = List<EmployeeData>.from(state.employeeList);
+    List<Employee> employeeList = List<Employee>.from(state.employeeList);
     employeeList = employeeList
         .where((e) =>
             e.name.toLowerCase().contains(query.toLowerCase()) || e.email.toLowerCase().contains(query.toLowerCase()))
@@ -61,8 +63,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     if (state.notifyEmployee.isEmpty ||
         state.dateController.text.isEmpty ||
         state.dateTimeController.text.isEmpty ||
-        state.reasonController.text.isEmpty
-    ) {
+        state.reasonController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           duration: Duration(seconds: 1),
@@ -82,11 +83,13 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     }
   }
 
-  void notifyEmployee(EmployeeData employeeData) {
-    clearSearch(employeeData: employeeData);
+  void notifyEmployee(Employee employeeData) {
+    clearSearch(
+      employeeData: employeeData,
+    );
   }
 
-  void clearSearch({EmployeeData? employeeData}) {
+  void clearSearch({Employee? employeeData}) {
     state.searchController.clear();
     if (employeeData != null) {
       emit(state.copyWith(notifyEmployee: [employeeData]));
@@ -94,55 +97,71 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       emit(state.copyWith(notifyEmployee: []));
     }
   }
+
+  void getNotifyEmployee() async {
+    final response = await Dio().get("https://5479-136-232-118-126.ngrok-free.app/api/user");
+    var notifyEmployee = List<Employee>.from(state.notifyEmployee);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      for (var entry in data) {
+        // print(data);
+
+        notifyEmployee.add(Employee.fromJson(entry));
+      }
+    } else {
+      Text("No-data");
+    }
+    emit(state.copyWith(employeeList: notifyEmployee));
+  }
 }
 
-List<EmployeeData> empList = [
-  EmployeeData(
-    name: "Pritesh Dineshbhai Tala",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "pritesh.t@elaunchinfotech.in",
-    number: "9510670968",
-  ),
-  EmployeeData(
-    name: "Devang Vijaybhai Sabalpara",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "devang.s@elaunchinfotech.in",
-    number: "7777947638",
-  ),
-  EmployeeData(
-    name: "Deep Jitendrabhai Vaghani",
-    role: "jr.Flutter Developer",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "deep.v@elaunchinfotech.in",
-    number: "7041454545",
-  ),
-  EmployeeData(
-    name: "Nensi Dineshbhai Tala",
-    role: "PHP/React-js",
-    location: "Katargam",
-    department: "IOS",
-    email: "pritesh.t@elaunchinfotech.in",
-    number: "95106 70968",
-  ),
-  EmployeeData(
-    name: "Kuldeep Ghoghari Devangbhai",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "Android/Flutter",
-    email: "kuldeep.g@elaunchinfotech.in",
-    number: "7542541245",
-  ),
-  EmployeeData(
-    name: "Pritesh DineshBhai Tala",
-    role: "Flutter trainee",
-    location: "Katargam",
-    department: "PHP",
-    email: "pritesh.t@elaunchinfotech.in",
-    number: "9510670968",
-  ),
-];
+// List<EmployeeData> empList = [
+//   EmployeeData(
+//     name: "Pritesh Dineshbhai Tala",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "pritesh.t@elaunchinfotech.in",
+//     number: "9510670968",
+//   ),
+//   EmployeeData(
+//     name: "Devang Vijaybhai Sabalpara",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "devang.s@elaunchinfotech.in",
+//     number: "7777947638",
+//   ),
+//   EmployeeData(
+//     name: "Deep Jitendrabhai Vaghani",
+//     role: "jr.Flutter Developer",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "deep.v@elaunchinfotech.in",
+//     number: "7041454545",
+//   ),
+//   EmployeeData(
+//     name: "Nensi Dineshbhai Tala",
+//     role: "PHP/React-js",
+//     location: "Katargam",
+//     department: "IOS",
+//     email: "pritesh.t@elaunchinfotech.in",
+//     number: "95106 70968",
+//   ),
+//   EmployeeData(
+//     name: "Kuldeep Ghoghari Devangbhai",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "Android/Flutter",
+//     email: "kuldeep.g@elaunchinfotech.in",
+//     number: "7542541245",
+//   ),
+//   EmployeeData(
+//     name: "Pritesh DineshBhai Tala",
+//     role: "Flutter trainee",
+//     location: "Katargam",
+//     department: "PHP",
+//     email: "pritesh.t@elaunchinfotech.in",
+//     number: "9510670968",
+//   ),
+// ];

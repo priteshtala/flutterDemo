@@ -69,11 +69,11 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://89bd-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("https://5479-136-232-118-126.ngrok-free.app/api/department");
     var animalList = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;
-      print("object=d=a=======${data}");
+      // print("object=d=a=======${data}");
       for (var entry in data) {
         animalList.add(Department.fromJson(entry));
       }
@@ -81,7 +81,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
       Text("No-Data");
     }
     emit(state.copyWith(departmentList:  animalList,leaveSearchList: animalList));
-    print("object======,ojoipo,lpokokpopokoijikpo0popopokpokpokoioi${state.departmentList}");
+    // print("object======,ojoipo,lpokokpopokoijikpo0popopokpokpokoioi${state.departmentList}");
   }
   // void sort() {
   //   List<Department> leaveList = List<Department>.from(state.departmentList);
@@ -108,13 +108,3 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   //   print("text::${state.departmentController.text}");
   // }
 }
-//
-// List<Department> leaveEmpList = [
-//   Department(department: "Flutter"),
-//   Department(department: "Android"),
-//   Department(department: "Laravel"),
-//   Department(department: "PHP"),
-//   Department(department: "NodeJs"),
-//   Department(department: "IOS"),
-//   Department(department: "ReactJS"),
-// ];

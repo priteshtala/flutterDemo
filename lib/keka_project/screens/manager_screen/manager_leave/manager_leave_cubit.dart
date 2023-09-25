@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/main_screen/main_screen_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
@@ -12,24 +13,24 @@ import 'package:intl/intl.dart';
 import 'manager_leave_state.dart';
 
 class ManagerScreenCubit extends Cubit<ManagerScreenState> {
-  ManagerScreenCubit()
-      : super(
-          ManagerScreenState(
-            leaveList: [
-              Leave(name: "Devang", surname: "Sabalpara"),
-              Leave(name: "Pritesh", surname: "Tala"),
-              Leave(name: "Deep", surname: "Vaghani"),
-              Leave(name: "Kuldeep", surname: "Ghoghari"),
-              Leave(name: "Nemanshu", surname: "Bhalala"),
-              Leave(name: "Akash", surname: "Valani"),
-              Leave(name: "Khushali", surname: "Sutariya"),
-              Leave(name: "Nensi", surname: "Tala"),
-            ],
-            dateController: TextEditingController(
-                text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
-            yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
-          ),
-        );
+  ManagerScreenCubit(super.initialState);
+      // : super(
+          // ManagerScreenState(
+          //   leaveList: [
+          //     Leave(name: "Devang", surname: "Sabalpara"),
+          //     Leave(name: "Pritesh", surname: "Tala"),
+          //     Leave(name: "Deep", surname: "Vaghani"),
+          //     Leave(name: "Kuldeep", surname: "Ghoghari"),
+          //     Leave(name: "Nemanshu", surname: "Bhalala"),
+          //     Leave(name: "Akash", surname: "Valani"),
+          //     Leave(name: "Khushali", surname: "Sutariya"),
+          //     Leave(name: "Nensi", surname: "Tala"),
+          //   ],
+          //   dateController: TextEditingController(
+          //       text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
+          //   yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
+          // ),
+        // );
 
   void dateTime(context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -95,5 +96,10 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void navigateToEmployeeView(context) {
     Navigator.of(context).pushNamed(EmployeeDetailsView.routeName);
+  }
+
+  Future<void> getToken() async {
+    var userToken = await Helper().getToken();
+    print("saveToken ====${userToken}");
   }
 }

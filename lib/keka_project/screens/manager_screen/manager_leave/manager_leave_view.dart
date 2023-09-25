@@ -1,7 +1,9 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import '../../../common/const.dart';
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
@@ -9,8 +11,15 @@ class ManagerLeaveView extends StatefulWidget {
   static const String routeName = '/Employee_Screen_View';
 
   static Widget builder(BuildContext context) {
+    final arg = ModalRoute.of(context)?.settings.arguments as Profile?;
     return BlocProvider(
-      create: (context) => ManagerScreenCubit(),
+      create: (context) => ManagerScreenCubit(ManagerScreenState(
+        profile: arg,
+        dateController: TextEditingController(),
+        leaveList: [],
+        yesterdayDate: "",
+        searchController: TextEditingController(),
+      )),
       child: const ManagerLeaveView(),
     );
   }
@@ -23,7 +32,16 @@ class ManagerLeaveView extends StatefulWidget {
 
 class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   @override
+  void initState() {
+    super.initState();
+    context.read<ManagerScreenCubit>().getToken();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)?.settings.arguments;
+    print("arg:::${arg}");
+    print("Data ===========${data().toString()}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return Scaffold(
@@ -191,7 +209,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     ],
                   ),
                 ),
-                Padding(
+
+               (state.profile == Profile.manager)?
+               Padding(
                   padding: const EdgeInsets.all(10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,7 +284,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               ),
                               Divider(color: Colors.white),
                               Text(
-
                                 "${state.leaveList.length}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -278,12 +297,17 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       ),
                     ],
                   ),
-                ),
+                ) : SizedBox.shrink(),
               ],
             ),
           ),
         );
       },
     );
+  }
+
+  data() async {
+    var token = await Helper().getToken();
+    return token;
   }
 }

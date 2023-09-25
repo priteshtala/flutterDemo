@@ -15,7 +15,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
           passwordController: TextEditingController(),
           roleController: TextEditingController(),
           locationController: TextEditingController(),
-          token: dynamic,
+          // token: dynamic,
           // departmentList: depList,
         ));
 
@@ -28,40 +28,85 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2025));
 
     if (pikedDate != null) {
-      String formattedDate = DateFormat.yMMMMd('en_US').format(pikedDate);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pikedDate);
       state.dateController.text = formattedDate;
     }
     emit(state.copyWith(dateController: state.dateController));
   }
 
-  Future dioPostApi(String name, String role, String location, String email, String password, String mobile_no,
-      String department_id, String birth_date) async {
-    try {
-      var response = await Dio().post(
-        'https://89bd-136-232-118-126.ngrok-free.app/api/user',
-        data: {
-          'name': name,
-          'role': role,
-          'location': location,
-          'email': email,
-          'password': password,
-          'mobile_no': mobile_no,
-          'department_id': department_id,
-          'birth_date': birth_date,
-        },
-      );
+  // Future dioPostApi() async {
+  //   var response = await Dio().post(
+  //     'https://5479-136-232-118-126.ngrok-free.app/api/user',
+  //     data: {
+  //       'name': state.nameController,
+  //       'role': state.roleController,
+  //       'location': state.locationController,
+  //       'email': state.emailController,
+  //       'password': state.passwordController,
+  //       'mobile_no': state.mobileController,
+  //       'department_id': state.selectedValue,
+  //       'birth_date': state.dateController,
+  //     },
+  //     options: Options(
+  //         headers: {"Accept": "application/json"},
+  //         followRedirects: false,
+  //         validateStatus: (status) {
+  //           return status! < 500;
+  //         }),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var login = response.data;
+  //     print("Status code======${response.statusCode}");
+  //
+  //     debugPrint("=========================${login["token"]}");
+  //     state.token = login["token"];
+  //     debugPrint('Login successfully');
+  //   } else {
+  //     debugPrint('failed');
+  //   }
+  // }
 
-      if (response.statusCode == 200) {
-        var login = response.data;
-        debugPrint("=========================${login["token"]}");
-        state.token = login["token"];
-        debugPrint('Login successfully');
-      } else {
-        debugPrint('failed');
-      }
-    } catch (e) {
-      debugPrint("Data Failed");
-    }
+  Future AddEmployeePost(String name, String role, String email, String location, String password, String department,
+      String mo_number, String birthdate) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // debugPrint("pref====${prefs.getString('Token')}");
+
+    var data =  {
+      "name": name,
+      "role": role,
+      "location": location,
+      "email": email,
+      "password": password,
+      "mobile_no": mo_number,
+      "department_id": department,
+      "birth_date": birthdate,
+    };
+ print(data);
+    var response = await Dio().post(
+      "https://5479-136-232-118-126.ngrok-free.app/api/user",
+      data: data,
+      options: Options(
+        contentType: Headers.jsonContentType,
+      ),
+
+    );
+    print("status code================${response.statusCode}");
+    // switch (response.statusCode) {
+    //   case 200:
+    //     var responseJson = response.data;
+    //     return responseJson;
+    //   case 400: //Bad request
+    //     throw response.data;
+    //   case 401: //Unauthorized
+    //     throw response.data;
+    //   case 403: //Forbidden
+    //     throw response.data;
+    //   case 404: //Resource Not Found
+    //     throw response.data;
+    //   case 500: //Internal Server Error
+    //   default:
+    //     throw ('Something went wrong! ${response.statusCode}');
+    // }
   }
 
   // Future<void> onLogIn() async {
@@ -122,11 +167,10 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://89bd-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("https://5479-136-232-118-126.ngrok-free.app/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;
-      print("departmentDetails====$data");
       for (var entry in data) {
         DepartmentListData.add(Department.fromJson(entry));
       }
@@ -136,8 +180,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     emit(state.copyWith(departmentList: DepartmentListData));
   }
 
-// void dropdownSelected(Department value) {
-//   List<Department> department = List<Department>.from(state.departmentList);
-//   emit(state.copyWith(departmentList: department, selectedValue: value));
-// }
+  void dropdownSelected(Department value) {
+    List<Department> department = List<Department>.from(state.departmentList);
+    emit(state.copyWith(departmentList: department, selectedValue: value));
+  }
+
+  String formatDate(DateTime date) {
+    final formatter = DateFormat('d MMMM, y', 'en_US');
+    return formatter.format(date);
+  }
 }

@@ -27,7 +27,7 @@ class AddEmployeeState extends Equatable {
   List<Department> departmentList;
   Department? selectedValue;
   bool iconShowHide;
-  dynamic token;
+  // dynamic token;
 
   AddEmployeeState(
       {required this.nameController,
@@ -40,7 +40,8 @@ class AddEmployeeState extends Equatable {
       this.departmentList = const [],
       this.selectedValue,
       this.iconShowHide = false,
-      required this.token});
+      // required this.token
+      });
 
   AddEmployeeState copyWith({
     TextEditingController? nameController,
@@ -53,7 +54,7 @@ class AddEmployeeState extends Equatable {
     List<Department>? departmentList,
     Department? selectedValue,
     bool? iconShowHide,
-    dynamic token,
+    // dynamic token,
   }) {
     return AddEmployeeState(
       nameController: nameController ?? this.nameController,
@@ -66,7 +67,7 @@ class AddEmployeeState extends Equatable {
       departmentList: departmentList ?? this.departmentList,
       selectedValue: selectedValue ?? this.selectedValue,
       iconShowHide: iconShowHide ?? this.iconShowHide,
-      token: token ?? this.token,
+      // token: token ?? this.token,
     );
   }
 }

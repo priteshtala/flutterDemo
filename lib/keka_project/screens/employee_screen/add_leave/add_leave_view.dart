@@ -23,6 +23,12 @@ class AddLeaveView extends StatefulWidget {
 }
 
 class _AddLeaveViewState extends State<AddLeaveView> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<AddLeaveCubit>().getNotifyEmployee();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddLeaveCubit, AddLeaveState>(

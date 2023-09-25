@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -29,6 +30,8 @@ class EmployeeLoginView extends StatefulWidget {
 }
 
 class EmployeeLoginViewState extends State<EmployeeLoginView> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +96,17 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                     const Gap(70),
                     CustomButtonChange(
                       onPressed: () {
-                        state.formKey.currentState?.validate();
+                        // state.formKey.currentState?.validate();
+                        // context.read<EmployeeLoginCubit>().onLogIn(context);
+                        if (state.emailController.text.isNotEmpty || state.passwordController.text.isNotEmpty) {
+                          context
+                              .read<EmployeeLoginCubit>()
+                              .loginPostDio(
+                                state.emailController.text,
+                                state.passwordController.text,
+                              )
+                              .then((value) => Navigator.of(context).pushNamed('/Employee_Screen_View'));
+                        }
                       },
                       width: 300,
                       height: 40,
