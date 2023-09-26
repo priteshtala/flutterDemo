@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 
 class ManagerScreenState extends Equatable {
   @override
-  List<Object?> get props => [leaveList,leaveTodayList, count,dateController, searchController, yesterdayDate, profile];
+  List<Object?> get props => [leaveList,leaveTodayList,dateList, count,dateController, searchController, yesterdayDate, profile];
 
   List<Leave> leaveList = [];
   List<TodayLeave> leaveTodayList = [];
   List<TodayLeave> leaveByDateList = [];
+  List<TodayLeave> dateList = [];
   TextEditingController dateController;
   TextEditingController? searchController;
   var yesterdayDate;
@@ -20,11 +21,12 @@ class ManagerScreenState extends Equatable {
   List<Employee>? count;
 
   ManagerScreenState(
-      {required this.leaveList, required this.dateController,required this.leaveTodayList,required this.leaveByDateList, this.searchController, required this.yesterdayDate, this.profile,this.count});
+      {required this.leaveList,required this.dateList, required this.dateController,required this.leaveTodayList,required this.leaveByDateList, this.searchController, required this.yesterdayDate, this.profile,this.count});
 
   ManagerScreenState copyWith({
     List<Leave>? leaveList,
     List<TodayLeave>? leaveTodayList,
+    List<TodayLeave>? dateList,
     List<TodayLeave>? leaveByDateList,
     TextEditingController? dateController,
     TextEditingController? searchController,
@@ -38,6 +40,7 @@ class ManagerScreenState extends Equatable {
       leaveList: leaveList ?? this.leaveList,
       leaveTodayList: leaveTodayList ?? this.leaveTodayList,
       leaveByDateList: leaveByDateList ?? this.leaveByDateList,
+      dateList: dateList ?? this.dateList,
       dateController: dateController ?? this.dateController,
       searchController: searchController ?? this.searchController,
       yesterdayDate: yesterdayDate ?? this.yesterdayDate,

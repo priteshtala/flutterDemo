@@ -9,7 +9,6 @@ import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_e
 import 'package:finaldemo/keka_project/screens/manager_screen/department_details/department_details_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_view.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -62,10 +61,10 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     );
 
     if (pickedDate != null) {
-      String formattedDate = DateFormat.yMd('en_US').format(pickedDate);
+      String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
     } else {
-      String formattedDate1 = DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)));
+      String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
     }
     emit(state.copyWith(dateController: state.dateController));
@@ -134,6 +133,20 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     }
     emit(state.copyWith(leaveByDateList: leaveByDateData));
   }
+
+  void departmentSearch(query) {
+    List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
+    leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
+    emit(state.copyWith(leaveByDateList: leaveList,dateController: state.dateController));
+    print('-------------------------LeaveList${state.dateList}');
+  }
+
+  // void runFilter(query) {
+  //   List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
+  //   leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
+  //
+  //   emit(state.copyWith(dateList: leaveList));
+  // }
 
   void navigateToDepartmentView(context) {
     Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);

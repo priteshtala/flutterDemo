@@ -26,7 +26,8 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       lastDate: DateTime(2025),
     );
     if (pickedDate != null) {
-      String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
+      // String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
+      String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
     }
     emit(state.copyWith(
@@ -42,7 +43,9 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       lastDate: DateTime(2025),
     );
     if (pickedDate2 != null) {
-      String formattedDate2 = DateFormat.yMMMMd('en_US').format(pickedDate2);
+      // String formattedDate2 = DateFormat.yMMMMd('en_US').format(pickedDate2);
+      String formattedDate2 = DateFormat("yyyy-MM-dd").format(pickedDate2);
+
       state.dateTimeController.text = formattedDate2;
     }
     emit(state.copyWith(dateTimeController: state.dateTimeController));
@@ -112,55 +115,40 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     }
     emit(state.copyWith(employeeList: notifyEmployee));
   }
-}
 
-// List<EmployeeData> empList = [
-//   EmployeeData(
-//     name: "Pritesh Dineshbhai Tala",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "pritesh.t@elaunchinfotech.in",
-//     number: "9510670968",
-//   ),
-//   EmployeeData(
-//     name: "Devang Vijaybhai Sabalpara",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "devang.s@elaunchinfotech.in",
-//     number: "7777947638",
-//   ),
-//   EmployeeData(
-//     name: "Deep Jitendrabhai Vaghani",
-//     role: "jr.Flutter Developer",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "deep.v@elaunchinfotech.in",
-//     number: "7041454545",
-//   ),
-//   EmployeeData(
-//     name: "Nensi Dineshbhai Tala",
-//     role: "PHP/React-js",
-//     location: "Katargam",
-//     department: "IOS",
-//     email: "pritesh.t@elaunchinfotech.in",
-//     number: "95106 70968",
-//   ),
-//   EmployeeData(
-//     name: "Kuldeep Ghoghari Devangbhai",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "Android/Flutter",
-//     email: "kuldeep.g@elaunchinfotech.in",
-//     number: "7542541245",
-//   ),
-//   EmployeeData(
-//     name: "Pritesh DineshBhai Tala",
-//     role: "Flutter trainee",
-//     location: "Katargam",
-//     department: "PHP",
-//     email: "pritesh.t@elaunchinfotech.in",
-//     number: "9510670968",
-//   ),
-// ];
+  Future ManagerAddLeave(String start_date, String end_date, String reason) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // debugPrint("pref====${prefs.getString('Token')}");
+    var data = {
+      "start_date": start_date,
+      "end_date": end_date,
+      "reason": reason,
+      "user_id": state.filtterdUserList.map((e) => e.id),
+    };
+    print("==================================ManagerAddLeave$data");
+    var response = await Dio().post(
+      "https://e3e8-136-232-118-126.ngrok-free.app/api/add_leave?is_role=1",
+      data: data,
+      options: Options(
+        contentType: Headers.jsonContentType,
+      ),
+    );
+    print("status code================${response.statusCode}");
+    // switch (response.statusCode) {
+    //   case 200:
+    //     var responseJson = response.data;
+    //     return responseJson;
+    //   case 400: //Bad request
+    //     throw response.data;
+    //   case 401: //Unauthorized
+    //     throw response.data;
+    //   case 403: //Forbidden
+    //     throw response.data;
+    //   case 404: //Resource Not Found
+    //     throw response.data;
+    //   case 500: //Internal Server Error
+    //   default:
+    //     throw ('Something went wrong! ${response.statusCode}');
+    // }
+  }
+}

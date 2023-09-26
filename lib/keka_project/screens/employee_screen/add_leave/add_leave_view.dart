@@ -23,12 +23,12 @@ class AddLeaveView extends StatefulWidget {
 }
 
 class _AddLeaveViewState extends State<AddLeaveView> {
-
   @override
   void initState() {
     super.initState();
     context.read<AddLeaveCubit>().getNotifyEmployee();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddLeaveCubit, AddLeaveState>(
@@ -46,7 +46,8 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
-                    context.read<AddLeaveCubit>().validation(context);
+                    // context.read<AddLeaveCubit>().validation(context);
+                    context.read<AddLeaveCubit>().ManagerAddLeave(state.dateController.text, state.dateTimeController.text, state.reasonController.text);
                   },
                 ),
               ],
