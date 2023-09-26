@@ -17,6 +17,8 @@ class ManagerLeaveView extends StatefulWidget {
       create: (context) => ManagerScreenCubit(ManagerScreenState(
         profile: arg,
         leaveList: [],
+        leaveTodayList: [],
+        leaveByDateList: [],
         searchController: TextEditingController(),
         dateController: TextEditingController(
             text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
@@ -37,8 +39,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   void initState() {
     super.initState();
     context.read<ManagerScreenCubit>().getToken();
+    context.read<ManagerScreenCubit>().getLeaveToday();
+    context.read<ManagerScreenCubit>().getLeaveByDate();
     context.read<ManagerScreenCubit>().employeeCount();
-
   }
 
   @override
@@ -122,6 +125,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
               children: [
                 // const Gap(10),
                 Container(
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.black),
@@ -141,7 +145,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                         height: 120,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: state.leaveList.length,
+                          itemCount: state.leaveTodayList.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Column(
@@ -152,7 +156,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                     radius: 27,
                                     backgroundColor: Colors.primaries[index],
                                     child: Text(
-                                      "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
+                                      "${state.leaveTodayList[index].user.name[0]}",
                                       style: const TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -160,7 +164,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 Column(
                                   children: [
                                     const Gap(5),
-                                    Text("${state.leaveList[index].name}..", overflow: TextOverflow.ellipsis),
+                                    Text("${state.leaveTodayList[index].user.name}..", overflow: TextOverflow.ellipsis),
                                   ],
                                 ),
                               ],
@@ -209,7 +213,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                         height: 120,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: state.leaveList.length,
+                          itemCount: state.leaveByDateList.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Column(
@@ -219,15 +223,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   child: CircleAvatar(
                                       radius: 27,
                                       backgroundColor: Colors.primaries[index],
-                                      child: Text(
-                                          "${state.leaveList[index].name[0]}${state.leaveList[index].surname[0]}",
+                                      child: Text("${state.leaveByDateList[index].user.name[0]}",
                                           style: const TextStyle(color: Colors.white))),
                                 ),
                                 Column(
                                   children: [
                                     const Gap(5),
                                     Text(
-                                      "${state.leaveList[index].name}..",
+                                      "${state.leaveByDateList[index].user.name}..",
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ],

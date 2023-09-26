@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_cubit.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'add_employee_state.dart';
@@ -187,5 +189,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   String formatDate(DateTime date) {
     final formatter = DateFormat('d MMMM, y', 'en_US');
     return formatter.format(date);
+  }
+
+  void navigatorToEmployee(context){
+    Navigator.of(context).pushReplacementNamed(EmployeeDetailsView.routeName);
   }
 }

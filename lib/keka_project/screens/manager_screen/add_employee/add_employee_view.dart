@@ -226,6 +226,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                           state.mobileController.text,
                           state.dateController.text,
                         );
+                    context.read<AddEmployeeCubit>().navigatorToEmployee(context);
                   },
                   minWidth: 300,
                   child: const Text("ADD", style: TextStyle(color: Colors.white, fontSize: 20)),

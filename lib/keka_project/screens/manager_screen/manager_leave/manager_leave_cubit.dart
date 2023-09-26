@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
+import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/main_screen/main_screen_view.dart';
@@ -100,6 +101,38 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
         );
       },
     );
+  }
+
+  void getLeaveToday() async {
+    final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/today_leave_user');
+    var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      print("======================================$data");
+      for (var entryJson in data) {
+        leaveTodayData.add(TodayLeave.fromJson(entryJson));
+      }
+      // debugPrint("Object========================${state.leaveTodayList.map((e) => e.api).toList()}");
+    } else {
+      throw Exception('Data Not Available');
+    }
+    emit(state.copyWith(leaveTodayList: leaveTodayData));
+  }
+
+  void getLeaveByDate() async {
+    final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/filter_leave_date');
+    var leaveByDateData = List<TodayLeave>.from(state.leaveByDateList);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      print("======================================$data");
+      for (var entryJson in data) {
+        leaveByDateData.add(TodayLeave.fromJson(entryJson));
+      }
+      // debugPrint("Object========================${state.leaveTodayList.map((e) => e.api).toList()}");
+    } else {
+      throw Exception('Data Not Available');
+    }
+    emit(state.copyWith(leaveByDateList: leaveByDateData));
   }
 
   void navigateToDepartmentView(context) {
