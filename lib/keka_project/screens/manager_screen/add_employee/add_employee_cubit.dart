@@ -83,7 +83,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
  print(data);
     var response = await Dio().post(
-      " https://e3e8-136-232-118-126.ngrok-free.app/api/user",
+      "https://e3e8-136-232-118-126.ngrok-free.app/api/user",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
