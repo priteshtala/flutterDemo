@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
-import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
+import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/main_screen/main_screen_view.dart';
@@ -18,38 +17,26 @@ import 'manager_leave_state.dart';
 class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   ManagerScreenCubit(super.initialState);
 
-  // : super(
-  // ManagerScreenState(
-  //   leaveList: [
-  //     Leave(name: "Devang", surname: "Sabalpara"),
-  //     Leave(name: "Pritesh", surname: "Tala"),
-  //     Leave(name: "Deep", surname: "Vaghani"),
-  //     Leave(name: "Kuldeep", surname: "Ghoghari"),
-  //     Leave(name: "Nemanshu", surname: "Bhalala"),
-  //     Leave(name: "Akash", surname: "Valani"),
-  //     Leave(name: "Khushali", surname: "Sutariya"),
-  //     Leave(name: "Nensi", surname: "Tala"),
-  //   ],
-  //   dateController: TextEditingController(
-  //       text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
-  //   yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
-  // ),
-  // );
-
   void employeeCount() async {
     final response = await Dio().get("https://e3e8-136-232-118-126.ngrok-free.app/api/count_user");
-    var employeeCount = List<Employee>.from(state.leaveList);
     if (response.statusCode == 200) {
       var data = response.data;
-      print("count::: $data");
-
-      for (var entry in data) {
-        employeeCount.add(Employee.fromJson(entry));
-      }
+      // print("employeeCount:: $data");
+      emit(state.copyWith(employeeCount: data["total"]));
     } else {
       Text("No-Data");
     }
-    emit(state.copyWith(count: employeeCount));
+  }
+
+  void departmentCount() async {
+    final response = await Dio().get("https://e3e8-136-232-118-126.ngrok-free.app/api/count_department");
+    if (response.statusCode == 200) {
+      var data = response.data;
+      // print("departmentCount:: $data");
+      emit(state.copyWith(departmentCount: data["total"]));
+    } else {
+      Text("No-Data");
+    }
   }
 
   void dateTime(context) async {
@@ -85,6 +72,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
                   splashColor: Colors.red,
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
+                    Helper().remove();
                     Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
                   },
                   child: const Text("Yes", style: TextStyle(color: Colors.red)),
@@ -107,11 +95,9 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
     if (response.statusCode == 200) {
       var data = response.data;
-      print("======================================$data");
       for (var entryJson in data) {
         leaveTodayData.add(TodayLeave.fromJson(entryJson));
       }
-      // debugPrint("Object========================${state.leaveTodayList.map((e) => e.api).toList()}");
     } else {
       throw Exception('Data Not Available');
     }
@@ -123,11 +109,9 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     var leaveByDateData = List<TodayLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
       var data = response.data;
-      print("======================================$data");
       for (var entryJson in data) {
         leaveByDateData.add(TodayLeave.fromJson(entryJson));
       }
-      // debugPrint("Object========================${state.leaveTodayList.map((e) => e.api).toList()}");
     } else {
       throw Exception('Data Not Available');
     }
@@ -147,6 +131,32 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   //
   //   emit(state.copyWith(dateList: leaveList));
   // }
+
+  // Future getEmployeeDetails() async {
+  //   final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/login_details');
+  //   var leaveByDateData = List<EmployeeLoginDetails>.from(state.employeeDetails);
+  //   if (response.statusCode == 200) {
+  //     var data = response.data;
+  //     print("employeeDetails::$data");
+  //     for (var entryJson in data) {
+  //       leaveByDateData.add(EmployeeLoginDetails.fromJson(entryJson));
+  //     }
+  //   } else {
+  //     throw Exception('Data Not Available');
+  //   }
+  //   emit(state.copyWith(employeeDetails:  leaveByDateData));
+  // }
+
+  void getLoginDetails() async {
+    final response = await Dio().get("https://e3e8-136-232-118-126.ngrok-free.app/api/login_details");
+    if (response.statusCode == 200) {
+      var data = response.data["name"];
+      print("getLoginDetails::${response.data}");
+      emit(state.copyWith(Name: data));
+    } else {
+      Text("No-Data");
+    }
+  }
 
   void navigateToDepartmentView(context) {
     Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);
@@ -170,6 +180,5 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   Future<void> getToken() async {
     var userToken = await Helper().getToken();
-    print("saveToken ====${userToken}");
   }
 }

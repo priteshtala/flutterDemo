@@ -15,4 +15,11 @@ class Helper {
     final value = await prefs.getString(valueSharedPreferences) ?? '';
     return value;
   }
+
+  //Remove token
+
+  void remove() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove(valueSharedPreferences);
+  }
 }

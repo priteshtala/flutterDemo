@@ -1,10 +1,9 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
-import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import '../../../common/const.dart';
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
@@ -16,7 +15,6 @@ class ManagerLeaveView extends StatefulWidget {
     return BlocProvider(
       create: (context) => ManagerScreenCubit(ManagerScreenState(
         profile: arg,
-        leaveList: [],
         leaveTodayList: [],
         dateList: [],
         leaveByDateList: [],
@@ -43,6 +41,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
     context.read<ManagerScreenCubit>().getLeaveToday();
     context.read<ManagerScreenCubit>().getLeaveByDate();
     context.read<ManagerScreenCubit>().employeeCount();
+    context.read<ManagerScreenCubit>().departmentCount();
+    context.read<ManagerScreenCubit>().getLoginDetails();
   }
 
   @override
@@ -106,7 +106,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     ],
                   ),
                 ),
-          appBar: AppBar(
+          appBar:
+          AppBar(
             automaticallyImplyLeading: false,
             title: const Text("Elaunch Solution"),
             actions: [
@@ -287,7 +288,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                     ),
                                     Divider(color: Colors.white),
                                     Text(
-                                      "${state.count}",
+                                      "${state.employeeCount}",
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.white,
@@ -325,7 +326,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                     ),
                                     Divider(color: Colors.white),
                                     Text(
-                                      "${state.count?.length}",
+                                      "${state.departmentCount}",
                                       style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                         color: Colors.white,

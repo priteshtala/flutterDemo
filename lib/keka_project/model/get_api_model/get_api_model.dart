@@ -20,8 +20,6 @@ class Employee {
   @JsonKey(name: "updated_at")
   DateTime updatedAt;
   Departments department;
-  @JsonKey(name: "total")
-  String? count;
 
   Employee({
     required this.id,
@@ -35,7 +33,6 @@ class Employee {
     required this.createdAt,
     required this.updatedAt,
     required this.department,
-    this.count,
   });
 
   factory Employee.fromJson(Map<String, dynamic> data) => _$EmployeeFromJson(data);

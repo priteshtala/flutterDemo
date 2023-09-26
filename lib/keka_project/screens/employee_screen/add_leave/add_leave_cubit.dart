@@ -113,7 +113,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     } else {
       Text("No-data");
     }
-    emit(state.copyWith(employeeList: notifyEmployee));
+    emit(state.copyWith(employeeList: notifyEmployee, filtterdUserList: notifyEmployee));
   }
 
   Future ManagerAddLeave(String start_date, String end_date, String reason) async {

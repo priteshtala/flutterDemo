@@ -1,16 +1,13 @@
 // ignore_for_file: must_be_immutable
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
-import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
-import 'package:finaldemo/keka_project/model/leave_model/leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:flutter/material.dart';
 
 class ManagerScreenState extends Equatable {
   @override
-  List<Object?> get props => [leaveList,leaveTodayList,dateList, count,dateController, searchController, yesterdayDate, profile];
+  List<Object?> get props => [leaveTodayList, employeeCount, dateController, searchController, yesterdayDate, profile,departmentCount,name];
 
-  List<Leave> leaveList = [];
   List<TodayLeave> leaveTodayList = [];
   List<TodayLeave> leaveByDateList = [];
   List<TodayLeave> dateList = [];
@@ -18,13 +15,24 @@ class ManagerScreenState extends Equatable {
   TextEditingController? searchController;
   var yesterdayDate;
   Profile? profile;
-  List<Employee>? count;
+  int? employeeCount;
+  int? departmentCount;
+  String? name;
 
-  ManagerScreenState(
-      {required this.leaveList,required this.dateList, required this.dateController,required this.leaveTodayList,required this.leaveByDateList, this.searchController, required this.yesterdayDate, this.profile,this.count});
+  ManagerScreenState({
+    required this.dateList,
+    required this.dateController,
+    required this.leaveTodayList,
+    required this.leaveByDateList,
+    this.searchController,
+    required this.yesterdayDate,
+    this.profile,
+    this.employeeCount = 0,
+    this.departmentCount = 0,
+    this.name,
+  });
 
   ManagerScreenState copyWith({
-    List<Leave>? leaveList,
     List<TodayLeave>? leaveTodayList,
     List<TodayLeave>? dateList,
     List<TodayLeave>? leaveByDateList,
@@ -32,12 +40,12 @@ class ManagerScreenState extends Equatable {
     TextEditingController? searchController,
     var yesterdayDate,
     Profile? profile,
-    List<Employee>? count,
-
+    int? employeeCount,
+    int? departmentCount,
+    String? Name,
 
   }) {
     return ManagerScreenState(
-      leaveList: leaveList ?? this.leaveList,
       leaveTodayList: leaveTodayList ?? this.leaveTodayList,
       leaveByDateList: leaveByDateList ?? this.leaveByDateList,
       dateList: dateList ?? this.dateList,
@@ -45,7 +53,9 @@ class ManagerScreenState extends Equatable {
       searchController: searchController ?? this.searchController,
       yesterdayDate: yesterdayDate ?? this.yesterdayDate,
       profile: profile ?? this.profile,
-      count: count ?? this.count,
+      employeeCount: employeeCount ?? this.employeeCount,
+      departmentCount: departmentCount ?? this.departmentCount,
+      name: name ?? this.name,
     );
   }
 }
