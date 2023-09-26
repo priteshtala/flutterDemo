@@ -19,6 +19,7 @@ Employee _$EmployeeFromJson(Map<String, dynamic> json) => Employee(
       updatedAt: DateTime.parse(json['updated_at'] as String),
       department:
           Departments.fromJson(json['department'] as Map<String, dynamic>),
+      count: json['total'] as String?,
     );
 
 Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
@@ -33,6 +34,7 @@ Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
       'department': instance.department,
+      'total': instance.count,
     };
 
 Departments _$DepartmentsFromJson(Map<String, dynamic> json) => Departments(

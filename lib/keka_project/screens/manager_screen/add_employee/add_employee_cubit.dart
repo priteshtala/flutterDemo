@@ -71,7 +71,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     // final prefs = await SharedPreferences.getInstance();
     // debugPrint("pref====${prefs.getString('Token')}");
 
-    var data =  {
+    var data = {
       "name": name,
       "role": role,
       "location": location,
@@ -81,14 +81,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       "department_id": department,
       "birth_date": birthdate,
     };
- print(data);
+    print(data);
     var response = await Dio().post(
       "https://e3e8-136-232-118-126.ngrok-free.app/api/user",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
       ),
-
     );
     print("status code================${response.statusCode}");
     // switch (response.statusCode) {

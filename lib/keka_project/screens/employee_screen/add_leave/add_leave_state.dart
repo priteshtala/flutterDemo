@@ -2,7 +2,6 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/employee_model/employee_model.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/cupertino.dart';
 

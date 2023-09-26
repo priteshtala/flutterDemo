@@ -3,6 +3,7 @@ import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_l
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import '../../../common/const.dart';
 import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
@@ -15,10 +16,11 @@ class ManagerLeaveView extends StatefulWidget {
     return BlocProvider(
       create: (context) => ManagerScreenCubit(ManagerScreenState(
         profile: arg,
-        dateController: TextEditingController(),
         leaveList: [],
-        yesterdayDate: "",
         searchController: TextEditingController(),
+        dateController: TextEditingController(
+            text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
+        yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
       )),
       child: const ManagerLeaveView(),
     );
@@ -35,42 +37,71 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   void initState() {
     super.initState();
     context.read<ManagerScreenCubit>().getToken();
+    context.read<ManagerScreenCubit>().employeeCount();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)?.settings.arguments;
-    print("arg:::${arg}");
-    print("Data ===========${data().toString()}");
+    // final arg = ModalRoute.of(context)?.settings.arguments;
+    // print("arg:::${arg}");
+    // print("Data ===========${data().toString()}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return Scaffold(
-          bottomNavigationBar: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomButtonChange(
-                  color: Colors.green,
-                  child: const Text("Add Leave", style: TextStyle(color: Colors.white)),
-                  onPressed: () {
-                    context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
-                  },
-                  width: 150,
-                  height: 40,
+          bottomNavigationBar: (state.profile == Profile.manager)
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomButtonChange(
+                        color: Colors.green,
+                        child: const Text("Add Leave", style: TextStyle(color: Colors.white)),
+                        onPressed: () {
+                          context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
+                        },
+                        width: 150,
+                        height: 40,
+                      ),
+                      CustomButtonChange(
+                        color: Colors.green,
+                        onPressed: () {
+                          context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
+                        },
+                        width: 150,
+                        height: 40,
+                        child: const Text("Leave Requests", style: TextStyle(color: Colors.white)),
+                      ),
+                    ],
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomButtonChange(
+                        color: Colors.green,
+                        child: const Text("Apply Leave", style: TextStyle(color: Colors.white)),
+                        onPressed: () {
+                          context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
+                        },
+                        width: 150,
+                        height: 40,
+                      ),
+                      CustomButtonChange(
+                        color: Colors.green,
+                        onPressed: () {
+                          context.read<ManagerScreenCubit>().navigateToEdit(context);
+                        },
+                        width: 150,
+                        height: 40,
+                        child: const Text("Edit", style: TextStyle(color: Colors.white)),
+                      ),
+                    ],
+                  ),
                 ),
-                CustomButtonChange(
-                  color: Colors.green,
-                  onPressed: () {
-                    context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
-                  },
-                  width: 150,
-                  height: 40,
-                  child: const Text("Leave Requests", style: TextStyle(color: Colors.white)),
-                ),
-              ],
-            ),
-          ),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Text("Elaunch Solution"),
@@ -210,94 +241,100 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   ),
                 ),
 
-               (state.profile == Profile.manager)?
-               Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(24),
-                          decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                            gradient: LinearGradient(
-                                // colors: [Colors.green, Colors.lightGreen, Colors.lightGreenAccent],
-                                colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
-                                begin: Alignment.bottomRight,
-                                end: Alignment.topLeft),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.green.shade200,
-                          ),
-                          height: 150,
-                          width: 150,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Employee",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
+                (state.profile == Profile.manager)
+                    ? Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(24),
+                                decoration: BoxDecoration(
+                                  boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
+                                  gradient: LinearGradient(
+                                      // colors: [Colors.green, Colors.lightGreen, Colors.lightGreenAccent],
+                                      colors: [
+                                        Colors.deepPurple.shade300,
+                                        Colors.pink.shade300,
+                                        Colors.orange.shade300
+                                      ],
+                                      begin: Alignment.bottomRight,
+                                      end: Alignment.topLeft),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.green.shade200,
+                                ),
+                                height: 150,
+                                width: 150,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      "Employee",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    Divider(color: Colors.white),
+                                    Text(
+                                      "${state.count}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Divider(color: Colors.white),
-                              Text(
-                                "${state.leaveList.length}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                  fontSize: 20,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(13),
+                                decoration: BoxDecoration(
+                                  boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
+                                  gradient: LinearGradient(colors: [
+                                    Colors.deepPurple.shade300,
+                                    Colors.pink.shade300,
+                                    Colors.orange.shade300
+                                  ], begin: Alignment.bottomRight, end: Alignment.topLeft),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.green.shade200,
+                                ),
+                                height: 150,
+                                width: 150,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      "Department",
+                                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
+                                    ),
+                                    Divider(color: Colors.white),
+                                    Text(
+                                      "${state.count?.length}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(13),
-                          decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                            gradient: LinearGradient(
-                                colors: [Colors.deepPurple.shade300, Colors.pink.shade300, Colors.orange.shade300],
-                                begin: Alignment.bottomRight,
-                                end: Alignment.topLeft),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.green.shade200,
-                          ),
-                          height: 150,
-                          width: 150,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Department",
-                                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
-                              ),
-                              Divider(color: Colors.white),
-                              Text(
-                                "${state.leaveList.length}",
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ) : SizedBox.shrink(),
+                      )
+                    : SizedBox.shrink(),
               ],
             ),
           ),
@@ -306,8 +343,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
     );
   }
 
-  data() async {
-    var token = await Helper().getToken();
-    return token;
-  }
+// data() async {
+//   var token = await Helper().getToken();
+//   return token;
+// }
 }
