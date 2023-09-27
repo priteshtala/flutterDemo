@@ -203,8 +203,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 ),
                                 readOnly: true,
                                 onTap: () {
-                                  context.read<ManagerScreenCubit>().dateTime(context);
                                   context.read<ManagerScreenCubit>().departmentSearch(state.dateController.text);
+                                  context.read<ManagerScreenCubit>().dateTime(context);
                                 },
                               ),
                             ),

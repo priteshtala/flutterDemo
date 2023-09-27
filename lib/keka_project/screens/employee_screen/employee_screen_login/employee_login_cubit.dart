@@ -44,7 +44,7 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
     };
     print("Login Data =====${data}");
     var response = await Dio().post(
-      "https://e3e8-136-232-118-126.ngrok-free.app/api/login",
+      "https://098a-136-232-118-126.ngrok-free.app/api/login",
       data: data,
       options: Options(
         headers: {

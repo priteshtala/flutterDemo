@@ -1,16 +1,28 @@
 // ignore_for_file: must_be_immutable
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
+import 'package:finaldemo/keka_project/model/date_by_leave_model/date_by_leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:flutter/material.dart';
 
 class ManagerScreenState extends Equatable {
   @override
-  List<Object?> get props => [leaveTodayList, employeeCount, dateController, searchController, yesterdayDate, profile,departmentCount,name];
+  List<Object?> get props => [
+        dateList,
+        leaveTodayList,
+        leaveByDateList,
+        employeeCount,
+        dateController,
+        searchController,
+        yesterdayDate,
+        profile,
+        departmentCount,
+        name
+      ];
 
   List<TodayLeave> leaveTodayList = [];
-  List<TodayLeave> leaveByDateList = [];
-  List<TodayLeave> dateList = [];
+  List<DateByLeave> leaveByDateList = [];
+  List<DateByLeave> dateList = [];
   TextEditingController dateController;
   TextEditingController? searchController;
   var yesterdayDate;
@@ -34,8 +46,8 @@ class ManagerScreenState extends Equatable {
 
   ManagerScreenState copyWith({
     List<TodayLeave>? leaveTodayList,
-    List<TodayLeave>? dateList,
-    List<TodayLeave>? leaveByDateList,
+    List<DateByLeave>? dateList,
+    List<DateByLeave>? leaveByDateList,
     TextEditingController? dateController,
     TextEditingController? searchController,
     var yesterdayDate,
@@ -43,7 +55,6 @@ class ManagerScreenState extends Equatable {
     int? employeeCount,
     int? departmentCount,
     String? Name,
-
   }) {
     return ManagerScreenState(
       leaveTodayList: leaveTodayList ?? this.leaveTodayList,

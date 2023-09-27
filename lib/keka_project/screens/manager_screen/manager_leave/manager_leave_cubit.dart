@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:finaldemo/keka_project/model/date_by_leave_model/date_by_leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
@@ -18,7 +19,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   ManagerScreenCubit(super.initialState);
 
   void employeeCount() async {
-    final response = await Dio().get("https://e3e8-136-232-118-126.ngrok-free.app/api/count_user");
+    final response = await Dio().get("https://098a-136-232-118-126.ngrok-free.app/api/count_user");
     if (response.statusCode == 200) {
       var data = response.data;
       // print("employeeCount:: $data");
@@ -29,7 +30,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void departmentCount() async {
-    final response = await Dio().get("https://e3e8-136-232-118-126.ngrok-free.app/api/count_department");
+    final response = await Dio().get("https://098a-136-232-118-126.ngrok-free.app/api/count_department");
     if (response.statusCode == 200) {
       var data = response.data;
       // print("departmentCount:: $data");
@@ -91,7 +92,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveToday() async {
-    final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/today_leave_user');
+    final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/today_leave_user');
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -105,12 +106,14 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveByDate() async {
-    final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/filter_leave_date');
-    var leaveByDateData = List<TodayLeave>.from(state.leaveByDateList);
+    final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/filter_leave_date',options: Options(headers: {
+      "authorization": "Bearer ${await Helper().getToken()}",
+    }));
+    var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
       var data = response.data;
       for (var entryJson in data) {
-        leaveByDateData.add(TodayLeave.fromJson(entryJson));
+        leaveByDateData.add(DateByLeave.fromJson(entryJson));
       }
     } else {
       throw Exception('Data Not Available');
@@ -118,19 +121,22 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     emit(state.copyWith(leaveByDateList: leaveByDateData));
   }
 
-  void departmentSearch(query) {
-    List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
-    leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
-    emit(state.copyWith(leaveByDateList: leaveList,dateController: state.dateController));
-    print('-------------------------LeaveList${state.dateList}');
-  }
-
-  // void runFilter(query) {
+  // void departmentSearch(query) {
   //   List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
   //   leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
-  //
-  //   emit(state.copyWith(dateList: leaveList));
+  //   emit(state.copyWith(leaveByDateList: leaveList,dateController: state.dateController));
+  //   print('-------------------------LeaveList${state.dateList}');
   // }
+
+  void departmentSearch(query) {
+    List<DateByLeave> leaveList = List<DateByLeave>.from(state.dateList);
+    leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
+
+    emit(state.copyWith(dateList: leaveList));
+      print('-------------------------dateList${state.dateList}');
+      print('-------------------------leaveList${leaveList}');
+
+  }
 
   // Future getEmployeeDetails() async {
   //   final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/login_details');
