@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:flutter/material.dart';
@@ -36,43 +39,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     emit(state.copyWith(dateController: state.dateController));
   }
 
-  // Future dioPostApi() async {
-  //   var response = await Dio().post(
-  //     'https://5479-136-232-118-126.ngrok-free.app/api/user',
-  //     data: {
-  //       'name': state.nameController,
-  //       'role': state.roleController,
-  //       'location': state.locationController,
-  //       'email': state.emailController,
-  //       'password': state.passwordController,
-  //       'mobile_no': state.mobileController,
-  //       'department_id': state.selectedValue,
-  //       'birth_date': state.dateController,
-  //     },
-  //     options: Options(
-  //         headers: {"Accept": "application/json"},
-  //         followRedirects: false,
-  //         validateStatus: (status) {
-  //           return status! < 500;
-  //         }),
-  //   );
-  //   if (response.statusCode == 200) {
-  //     var login = response.data;
-  //     print("Status code======${response.statusCode}");
-  //
-  //     debugPrint("=========================${login["token"]}");
-  //     state.token = login["token"];
-  //     debugPrint('Login successfully');
-  //   } else {
-  //     debugPrint('failed');
-  //   }
-  // }
-
   Future AddEmployeePost(String name, String role, String email, String location, String password, String department,
       String mo_number, String birthdate) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // debugPrint("pref====${prefs.getString('Token')}");
-
     var data = {
       "name": name,
       "role": role,
@@ -92,22 +60,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       ),
     );
     print("status code================${response.statusCode}");
-    // switch (response.statusCode) {
-    //   case 200:
-    //     var responseJson = response.data;
-    //     return responseJson;
-    //   case 400: //Bad request
-    //     throw response.data;
-    //   case 401: //Unauthorized
-    //     throw response.data;
-    //   case 403: //Forbidden
-    //     throw response.data;
-    //   case 404: //Resource Not Found
-    //     throw response.data;
-    //   case 500: //Internal Server Error
-    //   default:
-    //     throw ('Something went wrong! ${response.statusCode}');
-    // }
   }
 
   // Future<void> onLogIn() async {
@@ -167,6 +119,21 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     }
   }
 
+  Future<EmployeeLoginDetails> getEmployeeDetails() async {
+    final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/login_details',
+        options: Options(headers: {
+          "authorization": "Bearer ${await Helper().getToken()}",
+        }));
+    if (response.statusCode == 200) {
+      var data = response.data;
+      print("employeeDetails::$data");
+      emit(state.copyWith(loginData: EmployeeLoginDetails.fromJson(data)));
+      return data;
+    } else {
+      throw Exception('Data Not Available');
+    }
+  }
+
   void getDepartmentApi() async {
     final response = await Dio().get("https://098a-136-232-118-126.ngrok-free.app/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
@@ -191,7 +158,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     return formatter.format(date);
   }
 
-  void navigatorToEmployee(context){
+  void navigatorToEmployee(context) {
     Navigator.of(context).pushReplacementNamed(EmployeeDetailsView.routeName);
   }
 }

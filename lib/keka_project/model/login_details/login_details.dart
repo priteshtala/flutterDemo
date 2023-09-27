@@ -7,7 +7,7 @@ class EmployeeLoginDetails {
   String role;
   String location;
   @JsonKey(name: "department_id")
-  String departmentId;
+  int departmentId;
   String email;
   @JsonKey(name: "mobile_no")
   String mobileNo;

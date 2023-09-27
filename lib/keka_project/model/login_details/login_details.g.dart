@@ -13,7 +13,7 @@ EmployeeLoginDetails _$EmployeeLoginDetailsFromJson(
       name: json['name'] as String,
       role: json['role'] as String,
       location: json['location'] as String,
-      departmentId: json['department_id'] as String,
+      departmentId: json['department_id'] as int,
       email: json['email'] as String,
       mobileNo: json['mobile_no'] as String,
       birthDate: json['birth_date'] as String,

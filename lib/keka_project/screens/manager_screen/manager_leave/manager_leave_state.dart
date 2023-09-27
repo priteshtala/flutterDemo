@@ -3,10 +3,12 @@ import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/date_by_leave_model/date_by_leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
+import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:flutter/material.dart';
 
 class ManagerScreenState extends Equatable {
   @override
+
   List<Object?> get props => [
         dateList,
         leaveTodayList,
@@ -30,6 +32,7 @@ class ManagerScreenState extends Equatable {
   int? employeeCount;
   int? departmentCount;
   String? name;
+  EmployeeLoginDetails? loginData;
 
   ManagerScreenState({
     required this.dateList,
@@ -42,6 +45,7 @@ class ManagerScreenState extends Equatable {
     this.employeeCount = 0,
     this.departmentCount = 0,
     this.name,
+    this.loginData,
   });
 
   ManagerScreenState copyWith({
@@ -54,6 +58,8 @@ class ManagerScreenState extends Equatable {
     Profile? profile,
     int? employeeCount,
     int? departmentCount,
+    String? name,
+    EmployeeLoginDetails? loginData,
     String? Name,
   }) {
     return ManagerScreenState(
@@ -67,6 +73,7 @@ class ManagerScreenState extends Equatable {
       employeeCount: employeeCount ?? this.employeeCount,
       departmentCount: departmentCount ?? this.departmentCount,
       name: name ?? this.name,
+      loginData: loginData ?? this.loginData,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,9 +13,12 @@ class AddEmployeeView extends StatefulWidget {
   static const String routeName = "/Add_Employee_view";
 
   static Widget builder(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as EmployeeLoginDetails?;
+    print("::$args");
     return BlocProvider(
       create: (context) => AddEmployeeCubit(AddEmployeeState(
-        emailController: TextEditingController(),
+        loginData: args,
+        emailController: TextEditingController(text: args?.email),
         passwordController: TextEditingController(),
         nameController: TextEditingController(),
         mobileController: TextEditingController(),
@@ -38,6 +42,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   @override
   void initState() {
     context.read<AddEmployeeCubit>().getDepartmentApi();
+    context.read<AddEmployeeCubit>().getEmployeeDetails();
     super.initState();
   }
 

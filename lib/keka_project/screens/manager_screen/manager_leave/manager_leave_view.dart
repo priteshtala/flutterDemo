@@ -47,9 +47,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
 
   @override
   Widget build(BuildContext context) {
-    // final arg = ModalRoute.of(context)?.settings.arguments;
-    // print("arg:::${arg}");
-    // print("Data ===========${data().toString()}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return Scaffold(
@@ -90,6 +87,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                         child: const Text("Apply Leave", style: TextStyle(color: Colors.white)),
                         onPressed: () {
                           context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
+                          // context.read<ManagerScreenCubit>().getLoginDetails()
                         },
                         width: 150,
                         height: 40,
@@ -109,7 +107,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
           appBar:
           AppBar(
             automaticallyImplyLeading: false,
-            title: const Text("Elaunch Solution"),
+            title: (state.profile == Profile.manager) ?Text("Elaunch Solution") : Text(state.name.toString()),
             actions: [
               IconButton(
                 onPressed: () {

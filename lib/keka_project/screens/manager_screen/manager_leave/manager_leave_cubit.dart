@@ -124,6 +124,13 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   // void departmentSearch(query) {
   //   List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
   //   leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
+  //   emit(state.copyWith(leaveByDateList: leaveList, dateController: state.dateController));
+  //   print('-------------------------LeaveList${state.dateList}');
+  // }
+
+  // void runFilter(query) {
+  //   List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
+  //   leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
   //   emit(state.copyWith(leaveByDateList: leaveList,dateController: state.dateController));
   //   print('-------------------------LeaveList${state.dateList}');
   // }
@@ -140,27 +147,37 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   // Future getEmployeeDetails() async {
   //   final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/login_details');
-  //   var leaveByDateData = List<EmployeeLoginDetails>.from(state.employeeDetails);
   //   if (response.statusCode == 200) {
   //     var data = response.data;
   //     print("employeeDetails::$data");
-  //     for (var entryJson in data) {
-  //       leaveByDateData.add(EmployeeLoginDetails.fromJson(entryJson));
-  //     }
   //   } else {
   //     throw Exception('Data Not Available');
   //   }
-  //   emit(state.copyWith(employeeDetails:  leaveByDateData));
+  //   emit(state.copyWith(
+  //     loginData: response.data,
+  //   ));
   // }
 
   void getLoginDetails() async {
-    final response = await Dio().get("https://e3e8-136-232-118-126.ngrok-free.app/api/login_details");
-    if (response.statusCode == 200) {
-      var data = response.data["name"];
-      print("getLoginDetails::${response.data}");
-      emit(state.copyWith(Name: data));
-    } else {
-      Text("No-Data");
+    try {
+      final response = await Dio().get(
+        "https://e3e8-136-232-118-126.ngrok-free.app/api/login_details",
+        options: Options(headers: {
+          "authorization": "Bearer ${await Helper().getToken()}",
+        }),
+      );
+      if (response.statusCode == 200) {
+        var data = response.data["name"];
+        // print("getLoginDetails::${response.data["name"]}");
+        emit(state.copyWith(
+          name: data,
+        ));
+        // print("getLoginDetails::${state.name}");
+      } else {
+        Text("No-Data");
+      }
+    } on Exception catch (e) {
+      print("error => ${e}");
     }
   }
 
