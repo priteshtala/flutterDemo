@@ -105,10 +105,12 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     emit(state.copyWith(leaveTodayList: leaveTodayData));
   }
 
-  void getLeaveByDate() async {
+  void getLeaveByDate(DateTime date) async {
     final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/filter_leave_date',options: Options(headers: {
       "authorization": "Bearer ${await Helper().getToken()}",
-    }));
+    }),data: {
+    "date" : date
+    });
     var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
       var data = response.data;
