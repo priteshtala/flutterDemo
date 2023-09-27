@@ -73,7 +73,10 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                         },
                         width: 150,
                         height: 40,
-                        child: const Text("Leave Requests", style: TextStyle(color: Colors.white)),
+                        child: const Text(
+                          "Leave Requests",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -225,8 +228,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   child: CircleAvatar(
                                       radius: 27,
                                       backgroundColor: Colors.green.shade300,
-                                      child: Text("${index + 1}",
-                                          style: const TextStyle(color: Colors.white))),
+                                      child: Text("${index + 1}", style: const TextStyle(color: Colors.white))),
                                 ),
                                 Column(
                                   children: [
