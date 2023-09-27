@@ -38,7 +38,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     }
   }
 
-     dateTime(context) async {
+  dateTime(context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -49,6 +49,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     if (pickedDate != null) {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
+      getLeaveByDate(formattedDate);
     } else {
       String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
@@ -90,8 +91,10 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveToday() async {
-    final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/today_leave_user');
+    final response = await Dio()
+        .get('https://098a-136-232-118-126.ngrok-free.app/api/today_leave_user', queryParameters: {"is_role": 1});
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
+
     if (response.statusCode == 200) {
       var data = response.data;
       for (var entryJson in data) {
@@ -103,13 +106,15 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     emit(state.copyWith(leaveTodayList: leaveTodayData));
   }
 
-  void getLeaveByDate(DateTime date) async {
-    final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/filter_leave_date',options: Options(headers: {
-      "authorization": "Bearer ${await Helper().getToken()}",
-    }),data: {
-    // "date" : DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
-      "date" : "2023-09-27"
-    });
+  void getLeaveByDate(String? date) async {
+    final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/filter_leave_date',
+        options: Options(headers: {
+          "authorization": "Bearer ${await Helper().getToken()}",
+        }),
+        data: {
+          // "date" : DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
+          if(date != null)"date": date,
+        });
     var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -122,19 +127,12 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     emit(state.copyWith(leaveByDateList: leaveByDateData));
   }
 
-  // void departmentSearch(query) {
-  //   List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
-  //   leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
-  //   emit(state.copyWith(leaveByDateList: leaveList, dateController: state.dateController));
-  //   print('-------------------------LeaveList${state.dateList}');
-  // }
-
-  // void runFilter(query) {
-  //   List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
-  //   leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
-  //   emit(state.copyWith(leaveByDateList: state.dateList,dateController: state.dateController));
-  //   print('-------------------------LeaveList${state.dateList}');
-  // }
+  void runFilter(query) {
+    List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
+    leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
+    emit(state.copyWith(leaveByDateList: state.dateList,dateController: state.dateController));
+    print('-------------------------LeaveList${state.dateList}');
+  }
 
   // void dateByFilter(query) {
   //   List<DateByLeave> leaveList = List<DateByLeave>.from(state.dateList);
@@ -142,20 +140,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   //   emit(state.copyWith(leaveByDateList: leaveList));
   //     print('-------------------------dateList${state.leaveByDateList}');
   //     print('-------------------------leaveList${leaveList}');
-  //
-  // }
-
-  // Future getEmployeeDetails() async {
-  //   final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/login_details');
-  //   if (response.statusCode == 200) {
-  //     var data = response.data;
-  //     print("employeeDetails::$data");
-  //   } else {
-  //     throw Exception('Data Not Available');
-  //   }
-  //   emit(state.copyWith(
-  //     loginData: response.data,
-  //   ));
   // }
 
   void getLoginDetails() async {
@@ -194,11 +178,11 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void navigateToEmployeeView(context) {
-    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName,arguments: state.profile);
+    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName, arguments: state.profile);
   }
 
   void navigateToEdit(context) {
-    Navigator.of(context).pushNamed(AddEmployeeView.routeName,arguments: state.profile);
+    Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: state.profile);
   }
 
   Future<void> getToken() async {

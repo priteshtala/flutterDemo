@@ -34,16 +34,17 @@ class ManagerLeaveView extends StatefulWidget {
 }
 
 class _ManagerLeaveViewState extends State<ManagerLeaveView> {
+  ManagerScreenCubit get cubit => BlocProvider.of<ManagerScreenCubit>(context);
+
   @override
   void initState() {
     super.initState();
-    context.read<ManagerScreenCubit>().getToken();
-    context.read<ManagerScreenCubit>().getLeaveToday();
-    context.read<ManagerScreenCubit>().getLeaveByDate(
-        DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))));
-    context.read<ManagerScreenCubit>().employeeCount();
-    context.read<ManagerScreenCubit>().departmentCount();
-    context.read<ManagerScreenCubit>().getLoginDetails();
+    cubit.getToken();
+    cubit.getLeaveToday();
+    cubit.getLeaveByDate(DateFormat("yyyy-MM-dd").parse(DateTime.now().toString()).toString());
+    cubit.employeeCount();
+    cubit.departmentCount();
+    cubit.getLoginDetails();
   }
 
   @override
@@ -157,7 +158,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   padding: const EdgeInsets.symmetric(horizontal: 16),
                                   child: CircleAvatar(
                                     radius: 27,
-                                    backgroundColor: Colors.primaries[index],
+                                    backgroundColor: Colors.green.shade300,
                                     child: Text(
                                       "${state.leaveTodayList[index].user.name[0]}",
                                       style: const TextStyle(color: Colors.white),
@@ -184,6 +185,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     border: Border.all(color: Colors.black),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16),
@@ -200,13 +202,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               child: TextField(
                                 controller: state.dateController,
                                 decoration: const InputDecoration(
-                                  icon: Icon(Icons.calendar_today, color: Colors.deepPurple),
+                                  icon: Icon(Icons.calendar_today, color: Colors.green),
                                 ),
                                 readOnly: true,
                                 onTap: () {
                                   // context.read<ManagerScreenCubit>().getLeaveByDate(
                                   //     DateTime.parse(context.read<ManagerScreenCubit>().dateTime(context)));
                                   context.read<ManagerScreenCubit>().dateTime(context);
+                                  // context.read<ManagerScreenCubit>().runFilter(state.dateController);
                                 },
                               ),
                             ),

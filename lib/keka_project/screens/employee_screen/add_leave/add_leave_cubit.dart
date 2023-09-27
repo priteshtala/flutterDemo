@@ -1,22 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'add_leave_state.dart';
 
 class AddLeaveCubit extends Cubit<AddLeaveState> {
-  AddLeaveCubit()
-      : super(
-          AddLeaveState(
-            dateController: TextEditingController(),
-            dateTimeController: TextEditingController(),
-            reasonController: TextEditingController(),
-            searchController: TextEditingController(),
-            // employeeList: empList,
-            // filtterdUserList: empList,
-          ),
-        );
+  AddLeaveCubit(super.initialState);
+
 
   void dateTimePicker(context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -153,5 +147,9 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     //   default:
     //     throw ('Something went wrong! ${response.statusCode}');
     // }
+  }
+
+  void navigateToManagerLeave(context) {
+    Navigator.of(context).pushNamed(ManagerLeaveView.routeName,arguments: Profile.manager);
   }
 }

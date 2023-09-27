@@ -11,8 +11,16 @@ class AddLeaveView extends StatefulWidget {
   static const String routeName = '/Apply_Leave_View';
 
   static Widget builder(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as Profile?;
     return BlocProvider(
-      create: (context) => AddLeaveCubit(),
+      create: (context) => AddLeaveCubit(
+        AddLeaveState(
+            dateController: TextEditingController(),
+            dateTimeController: TextEditingController(),
+            reasonController: TextEditingController(),
+            searchController: TextEditingController(),
+            profile: args),
+      ),
       child: const AddLeaveView(),
     );
   }
@@ -48,9 +56,13 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
-                    // context.read<AddLeaveCubit>().validation(context);
-                    context.read<AddLeaveCubit>().ManagerAddLeave(
-                        state.dateController.text, state.dateTimeController.text, state.reasonController.text);
+                    if (state.dateController.text.isEmpty ||
+                        state.dateTimeController.text.isEmpty ||
+                        state.reasonController.text.isEmpty) {
+                      context.read<AddLeaveCubit>().validation(context);
+                    } else {
+                      context.read<AddLeaveCubit>().navigateToManagerLeave(context);
+                    }
                   },
                 ),
               ],
