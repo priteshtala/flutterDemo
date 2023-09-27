@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -33,6 +34,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
   Widget build(BuildContext context) {
     return BlocBuilder<AddLeaveCubit, AddLeaveState>(
       builder: (context, state) {
+        print("=============${Profile.employee.index}============${Profile.manager.index}");
         return Scaffold(
           backgroundColor: Colors.white,
           bottomNavigationBar: SafeArea(
@@ -41,13 +43,14 @@ class _AddLeaveViewState extends State<AddLeaveView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  child: const Text(
+                  child: Text(
                     "Add",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
                     // context.read<AddLeaveCubit>().validation(context);
-                    context.read<AddLeaveCubit>().ManagerAddLeave(state.dateController.text, state.dateTimeController.text, state.reasonController.text);
+                    context.read<AddLeaveCubit>().ManagerAddLeave(
+                        state.dateController.text, state.dateTimeController.text, state.reasonController.text);
                   },
                 ),
               ],

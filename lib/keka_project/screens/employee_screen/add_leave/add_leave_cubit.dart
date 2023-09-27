@@ -123,12 +123,15 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       "start_date": start_date,
       "end_date": end_date,
       "reason": reason,
-      "user_id": state.filtterdUserList.map((e) => e.id),
+      "user_id": state.filtterdUserList.map((e) => e.id).toList().first,
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
       "https://098a-136-232-118-126.ngrok-free.app/api/add_leave?is_role=1",
       data: data,
+      queryParameters: {
+        "is_role" : 0
+      },
       options: Options(
         contentType: Headers.jsonContentType,
       ),

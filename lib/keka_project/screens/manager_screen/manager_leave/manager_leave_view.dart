@@ -39,7 +39,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
     super.initState();
     context.read<ManagerScreenCubit>().getToken();
     context.read<ManagerScreenCubit>().getLeaveToday();
-    context.read<ManagerScreenCubit>().getLeaveByDate();
+    context.read<ManagerScreenCubit>().getLeaveByDate(
+        DateTime.parse(DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))));
     context.read<ManagerScreenCubit>().employeeCount();
     context.read<ManagerScreenCubit>().departmentCount();
     context.read<ManagerScreenCubit>().getLoginDetails();
@@ -104,10 +105,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     ],
                   ),
                 ),
-          appBar:
-          AppBar(
+          appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: (state.profile == Profile.manager) ?Text("Elaunch Solution") : Text(state.name.toString()),
+            title: (state.profile == Profile.manager) ? Text("Elaunch Solution") : Text(state.name.toString()),
             actions: [
               IconButton(
                 onPressed: () {
@@ -201,7 +201,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 ),
                                 readOnly: true,
                                 onTap: () {
-                                  context.read<ManagerScreenCubit>().departmentSearch(state.dateController.text);
+                                  // context.read<ManagerScreenCubit>().getLeaveByDate(
+                                  //     DateTime.parse(context.read<ManagerScreenCubit>().dateTime(context)));
                                   context.read<ManagerScreenCubit>().dateTime(context);
                                 },
                               ),
@@ -223,8 +224,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   padding: const EdgeInsets.symmetric(horizontal: 16),
                                   child: CircleAvatar(
                                       radius: 27,
-                                      backgroundColor: Colors.primaries[index],
-                                      child: Text("${state.leaveByDateList[index].user.name[0]}",
+                                      backgroundColor: Colors.green.shade300,
+                                      child: Text("${index + 1}",
                                           style: const TextStyle(color: Colors.white))),
                                 ),
                                 Column(
@@ -244,7 +245,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     ],
                   ),
                 ),
-
                 (state.profile == Profile.manager)
                     ? Padding(
                         padding: const EdgeInsets.all(10),
