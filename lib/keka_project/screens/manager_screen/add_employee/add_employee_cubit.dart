@@ -11,18 +11,7 @@ import 'package:intl/intl.dart';
 import 'add_employee_state.dart';
 
 class AddEmployeeCubit extends Cubit<AddEmployeeState> {
-  AddEmployeeCubit(AddEmployeeState addEmployeeState)
-      : super(AddEmployeeState(
-          dateController: TextEditingController(),
-          emailController: TextEditingController(),
-          nameController: TextEditingController(),
-          mobileController: TextEditingController(),
-          passwordController: TextEditingController(),
-          roleController: TextEditingController(),
-          locationController: TextEditingController(),
-          // token: dynamic,
-          // departmentList: depList,
-        ));
+  AddEmployeeCubit(super.initialState);
 
   void visibility() {
     emit(state.copyWith(iconShowHide: !state.iconShowHide));
@@ -62,37 +51,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     print("status code================${response.statusCode}");
   }
 
-  // Future<void> onLogIn() async {
-  //   await ApiCallRepository().loginPostDio(state.emailController.text, state.passwordController.text).then(
-  //         (v) {
-  //       if (v["code"] == 0) {
-  //         UserPreferences().setToken(v["data"]["Token"]);
-  //         Navigator.of(context).pushNamed(
-  //           '/mainView',
-  //           // (route) => false,
-  //         );
-  //       } else {
-  //         showDialog(
-  //           context: context,
-  //           builder: (context) => AlertDialog(
-  //             shape: RoundedRectangleBorder(
-  //               borderRadius: BorderRadius.circular(20),
-  //             ),
-  //             alignment: Alignment.bottomCenter,
-  //             title: Text(v["message"]),
-  //             actions: [
-  //               TextButton(
-  //                 onPressed: () => Navigator.pop(context),
-  //                 child: const Text("Oky"),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-
   void validation(context) {
     if (state.nameController.text.isEmpty ||
         state.emailController.text.isEmpty ||
@@ -119,16 +77,27 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     }
   }
 
-  Future<EmployeeLoginDetails> getEmployeeDetails() async {
-    final response = await Dio().get('https://e3e8-136-232-118-126.ngrok-free.app/api/login_details',
+  void getEmployeeDetails() async {
+    final response = await Dio().get('https://098a-136-232-118-126.ngrok-free.app/api/login_details',
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }));
     if (response.statusCode == 200) {
-      var data = response.data;
-      print("employeeDetails::$data");
-      emit(state.copyWith(loginData: EmployeeLoginDetails.fromJson(data)));
-      return data;
+      EmployeeLoginDetails employeeLoginDetails = EmployeeLoginDetails.fromJson(response.data);
+
+      if (state.profile == Profile.employee) {
+        state.nameController.text = employeeLoginDetails.name;
+        state.roleController.text = employeeLoginDetails.role;
+        state.emailController.text = employeeLoginDetails.email;
+        state.locationController.text = employeeLoginDetails.location;
+        state.mobileController.text = employeeLoginDetails.mobileNo;
+        state.dateController.text = employeeLoginDetails.birthDate;
+        // state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId);
+      }
+      final selectedDepartment =
+          state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId);
+      emit(state.copyWith(loginData: employeeLoginDetails, selectedValue: selectedDepartment.firstOrNull));
+      print("data:::::${employeeLoginDetails.departmentId}");
     } else {
       throw Exception('Data Not Available');
     }
@@ -137,7 +106,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   void getDepartmentApi() async {
     final response = await Dio().get("https://098a-136-232-118-126.ngrok-free.app/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
+
     if (response.statusCode == 200) {
+      getEmployeeDetails();
       var data = response.data;
       for (var entry in data) {
         DepartmentListData.add(Department.fromJson(entry));

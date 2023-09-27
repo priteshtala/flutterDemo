@@ -161,7 +161,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   void getLoginDetails() async {
     try {
       final response = await Dio().get(
-        "https://e3e8-136-232-118-126.ngrok-free.app/api/login_details",
+        "https://098a-136-232-118-126.ngrok-free.app/api/login_details",
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }),
@@ -172,7 +172,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
         emit(state.copyWith(
           name: data,
         ));
-        // print("getLoginDetails::${state.name}");
+        print("getLoginDetails::${state.name}");
       } else {
         Text("No-Data");
       }
@@ -194,11 +194,11 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void navigateToEmployeeView(context) {
-    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName);
+    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName,arguments: state.profile);
   }
 
   void navigateToEdit(context) {
-    Navigator.of(context).pushNamed(AddEmployeeView.routeName);
+    Navigator.of(context).pushNamed(AddEmployeeView.routeName,arguments: state.profile);
   }
 
   Future<void> getToken() async {

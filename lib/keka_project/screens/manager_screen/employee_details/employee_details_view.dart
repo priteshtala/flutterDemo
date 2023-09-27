@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_cubit.dart';
@@ -35,6 +36,8 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)?.settings.arguments as Profile?;
+
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
       builder: (context, state) {
         return Scaffold(
@@ -164,7 +167,8 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AddEmployeeView.routeName);
+                    Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: arg);
+
                   },
                   minWidth: 300,
                   child: const Text(

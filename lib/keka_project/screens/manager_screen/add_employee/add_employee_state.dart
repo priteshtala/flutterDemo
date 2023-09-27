@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 
 class AddEmployeeState extends Equatable {
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         nameController,
         emailController,
         passwordController,
@@ -20,6 +19,7 @@ class AddEmployeeState extends Equatable {
         iconShowHide,
         roleController,
         loginData,
+    profile,
       ];
   TextEditingController nameController;
   TextEditingController emailController;
@@ -48,7 +48,7 @@ class AddEmployeeState extends Equatable {
     this.selectedValue,
     this.iconShowHide = false,
     this.loginData,
-    this.profile
+    this.profile,
     // required this.token
   });
 

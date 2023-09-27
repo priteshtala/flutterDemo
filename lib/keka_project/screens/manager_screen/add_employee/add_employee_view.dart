@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
@@ -13,12 +14,12 @@ class AddEmployeeView extends StatefulWidget {
   static const String routeName = "/Add_Employee_view";
 
   static Widget builder(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as EmployeeLoginDetails?;
-    print("::$args");
+    final args = ModalRoute.of(context)?.settings.arguments as Profile?;
+    print("add employe::$args");
     return BlocProvider(
       create: (context) => AddEmployeeCubit(AddEmployeeState(
-        loginData: args,
-        emailController: TextEditingController(text: args?.email),
+        profile: args as Profile,
+        emailController: TextEditingController(),
         passwordController: TextEditingController(),
         nameController: TextEditingController(),
         mobileController: TextEditingController(),
@@ -42,7 +43,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   @override
   void initState() {
     context.read<AddEmployeeCubit>().getDepartmentApi();
-    context.read<AddEmployeeCubit>().getEmployeeDetails();
     super.initState();
   }
 
@@ -52,7 +52,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Add-Employee"),
+            title: (state.profile == Profile.employee) ? Text("Update Employee Details") : Text("Add Employee Details"),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -97,19 +97,23 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   hintText: "Enter Your Location",
                   prefixIcon: const Icon(Icons.location_pin),
                 ),
-                CustomTextForm(
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: state.passwordController,
-                  readOnly: false,
-                  textCapitalization: TextCapitalization.none,
-                  obscureText: state.iconShowHide,
-                  hintText: "Enter Your Password",
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    onPressed: () => context.read<AddEmployeeCubit>().visibility(),
-                    icon: state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
-                  ),
-                ),
+                (state.profile == Profile.manager)
+                    ? CustomTextForm(
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: state.passwordController,
+                        readOnly: false,
+                        textCapitalization: TextCapitalization.none,
+                        obscureText: state.iconShowHide,
+                        hintText: "Enter Your Password",
+                        prefixIcon: const Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          onPressed: () => context.read<AddEmployeeCubit>().visibility(),
+                          icon: state.iconShowHide
+                              ? const Icon(Icons.visibility_off_sharp)
+                              : const Icon(Icons.visibility),
+                        ),
+                      )
+                    : SizedBox.shrink(),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Theme(
@@ -212,14 +216,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    print(state.nameController.text);
-                    print(state.roleController.text);
-                    print(state.emailController.text);
-                    print(state.locationController.text);
-                    print(state.passwordController.text);
-                    print(state.selectedValue!.id);
-                    print(state.mobileController.text);
-                    print(state.dateController.text);
                     // context.read<AddEmployeeCubit>().validation(context);
                     context.read<AddEmployeeCubit>().AddEmployeePost(
                           state.nameController.text,
@@ -234,7 +230,9 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     context.read<AddEmployeeCubit>().navigatorToEmployee(context);
                   },
                   minWidth: 300,
-                  child: const Text("ADD", style: TextStyle(color: Colors.white, fontSize: 20)),
+                  child: (state.profile == Profile.employee)
+                      ? Text("Update Details",style: TextStyle(color: Colors.white, fontSize: 20))
+                      : Text("Add",style: TextStyle(color: Colors.white, fontSize: 20)),
                 )
               ],
             ),
