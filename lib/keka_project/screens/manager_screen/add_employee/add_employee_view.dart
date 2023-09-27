@@ -18,7 +18,7 @@ class AddEmployeeView extends StatefulWidget {
     print("add employe::$args");
     return BlocProvider(
       create: (context) => AddEmployeeCubit(AddEmployeeState(
-        profile: args as Profile,
+        profile: args,
         emailController: TextEditingController(),
         passwordController: TextEditingController(),
         nameController: TextEditingController(),
@@ -74,7 +74,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 CustomTextForm(
                   keyboardType: TextInputType.visiblePassword,
                   controller: state.roleController,
-                  readOnly: false,
+                  readOnly: state.profile == Profile.employee ? true : false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   hintText: "Enter Your Role",
@@ -82,7 +82,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 ),
                 CustomTextForm(
                   controller: state.emailController,
-                  readOnly: false,
+                  readOnly: state.profile == Profile.employee ? true : false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   hintText: "Enter Your Email",
@@ -91,7 +91,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 ),
                 CustomTextForm(
                   controller: state.locationController,
-                  readOnly: false,
+                  readOnly: state.profile == Profile.employee ? true : false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   hintText: "Enter Your Location",
@@ -101,7 +101,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     ? CustomTextForm(
                         keyboardType: TextInputType.visiblePassword,
                         controller: state.passwordController,
-                        readOnly: false,
+                        readOnly: state.profile == Profile.employee ? true : false,
                         textCapitalization: TextCapitalization.none,
                         obscureText: state.iconShowHide,
                         hintText: "Enter Your Password",
@@ -199,7 +199,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 ),
                 CustomTextForm(
                   controller: state.dateController,
-                  readOnly: false,
+                  readOnly: state.profile == Profile.employee ? true : false,
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   prefixIcon: const Icon(Icons.calendar_month),
@@ -217,22 +217,50 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 CustomButton(
                   onPressed: () {
                     // context.read<AddEmployeeCubit>().validation(context);
-                    context.read<AddEmployeeCubit>().AddEmployeePost(
-                          state.nameController.text,
-                          state.roleController.text,
-                          state.emailController.text,
-                          state.locationController.text,
-                          state.passwordController.text,
-                          state.selectedValue!.id.toString(),
-                          state.mobileController.text,
-                          state.dateController.text,
-                        );
+                    if (state.nameController.text.isEmpty ||
+                        state.roleController.text.isEmpty ||
+                        state.emailController.text.isEmpty ||
+                        state.locationController.text.isEmpty ||
+                        state.passwordController.text.isEmpty ||
+                        state.selectedValue!.id.toString().isEmpty ||
+                        state.mobileController.text.isEmpty ||
+                        state.dateController.text.isEmpty) {
+                      print("post:::True");
+                      context.read<AddEmployeeCubit>().updateEmployeeDetails(
+                            state.nameController.text,
+                            state.roleController.text,
+                            state.locationController.text,
+                            state.emailController.text,
+                            state.mobileController.text,
+                            state.selectedValue!.id.toString(),
+                            state.dateController.text,
+                          );
+                    } else {
+                      context.read<AddEmployeeCubit>().AddEmployeePost(
+                            state.nameController.text,
+                            state.roleController.text,
+                            state.emailController.text,
+                            state.locationController.text,
+                            state.passwordController.text,
+                            state.selectedValue!.id.toString(),
+                            state.mobileController.text,
+                            state.dateController.text,
+                          );
+                      print("post:::False");
+                    }
+
                     context.read<AddEmployeeCubit>().navigatorToEmployee(context);
                   },
                   minWidth: 300,
                   child: (state.profile == Profile.employee)
-                      ? Text("Update Details",style: TextStyle(color: Colors.white, fontSize: 20))
-                      : Text("Add",style: TextStyle(color: Colors.white, fontSize: 20)),
+                      ? Text(
+                          "Update Details",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                      : Text(
+                          "Add",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
                 )
               ],
             ),

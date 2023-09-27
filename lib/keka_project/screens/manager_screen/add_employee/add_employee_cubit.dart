@@ -4,7 +4,6 @@ import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -40,7 +39,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       "department_id": department,
       "birth_date": birthdate,
     };
-    print(data);
+    // print(data);
     var response = await Dio().post(
       "https://098a-136-232-118-126.ngrok-free.app/api/user",
       data: data,
@@ -49,6 +48,49 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       ),
     );
     print("status code================${response.statusCode}");
+  }
+
+  // Future update(String name, String job) async {
+  //   final response = await Dio().put(
+  //     Uri.parse('https://reqres.in/api/users/2'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //     },
+  //     body: jsonEncode(<String, String>{
+  //       'name': name,
+  //       'job': job,
+  //     }),
+  //   );
+  //   debugPrint("========================${response.statusCode}");
+  //
+  //   if (response.statusCode == 200) {
+  //     debugPrint("==========================${jsonDecode(response.body)}");
+  //     return jsonDecode(response.body);
+  //   } else {
+  //     throw Exception('Failed to update album.');
+  //   }
+  // }
+
+  Future updateEmployeeDetails(
+      String name, String role, String location, String email, String number, String departmentId, String date) async {
+    var data = {
+      "name": name,
+      "role": role,
+      "location": location,
+      "email": email,
+      "mobile_no": number,
+      "department_id": departmentId,
+      "birth_date": date,
+    };
+    print("updateData::$data");
+    final response = await Dio().put(
+      "https://098a-136-232-118-126.ngrok-free.app/api/user/6",
+      data: data,
+      options: Options(
+        contentType: Headers.jsonContentType,
+      ),
+    );
+    print("status code================${response.data}");
   }
 
   void validation(context) {
@@ -84,6 +126,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         }));
     if (response.statusCode == 200) {
       EmployeeLoginDetails employeeLoginDetails = EmployeeLoginDetails.fromJson(response.data);
+      var selectedDepartment;
 
       if (state.profile == Profile.employee) {
         state.nameController.text = employeeLoginDetails.name;
@@ -92,11 +135,15 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         state.locationController.text = employeeLoginDetails.location;
         state.mobileController.text = employeeLoginDetails.mobileNo;
         state.dateController.text = employeeLoginDetails.birthDate;
-        // state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId);
+        print(employeeLoginDetails.name);
+        print(employeeLoginDetails.role);
+        print(employeeLoginDetails.email);
+        print(employeeLoginDetails.birthDate);
+        print(employeeLoginDetails.birthDate);
+        selectedDepartment = state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId).firstOrNull;
       }
-      final selectedDepartment =
-          state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId);
-      emit(state.copyWith(loginData: employeeLoginDetails, selectedValue: selectedDepartment.firstOrNull));
+
+      emit(state.copyWith(loginData: employeeLoginDetails, selectedValue: selectedDepartment));
       print("data:::::${employeeLoginDetails.departmentId}");
     } else {
       throw Exception('Data Not Available');
@@ -130,6 +177,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void navigatorToEmployee(context) {
-    Navigator.of(context).pushReplacementNamed(EmployeeDetailsView.routeName);
+    state.profile == Profile.manager
+        ? Navigator.of(context).pushReplacementNamed(EmployeeDetailsView.routeName)
+        : Navigator.of(context).pop();
   }
 }
