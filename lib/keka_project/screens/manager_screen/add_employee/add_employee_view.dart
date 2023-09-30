@@ -216,39 +216,27 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    // context.read<AddEmployeeCubit>().validation(context);
-                    if (state.nameController.text.isEmpty ||
-                        state.roleController.text.isEmpty ||
-                        state.emailController.text.isEmpty ||
-                        state.locationController.text.isEmpty ||
-                        state.passwordController.text.isEmpty ||
-                        state.selectedValue!.id.toString().isEmpty ||
-                        state.mobileController.text.isEmpty ||
-                        state.dateController.text.isEmpty) {
-                      print("post:::True");
-                      context.read<AddEmployeeCubit>().updateEmployeeDetails(
-                            state.nameController.text,
-                            state.roleController.text,
-                            state.locationController.text,
-                            state.emailController.text,
-                            state.mobileController.text,
-                            state.selectedValue!.id.toString(),
-                            state.dateController.text,
-                          );
-                    } else {
-                      context.read<AddEmployeeCubit>().AddEmployeePost(
-                            state.nameController.text,
-                            state.roleController.text,
-                            state.emailController.text,
-                            state.locationController.text,
-                            state.passwordController.text,
-                            state.selectedValue!.id.toString(),
-                            state.mobileController.text,
-                            state.dateController.text,
-                          );
-                      print("post:::False");
-                    }
 
+                    (state.profile == Profile.manager)
+                        ? context.read<AddEmployeeCubit>().AddEmployeePost(
+                              state.nameController.text,
+                              state.roleController.text,
+                              state.emailController.text,
+                              state.locationController.text,
+                              state.passwordController.text,
+                              state.selectedValue!.id.toString(),
+                              state.mobileController.text,
+                              state.dateController.text,
+                            )
+                        : context.read<AddEmployeeCubit>().updateEmployeeDetails(
+                              state.nameController.text,
+                              state.roleController.text,
+                              state.locationController.text,
+                              state.emailController.text,
+                              state.mobileController.text,
+                              state.selectedValue!.id.toString(),
+                              state.dateController.text,
+                            );
                     context.read<AddEmployeeCubit>().navigatorToEmployee(context);
                   },
                   minWidth: 300,

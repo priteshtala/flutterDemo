@@ -19,7 +19,7 @@ class AddEmployeeState extends Equatable {
         iconShowHide,
         roleController,
         loginData,
-    profile,
+        profile,
       ];
   TextEditingController nameController;
   TextEditingController emailController;
