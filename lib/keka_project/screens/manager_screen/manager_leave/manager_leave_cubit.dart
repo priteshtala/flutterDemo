@@ -50,6 +50,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
       getLeaveByDate(formattedDate);
+      debugPrint("========================================FormattedDate${state.dateController}");
     } else {
       String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
@@ -97,6 +98,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
     if (response.statusCode == 200) {
       var data = response.data;
+
       for (var entryJson in data) {
         leaveTodayData.add(TodayLeave.fromJson(entryJson));
       }
@@ -108,9 +110,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void getLeaveByDate(String? date) async {
     final response = await Dio().get('https://c0db-136-232-118-126.ngrok-free.app/api/filter_leave_date',
-        options: Options(headers: {
-          "authorization": "Bearer ${await Helper().getToken()}",
-        }),
         data: {
           // "date" : DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
           if(date != null)"date": DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1))),
@@ -118,6 +117,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
       var data = response.data;
+      print("===============================Data${data}");
       for (var entryJson in data) {
         leaveByDateData.add(DateByLeave.fromJson(entryJson));
       }
