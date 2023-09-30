@@ -95,7 +95,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void getNotifyEmployee() async {
-    final response = await Dio().get("https://c82a-136-232-118-126.ngrok-free.app/api/user");
+    final response = await Dio().get("https://c0db-136-232-118-126.ngrok-free.app/api/user");
     var notifyEmployee = List<Employee>.from(state.notifyEmployee);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -121,7 +121,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
-      "https://c82a-136-232-118-126.ngrok-free.app/api/add_leave?is_role=1",
+      "https://c0db-136-232-118-126.ngrok-free.app/api/add_leave?is_role=1",
       data: data,
       queryParameters: {
         "is_role" : 0

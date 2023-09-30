@@ -17,7 +17,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   ManagerScreenCubit(super.initialState);
 
   void employeeCount() async {
-    final response = await Dio().get("https://c82a-136-232-118-126.ngrok-free.app/api/count_user");
+    final response = await Dio().get("https://c0db-136-232-118-126.ngrok-free.app/api/count_user");
     if (response.statusCode == 200) {
       var data = response.data;
       // print("employeeCount:: $data");
@@ -28,7 +28,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void departmentCount() async {
-    final response = await Dio().get("https://c82a-136-232-118-126.ngrok-free.app/api/count_department");
+    final response = await Dio().get("https://c0db-136-232-118-126.ngrok-free.app/api/count_department");
     if (response.statusCode == 200) {
       var data = response.data;
       // print("departmentCount:: $data");
@@ -54,7 +54,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
     }
-    emit(state.copyWith(dateController: state.dateController));
+    emit(state.copyWith(dateController: state.dateController,yesterdayDate: state.dateController));
   }
 
   alert(BuildContext context) {
@@ -92,7 +92,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void getLeaveToday() async {
     final response = await Dio()
-        .get('https://c82a-136-232-118-126.ngrok-free.app/api/today_leave_user', queryParameters: {"is_role": 1});
+        .get('https://c0db-136-232-118-126.ngrok-free.app/api/today_leave_user', queryParameters: {"is_role": 1});
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
 
     if (response.statusCode == 200) {
@@ -107,7 +107,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveByDate(String? date) async {
-    final response = await Dio().get('https://c82a-136-232-118-126.ngrok-free.app/api/filter_leave_date',
+    final response = await Dio().get('https://c0db-136-232-118-126.ngrok-free.app/api/filter_leave_date',
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }),
@@ -145,7 +145,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   void getLoginDetails() async {
     try {
       final response = await Dio().get(
-        "https://c82a-136-232-118-126.ngrok-free.app/api/login_details",
+        "https://c0db-136-232-118-126.ngrok-free.app/api/login_details",
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }),

@@ -41,7 +41,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
     // print(data);
     var response = await Dio().post(
-      "https://c82a-136-232-118-126.ngrok-free.app/api/user",
+      "https://c0db-136-232-118-126.ngrok-free.app/api/user",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
@@ -84,7 +84,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
     print("updateData::$data");
     final response = await Dio().put(
-      "https://c82a-136-232-118-126.ngrok-free.app/api/user/6",
+      "https://c0db-136-232-118-126.ngrok-free.app/api/user/6",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
@@ -120,7 +120,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getEmployeeDetails() async {
-    final response = await Dio().get('https://c82a-136-232-118-126.ngrok-free.app/api/login_details',
+    final response = await Dio().get('https://c0db-136-232-118-126.ngrok-free.app/api/login_details',
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }));
@@ -152,7 +152,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://c82a-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("https://c0db-136-232-118-126.ngrok-free.app/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
 
     if (response.statusCode == 200) {
