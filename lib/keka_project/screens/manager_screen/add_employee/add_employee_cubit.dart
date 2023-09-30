@@ -135,16 +135,17 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         state.locationController.text = employeeLoginDetails.location;
         state.mobileController.text = employeeLoginDetails.mobileNo;
         state.dateController.text = employeeLoginDetails.birthDate;
-        print(employeeLoginDetails.name);
-        print(employeeLoginDetails.role);
-        print(employeeLoginDetails.email);
-        print(employeeLoginDetails.birthDate);
-        print(employeeLoginDetails.birthDate);
-        selectedDepartment = state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId).firstOrNull;
+        debugPrint(employeeLoginDetails.name);
+        debugPrint(employeeLoginDetails.role);
+        debugPrint(employeeLoginDetails.email);
+        debugPrint(employeeLoginDetails.birthDate);
+        debugPrint(employeeLoginDetails.birthDate);
+        selectedDepartment =
+            state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId).firstOrNull;
       }
 
       emit(state.copyWith(loginData: employeeLoginDetails, selectedValue: selectedDepartment));
-      print("data:::::${employeeLoginDetails.departmentId}");
+      debugPrint("data:::::${employeeLoginDetails.departmentId}");
     } else {
       throw Exception('Data Not Available');
     }
