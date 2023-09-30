@@ -1,6 +1,7 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -56,15 +57,18 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
-                    if (state.dateController.text.isEmpty ||
-                        state.dateTimeController.text.isEmpty ||
-                        state.reasonController.text.isEmpty) {
-                      context.read<AddLeaveCubit>().validation(context);
-                    } else {
-                      context.read<AddLeaveCubit>().ManagerAddLeave(
-                          state.dateController.text, state.dateTimeController.text, state.reasonController.text);
-                      context.read<AddLeaveCubit>().navigateToManagerLeave(context);
-                    }
+                    // if (state.dateController.text.isEmpty ||
+                    //     state.dateTimeController.text.isEmpty ||
+                    //     state.reasonController.text.isEmpty) {
+                    //   context.read<AddLeaveCubit>().validation(context);
+                    // } else {
+                    Profile.manager.index == 0
+                        ? context.read<AddLeaveCubit>().ManagerAddLeave(
+                            state.dateController.text, state.dateTimeController.text, state.reasonController.text, 0)
+                        : context.read<AddLeaveCubit>().ManagerAddLeave(
+                            state.dateController.text, state.dateTimeController.text, state.reasonController.text, 1);
+                    context.read<AddLeaveCubit>().navigateToManagerLeave(context);
+                    // }
                   },
                 ),
               ],
