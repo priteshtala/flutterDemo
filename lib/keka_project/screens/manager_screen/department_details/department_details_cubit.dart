@@ -69,7 +69,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://3e20-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("https://c82a-136-232-118-126.ngrok-free.app/api/department");
     var animalList = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -81,7 +81,6 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
       Text("No-Data");
     }
     emit(state.copyWith(departmentList:  animalList,leaveSearchList: animalList));
-    // print("object======,ojoipo,lpokokpopokoijikpo0popopokpokpokoioi${state.departmentList}");
   }
   // void sort() {
   //   List<Department> leaveList = List<Department>.from(state.departmentList);
