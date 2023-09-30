@@ -34,6 +34,7 @@ class AddEmployeeState extends Equatable {
   EmployeeLoginDetails? loginData;
   Profile? profile;
 
+
   // dynamic token;
 
   AddEmployeeState({

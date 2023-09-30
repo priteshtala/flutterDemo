@@ -64,7 +64,6 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   void departmentSearch(query) {
     List<Department> leaveList = List<Department>.from(state.departmentList);
     leaveList = leaveList.where((element) => element.name.toLowerCase().contains(query.toLowerCase())).toList();
-    // sort();
     emit(state.copyWith(leaveSearchList: leaveList));
   }
 
@@ -73,37 +72,15 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
     var animalList = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;
-      // print("object=d=a=======${data}");
       for (var entry in data) {
         animalList.add(Department.fromJson(entry));
+        animalList.sort(
+          (a, b) => a.name.compareTo(b.name),
+        );
       }
     } else {
       Text("No-Data");
     }
-    emit(state.copyWith(departmentList:  animalList,leaveSearchList: animalList));
+    emit(state.copyWith(departmentList: animalList, leaveSearchList: animalList));
   }
-  // void sort() {
-  //   List<Department> leaveList = List<Department>.from(state.departmentList);
-  //   leaveList.sort(
-  //     (a, b) => a.department.compareTo(b.department),
-  //   );
-  //   // staticListAdd();
-  //   emit(state.copyWith(departmentList: leaveList, leaveSearchList: leaveList));
-  // }
-
-  // void staticListAdd() {
-  //   List<Department> leaveList = List<Department>.from(state.departmentList);
-  //   leaveList.add(
-  //     Department(department: state.departmentController.text),
-  //   );
-  //   emit(
-  //     state.copyWith(
-  //         departmentList: leaveList,
-  //         leaveSearchList: leaveList,
-  //         departmentController: state.departmentController,
-  //         staticList: leaveList),
-  //   );
-  //   print("Add::${state.staticList}");
-  //   print("text::${state.departmentController.text}");
-  // }
 }

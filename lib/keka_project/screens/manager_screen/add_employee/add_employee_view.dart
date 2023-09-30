@@ -15,20 +15,22 @@ class AddEmployeeView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as Profile?;
-    print("add employe::$args");
+    print("add employee::$args");
     return BlocProvider(
-      create: (context) => AddEmployeeCubit(AddEmployeeState(
-        profile: args,
-        emailController: TextEditingController(),
-        passwordController: TextEditingController(),
-        nameController: TextEditingController(),
-        mobileController: TextEditingController(),
-        dateController: TextEditingController(),
-        roleController: TextEditingController(),
-        locationController: TextEditingController(),
+      create: (context) => AddEmployeeCubit(
+          context,
+          AddEmployeeState(
+            profile: args,
+            emailController: TextEditingController(),
+            passwordController: TextEditingController(),
+            nameController: TextEditingController(),
+            mobileController: TextEditingController(),
+            dateController: TextEditingController(),
+            roleController: TextEditingController(),
+            locationController: TextEditingController(),
 
-        // token: dynamic,
-      )),
+            // token: dynamic,
+          )),
       child: const AddEmployeeView(),
     );
   }
@@ -50,6 +52,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   Widget build(BuildContext context) {
     return BlocBuilder<AddEmployeeCubit, AddEmployeeState>(
       builder: (context, state) {
+
         return Scaffold(
           appBar: AppBar(
             title: (state.profile == Profile.employee) ? Text("Update Employee Details") : Text("Add Employee Details"),
@@ -216,9 +219,9 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
-
+                    debugPrint("state.selectedValue!.id.toString() ::${state.selectedValue!.id.toString()}");
                     (state.profile == Profile.manager)
-                        ? context.read<AddEmployeeCubit>().AddEmployeePost(
+                        ? context.read<AddEmployeeCubit>().postEmployeeDetails(
                               state.nameController.text,
                               state.roleController.text,
                               state.emailController.text,
@@ -237,7 +240,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                               state.selectedValue!.id.toString(),
                               state.dateController.text,
                             );
-                    context.read<AddEmployeeCubit>().navigatorToEmployee(context);
                   },
                   minWidth: 300,
                   child: (state.profile == Profile.employee)

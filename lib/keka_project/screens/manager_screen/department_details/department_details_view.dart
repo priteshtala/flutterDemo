@@ -25,9 +25,7 @@ class DepartmentDetailsView extends StatefulWidget {
 class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
   @override
   void initState() {
-    // context.read<DepartmentDetailsCubit>().sort();
     context.read<DepartmentDetailsCubit>().getDepartmentApi();
-    // context.read<DepartmentDetailsCubit>().staticListAdd();
     super.initState();
   }
 
@@ -83,7 +81,8 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                             child: ListTile(
                               leading: CircleAvatar(
                                 backgroundColor: Colors.primaries[index],
-                                child: Text(state.leaveSearchList[index].name[0], style: const TextStyle(color: Colors.white)),
+                                child: Text(state.leaveSearchList[index].name[0],
+                                    style: const TextStyle(color: Colors.white)),
                               ),
                               title: Text(state.leaveSearchList[index].name),
                             ),

@@ -14,6 +14,7 @@ class EmployeeDetailsState extends Equatable {
   List<Department> departmentList;
   TextEditingController searchController;
   Department? selectedValue;
+  bool? hasError;
 
   EmployeeDetailsState({
     this.filterDepartmentList = const [],
@@ -22,6 +23,7 @@ class EmployeeDetailsState extends Equatable {
     this.departmentList = const [],
     required this.searchController,
     this.selectedValue,
+    this.hasError = false,
   });
 
   EmployeeDetailsState copyWith({
@@ -31,6 +33,7 @@ class EmployeeDetailsState extends Equatable {
     List<Department>? departmentList,
     TextEditingController? searchController,
     Department? selectedValue,
+    bool? hasError,
   }) {
     return EmployeeDetailsState(
       filterDepartmentList: filterDepartmentList ?? this.filterDepartmentList,
@@ -39,6 +42,7 @@ class EmployeeDetailsState extends Equatable {
       searchController: searchController ?? this.searchController,
       selectedValue: selectedValue ?? this.selectedValue,
       departmentList: departmentList ?? this.departmentList,
+      hasError: hasError ?? this.hasError,
     );
   }
 }

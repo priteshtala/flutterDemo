@@ -38,14 +38,16 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     var employeeDetails = List<Employee>.from(state.filtterdUserList);
     if (response.statusCode == 200) {
       var data = response.data;
-      // print("object=d=a=======${data}");
       for (var entry in data) {
         employeeDetails.add(Employee.fromJson(entry));
+        employeeDetails.sort(
+          (a, b) => a.name.compareTo(b.name),
+        );
       }
     } else {
       Text("No-Data");
     }
-    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
+    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails, hasError: true));
   }
 
   void getDepartmentApi() async {
@@ -53,7 +55,6 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     var DepartmentListData = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;
-      // print("departmentDetails====$data");
       for (var entry in data) {
         DepartmentListData.add(Department.fromJson(entry));
       }
@@ -62,5 +63,12 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       Text("No-Data");
     }
     emit(state.copyWith(departmentList: DepartmentListData, filterDepartmentList: DepartmentListData));
+  }
+
+  refresh() {
+    var refresh = state.hasError = false;
+    state.filtterdUserList.clear();
+    emit(state.copyWith(hasError: refresh));
+    return getEmployeeApi();
   }
 }

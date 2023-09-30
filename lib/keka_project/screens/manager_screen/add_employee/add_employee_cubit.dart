@@ -7,10 +7,13 @@ import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_l
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'add_employee_state.dart';
 
 class AddEmployeeCubit extends Cubit<AddEmployeeState> {
-  AddEmployeeCubit(super.initialState);
+  AddEmployeeCubit(this.context, super.initialState);
+
+  final BuildContext context;
 
   void visibility() {
     emit(state.copyWith(iconShowHide: !state.iconShowHide));
@@ -27,8 +30,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     emit(state.copyWith(dateController: state.dateController));
   }
 
-  Future AddEmployeePost(String name, String role, String email, String location, String password, String department,
-      String mo_number, String birthdate) async {
+  Future<void> postEmployeeDetails(String name, String role, String email, String location, String password,
+      String department, String mo_number, String birthdate) async {
     var data = {
       "name": name,
       "role": role,
@@ -39,13 +42,20 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       "department_id": department,
       "birth_date": birthdate,
     };
+
     var response = await Dio().post(
       "https://c0db-136-232-118-126.ngrok-free.app/api/user",
       data: data,
       options: Options(
+        headers: {"Accept": "application/json"},
+        followRedirects: false,
+        maxRedirects: 0,
+        validateStatus: (status) => status! < 500,
         contentType: Headers.jsonContentType,
       ),
     );
+    debugPrint("response ::${response.statusCode}");
+    navigatorToEmployee(context);
     print("status code================${response.statusCode}");
   }
 
@@ -62,12 +72,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
     print("updateData::$data");
     final response = await Dio().put(
-      "https://c0db-136-232-118-126.ngrok-free.app/api/user/6",
+      "https://c0db-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id??""}",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
       ),
     );
+    navigatorToEmployee(context);
     print("status code================${response.data}");
   }
 
@@ -104,11 +115,12 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         }));
     if (response.statusCode == 200) {
       EmployeeLoginDetails employeeLoginDetails = EmployeeLoginDetails.fromJson(response.data);
+      print(response.data);
       var selectedDepartment;
 
       if (state.profile == Profile.employee) {
         state.nameController.text = employeeLoginDetails.name;
-        state.roleController.text = employeeLoginDetails.role;
+        state.roleController.text = employeeLoginDetails.role.toString();
         state.emailController.text = employeeLoginDetails.email;
         state.locationController.text = employeeLoginDetails.location;
         state.mobileController.text = employeeLoginDetails.mobileNo;
@@ -121,10 +133,12 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         debugPrint(employeeLoginDetails.location);
         debugPrint(employeeLoginDetails.mobileNo);
         debugPrint(employeeLoginDetails.birthDate);
-
       }
 
-      emit(state.copyWith(loginData: employeeLoginDetails, selectedValue: selectedDepartment));
+      emit(state.copyWith(
+        loginData: employeeLoginDetails,
+        selectedValue: selectedDepartment,
+      ));
       debugPrint("data:::::${employeeLoginDetails.departmentId}");
     } else {
       throw Exception('Data Not Available');
@@ -157,8 +171,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void navigatorToEmployee(context) {
-    state.profile == Profile.employee?
-    Navigator.of(context).pop()
-        : Navigator.of(context).pushNamed(EmployeeDetailsView.routeName);
+    Navigator.of(context).pop();
   }
 }
