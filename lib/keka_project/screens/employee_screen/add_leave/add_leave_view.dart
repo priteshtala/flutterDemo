@@ -65,9 +65,9 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     // } else {
                     var token = await Helper().getToken();
                     token.isNotEmpty
-                        ? context.read<AddLeaveCubit>().ManagerAddLeave(
+                        ? context.read<AddLeaveCubit>().postAddLeave(
                             state.dateController.text, state.dateTimeController.text, state.reasonController.text, 1)
-                        : context.read<AddLeaveCubit>().ManagerAddLeave(
+                        : context.read<AddLeaveCubit>().postAddLeave(
                             state.dateController.text, state.dateTimeController.text, state.reasonController.text, 0);
 
                     // context.read<AddLeaveCubit>().navigateToManagerLeave(context);

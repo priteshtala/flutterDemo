@@ -8,7 +8,7 @@ import 'manager_leave_cubit.dart';
 import 'manager_leave_state.dart';
 
 class ManagerLeaveView extends StatefulWidget {
-  static const String routeName = '/Employee_Screen_View';
+  static const String routeName = '/Manager_Leave_View';
 
   static Widget builder(BuildContext context) {
     final arg = ModalRoute.of(context)?.settings.arguments as Profile?;

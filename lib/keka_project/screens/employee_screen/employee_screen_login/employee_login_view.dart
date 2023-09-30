@@ -1,6 +1,7 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -12,13 +13,14 @@ class EmployeeLoginView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => EmployeeLoginCubit(
-        EmployeeLoginState(
-          emailController: TextEditingController(),
-          passwordController: TextEditingController(),
-          formKey: GlobalKey(),
-        ),
-      ),
+      create: (context) =>
+          EmployeeLoginCubit(
+            EmployeeLoginState(
+              emailController: TextEditingController(),
+              passwordController: TextEditingController(),
+              formKey: GlobalKey(),
+            ),
+          ),
       child: const EmployeeLoginView(),
     );
   }
@@ -30,8 +32,6 @@ class EmployeeLoginView extends StatefulWidget {
 }
 
 class EmployeeLoginViewState extends State<EmployeeLoginView> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +90,7 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                       suffixIcon: IconButton(
                         onPressed: () => context.read<EmployeeLoginCubit>().visibility(),
                         icon:
-                            state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
+                        state.iconShowHide ? const Icon(Icons.visibility_off_sharp) : const Icon(Icons.visibility),
                       ),
                     ),
                     const Gap(70),
@@ -98,16 +98,40 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                       onPressed: () {
                         // state.formKey.currentState?.validate();
                         // context.read<EmployeeLoginCubit>().onLogIn(context);
-                        if (state.emailController.text.isNotEmpty || state.passwordController.text.isNotEmpty) {
-                          context
-                              .read<EmployeeLoginCubit>()
-                              .loginPostDio(
-                                state.emailController.text,
-                                state.passwordController.text,
-                              )
-                              .then((value) => Navigator.of(context).pushNamed('/Employee_Screen_View'));
-                        }
-                      },
+                        // if (state.emailController.text.isNotEmpty || state.passwordController.text.isNotEmpty) {
+                        context
+                            .read<EmployeeLoginCubit>()
+                            .loginPostDio(
+                          state.emailController.text,
+                          state.passwordController.text,
+                        ).then((value) => Navigator.of(context).pushNamed("/Manager_Leave_View"));
+                        //     .then((value) {
+                        //   if (value["status"] == 200) {
+                        //
+                        //     Navigator.of(context).pushNamed("/Manager_Leave_View");
+                        //   } else {
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (context) => AlertDialog(
+                        //         shape: RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(20),
+                        //         ),
+                        //         alignment: Alignment.bottomCenter,
+                        //         title: Text(value["message"]),
+                        //         actions: [
+                        //           TextButton(
+                        //             onPressed: () => Navigator.pop(context),
+                        //             child: const Text("Oky"),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     );
+                        //   }
+                        // });
+
+
+
+                        },
                       width: 300,
                       height: 40,
                       color: Colors.green,

@@ -32,4 +32,11 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     var format1 = "${dateTime2.year}-${dateTime2.month}-${dateTime2.day}";
     emit(state.copyWith(startDate: format,endDate: format1));
   }
+
+  refresh() {
+    var refresh = state.hasError = false;
+    state.pendingLeaveList.clear();
+    emit(state.copyWith(hasError: refresh));
+    return pendingLeave();
+  }
 }
