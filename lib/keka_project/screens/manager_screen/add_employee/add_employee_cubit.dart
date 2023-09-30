@@ -39,7 +39,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       "department_id": department,
       "birth_date": birthdate,
     };
-    // print(data);
     var response = await Dio().post(
       "https://c0db-136-232-118-126.ngrok-free.app/api/user",
       data: data,
@@ -49,27 +48,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     );
     print("status code================${response.statusCode}");
   }
-
-  // Future update(String name, String job) async {
-  //   final response = await Dio().put(
-  //     Uri.parse('https://reqres.in/api/users/2'),
-  //     headers: <String, String>{
-  //       'Content-Type': 'application/json; charset=UTF-8',
-  //     },
-  //     body: jsonEncode(<String, String>{
-  //       'name': name,
-  //       'job': job,
-  //     }),
-  //   );
-  //   debugPrint("========================${response.statusCode}");
-  //
-  //   if (response.statusCode == 200) {
-  //     debugPrint("==========================${jsonDecode(response.body)}");
-  //     return jsonDecode(response.body);
-  //   } else {
-  //     throw Exception('Failed to update album.');
-  //   }
-  // }
 
   Future updateEmployeeDetails(
       String name, String role, String location, String email, String number, String departmentId, String date) async {
@@ -135,13 +113,15 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         state.locationController.text = employeeLoginDetails.location;
         state.mobileController.text = employeeLoginDetails.mobileNo;
         state.dateController.text = employeeLoginDetails.birthDate;
+        selectedDepartment =
+            state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId).firstOrNull;
         debugPrint(employeeLoginDetails.name);
         debugPrint(employeeLoginDetails.role);
         debugPrint(employeeLoginDetails.email);
+        debugPrint(employeeLoginDetails.location);
+        debugPrint(employeeLoginDetails.mobileNo);
         debugPrint(employeeLoginDetails.birthDate);
-        debugPrint(employeeLoginDetails.birthDate);
-        selectedDepartment =
-            state.departmentList.where((element) => element.id == employeeLoginDetails.departmentId).firstOrNull;
+
       }
 
       emit(state.copyWith(loginData: employeeLoginDetails, selectedValue: selectedDepartment));
@@ -154,7 +134,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   void getDepartmentApi() async {
     final response = await Dio().get("https://c0db-136-232-118-126.ngrok-free.app/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
-
     if (response.statusCode == 200) {
       getEmployeeDetails();
       var data = response.data;
@@ -178,8 +157,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void navigatorToEmployee(context) {
-    state.profile == Profile.manager
-        ? Navigator.of(context).pushReplacementNamed(EmployeeDetailsView.routeName)
-        : Navigator.of(context).pop();
+    state.profile == Profile.employee?
+    Navigator.of(context).pop()
+        : Navigator.of(context).pushNamed(EmployeeDetailsView.routeName);
   }
 }

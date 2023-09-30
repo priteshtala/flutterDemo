@@ -167,7 +167,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: arg);
+                    Navigator.of(context).pushReplacementNamed(AddEmployeeView.routeName, arguments: arg);
 
                   },
                   minWidth: 300,
