@@ -61,6 +61,8 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                         state.reasonController.text.isEmpty) {
                       context.read<AddLeaveCubit>().validation(context);
                     } else {
+                      context.read<AddLeaveCubit>().ManagerAddLeave(
+                          state.dateController.text, state.dateTimeController.text, state.reasonController.text);
                       context.read<AddLeaveCubit>().navigateToManagerLeave(context);
                     }
                   },

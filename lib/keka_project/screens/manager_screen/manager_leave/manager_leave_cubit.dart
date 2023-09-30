@@ -113,7 +113,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
         }),
         data: {
           // "date" : DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
-          if(date != null)"date": date,
+          if(date != null)"date": DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1))),
         });
     var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
