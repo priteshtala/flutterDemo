@@ -110,14 +110,14 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     emit(state.copyWith(employeeList: notifyEmployee, filtterdUserList: notifyEmployee));
   }
 
-  Future postAddLeave(String start_date, String end_date, String reason,int? is_role) async {
+  Future postAddLeave(String start_date, String end_date, String reason,int? id,int? is_role) async {
     // final prefs = await SharedPreferences.getInstance();
     // debugPrint("pref====${prefs.getString('Token')}");
     var data = {
       "start_date": start_date,
       "end_date": end_date,
       "reason": reason,
-      "user_id": state.filtterdUserList.map((e) => e.id).toList().first,
+      "user_id": id,
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
