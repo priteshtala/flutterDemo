@@ -50,12 +50,17 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
       getLeaveByDate(formattedDate);
+      if (state.leaveByDateList.isEmpty) {
+        state.leaveByDateList.remove;
+      } else {
+        state.leaveByDateList.clear();
+      }
       debugPrint("========================================FormattedDate${state.dateController}");
     } else {
       String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
     }
-    emit(state.copyWith(dateController: state.dateController,yesterdayDate: state.dateController));
+    emit(state.copyWith(dateController: state.dateController, yesterdayDate: state.dateController));
   }
 
   alert(BuildContext context) {
@@ -109,11 +114,12 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveByDate(String? date) async {
-    final response = await Dio().get('https://c0db-136-232-118-126.ngrok-free.app/api/filter_leave_date',
-        data: {
-          // "date" : DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
-          if(date != null)"date": DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1))),
-        });
+    debugPrint("Date::${date}");
+    final response = await Dio().get('https://c0db-136-232-118-126.ngrok-free.app/api/filter_leave_date', data: {
+      "date": date
+      // DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
+      // "date": date,
+    });
     var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -125,12 +131,13 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       throw Exception('Data Not Available');
     }
     emit(state.copyWith(leaveByDateList: leaveByDateData));
+    print(leaveByDateData.length);
   }
 
   void runFilter(query) {
     List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
     leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
-    emit(state.copyWith(leaveByDateList: state.dateList,dateController: state.dateController));
+    emit(state.copyWith(leaveByDateList: state.dateList, dateController: state.dateController));
     print('-------------------------LeaveList${state.dateList}');
   }
 

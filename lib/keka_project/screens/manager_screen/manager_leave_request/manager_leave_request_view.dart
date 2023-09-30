@@ -10,7 +10,7 @@ class ManagerLeaveRequest extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => ManagerLeaveRequestCubit(ManagerLeaveRequestState()),
+      create: (context) => ManagerLeaveRequestCubit(ManagerLeaveRequestState(pendingLeaveList: [])),
       child: ManagerLeaveRequest(),
     );
   }
@@ -23,56 +23,71 @@ class ManagerLeaveRequest extends StatefulWidget {
 
 class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
   @override
+  void initState() {
+    super.initState();
+    context.read<ManagerLeaveRequestCubit>().pendingLeave();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Leave-Request-List"),
       ),
-      body: SingleChildScrollView(
-        child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: 7,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                leading: CircleAvatar(
-                  child: Text(
-                    index.toString(),
-                  ),
-                  backgroundColor: Colors.primaries[index],
-                ),
-                title: Text("Name : Pritesh Tala"),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Department : Flutter"),
-                    Text("DOB : 15-11-2002"),
-                    Text("Reason : Fever"),
-                    const Gap(10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+      body: BlocBuilder<ManagerLeaveRequestCubit, ManagerLeaveRequestState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: state.pendingLeaveList.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: Text(
+                        index.toString(),
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      backgroundColor: Colors.green.shade200,
+                    ),
+                    title: Text(state.pendingLeaveList[index].user.name),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomButtonChange(
-                          color: Colors.green.shade100,
-                          child: Icon(Icons.done),
-                          onPressed: () {}, width: 50, height: 35,
-                        ),
-
-                        Gap(15),
-                        CustomButtonChange(
-                          color: Colors.red.shade100,
-                          child: Icon(Icons.close),
-                          onPressed: () {}, width: 50, height: 35,
+                        Text("Department : ${state.pendingLeaveList[index].user.role}"),
+                        Text("START DATE : ${state.pendingLeaveList[index].startDate}"),
+                        Text("END DATE : ${state.pendingLeaveList[index].endDate}"),
+                        Text("Reason : ${state.pendingLeaveList[index].reason}"),
+                        const Gap(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CustomButtonChange(
+                              color: Colors.green.shade100,
+                              child: Icon(Icons.done),
+                              onPressed: () {},
+                              width: 50,
+                              height: 35,
+                            ),
+                            Gap(15),
+                            CustomButtonChange(
+                              color: Colors.red.shade100,
+                              child: Icon(Icons.close),
+                              onPressed: () {},
+                              width: 50,
+                              height: 35,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

@@ -79,6 +79,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
+
                     ],
                   ),
                 )

@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 
 class ManagerScreenState extends Equatable {
   @override
-
   List<Object?> get props => [
         dateList,
         leaveTodayList,
@@ -19,7 +18,8 @@ class ManagerScreenState extends Equatable {
         yesterdayDate,
         profile,
         departmentCount,
-        name
+        name,
+        loginData,
       ];
 
   List<TodayLeave> leaveTodayList = [];
@@ -50,6 +50,7 @@ class ManagerScreenState extends Equatable {
 
   ManagerScreenState copyWith({
     List<TodayLeave>? leaveTodayList,
+    List<TodayLeave>? pendingLeaveList,
     List<DateByLeave>? dateList,
     List<DateByLeave>? leaveByDateList,
     TextEditingController? dateController,
