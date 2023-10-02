@@ -122,7 +122,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/add_leave?is_role=1",
+      "https://19d1-136-232-118-126.ngrok-free.app/api/add_leave?is_role=$is_role",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,

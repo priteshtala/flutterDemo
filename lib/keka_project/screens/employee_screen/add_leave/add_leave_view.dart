@@ -57,7 +57,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     "Add",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () async {
+                  onPressed: ()  {
                     // if (state.dateController.text.isEmpty ||
                     //     state.dateTimeController.text.isEmpty ||
                     //     state.reasonController.text.isEmpty) {

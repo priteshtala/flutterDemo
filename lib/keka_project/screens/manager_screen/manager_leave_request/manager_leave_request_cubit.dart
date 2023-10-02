@@ -33,7 +33,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     print("UserId=============UserId==========UserId=======UserId========UserId===${state.pendingLeaveList[index].id}");
 
     final response = await Dio().put(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id ?? ""}",
+      "https://19d1-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id}",
       data: data,
       options: Options(
           headers: {"Accept": "application/json"}),
@@ -59,6 +59,6 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     return pendingLeave();
   }
   void navigateToManager(context) {
-    Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: state.profile);
+    Navigator.of(context).pop();
   }
 }
