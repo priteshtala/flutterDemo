@@ -11,7 +11,7 @@ class ManagerLeaveRequestState extends Equatable {
   String? startDate;
   String? endDate;
   bool? hasError;
-  EmployeeLoginDetails? loginData;
+  TodayLeave? loginData;
   Profile? profile;
 
 
@@ -29,7 +29,7 @@ class ManagerLeaveRequestState extends Equatable {
     String? startDate,
     String? endDate,
     bool? hasError,
-    EmployeeLoginDetails? loginData,
+    TodayLeave? loginData,
     Profile? profile,
 
 

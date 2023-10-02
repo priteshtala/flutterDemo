@@ -72,7 +72,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                 onPressed: () {
                                   // if (Profile.manager == 0) {
                                   //   (state.profile == Profile.manager) ?
-                                    context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString());
+                                    context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(),index);
                                     // context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(1.toString());
                                   },
                                 // },
@@ -84,7 +84,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                 color: Colors.red.shade100,
                                 child: Icon(Icons.close),
                                 onPressed: () {
-                                  context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString());
+                                  context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString(),index);
                                 },
                                 width: 50,
                                 height: 35,

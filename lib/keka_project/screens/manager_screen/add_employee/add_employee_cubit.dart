@@ -71,7 +71,10 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       "birth_date": date,
     };
     print("updateData::$data");
+    print("UserId=============UserId==========UserId=======UserId========UserId===${state.loginData?.id}");
+
     final response = await Dio().put(
+
       "https://19d1-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id??""}",
       data: data,
       options: Options(
