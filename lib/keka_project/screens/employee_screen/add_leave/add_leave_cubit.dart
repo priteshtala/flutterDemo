@@ -7,7 +7,9 @@ import 'package:intl/intl.dart';
 import 'add_leave_state.dart';
 
 class AddLeaveCubit extends Cubit<AddLeaveState> {
-  AddLeaveCubit(super.initialState);
+  AddLeaveCubit(this.context,super.initialState);
+
+  final BuildContext context;
 
   void dateTimePicker(context) async {
     DateTime? pickedDate = await showDatePicker(
@@ -121,6 +123,8 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       data: data,
       options: Options(headers: {"Accept": "application/json"}),
     );
+    navigateToManagerLeave(context);
+
     print("status code================${response.statusCode}");
     // switch (response.statusCode) {
     //   case 200:
@@ -141,6 +145,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void navigateToManagerLeave(context) {
-    Navigator.of(context).pushNamed(ManagerLeaveView.routeName,arguments: state.profile);
+    Navigator.of(context).pop();
   }
 }

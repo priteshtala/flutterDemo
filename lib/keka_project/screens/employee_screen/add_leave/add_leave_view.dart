@@ -16,6 +16,7 @@ class AddLeaveView extends StatefulWidget {
     final args = ModalRoute.of(context)?.settings.arguments as Profile?;
     return BlocProvider(
       create: (context) => AddLeaveCubit(
+        context,
         AddLeaveState(
             dateController: TextEditingController(),
             dateTimeController: TextEditingController(),
@@ -57,7 +58,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     "Add",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: ()  {
+                  onPressed: () {
                     // if (state.dateController.text.isEmpty ||
                     //     state.dateTimeController.text.isEmpty ||
                     //     state.reasonController.text.isEmpty) {
