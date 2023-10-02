@@ -10,11 +10,12 @@ class EmployeeLoginState extends Equatable {
   final bool iconShowHide;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  EmployeeLoginState(
-      {required this.emailController,
-      required this.passwordController,
-      this.iconShowHide = true,
-      required this.formKey});
+  EmployeeLoginState({
+    required this.emailController,
+    required this.passwordController,
+    this.iconShowHide = true,
+    required this.formKey,
+  });
 
   EmployeeLoginState copyWith({
     TextEditingController? emailController,
