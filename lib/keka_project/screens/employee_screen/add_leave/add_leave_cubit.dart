@@ -110,10 +110,11 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     emit(state.copyWith(employeeList: notifyEmployee, filtterdUserList: notifyEmployee));
   }
 
-  Future postAddLeave(String start_date, String end_date, String reason,int? user_id,int? is_role) async {
+  Future postAddLeave(int is_role,String start_date, String end_date, String reason,int? user_id) async {
     // final prefs = await SharedPreferences.getInstance();
     // debugPrint("pref====${prefs.getString('Token')}");
     var data = {
+      "is_role" : is_role,
       "start_date": start_date,
       "end_date": end_date,
       "reason": reason,
@@ -123,9 +124,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     var response = await Dio().post(
       "https://19d1-136-232-118-126.ngrok-free.app/api/add_leave?is_role=1",
       data: data,
-      queryParameters: {
-        "is_role" : is_role
-      },
       options: Options(
         contentType: Headers.jsonContentType,
       ),
