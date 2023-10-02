@@ -67,13 +67,13 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     (state.profile == Profile.manager)
                         // token.isNotEmpty
                         ? context.read<AddLeaveCubit>().postAddLeave(
-                            1,
+                            0,
                             state.dateController.text,
                             state.dateTimeController.text,
                             state.reasonController.text,
                             state.filtterdUserList.map((e) => e.id).firstOrNull)
                         : context.read<AddLeaveCubit>().postAddLeave(
-                            0,
+                            1,
                             state.dateController.text,
                             state.dateTimeController.text,
                             state.reasonController.text,

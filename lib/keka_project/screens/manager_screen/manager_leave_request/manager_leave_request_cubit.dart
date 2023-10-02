@@ -8,8 +8,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
   ManagerLeaveRequestCubit(super.initialState);
 
   void pendingLeave() async {
-    final response = await Dio()
-        .get('https://19d1-136-232-118-126.ngrok-free.app/api/all_leaves');
+    final response = await Dio().get('https://19d1-136-232-118-126.ngrok-free.app/api/all_leaves');
     var pendingLeaveData = List<TodayLeave>.from(state.pendingLeaveList);
 
     if (response.statusCode == 200) {
@@ -24,13 +23,29 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     emit(state.copyWith(pendingLeaveList: pendingLeaveData));
   }
 
-   Date(index){
+  Future updateLeaveRequests(String status) async {
+    var data = {
+      "status": status,
+    };
+    print("updateStatus::$data");
+    final response = await Dio().put(
+      "https://19d1-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.loginData?.id ?? ""}",
+      data: data,
+      options: Options(
+          headers: {"Accept": "application/json"}),
+
+    );
+    // navigatorToEmployee(context);
+    print("status code================${response.data}");
+  }
+
+  Date(index) {
     var dateTime1 = DateTime.parse("${state.pendingLeaveList[index].startDate}");
     var dateTime2 = DateTime.parse("${state.pendingLeaveList[index].endDate}");
 
     var format = "${dateTime1.year}-${dateTime1.month}-${dateTime1.day}";
     var format1 = "${dateTime2.year}-${dateTime2.month}-${dateTime2.day}";
-    emit(state.copyWith(startDate: format,endDate: format1));
+    emit(state.copyWith(startDate: format, endDate: format1));
   }
 
   refresh() {

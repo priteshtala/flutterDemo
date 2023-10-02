@@ -1,4 +1,5 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_state.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,13 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                               CustomButtonChange(
                                 color: Colors.green.shade100,
                                 child: Icon(Icons.done),
-                                onPressed: () {},
+                                onPressed: () {
+                                  // if (Profile.manager == 0) {
+                                  //   (state.profile == Profile.manager) ?
+                                    context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString());
+                                    // context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(1.toString());
+                                  },
+                                // },
                                 height: 35,
                                 width: 50,
                               ),
@@ -76,7 +83,9 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                               CustomButtonChange(
                                 color: Colors.red.shade100,
                                 child: Icon(Icons.close),
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString());
+                                },
                                 width: 50,
                                 height: 35,
                               ),
