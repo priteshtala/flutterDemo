@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'add_leave_state.dart';
 
 class AddLeaveCubit extends Cubit<AddLeaveState> {
-  AddLeaveCubit(this.context,super.initialState);
+  AddLeaveCubit(this.context, super.initialState);
 
   final BuildContext context;
 
@@ -46,7 +46,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     List<Employee> employeeList = List<Employee>.from(state.employeeList);
     employeeList = employeeList
         .where((e) =>
-            e.name.toLowerCase().contains(query.toLowerCase()) || e.email.toLowerCase().contains(query.toLowerCase()))
+            e.name.contains(query) || e.email.contains(query))
         .toList();
 
     emit(state.copyWith(filtterdUserList: employeeList));
@@ -123,7 +123,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       data: data,
       options: Options(headers: {"Accept": "application/json"}),
     );
-    navigateToManagerLeave(context);
 
     print("status code================${response.statusCode}");
     // switch (response.statusCode) {

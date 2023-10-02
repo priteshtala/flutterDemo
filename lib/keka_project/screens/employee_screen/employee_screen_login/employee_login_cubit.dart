@@ -38,7 +38,7 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
 
   Future loginPostDio(String email, String password) async {
     await SharedPreferences.getInstance();
-    Map<String,dynamic> data = {
+    Map<String, dynamic> data = {
       "email": email,
       "password": password,
     };
@@ -57,7 +57,10 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
     // UserPreferences().setToken(response.data["token"]);
     print("token================${response.data["token"]}");
 
-    return null;
+    if (response.statusCode == 404)
+      print("response.data;:::${response.data}");
+      return response.data;
+    }
     // return response;
   }
 
@@ -92,4 +95,3 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
 //     },
 //   );
 // }
-}

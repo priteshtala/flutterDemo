@@ -175,6 +175,13 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     }
   }
 
+  refresh() {
+    var refresh = state.hasError = false;
+    state.leaveTodayList.clear();
+    emit(state.copyWith(hasError: refresh));
+    return getLeaveToday();
+  }
+
   void navigateToDepartmentView(context) {
     Navigator.of(context).pushNamed(DepartmentDetailsView.routeName);
   }

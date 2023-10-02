@@ -74,8 +74,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     print("UserId=============UserId==========UserId=======UserId========UserId===${state.loginData?.id}");
 
     final response = await Dio().put(
-
-      "https://19d1-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id??""}",
+      "https://19d1-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id ?? ""}",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
@@ -112,6 +111,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getEmployeeDetails() async {
+    print("GetAmploye::::");
     final response = await Dio().get('https://19d1-136-232-118-126.ngrok-free.app/api/login_details',
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
@@ -121,7 +121,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       print(response.data);
       var selectedDepartment;
 
-      if (state.profile == Profile.employee) {
+      if (state.profile != Profile.manager) {
         state.nameController.text = employeeLoginDetails.name;
         state.roleController.text = employeeLoginDetails.role.toString();
         state.emailController.text = employeeLoginDetails.email;

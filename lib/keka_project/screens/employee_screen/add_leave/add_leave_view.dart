@@ -82,7 +82,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     print("manager=================== ${state.profile == Profile.manager}");
                     print("id:::::::::${state.filtterdUserList.map((e) => e.id).firstOrNull}");
 
-                    // context.read<AddLeaveCubit>().navigateToManagerLeave(context);
+                    context.read<AddLeaveCubit>().navigateToManagerLeave(context);
                     // }
                   },
                 ),
