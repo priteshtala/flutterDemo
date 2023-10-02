@@ -68,7 +68,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://c0db-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("https://19d1-136-232-118-126.ngrok-free.app/api/department");
     var animalList = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;

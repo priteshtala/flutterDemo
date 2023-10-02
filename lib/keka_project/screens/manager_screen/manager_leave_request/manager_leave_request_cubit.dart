@@ -9,7 +9,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
 
   void pendingLeave() async {
     final response = await Dio()
-        .get('https://c0db-136-232-118-126.ngrok-free.app/api/all_leaves');
+        .get('https://19d1-136-232-118-126.ngrok-free.app/api/all_leaves');
     var pendingLeaveData = List<TodayLeave>.from(state.pendingLeaveList);
 
     if (response.statusCode == 200) {
