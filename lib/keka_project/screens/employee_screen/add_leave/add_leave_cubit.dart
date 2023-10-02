@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
-import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +9,6 @@ import 'add_leave_state.dart';
 class AddLeaveCubit extends Cubit<AddLeaveState> {
   AddLeaveCubit(super.initialState);
 
-
   void dateTimePicker(context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -20,7 +17,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       lastDate: DateTime(2025),
     );
     if (pickedDate != null) {
-      // String formattedDate = DateFormat.yMMMMd('en_US').format(pickedDate);
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
     }
@@ -37,7 +33,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       lastDate: DateTime(2025),
     );
     if (pickedDate2 != null) {
-      // String formattedDate2 = DateFormat.yMMMMd('en_US').format(pickedDate2);
       String formattedDate2 = DateFormat("yyyy-MM-dd").format(pickedDate2);
 
       state.dateTimeController.text = formattedDate2;
@@ -110,11 +105,11 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     emit(state.copyWith(employeeList: notifyEmployee, filtterdUserList: notifyEmployee));
   }
 
-  Future postAddLeave(int is_role,String start_date, String end_date, String reason,int? user_id) async {
+  Future postAddLeave(String is_role, String start_date, String end_date, String reason, int? user_id) async {
     // final prefs = await SharedPreferences.getInstance();
     // debugPrint("pref====${prefs.getString('Token')}");
     var data = {
-      "is_role" : is_role,
+      "is_role": is_role,
       "start_date": start_date,
       "end_date": end_date,
       "reason": reason,
@@ -122,11 +117,9 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/add_leave?is_role=$is_role",
+      "https://19d1-136-232-118-126.ngrok-free.app/api/add_leave",
       data: data,
-      options: Options(
-        contentType: Headers.jsonContentType,
-      ),
+      options: Options(headers: {"Accept": "application/json"}),
     );
     print("status code================${response.statusCode}");
     // switch (response.statusCode) {
@@ -148,6 +141,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void navigateToManagerLeave(context) {
-    Navigator.of(context).pushNamed(ManagerLeaveView.routeName,arguments: Profile.manager);
+    Navigator.of(context).pushNamed(ManagerLeaveView.routeName,arguments: state.profile);
   }
 }

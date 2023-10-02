@@ -98,7 +98,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void getLeaveToday() async {
     final response = await Dio()
-        .get('https://19d1-136-232-118-126.ngrok-free.app/api/today_leave_user', queryParameters: {"is_role": 1});
+        .get('https://19d1-136-232-118-126.ngrok-free.app/api/today_leave_user');
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
 
     if (response.statusCode == 200) {
@@ -177,7 +177,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void navigateToApplyLeave(context) {
-    Navigator.of(context).pushNamed(AddLeaveView.routeName);
+    Navigator.of(context).pushNamed(AddLeaveView.routeName, arguments: state.profile);
   }
 
   void navigateToManagerRequest(context) {
