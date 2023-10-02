@@ -63,9 +63,9 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     //     state.reasonController.text.isEmpty) {
                     //   context.read<AddLeaveCubit>().validation(context);
                     // } else {
-                    var token = await Helper().getToken();
+                    // var token = await Helper().getToken();
                     (state.profile == Profile.manager)
-                    // token.isNotEmpty
+                        // token.isNotEmpty
                         ? context.read<AddLeaveCubit>().postAddLeave(
                             state.dateController.text,
                             state.dateTimeController.text,
@@ -110,36 +110,6 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                               context.read<AddLeaveCubit>().notifyEmp(query);
                             },
                           )
-                        // : Container(
-                        //     decoration: BoxDecoration(
-                        //       border: Border.all(color: Colors.black),
-                        //       gradient: LinearGradient(
-                        //           colors: [Colors.green.shade400, Colors.grey.shade200],
-                        //           begin: Alignment.topRight,
-                        //           end: Alignment.bottomRight),
-                        //       color: Colors.white,
-                        //     ),
-                        //     child: ListTile(
-                        //       title: Text(state.notifyEmployee.first.name,
-                        //           style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
-                        //           textScaleFactor: 1),
-                        //       subtitle: Text(state.notifyEmployee.first.role),
-                        //       leading: CircleAvatar(
-                        //         radius: 30,
-                        //         backgroundColor: Colors.white,
-                        //         child: Text(
-                        //           style: const TextStyle(color: Colors.black),
-                        //           state.notifyEmployee.first.name.split("").first,
-                        //         ),
-                        //       ),
-                        //       trailing: IconButton(
-                        //         onPressed: () {
-                        //           context.read<AddLeaveCubit>().clearSearch();
-                        //         },
-                        //         icon: const Icon(Icons.close),
-                        //       ),
-                        //     ),
-                        //   ),
                         : Chip(
                             backgroundColor: Colors.green.shade100,
                             deleteButtonTooltipMessage: "Remove",
