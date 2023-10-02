@@ -50,11 +50,8 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
       getLeaveByDate(formattedDate);
-      if (state.leaveByDateList.isEmpty) {
-        state.leaveByDateList.remove;
-      } else {
         state.leaveByDateList.clear();
-      }
+
       debugPrint("========================================FormattedDate${state.dateController}");
     } else {
       String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
@@ -115,7 +112,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void getLeaveByDate(String? date) async {
     debugPrint("Date::${date}");
-    final response = await Dio().get('https://c0db-136-232-118-126.ngrok-free.app/api/filter_leave_date', data: {
+    final response = await Dio().get('https://19d1-136-232-118-126.ngrok-free.app/api/filter_leave_date', data: {
       "date": date
       // DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
       // "date": date,
