@@ -40,7 +40,9 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
           return RefreshIndicator(
             onRefresh: () => context.read<ManagerLeaveRequestCubit>().refresh(),
             child: SingleChildScrollView(
-              child: ListView.builder(
+              child:
+              (state.pendingLeaveList.isNotEmpty)?
+              ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: state.pendingLeaveList.length,
@@ -70,9 +72,9 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                 color: Colors.green.shade100,
                                 child: Icon(Icons.done),
                                 onPressed: () {
-                                    context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(),index);
-                                    context.read<ManagerLeaveRequestCubit>().navigateToManager(context);
-                                  },
+                                  context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(), index);
+                                  context.read<ManagerLeaveRequestCubit>().navigateToManager(context);
+                                },
                                 height: 35,
                                 width: 50,
                               ),
@@ -81,7 +83,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                 color: Colors.red.shade100,
                                 child: Icon(Icons.close),
                                 onPressed: () {
-                                  context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString(),index);
+                                  context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString(), index);
                                   context.read<ManagerLeaveRequestCubit>().navigateToManager(context);
                                 },
                                 width: 50,
@@ -94,7 +96,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                     ),
                   );
                 },
-              ),
+              ) : Center(child: CircularProgressIndicator())
             ),
           );
         },

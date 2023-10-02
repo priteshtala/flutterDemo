@@ -52,7 +52,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   Widget build(BuildContext context) {
     return BlocBuilder<AddEmployeeCubit, AddEmployeeState>(
       builder: (context, state) {
-
         return Scaffold(
           appBar: AppBar(
             title: (state.profile == Profile.employee) ? Text("Update Employee Details") : Text("Add Employee Details"),
@@ -213,7 +212,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
             ),
           ),
           bottomNavigationBar: SafeArea(
-            minimum: const EdgeInsets.only(bottom: 8),
+            minimum: const EdgeInsets.only(top: 8,bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

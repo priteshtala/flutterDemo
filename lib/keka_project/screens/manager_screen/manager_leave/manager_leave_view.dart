@@ -79,7 +79,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-
                     ],
                   ),
                 )
@@ -114,12 +113,19 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
             automaticallyImplyLeading: false,
             title: (state.profile == Profile.manager) ? Text("Elaunch Solution") : Text(state.name.toString()),
             actions: [
-              IconButton(
-                onPressed: () {
-                  context.read<ManagerScreenCubit>().alert(context);
-                },
-                icon: const Icon(Icons.logout),
-              ),
+              (state.profile == Profile.employee)
+                  ? IconButton(
+                      onPressed: () {
+                        context.read<ManagerScreenCubit>().alert(context);
+                      },
+                      icon: const Icon(Icons.logout),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(Icons.logout),
+                    ),
             ],
           ),
           body: SingleChildScrollView(
