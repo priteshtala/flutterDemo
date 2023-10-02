@@ -6,9 +6,7 @@ part of 'login_details.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EmployeeLoginDetails _$EmployeeLoginDetailsFromJson(
-        Map<String, dynamic> json) =>
-    EmployeeLoginDetails(
+EmployeeLoginDetails _$EmployeeLoginDetailsFromJson(Map<String, dynamic> json) => EmployeeLoginDetails(
       id: json['id'] as int?,
       name: json['name'] as String,
       role: json['role'] as String,
@@ -19,12 +17,9 @@ EmployeeLoginDetails _$EmployeeLoginDetailsFromJson(
       birthDate: json['birth_date'] as String,
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
-      token: json['device_token'] as String,
     );
 
-Map<String, dynamic> _$EmployeeLoginDetailsToJson(
-        EmployeeLoginDetails instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$EmployeeLoginDetailsToJson(EmployeeLoginDetails instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'role': instance.role,
@@ -35,5 +30,4 @@ Map<String, dynamic> _$EmployeeLoginDetailsToJson(
       'birth_date': instance.birthDate,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'device_token': instance.token,
     };

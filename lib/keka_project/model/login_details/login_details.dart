@@ -17,8 +17,8 @@ class EmployeeLoginDetails {
   dynamic createdAt;
   @JsonKey(name: "updated_at")
   dynamic updatedAt;
-  @JsonKey(name: "device_token")
-  String token;
+  // @JsonKey(name: "device_token")
+  // String token;
 
   EmployeeLoginDetails({
     this.id,
@@ -31,7 +31,7 @@ class EmployeeLoginDetails {
     required this.birthDate,
     required this.createdAt,
     required this.updatedAt,
-    required this.token,
+    // required this.token,
   });
 
   factory EmployeeLoginDetails.fromJson(Map<String, dynamic> data) => _$EmployeeLoginDetailsFromJson(data);

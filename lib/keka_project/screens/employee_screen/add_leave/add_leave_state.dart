@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
+import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:flutter/cupertino.dart';
 
 class AddLeaveState extends Equatable {
@@ -18,7 +19,8 @@ class AddLeaveState extends Equatable {
         filtterdUserList,
         notifyEmployee,
         isSearch,
-    profile
+        profile,
+        loginData,
       ];
   TextEditingController searchController;
   TextEditingController dateController;
@@ -30,6 +32,7 @@ class AddLeaveState extends Equatable {
   List<Employee> notifyEmployee;
   bool? isSearch;
   Profile? profile;
+  EmployeeLoginDetails? loginData;
 
   AddLeaveState({
     required this.searchController,
@@ -41,7 +44,8 @@ class AddLeaveState extends Equatable {
     this.filtterdUserList = const [],
     this.notifyEmployee = const [],
     this.isSearch,
-    this.profile
+    this.profile,
+    this.loginData,
   });
 
   AddLeaveState copyWith({
@@ -55,6 +59,7 @@ class AddLeaveState extends Equatable {
     List<Employee>? notifyEmployee,
     bool? isSearch,
     Profile? profile,
+    EmployeeLoginDetails? loginData,
   }) {
     return AddLeaveState(
       searchController: searchController ?? this.searchController,
@@ -67,6 +72,7 @@ class AddLeaveState extends Equatable {
       notifyEmployee: notifyEmployee ?? this.notifyEmployee,
       isSearch: isSearch ?? this.isSearch,
       profile: profile ?? this.profile,
+      loginData: loginData ?? this.loginData,
     );
   }
 }
