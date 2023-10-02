@@ -35,7 +35,6 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MaterialButton(
-
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
                     // staticListAdd();
@@ -48,8 +47,8 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
-                MaterialButton(splashColor: Colors.red,
-
+                MaterialButton(
+                  splashColor: Colors.red,
                   shape: Border.all(color: Colors.black),
                   onPressed: () => Navigator.pop(context),
                   child: const Text(

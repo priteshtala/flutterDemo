@@ -50,14 +50,17 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
       getLeaveByDate(formattedDate);
-        state.leaveByDateList.clear();
+      state.leaveByDateList.clear();
 
       debugPrint("========================================FormattedDate${state.dateController}");
     } else {
       String formattedDate1 = DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)));
       state.yesterdayDate = formattedDate1;
     }
-    emit(state.copyWith(dateController: state.dateController, yesterdayDate: state.dateController));
+    emit(state.copyWith(
+        dateController: state.dateController,
+        yesterdayDate: state.dateController,
+        leaveByDateList: state.leaveByDateList));
   }
 
   alert(BuildContext context) {
@@ -94,8 +97,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveToday() async {
-    final response = await Dio()
-        .get('https://19d1-136-232-118-126.ngrok-free.app/api/today_leave_user');
+    final response = await Dio().get('https://19d1-136-232-118-126.ngrok-free.app/api/today_leave_user');
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
 
     if (response.statusCode == 200) {
@@ -118,15 +120,19 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       // "date": date,
     });
     var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
+    var data = response.data;
     if (response.statusCode == 200) {
-      var data = response.data;
       print("===============================Data${data}");
       for (var entryJson in data) {
         leaveByDateData.add(DateByLeave.fromJson(entryJson));
+        if (data == null) {
+          leaveByDateData.clear();
+        }
       }
     } else {
       throw Exception('Data Not Available');
     }
+
     emit(state.copyWith(leaveByDateList: leaveByDateData));
     print(leaveByDateData.length);
   }

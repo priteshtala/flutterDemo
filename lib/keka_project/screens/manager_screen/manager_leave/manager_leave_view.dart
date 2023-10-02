@@ -159,6 +159,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           itemCount: state.leaveTodayList.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
+                            print("lenaghthadfsbhjdashfjk${state.leaveByDateList.length}");
                             return Column(
                               children: [
                                 Padding(
@@ -216,6 +217,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   // context.read<ManagerScreenCubit>().getLeaveByDate(
                                   //     DateTime.parse(context.read<ManagerScreenCubit>().dateTime(context)));
                                   context.read<ManagerScreenCubit>().dateTime(context);
+
                                   // context.read<ManagerScreenCubit>().runFilter(state.dateController);
                                 },
                               ),
@@ -226,7 +228,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       Container(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
                         height: 120,
-                        child: ListView.builder(
+                        child: state.leaveByDateList.length > 0 ? ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: state.leaveByDateList.length,
                           shrinkWrap: true,
@@ -252,7 +254,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                               ],
                             );
                           },
-                        ),
+                        ) : Center(child: Text("no leave on this date",textAlign: TextAlign.center)),
                       ),
                     ],
                   ),
