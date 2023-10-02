@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
-
-import '../../../model/leave_today_model/leave_today_model.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_cubit.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
+import 'package:flutter/material.dart';
 import 'manager_leave_request_state.dart';
 
 class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
@@ -56,5 +57,8 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     state.pendingLeaveList.clear();
     emit(state.copyWith(hasError: refresh));
     return pendingLeave();
+  }
+  void navigateToManager(context) {
+    Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: state.profile);
   }
 }

@@ -35,23 +35,27 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MaterialButton(
-                  splashColor: Colors.blue,
+
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
                     // staticListAdd();
                     Navigator.pop(context);
-
-                    print("Add::${state.departmentList}");
+                    // state.leaveSearchList.add(Department(name: state.departmentController.text, createAt: "", updateAt: ""));
+                    print("Add::${state.staticList}");
                   },
                   child: const Text(
                     "Add",
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
-                MaterialButton(
+                MaterialButton(splashColor: Colors.red,
+
                   shape: Border.all(color: Colors.black),
                   onPressed: () => Navigator.pop(context),
-                  child: const Text("No"),
+                  child: const Text(
+                    "No",
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
               ],
             )
