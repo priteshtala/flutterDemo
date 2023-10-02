@@ -44,7 +44,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
 
     var response = await Dio().post(
-      "https://c0db-136-232-118-126.ngrok-free.app/api/user",
+      "https://19d1-136-232-118-126.ngrok-free.app/api/user",
       data: data,
       options: Options(
         headers: {"Accept": "application/json"},
