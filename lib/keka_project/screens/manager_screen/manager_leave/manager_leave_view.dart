@@ -47,7 +47,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
     super.initState();
     cubit.getToken();
     cubit.getLeaveToday();
-    cubit.getLeaveByDate(DateFormat("yyyy-MM-dd").parse(DateTime.now().toString()).toString());
+    cubit.getLeaveByDate(cubit.state.dateController.text);
     cubit.employeeCount();
     cubit.departmentCount();
     cubit.getLoginDetails();
