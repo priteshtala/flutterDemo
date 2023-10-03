@@ -56,10 +56,10 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                           child: ListTile(
                             leading: CircleAvatar(
                               child: Text(
-                                state.pendingLeaveList[index].user.name[index].toUpperCase(),
-                                style: TextStyle(color: Colors.black, fontSize: 18),
+                                state.pendingLeaveList[index].user.name[0].toUpperCase(),
+                                style: TextStyle(color: Colors.white, fontSize: 18),
                               ),
-                              backgroundColor: Colors.green.shade200,
+                              backgroundColor: Colors.green,
                             ),
                             title: Text(state.pendingLeaveList[index].user.name),
                             subtitle: Column(

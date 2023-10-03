@@ -43,9 +43,7 @@ class MainScreenCubit extends Cubit<MainScreenState> {
       var getToken = await Helper().getToken();
       getToken.isNotEmpty
           ? Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: Profile.employee)
-          : Navigator.of(context).pushNamed(
-              EmployeeLoginView.routeName,
-            );
+          : Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
     }
   }
 }
