@@ -13,16 +13,22 @@ class ManagerLeaveView extends StatefulWidget {
   static Widget builder(BuildContext context) {
     final arg = ModalRoute.of(context)?.settings.arguments as Profile?;
     return BlocProvider(
-      create: (context) => ManagerScreenCubit(ManagerScreenState(
-        profile: arg,
-        leaveTodayList: [],
-        dateList: [],
-        leaveByDateList: [],
-        searchController: TextEditingController(),
-        dateController: TextEditingController(
-            text: DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))),
-        // yesterdayDate: DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1))),
-      )),
+      create: (context) => ManagerScreenCubit(
+        ManagerScreenState(
+          profile: arg,
+          leaveTodayList: [],
+          dateList: [],
+          leaveByDateList: [],
+          searchController: TextEditingController(),
+          dateController: TextEditingController(
+            text: DateFormat("yyyy-MM-dd").format(
+              DateTime.now().subtract(
+                const Duration(days: 1),
+              ),
+            ),
+          ),
+        ),
+      ),
       child: const ManagerLeaveView(),
     );
   }
@@ -275,11 +281,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                     boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
                                     gradient: LinearGradient(
                                         // colors: [Colors.green, Colors.lightGreen, Colors.lightGreenAccent],
-                                        colors: [
-                                          Colors.greenAccent,
-                                          Colors.green.shade300,
-                                          Colors.lightGreen
-                                        ],
+                                        colors: [Colors.greenAccent, Colors.green.shade300, Colors.lightGreen],
                                         begin: Alignment.bottomRight,
                                         end: Alignment.topLeft),
                                     borderRadius: BorderRadius.circular(10),
@@ -319,11 +321,10 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   padding: EdgeInsets.all(13),
                                   decoration: BoxDecoration(
                                     boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                                    gradient: LinearGradient(colors: [
-                                      Colors.greenAccent,
-                                      Colors.green.shade300,
-                                      Colors.lightGreen
-                                    ], begin: Alignment.bottomRight, end: Alignment.topLeft),
+                                    gradient: LinearGradient(
+                                        colors: [Colors.greenAccent, Colors.green.shade300, Colors.lightGreen],
+                                        begin: Alignment.bottomRight,
+                                        end: Alignment.topLeft),
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.green.shade200,
                                   ),

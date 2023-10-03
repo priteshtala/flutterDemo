@@ -105,15 +105,15 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveByDate(String? date) async {
-    debugPrint("Date::${date}");
+    debugPrint("Date:==========date=========:${date}");
     final response =
         await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/filter_leave_date', data: {"date": date});
     var leaveByDateData = List<DateByLeave>.from([]);
     var data = response.data;
     if (response.statusCode == 200) {
       print("===============================Data${data}");
-      print("===============================Data${data == null || (data as List).isEmpty}");
-      if (data != null || (data as List).isNotEmpty) {
+      print("===============================Data${data == null}");
+      if (data != null) {
         for (var entryJson in data) {
           leaveByDateData.add(DateByLeave.fromJson(entryJson));
         }
@@ -185,5 +185,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   Future<void> getToken() async {
     var userToken = await Helper().getToken();
+    // print("${userToken}");
   }
 }
