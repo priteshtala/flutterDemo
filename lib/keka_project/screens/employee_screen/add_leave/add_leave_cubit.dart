@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -92,7 +91,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void getNotifyEmployee() async {
-    final response = await Dio().get("https://19d1-136-232-118-126.ngrok-free.app/api/user");
+    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/user");
     var notifyEmployee = List<Employee>.from(state.notifyEmployee);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -119,7 +118,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/add_leave",
+      "https://1f35-136-232-118-126.ngrok-free.app/api/add_leave",
       data: data,
       options: Options(headers: {"Accept": "application/json"}),
     );

@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_cubit.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'manager_leave_request_state.dart';
 
@@ -10,7 +8,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
   ManagerLeaveRequestCubit(super.initialState);
 
   void pendingLeave() async {
-    final response = await Dio().get('https://19d1-136-232-118-126.ngrok-free.app/api/all_leaves');
+    final response = await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/all_leaves');
     var pendingLeaveData = List<TodayLeave>.from(state.pendingLeaveList);
 
     if (response.statusCode == 200) {
@@ -33,7 +31,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     print("UserId=============UserId==========UserId=======UserId========UserId===${state.pendingLeaveList[index].id}");
 
     final response = await Dio().put(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id}",
+      "https://1f35-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id}",
       data: data,
       options: Options(
           headers: {"Accept": "application/json"}),

@@ -3,7 +3,6 @@ import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/employee_login_view.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'main_screen_state.dart';

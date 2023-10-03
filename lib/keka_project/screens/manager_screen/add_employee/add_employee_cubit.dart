@@ -4,10 +4,8 @@ import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'add_employee_state.dart';
 
 class AddEmployeeCubit extends Cubit<AddEmployeeState> {
@@ -44,7 +42,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
 
     var response = await Dio().post(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/user",
+      "https://1f35-136-232-118-126.ngrok-free.app/api/user",
       data: data,
       options: Options(
         headers: {"Accept": "application/json"},
@@ -74,7 +72,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     print("UserId=============UserId==========UserId=======UserId========UserId===${state.loginData?.id}");
 
     final response = await Dio().put(
-      "https://19d1-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id ?? ""}",
+      "https://1f35-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id ?? ""}",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
@@ -112,7 +110,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   void getEmployeeDetails() async {
     print("GetAmploye::::");
-    final response = await Dio().get('https://19d1-136-232-118-126.ngrok-free.app/api/login_details',
+    final response = await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/login_details',
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }));
@@ -149,7 +147,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://19d1-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       getEmployeeDetails();
