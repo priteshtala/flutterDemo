@@ -97,7 +97,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                   ),
                 ] else if (state.departmentList.isEmpty) ...[
                   Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(color: Colors.green),
                   ),
                 ] else ...[
                   Text("Data Not Found"),

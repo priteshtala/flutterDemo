@@ -57,7 +57,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   Widget build(BuildContext context) {
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
-        return RefreshIndicator(
+        return RefreshIndicator(color: Colors.green,
           onRefresh: () => context.read<ManagerScreenCubit>().refresh(),
           child: Scaffold(
             bottomNavigationBar: (state.profile == Profile.manager)

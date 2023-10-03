@@ -45,6 +45,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
       builder: (context, state) {
         return RefreshIndicator(
+          color: Colors.green,
           onRefresh: () => context.read<EmployeeDetailsCubit>().refresh(),
           child: Scaffold(
             appBar: AppBar(
@@ -167,7 +168,11 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                       },
                     )
                   ] else if (state.employeeList.isEmpty) ...[
-                    Center(child: CircularProgressIndicator()),
+                    Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
+                    ),
                   ] else ...[
                     Text("Data Not Found"),
                   ]

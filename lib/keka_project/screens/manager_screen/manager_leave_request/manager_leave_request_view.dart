@@ -39,6 +39,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
       body: BlocBuilder<ManagerLeaveRequestCubit, ManagerLeaveRequestState>(
         builder: (context, state) {
           return RefreshIndicator(
+            color: Colors.green,
             onRefresh: () => context.read<ManagerLeaveRequestCubit>().refresh(),
             child: SingleChildScrollView(
               padding: EdgeInsets.all(8),
@@ -143,7 +144,9 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                       },
                     )
                   : Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(
+                        color: Colors.green,
+                      ),
                     ),
             ),
           );
