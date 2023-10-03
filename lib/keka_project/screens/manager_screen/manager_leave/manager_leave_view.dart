@@ -11,22 +11,18 @@ class ManagerLeaveView extends StatefulWidget {
   static const String routeName = '/Manager_Leave_View';
 
   static Widget builder(BuildContext context) {
-    final arg = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments as Profile?;
+    final arg = ModalRoute.of(context)?.settings.arguments as Profile?;
     return BlocProvider(
-      create: (context) =>
-          ManagerScreenCubit(ManagerScreenState(
-            profile: arg,
-            leaveTodayList: [],
-            dateList: [],
-            leaveByDateList: [],
-            searchController: TextEditingController(),
-            dateController: TextEditingController(
-                text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
-            yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
-          )),
+      create: (context) => ManagerScreenCubit(ManagerScreenState(
+        profile: arg,
+        leaveTodayList: [],
+        dateList: [],
+        leaveByDateList: [],
+        searchController: TextEditingController(),
+        dateController: TextEditingController(
+            text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
+        yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
+      )),
       child: const ManagerLeaveView(),
     );
   }
@@ -60,78 +56,78 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
           child: Scaffold(
             bottomNavigationBar: (state.profile == Profile.manager)
                 ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomButtonChange(
-                    color: Colors.green,
-                    child: const Text("Add Leave", style: TextStyle(color: Colors.white)),
-                    onPressed: () {
-                      context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
-                    },
-                    width: 150,
-                    height: 40,
-                  ),
-                  CustomButtonChange(
-                    color: Colors.green,
-                    onPressed: () {
-                      context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
-                    },
-                    width: 150,
-                    height: 40,
-                    child: const Text(
-                      "Leave Requests",
-                      style: TextStyle(color: Colors.white),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomButtonChange(
+                          color: Colors.green,
+                          child: const Text("Add Leave", style: TextStyle(color: Colors.white)),
+                          onPressed: () {
+                            context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
+                          },
+                          width: 150,
+                          height: 40,
+                        ),
+                        CustomButtonChange(
+                          color: Colors.green,
+                          onPressed: () {
+                            context.read<ManagerScreenCubit>().navigateToManagerRequest(context);
+                          },
+                          width: 150,
+                          height: 40,
+                          child: const Text(
+                            "Leave Requests",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomButtonChange(
+                          color: Colors.green,
+                          child: const Text("Apply Leave", style: TextStyle(color: Colors.white)),
+                          onPressed: () {
+                            context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
+                            // context.read<ManagerScreenCubit>().getLoginDetails()
+                          },
+                          width: 150,
+                          height: 40,
+                        ),
+                        CustomButtonChange(
+                          color: Colors.green,
+                          onPressed: () {
+                            context.read<ManagerScreenCubit>().navigateToEdit(context);
+                          },
+                          width: 150,
+                          height: 40,
+                          child: const Text("Edit", style: TextStyle(color: Colors.white)),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            )
-                : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomButtonChange(
-                    color: Colors.green,
-                    child: const Text("Apply Leave", style: TextStyle(color: Colors.white)),
-                    onPressed: () {
-                      context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
-                      // context.read<ManagerScreenCubit>().getLoginDetails()
-                    },
-                    width: 150,
-                    height: 40,
-                  ),
-                  CustomButtonChange(
-                    color: Colors.green,
-                    onPressed: () {
-                      context.read<ManagerScreenCubit>().navigateToEdit(context);
-                    },
-                    width: 150,
-                    height: 40,
-                    child: const Text("Edit", style: TextStyle(color: Colors.white)),
-                  ),
-                ],
-              ),
-            ),
             appBar: AppBar(
               automaticallyImplyLeading: false,
               title: (state.profile == Profile.manager) ? Text("Elaunch Solution") : Text(state.name.toString()),
               actions: [
-                (state.profile == Profile.employee)
-                    ? IconButton(
-                  onPressed: () {
-                    context.read<ManagerScreenCubit>().alert(context);
-                  },
-                  icon: const Icon(Icons.logout),
-                )
-                    : IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(Icons.logout),
-                ),
+                // (state.profile == Profile.employee)
+                     IconButton(
+                        onPressed: () {
+                          context.read<ManagerScreenCubit>().alert(context);
+                        },
+                        icon: const Icon(Icons.logout),
+                      ),
+                    // : IconButton(
+                    //     onPressed: () {
+                    //       Navigator.of(context).pop();
+                    //     },
+                    //     icon: const Icon(Icons.logout),
+                    //   ),
               ],
             ),
             body: SingleChildScrollView(
@@ -165,7 +161,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                             itemCount: state.leaveTodayList.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              print("lenaghthadfsbhjdashfjk${state.leaveByDateList.length}");
+                              print("length${state.leaveByDateList.length}");
                               return Column(
                                 children: [
                                   Padding(
@@ -237,32 +233,32 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           height: 120,
                           child: state.leaveByDateList.length > 0
                               ? ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.leaveByDateList.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: CircleAvatar(
-                                        radius: 27,
-                                        backgroundColor: Colors.green.shade300,
-                                        child: Text("${index + 1}", style: const TextStyle(color: Colors.white))),
-                                  ),
-                                  Column(
-                                    children: [
-                                      const Gap(5),
-                                      Text(
-                                        "${state.leaveByDateList[index].user.name}..",
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                          )
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: state.leaveByDateList.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                                          child: CircleAvatar(
+                                              radius: 27,
+                                              backgroundColor: Colors.green.shade300,
+                                              child: Text("${index + 1}", style: const TextStyle(color: Colors.white))),
+                                        ),
+                                        Column(
+                                          children: [
+                                            const Gap(5),
+                                            Text(
+                                              "${state.leaveByDateList[index].user.name}..",
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                )
                               : Center(child: Text("no leave on this date", textAlign: TextAlign.center)),
                         ),
                       ],
@@ -270,98 +266,98 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   ),
                   (state.profile == Profile.manager)
                       ? Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                              boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                              gradient: LinearGradient(
-                                // colors: [Colors.green, Colors.lightGreen, Colors.lightGreenAccent],
-                                  colors: [
-                                    Colors.deepPurple.shade300,
-                                    Colors.pink.shade300,
-                                    Colors.orange.shade300
-                                  ],
-                                  begin: Alignment.bottomRight,
-                                  end: Alignment.topLeft),
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.green.shade200,
-                            ),
-                            height: 150,
-                            width: 150,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Employee",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20,
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  context.read<ManagerScreenCubit>().navigateToEmployeeView(context);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(24),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
+                                    gradient: LinearGradient(
+                                        // colors: [Colors.green, Colors.lightGreen, Colors.lightGreenAccent],
+                                        colors: [
+                                          Colors.deepPurple.shade300,
+                                          Colors.pink.shade300,
+                                          Colors.orange.shade300
+                                        ],
+                                        begin: Alignment.bottomRight,
+                                        end: Alignment.topLeft),
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.green.shade200,
+                                  ),
+                                  height: 150,
+                                  width: 150,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Employee",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Divider(color: Colors.white),
+                                      Text(
+                                        "${state.employeeCount}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Divider(color: Colors.white),
-                                Text(
-                                  "${state.employeeCount}",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                    fontSize: 20,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(13),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
+                                    gradient: LinearGradient(colors: [
+                                      Colors.deepPurple.shade300,
+                                      Colors.pink.shade300,
+                                      Colors.orange.shade300
+                                    ], begin: Alignment.bottomRight, end: Alignment.topLeft),
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.green.shade200,
+                                  ),
+                                  height: 150,
+                                  width: 150,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "Department",
+                                        style:
+                                            TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
+                                      ),
+                                      Divider(color: Colors.white),
+                                      Text(
+                                        "${state.departmentCount}",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            context.read<ManagerScreenCubit>().navigateToDepartmentView(context);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(13),
-                            decoration: BoxDecoration(
-                              boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                              gradient: LinearGradient(colors: [
-                                Colors.deepPurple.shade300,
-                                Colors.pink.shade300,
-                                Colors.orange.shade300
-                              ], begin: Alignment.bottomRight, end: Alignment.topLeft),
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.green.shade200,
-                            ),
-                            height: 150,
-                            width: 150,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "Department",
-                                  style:
-                                  TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
-                                ),
-                                Divider(color: Colors.white),
-                                Text(
-                                  "${state.departmentCount}",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+                        )
                       : SizedBox.shrink(),
                 ],
               ),

@@ -37,31 +37,37 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
   }
 
   Future loginPostDio(String email, String password) async {
+    Response? response ;
     await SharedPreferences.getInstance();
     Map<String, dynamic> data = {
       "email": email,
       "password": password,
     };
     print("Login Data =====${data}");
-    var response = await Dio().post(
-      "https://1f35-136-232-118-126.ngrok-free.app/api/login",
-      data: data,
-      options: Options(
-        headers: {
-          HttpHeaders.authorizationHeader: "Bearer",
-        },
-        contentType: Headers.jsonContentType,
-      ),
-    );
-    Helper().saveToken(response.data["token"]);
-    // UserPreferences().setToken(response.data["token"]);
-    print("token================${response.data["token"]}");
+    try {
+       response = await Dio().post(
+        "https://1f35-136-232-118-126.ngrok-free.app/api/login",
+        data: data,
+        options: Options(
+          headers: {
+            HttpHeaders.authorizationHeader: "Bearer",
 
-    if (response.statusCode == 404)
-      print("response.data;:::${response.data}");
+          },
+          contentType: Headers.jsonContentType,
+        ),
+      );
+      Helper().saveToken(response.data["token"]);
+      // UserPreferences().setToken(response.data["token"]);
+      print("token================${response.data["token"]}");
       return response.data;
+    }  on DioException catch (e) {
+      print("object::${e.response}");
+      // emit(state.copyWith(error: e.response[""]))
+      return e;
     }
-    // return response;
+
+    }
+
   }
 
 // Future<void> onLogIn(context) async {

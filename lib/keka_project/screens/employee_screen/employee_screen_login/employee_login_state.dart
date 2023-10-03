@@ -8,6 +8,7 @@ class EmployeeLoginState extends Equatable {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final bool iconShowHide;
+  var error;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   EmployeeLoginState({
@@ -15,6 +16,7 @@ class EmployeeLoginState extends Equatable {
     required this.passwordController,
     this.iconShowHide = true,
     required this.formKey,
+    this.error,
   });
 
   EmployeeLoginState copyWith({
@@ -22,11 +24,14 @@ class EmployeeLoginState extends Equatable {
     TextEditingController? passwordController,
     bool? iconShowHide,
     GlobalKey<FormState>? formKey,
+    var error,
   }) {
     return EmployeeLoginState(
-        emailController: emailController ?? this.emailController,
-        passwordController: passwordController ?? this.passwordController,
-        iconShowHide: iconShowHide ?? this.iconShowHide,
-        formKey: formKey ?? this.formKey);
+      emailController: emailController ?? this.emailController,
+      passwordController: passwordController ?? this.passwordController,
+      iconShowHide: iconShowHide ?? this.iconShowHide,
+      formKey: formKey ?? this.formKey,
+      error: error ?? this.error,
+    );
   }
 }

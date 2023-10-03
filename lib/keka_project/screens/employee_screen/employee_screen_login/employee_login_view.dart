@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
@@ -98,9 +99,6 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                     const Gap(70),
                     CustomButtonChange(
                       onPressed: () {
-                        // state.formKey.currentState?.validate();
-                        // context.read<EmployeeLoginCubit>().onLogIn(context);
-                        // if (state.emailController.text.isNotEmpty || state.passwordController.text.isNotEmpty) {
                         context
                             .read<EmployeeLoginCubit>()
                             .loginPostDio(
@@ -108,7 +106,26 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                               state.passwordController.text,
                             )
                             .then(
-                                (value) => Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: arg));
+                          (value) {
+                            print("value$value");
+                            if (value is DioException) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  padding: EdgeInsets.all(3),
+                                  backgroundColor: Colors.red,
+                                  content: Text(
+                                    "wrong email & password!!",
+                                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              Navigator.of(context).pushReplacementNamed(ManagerLeaveView.routeName, arguments: arg);
+                            }
+                          },
+                        );
                         //     .then((value) {
                         //   if (value["status"] == 200) {
                         //
