@@ -16,6 +16,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
         );
 
   void addDepartment(BuildContext context) {
+    List<Department> data = [];
     showDialog(
       context: context,
       builder: (context) {
@@ -28,6 +29,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
           title: const Text("Add Department"),
           actions: [
             TextFormField(
+              controller: state.departmentController,
               decoration: const InputDecoration(hintText: "Enter Department"),
             ),
             const SizedBox(height: 20),
@@ -37,10 +39,9 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                 MaterialButton(
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
-                    // staticListAdd();
                     Navigator.pop(context);
-                    // state.leaveSearchList.add(Department(name: state.departmentController.text, createAt: "", updateAt: ""));
-                    print("Add::${state.staticList}");
+                    data.add(Department(name: state.departmentController.text, createAt: "", updateAt: ""));
+                    emit(state.copyWith(staticList: data));
                   },
                   child: const Text(
                     "Add",
@@ -57,7 +58,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         );
       },

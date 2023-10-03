@@ -97,7 +97,31 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                   ),
                 ] else ...[
                   Text("Data Not Found"),
-                ]
+                ],
+                ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: state.staticList.length,
+                  itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Card(
+                        color: Colors.white,
+                        elevation: 3,
+                        shadowColor: Colors.white,
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.primaries[index],
+                            child: Text(state.staticList[index].name[0],
+                                style: const TextStyle(color: Colors.white)),
+                          ),
+                          title: Text(state.staticList[index].name),
+                        ),
+                      ),
+                    ],
+                  );
+                },),
               ],
             ),
           ),
