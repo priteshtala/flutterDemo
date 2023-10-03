@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'department_details_state.dart';
 
 class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
-  DepartmentDetailsCubit()
-      : super(
-          DepartmentDetailsState(
-            departmentController: TextEditingController(),
-          ),
-        );
+  DepartmentDetailsCubit(super.initialState);
+
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
 
   void addDepartment(BuildContext context) {
     List<Department> data = [];
@@ -69,7 +66,7 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("$baseurl/api/department");
     var departmentData = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;

@@ -11,7 +11,11 @@ class DepartmentDetailsView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => DepartmentDetailsCubit(),
+      create: (context) => DepartmentDetailsCubit(
+        DepartmentDetailsState(
+          departmentController: TextEditingController(),
+        ),
+      ),
       child: const DepartmentDetailsView(),
     );
   }
@@ -112,8 +116,11 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                           shadowColor: Colors.white,
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundColor: Colors.primaries[index],
-                              child: Text(state.staticList[index].name[0], style: const TextStyle(color: Colors.white)),
+                              backgroundColor: Colors.green,
+                              child: Text(
+                                state.staticList[index].name[index],
+                                style: const TextStyle(color: Colors.white),
+                              ),
                             ),
                             title: Text(state.staticList[index].name),
                           ),

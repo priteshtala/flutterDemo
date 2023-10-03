@@ -9,6 +9,7 @@ import 'employee_details_state.dart';
 class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   EmployeeDetailsCubit(super.initialState);
 
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
 
   void dropdownSelected(Department value) {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
@@ -30,7 +31,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   }
 
   void getEmployeeApi() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/user");
+    final response = await Dio().get("$baseurl/api/user");
     var employeeDetails = List<Employee>.from(state.filtterdUserList);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -47,7 +48,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/department");
+    final response = await Dio().get("$baseurl/api/department");
     var DepartmentListData = List<Department>.from(state.departmentList);
     if (response.statusCode == 200) {
       var data = response.data;

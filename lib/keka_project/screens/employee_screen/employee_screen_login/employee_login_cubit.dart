@@ -10,6 +10,8 @@ import 'employee_login_state.dart';
 class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
   EmployeeLoginCubit(super.initialState);
 
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
+
   void visibility() {
     emit(state.copyWith(iconShowHide: !state.iconShowHide));
   }
@@ -24,7 +26,7 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
     print("Login Data =====${data}");
     try {
       response = await Dio().post(
-        "https://1f35-136-232-118-126.ngrok-free.app/api/login",
+        "$baseurl/api/login",
         data: data,
         options: Options(
           headers: {

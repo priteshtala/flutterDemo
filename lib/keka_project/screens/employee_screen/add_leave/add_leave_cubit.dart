@@ -9,6 +9,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   AddLeaveCubit(this.context, super.initialState);
 
   final BuildContext context;
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
 
   void dateTimePicker() async {
     DateTime? pickedDate = await showDatePicker(
@@ -90,7 +91,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void getNotifyEmployee() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/user");
+    final response = await Dio().get("$baseurl/api/user");
     var notifyEmployee = List<Employee>.from(state.notifyEmployee);
     if (response.statusCode == 200) {
       var data = response.data;
@@ -113,7 +114,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     };
     print("==================================ManagerAddLeave$data");
     var response = await Dio().post(
-      "https://1f35-136-232-118-126.ngrok-free.app/api/add_leave",
+      "$baseurl/api/add_leave",
       data: data,
       options: Options(headers: {"Accept": "application/json"}),
     );

@@ -17,8 +17,10 @@ import 'manager_leave_state.dart';
 class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   ManagerScreenCubit(super.initialState);
 
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
+
   void employeeCount() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/count_user");
+    final response = await Dio().get("$baseurl/api/count_user");
     if (response.statusCode == 200) {
       var data = response.data;
       emit(state.copyWith(employeeCount: data["total"]));
@@ -28,7 +30,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void departmentCount() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/count_department");
+    final response = await Dio().get("$baseurl/api/count_department");
     if (response.statusCode == 200) {
       var data = response.data;
       emit(state.copyWith(departmentCount: data["total"]));
@@ -49,7 +51,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
       getLeaveByDate(formattedDate);
-      debugPrint("========================================FormattedDate${state.dateController}");
+      debugPrint("================FormattedDate${state.dateController}");
     }
     emit(state.copyWith(
       dateController: state.dateController,
@@ -94,7 +96,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveToday() async {
-    final response = await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/today_leave_user');
+    final response = await Dio().get('$baseurl/api/today_leave_user');
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
 
     if (response.statusCode == 200) {
@@ -110,7 +112,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   void getLeaveByDate(String? date) async {
     final response = await Dio().get(
-      'https://1f35-136-232-118-126.ngrok-free.app/api/filter_leave_date',
+      '$baseurl/api/filter_leave_date',
       data: {"date": date},
     );
     var leaveByDateData = List<DateByLeave>.from([]);
@@ -129,11 +131,10 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     print(leaveByDateData.length);
   }
 
-
   void getLoginDetails() async {
     try {
       final response = await Dio().get(
-        "https://1f35-136-232-118-126.ngrok-free.app/api/login_details",
+        "$baseurl/api/login_details",
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }),

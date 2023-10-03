@@ -7,8 +7,10 @@ import 'manager_leave_request_state.dart';
 class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
   ManagerLeaveRequestCubit(super.initialState);
 
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
+
   void pendingLeave() async {
-    final response = await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/all_leaves');
+    final response = await Dio().get('$baseurl/api/all_leaves');
     var pendingLeaveData = List<TodayLeave>.from(state.pendingLeaveList);
 
     if (response.statusCode == 200) {
@@ -28,7 +30,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
       "status": status,
     };
     final response = await Dio().put(
-      "https://1f35-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id}",
+      "$baseurl/api/update_leave_status/${state.pendingLeaveList[index].id}",
       data: data,
       options: Options(headers: {"Accept": "application/json"}),
     );
