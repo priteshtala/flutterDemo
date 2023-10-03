@@ -3,6 +3,7 @@ import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_requ
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -52,61 +53,77 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].startDate.toString()));
                         String endDate =
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].endDate.toString()));
-                        return Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              child: Text(
-                                state.pendingLeaveList[index].user.name[0].toUpperCase(),
-                                style: TextStyle(color: Colors.white, fontSize: 18),
-                              ),
-                              backgroundColor: Colors.green,
+                        return Slidable(
+                          startActionPane: ActionPane(motion: ScrollMotion(), children: [
+                            CustomButtonChange(
+                              color: Colors.green.shade100,
+                              child: Icon(Icons.done),
+                              onPressed: () {
+                                context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(), index).then(
+                                      (value) => context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
+                                    );
+                              },
+                              height: 35,
+                              width: 50,
                             ),
-                            title: Text(state.pendingLeaveList[index].user.name),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Department : ${state.pendingLeaveList[index].user.role}"),
-                                Text("Start Date : ${startDate}"),
-                                Text("End Date : ${endDate}"),
-                                Text("Reason : ${state.pendingLeaveList[index].reason}"),
-                                const Gap(10),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    CustomButtonChange(
-                                      color: Colors.green.shade100,
-                                      child: Icon(Icons.done),
-                                      onPressed: () {
-                                        context
-                                            .read<ManagerLeaveRequestCubit>()
-                                            .updateLeaveRequests(0.toString(), index)
-                                            .then(
-                                              (value) =>
-                                                  context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                                            );
-                                      },
-                                      height: 35,
-                                      width: 50,
-                                    ),
-                                    Gap(15),
-                                    CustomButtonChange(
-                                      color: Colors.red.shade100,
-                                      child: Icon(Icons.close),
-                                      onPressed: () {
-                                        context
-                                            .read<ManagerLeaveRequestCubit>()
-                                            .updateLeaveRequests(2.toString(), index)
-                                            .then(
-                                              (value) =>
-                                                  context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                                            );
-                                      },
-                                      width: 50,
-                                      height: 35,
-                                    ),
-                                  ],
+                          ]),
+                          child: Card(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                child: Text(
+                                  state.pendingLeaveList[index].user.name[0].toUpperCase(),
+                                  style: TextStyle(color: Colors.white, fontSize: 18),
                                 ),
-                              ],
+                                backgroundColor: Colors.green,
+                              ),
+                              title: Text(state.pendingLeaveList[index].user.name),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Department : ${state.pendingLeaveList[index].user.role}"),
+                                  Text("Start Date : ${startDate}"),
+                                  Text("End Date : ${endDate}"),
+                                  Text("Reason : ${state.pendingLeaveList[index].reason}"),
+                                  const Gap(10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      CustomButtonChange(
+                                        color: Colors.green.shade100,
+                                        child: Icon(Icons.done),
+                                        onPressed: () {
+                                          context
+                                              .read<ManagerLeaveRequestCubit>()
+                                              .updateLeaveRequests(0.toString(), index)
+                                              .then(
+                                                (value) =>
+                                                    context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
+                                              );
+                                        },
+                                        height: 35,
+                                        width: 50,
+                                      ),
+                                      Gap(15),
+                                      CustomButtonChange(
+                                        color: Colors.red.shade100,
+                                        child: Icon(Icons.close),
+                                        onPressed: () {
+                                          context
+                                              .read<ManagerLeaveRequestCubit>()
+                                              .updateLeaveRequests(2.toString(), index)
+                                              .then(
+                                                (value) =>
+                                                    context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
+                                              );
+                                        },
+                                        width: 50,
+                                        height: 35,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
