@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/date_by_leave_model/date_by_leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
@@ -20,7 +21,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/count_user");
     if (response.statusCode == 200) {
       var data = response.data;
-      // print("employeeCount:: $data");
       emit(state.copyWith(employeeCount: data["total"]));
     } else {
       Text("No-Data");
@@ -71,8 +71,12 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
                   splashColor: Colors.red,
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
-                    Helper().remove();
-                    Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
+                    if (state.profile == Profile.manager) {
+                      Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
+                    } else {
+                      Helper().remove();
+                      Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
+                    }
                   },
                   child: const Text("Yes", style: TextStyle(color: Colors.red)),
                 ),
@@ -105,14 +109,13 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void getLeaveByDate(String? date) async {
-    debugPrint("Date:==========date=========:${date}");
-    final response =
-        await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/filter_leave_date', data: {"date": date});
+    final response = await Dio().get(
+      'https://1f35-136-232-118-126.ngrok-free.app/api/filter_leave_date',
+      data: {"date": date},
+    );
     var leaveByDateData = List<DateByLeave>.from([]);
     var data = response.data;
     if (response.statusCode == 200) {
-      print("===============================Data${data}");
-      print("===============================Data${data == null}");
       if (data != null) {
         for (var entryJson in data) {
           leaveByDateData.add(DateByLeave.fromJson(entryJson));
@@ -126,12 +129,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     print(leaveByDateData.length);
   }
 
-  void runFilter(query) {
-    List<TodayLeave> leaveList = List<TodayLeave>.from(state.dateList);
-    leaveList = leaveList.where((element) => element.startDate.toString().contains(query.toLowerCase())).toList();
-    emit(state.copyWith(leaveByDateList: state.dateList, dateController: state.dateController));
-    print('-------------------------LeaveList${state.dateList}');
-  }
 
   void getLoginDetails() async {
     try {
@@ -143,7 +140,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       );
       if (response.statusCode == 200) {
         var data = response.data["name"];
-        // print("getLoginDetails::${response.data["name"]}");
         emit(state.copyWith(
           name: data,
         ));

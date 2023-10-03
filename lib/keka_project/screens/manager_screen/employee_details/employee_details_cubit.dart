@@ -7,12 +7,8 @@ import 'package:flutter/material.dart';
 import 'employee_details_state.dart';
 
 class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
-  EmployeeDetailsCubit()
-      : super(
-          EmployeeDetailsState(
-            searchController: TextEditingController(),
-          ),
-        );
+  EmployeeDetailsCubit(super.initialState);
+
 
   void dropdownSelected(Department value) {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);

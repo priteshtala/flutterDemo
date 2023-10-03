@@ -4,7 +4,6 @@ import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_l
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
-
 import 'main_screen_state.dart';
 
 class MainScreenCubit extends Cubit<MainScreenState> {

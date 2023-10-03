@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'manager_leave_request_state.dart';
 
 class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
@@ -28,9 +27,6 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     var data = {
       "status": status,
     };
-    print("updateStatus::$data");
-    print("UserId=============UserId==========UserId=======UserId========UserId===${state.pendingLeaveList[index].id}");
-
     final response = await Dio().put(
       "https://1f35-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id}",
       data: data,

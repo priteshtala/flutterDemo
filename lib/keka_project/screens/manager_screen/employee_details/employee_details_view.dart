@@ -15,7 +15,11 @@ class EmployeeDetailsView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => EmployeeDetailsCubit(),
+      create: (context) => EmployeeDetailsCubit(
+        EmployeeDetailsState(
+          searchController: TextEditingController(),
+        ),
+      ),
       child: const EmployeeDetailsView(),
     );
   }
@@ -87,7 +91,12 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             )),
                             child: DropdownButtonFormField<Department>(
                               alignment: Alignment.center,
-                              decoration: InputDecoration(enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.green,width: 2,)),
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                  color: Colors.green,
+                                  width: 2,
+                                )),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),

@@ -10,7 +10,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
 
   final BuildContext context;
 
-  void dateTimePicker(context) async {
+  void dateTimePicker() async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -26,7 +26,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     ));
   }
 
-  void datePicker(context) async {
+  void datePicker() async {
     DateTime? pickedDate2 = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -95,8 +95,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     if (response.statusCode == 200) {
       var data = response.data;
       for (var entry in data) {
-        // print(data);
-
         notifyEmployee.add(Employee.fromJson(entry));
       }
     } else {
@@ -106,8 +104,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   Future postAddLeave(String is_role, String start_date, String end_date, String reason, int? user_id) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // debugPrint("pref====${prefs.getString('Token')}");
     var data = {
       "is_role": is_role,
       "start_date": start_date,

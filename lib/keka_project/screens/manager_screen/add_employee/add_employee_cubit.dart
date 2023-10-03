@@ -12,6 +12,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   AddEmployeeCubit(this.context, super.initialState);
 
   final BuildContext context;
+  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
 
   void visibility() {
     emit(state.copyWith(iconShowHide: !state.iconShowHide));
@@ -42,7 +43,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     };
 
     var response = await Dio().post(
-      "https://1f35-136-232-118-126.ngrok-free.app/api/user",
+      "$baseurl/api/user",
       data: data,
       options: Options(
         headers: {"Accept": "application/json"},
@@ -72,7 +73,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     print("UserId=============UserId==========UserId=======UserId========UserId===${state.loginData?.id}");
 
     final response = await Dio().put(
-      "https://1f35-136-232-118-126.ngrok-free.app/api/user/${state.loginData?.id ?? ""}",
+      "$baseurl/api/user/${state.loginData?.id ?? ""}",
       data: data,
       options: Options(
         contentType: Headers.jsonContentType,
@@ -109,8 +110,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getEmployeeDetails() async {
-    print("GetAmploye::::");
-    final response = await Dio().get('https://1f35-136-232-118-126.ngrok-free.app/api/login_details',
+    print("GetEmp::::");
+    final response = await Dio().get('$baseurl/api/login_details',
         options: Options(headers: {
           "authorization": "Bearer ${await Helper().getToken()}",
         }));
@@ -147,8 +148,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void getDepartmentApi() async {
-    final response = await Dio().get("https://1f35-136-232-118-126.ngrok-free.app/api/department");
-    var DepartmentListData = List<Department>.from(state.departmentList);
+    final response = await Dio().get("$baseurl/api/department");
+    var DepartmentListData = List<Department>.from([]);
     if (response.statusCode == 200) {
       getEmployeeDetails();
       var data = response.data;
@@ -164,11 +165,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   void dropdownSelected(Department value) {
     List<Department> department = List<Department>.from(state.departmentList);
     emit(state.copyWith(departmentList: department, selectedValue: value));
-  }
-
-  String formatDate(DateTime date) {
-    final formatter = DateFormat('d MMMM, y', 'en_US');
-    return formatter.format(date);
   }
 
   void navigatorToEmployee(context) {

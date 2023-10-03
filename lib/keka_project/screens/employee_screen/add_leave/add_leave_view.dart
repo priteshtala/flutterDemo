@@ -158,7 +158,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                                 icon: Icon(Icons.calendar_today, color: Colors.green),
                               ),
                               onTap: () {
-                                context.read<AddLeaveCubit>().dateTimePicker(context);
+                                context.read<AddLeaveCubit>().dateTimePicker();
                               },
                             ),
                           ),
@@ -204,7 +204,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                                 icon: Icon(Icons.calendar_today, color: Colors.green),
                               ),
                               onTap: () {
-                                context.read<AddLeaveCubit>().datePicker(context);
+                                context.read<AddLeaveCubit>().datePicker();
                               },
                             ),
                           ),
