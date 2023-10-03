@@ -9,9 +9,6 @@ class DepartmentDetailsCubit extends Cubit<DepartmentDetailsState> {
       : super(
           DepartmentDetailsState(
             departmentController: TextEditingController(),
-            // leaveSearchList: leaveEmpList,
-            // departmentList: leaveEmpList,
-            // staticList: leaveEmpList,
           ),
         );
 

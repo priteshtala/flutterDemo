@@ -2,7 +2,6 @@ import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,19 +17,18 @@ class AddEmployeeView extends StatefulWidget {
     print("add employee::$args");
     return BlocProvider(
       create: (context) => AddEmployeeCubit(
-          context,
-          AddEmployeeState(
-            profile: args,
-            emailController: TextEditingController(),
-            passwordController: TextEditingController(),
-            nameController: TextEditingController(),
-            mobileController: TextEditingController(),
-            dateController: TextEditingController(),
-            roleController: TextEditingController(),
-            locationController: TextEditingController(),
-
-            // token: dynamic,
-          )),
+        context,
+        AddEmployeeState(
+          profile: args,
+          emailController: TextEditingController(),
+          passwordController: TextEditingController(),
+          nameController: TextEditingController(),
+          mobileController: TextEditingController(),
+          dateController: TextEditingController(),
+          roleController: TextEditingController(),
+          locationController: TextEditingController(),
+        ),
+      ),
       child: const AddEmployeeView(),
     );
   }
@@ -68,7 +66,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   ],
                   controller: state.nameController,
                   readOnly: false,
-                  textCapitalization: TextCapitalization.none,
+                  textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   hintText: "Enter Your Name",
                   prefixIcon: const Icon(Icons.person),
@@ -77,7 +75,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   keyboardType: TextInputType.visiblePassword,
                   controller: state.roleController,
                   readOnly: state.profile == Profile.employee ? true : false,
-                  textCapitalization: TextCapitalization.none,
+                  textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   hintText: "Enter Your Role",
                   prefixIcon: Icon(Icons.accessibility_sharp),
@@ -85,7 +83,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 CustomTextForm(
                   controller: state.emailController,
                   readOnly: state.profile == Profile.employee ? true : false,
-                  textCapitalization: TextCapitalization.none,
+                  textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   hintText: "Enter Your Email",
                   keyboardType: TextInputType.emailAddress,
@@ -94,7 +92,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                 CustomTextForm(
                   controller: state.locationController,
                   readOnly: state.profile == Profile.employee ? true : false,
-                  textCapitalization: TextCapitalization.none,
+                  textCapitalization: TextCapitalization.words,
                   obscureText: false,
                   hintText: "Enter Your Location",
                   prefixIcon: const Icon(Icons.location_pin),
@@ -104,7 +102,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                         keyboardType: TextInputType.visiblePassword,
                         controller: state.passwordController,
                         readOnly: state.profile == Profile.employee ? true : false,
-                        textCapitalization: TextCapitalization.none,
+                        textCapitalization: TextCapitalization.words,
                         obscureText: state.iconShowHide,
                         hintText: "Enter Your Password",
                         prefixIcon: const Icon(Icons.lock),
@@ -212,7 +210,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
             ),
           ),
           bottomNavigationBar: SafeArea(
-            minimum: const EdgeInsets.only(top: 8,bottom: 8),
+            minimum: const EdgeInsets.only(top: 8, bottom: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -252,7 +250,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                           "Add",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                )
+                ),
               ],
             ),
           ),

@@ -16,26 +16,27 @@ class CustomTextForm extends StatelessWidget {
   final Widget? suffixIcon;
   final bool obscureText;
 
-  const CustomTextForm(
-      {super.key,
-        this.hintText,
-        this.prefixIcon,
-        this.label,
-        this.validator,
-        this.controller,
-        this.onTap,
-        required this.readOnly,
-        this.onChanged,
-        this.inputFormatters,
-        this.keyboardType,
-        required this.textCapitalization,
-        this.suffixIcon,
-        required this.obscureText});
+  const CustomTextForm({
+    super.key,
+    this.hintText,
+    this.prefixIcon,
+    this.label,
+    this.validator,
+    this.controller,
+    this.onTap,
+    required this.readOnly,
+    this.onChanged,
+    this.inputFormatters,
+    this.keyboardType,
+    required this.textCapitalization,
+    this.suffixIcon,
+    required this.obscureText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0,right: 10.0,top: 10.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       child: TextFormField(
         obscureText: obscureText,
         onChanged: onChanged,

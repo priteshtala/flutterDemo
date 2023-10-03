@@ -30,15 +30,19 @@ class CustomButtonChange extends StatelessWidget {
   final double height;
   final Color color;
 
-  const CustomButtonChange(
-      {super.key,
-      required this.child,
-      required this.onPressed,
-      required this.width, required this.height, required this.color});
+  const CustomButtonChange({
+    super.key,
+    required this.child,
+    required this.onPressed,
+    required this.width,
+    required this.height,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedButton(color: color,
+    return AnimatedButton(
+      color: color,
       onPressed: onPressed,
       child: child,
       width: width,
@@ -46,38 +50,3 @@ class CustomButtonChange extends StatelessWidget {
     );
   }
 }
-
-//   animated_button: ^0.1.3
-
-// import 'package:animated_button/animated_button.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-//
-// class MyCustomWidget extends StatefulWidget {
-// @override
-// MyCustomWidgetState createState() => MyCustomWidgetState();
-// }
-//
-// class _MyCustomWidgetState extends State<MyCustomWidget> {
-// @override
-// Widget build(BuildContext context) {
-// return Scaffold(
-// body: Center(
-// child: AnimatedButton(
-// child: Text(
-// 'Simple button',
-// style: TextStyle(
-// fontSize: 22,
-// color: Colors.white,
-// fontWeight: FontWeight.w500,
-// ),
-// ),
-// color: Colors.blue,
-// onPressed: () {},
-// enabled: true,
-// shadowDegree: ShadowDegree.light,
-// ),
-// ),
-// );
-// }
-// }

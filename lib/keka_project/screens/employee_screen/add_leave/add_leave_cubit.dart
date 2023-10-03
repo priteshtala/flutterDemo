@@ -43,10 +43,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
 
   void notifyEmp(String query) {
     List<Employee> employeeList = List<Employee>.from(state.employeeList);
-    employeeList = employeeList
-        .where((e) =>
-            e.name.contains(query) || e.email.contains(query))
-        .toList();
+    employeeList = employeeList.where((e) => e.name.contains(query) || e.email.contains(query)).toList();
 
     emit(state.copyWith(filtterdUserList: employeeList));
   }
@@ -72,6 +69,8 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
           ),
         ),
       );
+    } else {
+      navigateToManagerLeave(context);
     }
   }
 
@@ -124,22 +123,6 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
     );
 
     print("status code================${response.statusCode}");
-    // switch (response.statusCode) {
-    //   case 200:
-    //     var responseJson = response.data;
-    //     return responseJson;
-    //   case 400: //Bad request
-    //     throw response.data;
-    //   case 401: //Unauthorized
-    //     throw response.data;
-    //   case 403: //Forbidden
-    //     throw response.data;
-    //   case 404: //Resource Not Found
-    //     throw response.data;
-    //   case 500: //Internal Server Error
-    //   default:
-    //     throw ('Something went wrong! ${response.statusCode}');
-    // }
   }
 
   void navigateToManagerLeave(context) {

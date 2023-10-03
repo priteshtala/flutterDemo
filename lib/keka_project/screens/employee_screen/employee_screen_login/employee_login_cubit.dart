@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
@@ -37,7 +36,7 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
   }
 
   Future loginPostDio(String email, String password) async {
-    Response? response ;
+    Response? response;
     await SharedPreferences.getInstance();
     Map<String, dynamic> data = {
       "email": email,
@@ -45,13 +44,12 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
     };
     print("Login Data =====${data}");
     try {
-       response = await Dio().post(
+      response = await Dio().post(
         "https://1f35-136-232-118-126.ngrok-free.app/api/login",
         data: data,
         options: Options(
           headers: {
             HttpHeaders.authorizationHeader: "Bearer",
-
           },
           contentType: Headers.jsonContentType,
         ),
@@ -60,44 +58,9 @@ class EmployeeLoginCubit extends Cubit<EmployeeLoginState> {
       // UserPreferences().setToken(response.data["token"]);
       print("token================${response.data["token"]}");
       return response.data;
-    }  on DioException catch (e) {
+    } on DioException catch (e) {
       print("object::${e.response}");
-      // emit(state.copyWith(error: e.response[""]))
       return e;
     }
-
-    }
-
   }
-
-// Future<void> onLogIn(context) async {
-//   await loginPostDio(state.emailController.text, state.passwordController.text).then(
-//     (v) {
-//       if (v["token"] == null) {
-//         UserPreferences().setToken(v["token"]);
-//         // print(v["token"]);
-//         showDialog(
-//           context: context,
-//           builder: (context) => AlertDialog(
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(20),
-//             ),
-//             alignment: Alignment.bottomCenter,
-//             title: Text(v["message"]),
-//             actions: [
-//               TextButton(
-//                 onPressed: () => Navigator.pop(context),
-//                 child: const Text("Oky"),
-//               ),
-//             ],
-//           ),
-//         );
-//       } else {
-//         Navigator.of(context).pushNamed(
-//           '/Employee_Screen_View',
-//           // (route) => false,
-//         );
-//       }
-//     },
-//   );
-// }
+}

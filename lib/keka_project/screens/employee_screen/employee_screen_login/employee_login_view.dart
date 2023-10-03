@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_textformfield.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
-import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/shardpref.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,11 +111,11 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   duration: Duration(seconds: 1),
-                                  padding: EdgeInsets.all(3),
+                                  padding: EdgeInsets.all(7),
                                   backgroundColor: Colors.red,
                                   content: Text(
                                     "wrong email & password!!",
-                                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -126,29 +125,6 @@ class EmployeeLoginViewState extends State<EmployeeLoginView> {
                             }
                           },
                         );
-                        //     .then((value) {
-                        //   if (value["status"] == 200) {
-                        //
-                        //     Navigator.of(context).pushNamed("/Manager_Leave_View");
-                        //   } else {
-                        //     showDialog(
-                        //       context: context,
-                        //       builder: (context) => AlertDialog(
-                        //         shape: RoundedRectangleBorder(
-                        //           borderRadius: BorderRadius.circular(20),
-                        //         ),
-                        //         alignment: Alignment.bottomCenter,
-                        //         title: Text(value["message"]),
-                        //         actions: [
-                        //           TextButton(
-                        //             onPressed: () => Navigator.pop(context),
-                        //             child: const Text("Oky"),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     );
-                        //   }
-                        // });
                       },
                       width: 300,
                       height: 40,
