@@ -13,13 +13,14 @@ class ManagerLeaveRequestState extends Equatable {
   TodayLeave? loginData;
   Profile? profile;
 
-  ManagerLeaveRequestState(
-      {required this.pendingLeaveList,
-      this.startDate,
-      this.endDate,
-      this.hasError = false,
-      this.loginData,
-      this.profile});
+  ManagerLeaveRequestState({
+    required this.pendingLeaveList,
+    this.startDate,
+    this.endDate,
+    this.hasError = false,
+    this.loginData,
+    this.profile,
+  });
 
   ManagerLeaveRequestState copyWith({
     List<TodayLeave>? pendingLeaveList,

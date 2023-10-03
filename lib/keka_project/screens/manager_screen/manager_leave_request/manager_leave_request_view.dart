@@ -4,6 +4,7 @@ import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave_requ
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 class ManagerLeaveRequest extends StatefulWidget {
   static const String routeName = "/Manager_Leave_Request";
@@ -39,18 +40,24 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
           return RefreshIndicator(
             onRefresh: () => context.read<ManagerLeaveRequestCubit>().refresh(),
             child: SingleChildScrollView(
+              padding: EdgeInsets.all(8),
               child: (state.pendingLeaveList.isNotEmpty)
                   ? ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: state.pendingLeaveList.length,
                       itemBuilder: (context, index) {
+                        final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+                        String startDate =
+                            dateFormat.format(DateTime.parse(state.pendingLeaveList[index].startDate.toString()));
+                        String endDate =
+                            dateFormat.format(DateTime.parse(state.pendingLeaveList[index].endDate.toString()));
                         return Card(
                           child: ListTile(
                             leading: CircleAvatar(
                               child: Text(
-                                index.toString(),
-                                style: TextStyle(color: Colors.black),
+                                state.pendingLeaveList[index].user.name[index].toUpperCase(),
+                                style: TextStyle(color: Colors.black, fontSize: 18),
                               ),
                               backgroundColor: Colors.green.shade200,
                             ),
@@ -59,8 +66,8 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Department : ${state.pendingLeaveList[index].user.role}"),
-                                Text("START DATE : ${state.pendingLeaveList[index].startDate}"),
-                                Text("END DATE : ${state.pendingLeaveList[index].endDate}"),
+                                Text("START DATE : ${startDate}"),
+                                Text("END DATE : ${endDate}"),
                                 Text("Reason : ${state.pendingLeaveList[index].reason}"),
                                 const Gap(10),
                                 Row(
@@ -72,8 +79,11 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                       onPressed: () {
                                         context
                                             .read<ManagerLeaveRequestCubit>()
-                                            .updateLeaveRequests(0.toString(), index);
-                                        context.read<ManagerLeaveRequestCubit>().navigateToManager(context);
+                                            .updateLeaveRequests(0.toString(), index)
+                                            .then(
+                                              (value) =>
+                                                  context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
+                                            );
                                       },
                                       height: 35,
                                       width: 50,
@@ -85,8 +95,11 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                       onPressed: () {
                                         context
                                             .read<ManagerLeaveRequestCubit>()
-                                            .updateLeaveRequests(2.toString(), index);
-                                        context.read<ManagerLeaveRequestCubit>().navigateToManager(context);
+                                            .updateLeaveRequests(2.toString(), index)
+                                            .then(
+                                              (value) =>
+                                                  context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
+                                            );
                                       },
                                       width: 50,
                                       height: 35,

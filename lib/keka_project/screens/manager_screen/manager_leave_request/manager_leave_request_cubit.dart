@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'manager_leave_request_state.dart';
 
 class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
@@ -35,17 +36,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
       data: data,
       options: Options(headers: {"Accept": "application/json"}),
     );
-    // navigatorToEmployee(context);
     print("status code================${response.data}");
-  }
-
-  Date(index) {
-    var dateTime1 = DateTime.parse("${state.pendingLeaveList[index].startDate}");
-    var dateTime2 = DateTime.parse("${state.pendingLeaveList[index].endDate}");
-
-    var format = "${dateTime1.year}-${dateTime1.month}-${dateTime1.day}";
-    var format1 = "${dateTime2.year}-${dateTime2.month}-${dateTime2.day}";
-    emit(state.copyWith(startDate: format, endDate: format1));
   }
 
   refresh() {
