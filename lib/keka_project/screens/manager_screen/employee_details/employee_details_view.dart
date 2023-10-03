@@ -82,21 +82,23 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                           flex: 2,
                           child: Theme(
                             data: Theme.of(context).copyWith(
-                                inputDecorationTheme: InputDecorationTheme(
-                              isDense: true,
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
-                              fillColor: Colors.white,
-                              filled: true,
-                              contentPadding: const EdgeInsets.all(8),
-                            )),
+                              inputDecorationTheme: InputDecorationTheme(
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
+                                fillColor: Colors.white,
+                                filled: true,
+                                contentPadding: const EdgeInsets.all(8),
+                              ),
+                            ),
                             child: DropdownButtonFormField<Department>(
                               alignment: Alignment.center,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                  color: Colors.green,
-                                  width: 2,
-                                )),
+                                  borderSide: BorderSide(
+                                    color: Colors.green,
+                                    width: 2,
+                                  ),
+                                ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),
