@@ -54,7 +54,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                         String endDate =
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].endDate.toString()));
                         return Slidable(
-                          endActionPane: ActionPane(motion: ScrollMotion(), children: [
+                          endActionPane: ActionPane(motion: DrawerMotion(), children: [
                             SlidableAction(
                               borderRadius: BorderRadius.circular(14),
                               onPressed: (v) {
