@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/date_by_leave_model/date_by_leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
@@ -72,13 +71,8 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
                   splashColor: Colors.red,
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
-                    if(state.profile == Profile.manager){
-
-                    Navigator.of(context).pushNamed(MainScreenView.routeName);
-                    }else{
-                      Helper().remove();
-                      Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
-                    }
+                    Helper().remove();
+                    Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
                   },
                   child: const Text("Yes", style: TextStyle(color: Colors.red)),
                 ),
