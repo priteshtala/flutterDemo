@@ -50,7 +50,6 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       String formattedDate = DateFormat("yyyy-MM-dd").format(pickedDate);
       state.dateController.text = formattedDate;
       getLeaveByDate(formattedDate);
-      state.leaveByDateList.clear();
 
       debugPrint("========================================FormattedDate${state.dateController}");
     } else {
@@ -58,9 +57,9 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       state.yesterdayDate = formattedDate1;
     }
     emit(state.copyWith(
-        dateController: state.dateController,
-        yesterdayDate: state.dateController,
-        leaveByDateList: state.leaveByDateList));
+      dateController: state.dateController,
+      yesterdayDate: state.dateController,
+    ));
   }
 
   alert(BuildContext context) {
@@ -119,14 +118,14 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       // DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))
       // "date": date,
     });
-    var leaveByDateData = List<DateByLeave>.from(state.leaveByDateList);
+    var leaveByDateData = List<DateByLeave>.from([]);
     var data = response.data;
     if (response.statusCode == 200) {
       print("===============================Data${data}");
-      for (var entryJson in data) {
-        leaveByDateData.add(DateByLeave.fromJson(entryJson));
-        if (data == null) {
-          leaveByDateData.clear();
+      print("===============================Data${data == null || (data as List).isEmpty}");
+      if (data != null || (data as List).isNotEmpty) {
+        for (var entryJson in data) {
+          leaveByDateData.add(DateByLeave.fromJson(entryJson));
         }
       }
     } else {
