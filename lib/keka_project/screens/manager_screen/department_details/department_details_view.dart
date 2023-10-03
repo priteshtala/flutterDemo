@@ -80,7 +80,7 @@ class _DepartmentDetailsViewState extends State<DepartmentDetailsView> {
                             shadowColor: Colors.white,
                             child: ListTile(
                               leading: CircleAvatar(
-                                backgroundColor: Colors.primaries[index],
+                                backgroundColor: Colors.green,
                                 child: Text(state.leaveSearchList[index].name[0],
                                     style: const TextStyle(color: Colors.white)),
                               ),

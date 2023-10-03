@@ -87,7 +87,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             )),
                             child: DropdownButtonFormField<Department>(
                               alignment: Alignment.center,
-                              decoration: InputDecoration(
+                              decoration: InputDecoration(enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.green,width: 2,)),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(14),
                                 ),
