@@ -52,7 +52,7 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].startDate.toString()));
                         String endDate =
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].endDate.toString()));
-                        return Card(
+                        return Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                           child: ListTile(
                             leading: CircleAvatar(
                               child: Text(
@@ -66,8 +66,8 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Department : ${state.pendingLeaveList[index].user.role}"),
-                                Text("START DATE : ${startDate}"),
-                                Text("END DATE : ${endDate}"),
+                                Text("Start Date : ${startDate}"),
+                                Text("End Date : ${endDate}"),
                                 Text("Reason : ${state.pendingLeaveList[index].reason}"),
                                 const Gap(10),
                                 Row(
