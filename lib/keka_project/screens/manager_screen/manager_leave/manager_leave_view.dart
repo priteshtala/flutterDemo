@@ -20,8 +20,8 @@ class ManagerLeaveView extends StatefulWidget {
         leaveByDateList: [],
         searchController: TextEditingController(),
         dateController: TextEditingController(
-            text: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1)))),
-        yesterdayDate: DateFormat.yMd('en_US').format(DateTime.now().subtract(const Duration(days: 1))),
+            text: DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1)))),
+        // yesterdayDate: DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1))),
       )),
       child: const ManagerLeaveView(),
     );
@@ -94,7 +94,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           child: const Text("Apply Leave", style: TextStyle(color: Colors.white)),
                           onPressed: () {
                             context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
-                            // context.read<ManagerScreenCubit>().getLoginDetails()
                           },
                           width: 150,
                           height: 40,
@@ -115,19 +114,12 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
               automaticallyImplyLeading: false,
               title: (state.profile == Profile.manager) ? Text("Elaunch Solution") : Text(state.name.toString()),
               actions: [
-                // (state.profile == Profile.employee)
                      IconButton(
                         onPressed: () {
                           context.read<ManagerScreenCubit>().alert(context);
                         },
                         icon: const Icon(Icons.logout),
                       ),
-                    // : IconButton(
-                    //     onPressed: () {
-                    //       Navigator.of(context).pop();
-                    //     },
-                    //     icon: const Icon(Icons.logout),
-                    //   ),
               ],
             ),
             body: SingleChildScrollView(
@@ -170,7 +162,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                       radius: 27,
                                       backgroundColor: Colors.green.shade300,
                                       child: Text(
-                                        "${state.leaveTodayList[index].user.name[0]}",
+                                        "${state.leaveTodayList[index].user.name[0].toUpperCase()}",
                                         style: const TextStyle(color: Colors.white),
                                       ),
                                     ),
@@ -217,12 +209,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   ),
                                   readOnly: true,
                                   onTap: () {
-                                    // context.read<ManagerScreenCubit>().getLeaveByDate(
-                                    //     DateTime.parse(context.read<ManagerScreenCubit>().dateTime(context)));
                                     context.read<ManagerScreenCubit>().dateTime(context);
-
-                                    // context.read<ManagerScreenCubit>().runFilter(state.dateController);
-                                  },
+                                    },
                                 ),
                               ),
                             ],
@@ -244,7 +232,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                           child: CircleAvatar(
                                               radius: 27,
                                               backgroundColor: Colors.green.shade300,
-                                              child: Text("${index + 1}", style: const TextStyle(color: Colors.white))),
+                                              child: Text(state.leaveByDateList[index].user.name[0].toUpperCase(), style: const TextStyle(color: Colors.white))),
                                         ),
                                         Column(
                                           children: [

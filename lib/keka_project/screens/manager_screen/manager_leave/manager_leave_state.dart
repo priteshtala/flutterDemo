@@ -15,7 +15,6 @@ class ManagerScreenState extends Equatable {
         employeeCount,
         dateController,
         searchController,
-        yesterdayDate,
         profile,
         departmentCount,
         name,
@@ -27,7 +26,6 @@ class ManagerScreenState extends Equatable {
   List<DateByLeave> dateList = [];
   TextEditingController dateController;
   TextEditingController? searchController;
-  var yesterdayDate;
   Profile? profile;
   int? employeeCount;
   int? departmentCount;
@@ -41,7 +39,6 @@ class ManagerScreenState extends Equatable {
     required this.leaveTodayList,
     required this.leaveByDateList,
     this.searchController,
-    required this.yesterdayDate,
     this.profile,
     this.employeeCount = 0,
     this.departmentCount = 0,
@@ -57,7 +54,6 @@ class ManagerScreenState extends Equatable {
     List<DateByLeave>? leaveByDateList,
     TextEditingController? dateController,
     TextEditingController? searchController,
-    var yesterdayDate,
     Profile? profile,
     int? employeeCount,
     int? departmentCount,
@@ -72,7 +68,6 @@ class ManagerScreenState extends Equatable {
       dateList: dateList ?? this.dateList,
       dateController: dateController ?? this.dateController,
       searchController: searchController ?? this.searchController,
-      yesterdayDate: yesterdayDate ?? this.yesterdayDate,
       profile: profile ?? this.profile,
       employeeCount: employeeCount ?? this.employeeCount,
       departmentCount: departmentCount ?? this.departmentCount,

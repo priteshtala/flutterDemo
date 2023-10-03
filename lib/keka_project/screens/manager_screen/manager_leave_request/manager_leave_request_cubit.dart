@@ -23,7 +23,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     emit(state.copyWith(pendingLeaveList: pendingLeaveData));
   }
 
-  Future updateLeaveRequests(String status,int index) async {
+  Future updateLeaveRequests(String status, int index) async {
     var data = {
       "status": status,
     };
@@ -33,9 +33,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     final response = await Dio().put(
       "https://1f35-136-232-118-126.ngrok-free.app/api/update_leave_status/${state.pendingLeaveList[index].id}",
       data: data,
-      options: Options(
-          headers: {"Accept": "application/json"}),
-
+      options: Options(headers: {"Accept": "application/json"}),
     );
     // navigatorToEmployee(context);
     print("status code================${response.data}");
@@ -56,6 +54,7 @@ class ManagerLeaveRequestCubit extends Cubit<ManagerLeaveRequestState> {
     emit(state.copyWith(hasError: refresh));
     return pendingLeave();
   }
+
   void navigateToManager(context) {
     Navigator.of(context).pop();
   }
