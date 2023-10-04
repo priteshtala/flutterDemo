@@ -44,7 +44,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     } else {
       Text("No-Data");
     }
-    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails, hasError: true));
+    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
   }
 
   void getDepartmentApi() async {
