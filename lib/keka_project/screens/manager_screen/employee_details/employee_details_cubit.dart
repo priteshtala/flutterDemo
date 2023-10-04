@@ -25,7 +25,6 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       if (state.selectedValue?.id != 0) {
         filtterdUserList = state.employeeList.where((e) => e.departmentId == state.selectedValue?.id).toList();
       } else {
-        // When "All" is selected and search is cleared, show all "Flutter" data
         filtterdUserList = state.employeeList;
       }
     } else {
@@ -59,24 +58,6 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
 
     emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
   }
-
-  //
-  // void getEmployeeApi() async {
-  //   final response = await Dio().get("$baseurl/api/user");
-  //   var employeeDetails = List<Employee>.from(state.filtterdUserList);
-  //   if (response.statusCode == 200) {
-  //     var data = response.data;
-  //     for (var entry in data) {
-  //       employeeDetails.add(Employee.fromJson(entry));
-  //       employeeDetails.sort(
-  //         (a, b) => a.name.compareTo(b.name),
-  //       );
-  //     }
-  //   } else {
-  //     Text("No-Data");
-  //   }
-  //   emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
-  // }
 
   void getDepartmentApi() async {
     final response = await Dio().get("$baseurl/api/department");
