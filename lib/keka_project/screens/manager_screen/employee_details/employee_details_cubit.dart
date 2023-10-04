@@ -13,48 +13,34 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
 
   void dropdownSelected(Department value) {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-    // filtterdUserList =
-    //     value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
-    if (value.id != 0) {
-      filtterdUserList = state.employeeList.where((element) => element.departmentId == value.id).toList();
-    }
+    filtterdUserList =
+        value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
     emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList));
   }
 
-  // void runFilter(String query) {
-  //   List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-  //   List<Employee> employeeList = List<Employee>.from(state.employeeList);
-  //   filtterdUserList = query.isEmpty
-  //       ? state.employeeList
-  //       : employeeList.where((e) {
-  //           return e.name.toString().toLowerCase().contains(query.toLowerCase());
-  //         }).toList();
-  //
-  //   emit(state.copyWith(filtterdUserList: filtterdUserList));
-  // }
-
   void runFilter(String query) {
-    List<Employee> filteredUserList = List<Employee>.from(state.filtterdUserList);
+    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
 
     if (query.isEmpty) {
       if (state.selectedValue?.id != 0) {
-        filteredUserList = state.employeeList.where((e) => e.departmentId == state.selectedValue?.id).toList();
+        filtterdUserList = state.employeeList.where((e) => e.departmentId == state.selectedValue?.id).toList();
       } else {
-        filteredUserList = state.employeeList;
+        // When "All" is selected and search is cleared, show all "Flutter" data
+        filtterdUserList = state.employeeList;
       }
     } else {
       if (state.selectedValue?.id != 0) {
-        filteredUserList = filteredUserList.where((e) {
+        filtterdUserList = filtterdUserList.where((e) {
           return e.name.toString().toLowerCase().contains(query.toLowerCase());
         }).toList();
       } else {
-        filteredUserList = state.employeeList.where((e) {
+        filtterdUserList = state.employeeList.where((e) {
           return e.name.toString().toLowerCase().contains(query.toLowerCase());
         }).toList();
       }
     }
 
-    emit(state.copyWith(filtterdUserList: filteredUserList));
+    emit(state.copyWith(filtterdUserList: filtterdUserList));
   }
 
   void getEmployeeApi() async {
