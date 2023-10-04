@@ -13,39 +13,84 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
 
   void dropdownSelected(Department value) {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-    filtterdUserList =
-        value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
-    emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList,employeeList: filtterdUserList));
+    // filtterdUserList =
+    //     value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
+    if (value.id != 0) {
+      filtterdUserList = state.employeeList.where((element) => element.departmentId == value.id).toList();
+    }
+    emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList));
   }
 
-  void runFilter(String query) {
-    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
-    List<Employee> employeeList = List<Employee>.from(state.employeeList);
-    filtterdUserList = query.isEmpty
-        ? state.employeeList
-        : employeeList.where((e) {
-            return e.name.toString().toLowerCase().contains(query.toLowerCase());
-          }).toList();
+  // void runFilter(String query) {
+  //   List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
+  //   List<Employee> employeeList = List<Employee>.from(state.employeeList);
+  //   filtterdUserList = query.isEmpty
+  //       ? state.employeeList
+  //       : employeeList.where((e) {
+  //           return e.name.toString().toLowerCase().contains(query.toLowerCase());
+  //         }).toList();
+  //
+  //   emit(state.copyWith(filtterdUserList: filtterdUserList));
+  // }
 
-    emit(state.copyWith(filtterdUserList: filtterdUserList));
+  void runFilter(String query) {
+    List<Employee> filteredUserList = List<Employee>.from(state.filtterdUserList);
+
+    if (query.isEmpty) {
+      if (state.selectedValue?.id != 0) {
+        filteredUserList = state.employeeList.where((e) => e.departmentId == state.selectedValue?.id).toList();
+      } else {
+        filteredUserList = state.employeeList;
+      }
+    } else {
+      if (state.selectedValue?.id != 0) {
+        filteredUserList = filteredUserList.where((e) {
+          return e.name.toString().toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      } else {
+        filteredUserList = state.employeeList.where((e) {
+          return e.name.toString().toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      }
+    }
+
+    emit(state.copyWith(filtterdUserList: filteredUserList));
   }
 
   void getEmployeeApi() async {
     final response = await Dio().get("$baseurl/api/user");
-    var employeeDetails = List<Employee>.from(state.filtterdUserList);
+    var employeeDetails = List<Employee>.from([]);
+
     if (response.statusCode == 200) {
       var data = response.data;
       for (var entry in data) {
         employeeDetails.add(Employee.fromJson(entry));
-        employeeDetails.sort(
-          (a, b) => a.name.compareTo(b.name),
-        );
       }
+      employeeDetails.sort((a, b) => a.name.compareTo(b.name));
     } else {
       Text("No-Data");
     }
+
     emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
   }
+
+  //
+  // void getEmployeeApi() async {
+  //   final response = await Dio().get("$baseurl/api/user");
+  //   var employeeDetails = List<Employee>.from(state.filtterdUserList);
+  //   if (response.statusCode == 200) {
+  //     var data = response.data;
+  //     for (var entry in data) {
+  //       employeeDetails.add(Employee.fromJson(entry));
+  //       employeeDetails.sort(
+  //         (a, b) => a.name.compareTo(b.name),
+  //       );
+  //     }
+  //   } else {
+  //     Text("No-Data");
+  //   }
+  //   emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
+  // }
 
   void getDepartmentApi() async {
     final response = await Dio().get("$baseurl/api/department");
