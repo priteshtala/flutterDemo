@@ -14,10 +14,13 @@ class EmployeeDetailsView extends StatefulWidget {
   static const String routeName = "/Employee_details_view";
 
   static Widget builder(BuildContext context) {
+    final arg = ModalRoute.of(context)?.settings.arguments as Profile?;
+
     return BlocProvider(
       create: (context) => EmployeeDetailsCubit(
         context,
         EmployeeDetailsState(
+          profile: arg,
           searchController: TextEditingController(),
         ),
       ),
@@ -41,8 +44,6 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final arg = ModalRoute.of(context)?.settings.arguments as Profile?;
-
     return BlocBuilder<EmployeeDetailsCubit, EmployeeDetailsState>(
       builder: (context, state) {
         return Scaffold(
@@ -149,8 +150,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                             children: [
                               Text(
                                 employee.name.toString(),
-                                style:
-                                    const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 17),
                               ),
                               const Gap(8),
                               Text(employee.role.toString()),
@@ -184,7 +184,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    context.read<EmployeeDetailsCubit>().addEmployee(arg);
+                    context.read<EmployeeDetailsCubit>().addEmployee(state.profile);
                   },
                   minWidth: 300,
                   child: const Text(

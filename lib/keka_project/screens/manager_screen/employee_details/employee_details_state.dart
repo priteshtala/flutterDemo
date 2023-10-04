@@ -1,12 +1,20 @@
 // ignore_for_file: must_be_immutable
 import 'package:equatable/equatable.dart';
+import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:flutter/material.dart';
 
 class EmployeeDetailsState extends Equatable {
   @override
-  List<Object?> get props => [selectedValue, filterDepartmentList, selectedValue, filtterdUserList, employeeList];
+  List<Object?> get props => [
+        selectedValue,
+        filterDepartmentList,
+        selectedValue,
+        filtterdUserList,
+        employeeList,
+        profile,
+      ];
 
   List<Department> filterDepartmentList;
   List<Employee> employeeList;
@@ -15,6 +23,7 @@ class EmployeeDetailsState extends Equatable {
   TextEditingController searchController;
   Department? selectedValue;
   bool? hasError;
+  Profile? profile;
 
   EmployeeDetailsState({
     this.filterDepartmentList = const [],
@@ -24,6 +33,7 @@ class EmployeeDetailsState extends Equatable {
     required this.searchController,
     this.selectedValue,
     this.hasError = false,
+    this.profile,
   });
 
   EmployeeDetailsState copyWith({
@@ -34,6 +44,7 @@ class EmployeeDetailsState extends Equatable {
     TextEditingController? searchController,
     Department? selectedValue,
     bool? hasError,
+    Profile? profile,
   }) {
     return EmployeeDetailsState(
       filterDepartmentList: filterDepartmentList ?? this.filterDepartmentList,
@@ -43,6 +54,7 @@ class EmployeeDetailsState extends Equatable {
       selectedValue: selectedValue ?? this.selectedValue,
       departmentList: departmentList ?? this.departmentList,
       hasError: hasError ?? this.hasError,
+      profile: profile ?? this.profile,
     );
   }
 }

@@ -50,19 +50,25 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     List<Employee> employeeDetails = [];
 
     if (response.statusCode == 200) {
-      var data = response.data;
-      for (var entry in data) {
-        employeeDetails.add(Employee.fromJson(entry));
-      }
+      List<Employee> data = (response.data as List).map((e) => Employee.fromJson(e)).toList();
+      employeeDetails.addAll(data);
       employeeDetails.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+
+      if (department != null) {
+        debugPrint("Sele:${department.name}");
+        debugPrint("employeeDetails :${employeeDetails.first.department.name}");
+
+        var selectedEmployeeList =
+            employeeDetails.where((element) => element.department.name == department.name).toList();
+
+        debugPrint("selectedEmployeeList ::${selectedEmployeeList.length}");
+
+        emit(state.copyWith(filtterdUserList: selectedEmployeeList, selectedValue: department));
+      } else {
+        emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
+      }
     } else {
       Text("No-Data");
-    }
-    if (department != null) {
-      debugPrint("Sele:${department.name}");
-      emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails, selectedValue: department));
-    } else {
-      emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
     }
   }
 
@@ -88,15 +94,27 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     getEmployeeApi();
   }
 
-  void addEmployee(Profile? arg) {
+  addEmployee(Profile? arg) {
+    Department selectDep = state.departmentList.firstWhere((element) => element.name == state.selectedValue?.name);
+    emit(state.copyWith(selectedValue: selectDep));
+
     Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: arg).then((value) {
       if (value == true) {
         debugPrint("State::${state.selectedValue?.id}");
         debugPrint("name::${state.selectedValue?.name}");
-        Department selectDep = state.departmentList.firstWhere((element) => element.id == state.selectedValue?.id);
         debugPrint("dep::${selectDep.name}");
         getEmployeeApi(department: selectDep);
       }
     });
   }
+// void addEmployee(Profile? arg) async {
+//   bool? result = await Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: state.profile);
+//
+//   if (result == true) {
+//     Department selectedDepartment = state.departmentList.firstWhere((element) => element.name == state.selectedValue?.name);
+//
+//     emit(state.copyWith(selectedValue: selectedDepartment));
+//     getEmployeeApi(department: selectedDepartment);
+//   }
+// }
 }
