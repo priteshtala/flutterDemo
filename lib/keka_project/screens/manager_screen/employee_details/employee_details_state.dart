@@ -50,9 +50,9 @@ class EmployeeDetailsState extends Equatable {
       filterDepartmentList: filterDepartmentList ?? this.filterDepartmentList,
       employeeList: employeeList ?? this.employeeList,
       filtterdUserList: filtterdUserList ?? this.filtterdUserList,
+      departmentList: departmentList ?? this.departmentList,
       searchController: searchController ?? this.searchController,
       selectedValue: selectedValue ?? this.selectedValue,
-      departmentList: departmentList ?? this.departmentList,
       hasError: hasError ?? this.hasError,
       profile: profile ?? this.profile,
     );

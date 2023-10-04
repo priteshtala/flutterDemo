@@ -216,7 +216,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    debugPrint("state.selectedValue!.id.toString() ::${state.selectedValue!.id.toString()}");
                     (state.profile == Profile.manager)
                         ? context.read<AddEmployeeCubit>().postEmployeeDetails(
                               state.nameController.text,
@@ -224,7 +223,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                               state.emailController.text,
                               state.locationController.text,
                               state.passwordController.text,
-                              state.selectedValue!.id.toString(),
+                              state.selectedValue?.id.toString() ??"",
                               state.mobileController.text,
                               state.dateController.text,
                             )
@@ -237,7 +236,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                               state.selectedValue!.id.toString(),
                               state.dateController.text,
                             );
-                    // context.read<AddEmployeeCubit>().navigatorToEmployee(context);
+                    // context.read<AddEmployeeCubit>().validation(context);
                   },
                   minWidth: 300,
                   child: (state.profile == Profile.employee)

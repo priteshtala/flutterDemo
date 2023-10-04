@@ -21,8 +21,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   void dateTime(context) async {
     DateTime? pikedDate = await showDatePicker(
-        context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2025));
-
+        context: context, initialDate: DateTime.now().subtract(Duration(days: 7500)), firstDate: DateTime(2000), lastDate: DateTime(2025));
+    // DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1),
     if (pikedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pikedDate);
       state.dateController.text = formattedDate;
@@ -83,14 +83,15 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         contentType: Headers.jsonContentType,
       ),
     );
-    // navigatorToEmployee(context);
     Navigator.of(context).pop(true);
     print("status code================${response.data}");
   }
 
   void validation(context) {
     if (state.nameController.text.isEmpty ||
+        state.roleController.text.isEmpty ||
         state.emailController.text.isEmpty ||
+        state.locationController.text.isEmpty ||
         state.passwordController.text.isEmpty ||
         state.selectedValue.toString().isEmpty ||
         state.mobileController.text.isEmpty ||
@@ -111,6 +112,15 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
           ),
         ),
       );
+    } else if (state.nameController.text.isNotEmpty ||
+        state.roleController.text.isNotEmpty ||
+        state.emailController.text.isNotEmpty ||
+        state.locationController.text.isNotEmpty ||
+        state.passwordController.text.isNotEmpty ||
+        state.selectedValue.toString().isNotEmpty ||
+        state.mobileController.text.isNotEmpty ||
+        state.dateController.text.isNotEmpty) {
+      Navigator.pop(context);
     }
   }
 
@@ -171,5 +181,4 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     List<Department> department = List<Department>.from(state.departmentList);
     emit(state.copyWith(departmentList: department, selectedValue: value));
   }
-
 }
