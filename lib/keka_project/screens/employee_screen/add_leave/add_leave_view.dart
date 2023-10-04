@@ -16,11 +16,12 @@ class AddLeaveView extends StatefulWidget {
       create: (context) => AddLeaveCubit(
         context,
         AddLeaveState(
-            dateController: TextEditingController(),
-            dateTimeController: TextEditingController(),
-            reasonController: TextEditingController(),
-            searchController: TextEditingController(),
-            profile: args),
+          dateController: TextEditingController(),
+          dateTimeController: TextEditingController(),
+          reasonController: TextEditingController(),
+          searchController: TextEditingController(),
+          profile: args,
+        ),
       ),
       child: const AddLeaveView(),
     );
@@ -33,17 +34,22 @@ class AddLeaveView extends StatefulWidget {
 }
 
 class _AddLeaveViewState extends State<AddLeaveView> {
+
+
+
   @override
   void initState() {
     super.initState();
     context.read<AddLeaveCubit>().getNotifyEmployee();
+    context.read<AddLeaveCubit>().getLoginDetails();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddLeaveCubit, AddLeaveState>(
       builder: (context, state) {
-        print("=============${Profile.employee.index}============${Profile.manager.index}");
+        debugPrint("Notify Employee:::::${state.name.toString()}");
+
         return Scaffold(
           backgroundColor: Colors.white,
           bottomNavigationBar: SafeArea(
@@ -59,17 +65,19 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                   onPressed: () {
                     (state.profile == Profile.manager)
                         ? context.read<AddLeaveCubit>().postAddLeave(
-                            0.toString(),
-                            state.dateController.text,
-                            state.dateTimeController.text,
-                            state.reasonController.text,
-                            state.filtterdUserList.map((e) => e.id).firstOrNull)
+                              0.toString(),
+                              state.dateController.text,
+                              state.dateTimeController.text,
+                              state.reasonController.text,
+                              state.filtterdUserList.map((e) => e.id).firstOrNull,
+                            )
                         : context.read<AddLeaveCubit>().postAddLeave(
-                            1.toString(),
-                            state.dateController.text,
-                            state.dateTimeController.text,
-                            state.reasonController.text,
-                            state.filtterdUserList.map((e) => e.id).firstOrNull);
+                              1.toString(),
+                              state.dateController.text,
+                              state.dateTimeController.text,
+                              state.reasonController.text,
+                              state.id,
+                            );
                     print("manager=================== ${state.profile == Profile.manager}");
                     print("id:::::::::${state.filtterdUserList.map((e) => e.id).firstOrNull}");
 
@@ -94,30 +102,49 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     const Gap(6),
-                    state.notifyEmployee.isEmpty
-                        ? CustomSearch(
-                            controller: state.searchController,
-                            onChanged: (query) {
-                              context.read<AddLeaveCubit>().notifyEmp(query);
-                            },
-                          )
-                        : Chip(
-                            backgroundColor: Colors.green.shade100,
-                            deleteButtonTooltipMessage: "Remove",
-                            onDeleted: () {
-                              context.read<AddLeaveCubit>().clearSearch();
-                            },
-                            avatar: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.green,
-                              child: Text(
-                                style: const TextStyle(color: Colors.white),
-                                state.notifyEmployee.first.name.split("").first,
+                    (state.profile == Profile.manager)
+                        ? state.notifyEmployee.isEmpty
+                            ? CustomSearch(
+                                controller: state.searchController,
+                                onChanged: (query) {
+                                  context.read<AddLeaveCubit>().notifyEmp(query);
+                                },
+                              )
+                            : Chip(
+                                backgroundColor: Colors.green.shade100,
+                                deleteButtonTooltipMessage: "Remove",
+                                onDeleted: () {
+                                  context.read<AddLeaveCubit>().clearSearch();
+                                },
+                                avatar: CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.green,
+                                  child: Text(
+                                    style: const TextStyle(color: Colors.white),
+                                    state.notifyEmployee.first.name.split("").first,
+                                  ),
+                                ),
+                                label: Text(
+                                  state.notifyEmployee.first.name,
+                                ),
+                              )
+                        : Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.only(left: 14),
+                                width: double.infinity,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: Text(
+                                  state.name.toString(),
+                                  style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                            label: Text(
-                              state.notifyEmployee.first.name,
-                            ),
+                            ],
                           ),
                     const Gap(20),
                     const Text(

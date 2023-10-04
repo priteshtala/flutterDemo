@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -50,8 +51,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   }
 
   void validation(context) {
-    if (state.notifyEmployee.isEmpty ||
-        state.dateController.text.isEmpty ||
+    if (state.dateController.text.isEmpty ||
         state.dateTimeController.text.isEmpty ||
         state.reasonController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -65,13 +65,34 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
               color: Colors.white,
               fontWeight: FontWeight.w500,
             ),
-            textScaleFactor: 1.3,
+            textScaleFactor: 1.2,
             textAlign: TextAlign.center,
           ),
         ),
       );
     } else {
-      navigateToManagerLeave(context);
+      DateTime startDate = DateFormat("yyyy-MM-dd").parse(state.dateController.text);
+      DateTime endDate = DateFormat("yyyy-MM-dd").parse(state.dateTimeController.text);
+      if (startDate.isAfter(endDate)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            duration: Duration(seconds: 1),
+            padding: EdgeInsets.all(3),
+            backgroundColor: Colors.red,
+            content: Text(
+              "Please fill valid dates",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+              textScaleFactor: 1.2,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      } else {
+        navigateToManagerLeave(context);
+      }
     }
   }
 
@@ -102,6 +123,30 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
       Text("No-data");
     }
     emit(state.copyWith(employeeList: notifyEmployee, filtterdUserList: notifyEmployee));
+  }
+
+  void getLoginDetails() async {
+    try {
+      final response = await Dio().get(
+        "$baseurl/api/login_details",
+        options: Options(headers: {
+          "authorization": "Bearer ${await Helper().getToken()}",
+        }),
+      );
+      if (response.statusCode == 200) {
+        var data = response.data;
+        emit(state.copyWith(
+          name: data["name"],
+          id: data["id"],
+        ));
+        print("getLoginDetails::${state.name}");
+        print("getLoginId::${state.id}");
+      } else {
+        Text("No-Data");
+      }
+    } on Exception catch (e) {
+      print("error => ${e}");
+    }
   }
 
   Future postAddLeave(String is_role, String start_date, String end_date, String reason, int? user_id) async {
