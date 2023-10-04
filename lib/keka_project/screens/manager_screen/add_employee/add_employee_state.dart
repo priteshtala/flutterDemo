@@ -3,6 +3,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,8 @@ class AddEmployeeState extends Equatable {
         roleController,
         loginData,
         profile,
+    filtterdUserList,
+    employeeList
       ];
   TextEditingController nameController;
   TextEditingController emailController;
@@ -29,6 +32,8 @@ class AddEmployeeState extends Equatable {
   TextEditingController dateController;
   TextEditingController locationController;
   List<Department> departmentList;
+  List<Employee> filtterdUserList;
+  List<Employee> employeeList;
   Department? selectedValue;
   bool iconShowHide;
   EmployeeLoginDetails? loginData;
@@ -46,6 +51,8 @@ class AddEmployeeState extends Equatable {
     required this.dateController,
     required this.locationController,
     this.departmentList = const [],
+    this.filtterdUserList = const [],
+    this.employeeList = const [],
     this.selectedValue,
     this.iconShowHide = false,
     this.loginData,
@@ -62,6 +69,8 @@ class AddEmployeeState extends Equatable {
     TextEditingController? dateController,
     TextEditingController? locationController,
     List<Department>? departmentList,
+    List<Employee>? filtterdUserList,
+    List<Employee>? employeeList,
     Department? selectedValue,
     bool? iconShowHide,
     EmployeeLoginDetails? loginData,
@@ -78,6 +87,8 @@ class AddEmployeeState extends Equatable {
       dateController: dateController ?? this.dateController,
       locationController: locationController ?? this.locationController,
       departmentList: departmentList ?? this.departmentList,
+      filtterdUserList: filtterdUserList ?? this.filtterdUserList,
+      employeeList: employeeList ?? this.employeeList,
       selectedValue: selectedValue ?? this.selectedValue,
       iconShowHide: iconShowHide ?? this.iconShowHide,
       loginData: loginData ?? this.loginData,

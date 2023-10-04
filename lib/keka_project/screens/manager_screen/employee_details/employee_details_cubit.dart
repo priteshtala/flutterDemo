@@ -15,7 +15,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
     filtterdUserList =
         value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
-    emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList));
+    emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList,employeeList: filtterdUserList));
   }
 
   void runFilter(String query) {

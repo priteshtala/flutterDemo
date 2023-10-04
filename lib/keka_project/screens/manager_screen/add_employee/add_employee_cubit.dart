@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
+import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:flutter/material.dart';
@@ -160,6 +161,35 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       Text("No-Data");
     }
     emit(state.copyWith(departmentList: DepartmentListData));
+  }
+  void runFilter(String query) {
+    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
+    List<Employee> employeeList = List<Employee>.from(state.employeeList);
+    filtterdUserList = query.isEmpty
+        ? state.employeeList
+        : employeeList.where((e) {
+      return e.name.toString().toLowerCase().contains(query.toLowerCase());
+    }).toList();
+
+    emit(state.copyWith(filtterdUserList: filtterdUserList));
+  }
+
+
+  void getEmployeeApi() async {
+    final response = await Dio().get("$baseurl/api/user");
+    var employeeDetails = List<Employee>.from(state.filtterdUserList);
+    if (response.statusCode == 200) {
+      var data = response.data;
+      for (var entry in data) {
+        employeeDetails.add(Employee.fromJson(entry));
+        employeeDetails.sort(
+          (a, b) => a.name.compareTo(b.name),
+        );
+      }
+    } else {
+      Text("No-Data");
+    }
+    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
   }
 
   void dropdownSelected(Department value) {
