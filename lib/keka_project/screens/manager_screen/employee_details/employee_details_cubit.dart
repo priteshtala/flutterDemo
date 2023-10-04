@@ -45,26 +45,30 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     emit(state.copyWith(filtterdUserList: filtterdUserList));
   }
 
-  void getEmployeeApi() async {
+  void getEmployeeApi({Department? department}) async {
     final response = await Dio().get("$baseurl/api/user");
-    List<Employee> employeeDetails = List<Employee>.from(state.employeeList);
+    List<Employee> employeeDetails = [];
 
     if (response.statusCode == 200) {
       var data = response.data;
       for (var entry in data) {
         employeeDetails.add(Employee.fromJson(entry));
       }
-      employeeDetails.sort((a, b) => a.name.compareTo(b.name));
+      employeeDetails.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     } else {
       Text("No-Data");
     }
-
-    emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
+    if (department != null) {
+      debugPrint("Sele:${department.name}");
+      emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails, selectedValue: department));
+    } else {
+      emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
+    }
   }
 
   void getDepartmentApi() async {
     final response = await Dio().get("$baseurl/api/department");
-    var DepartmentListData = List<Department>.from(state.departmentList);
+    List<Department> DepartmentListData = [];
     if (response.statusCode == 200) {
       var data = response.data;
       for (var entry in data) {
@@ -87,7 +91,11 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   void addEmployee(Profile? arg) {
     Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: arg).then((value) {
       if (value == true) {
-        getEmployeeApi();
+        debugPrint("State::${state.selectedValue?.id}");
+        debugPrint("name::${state.selectedValue?.name}");
+        Department selectDep = state.departmentList.firstWhere((element) => element.id == state.selectedValue?.id);
+        debugPrint("dep::${selectDep.name}");
+        getEmployeeApi(department: selectDep);
       }
     });
   }
