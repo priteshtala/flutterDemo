@@ -17,7 +17,7 @@ import 'manager_leave_state.dart';
 class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   ManagerScreenCubit(super.initialState);
 
-  String baseurl = "https://1f35-136-232-118-126.ngrok-free.app";
+  String baseurl = "https://57af-136-232-118-126.ngrok-free.app";
 
   void employeeCount() async {
     final response = await Dio().get("$baseurl/api/count_user");
