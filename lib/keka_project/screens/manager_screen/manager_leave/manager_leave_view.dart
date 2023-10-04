@@ -57,7 +57,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   Widget build(BuildContext context) {
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
-        return RefreshIndicator(color: Colors.green,
+        return RefreshIndicator(
+          color: Colors.green,
           onRefresh: () => context.read<ManagerScreenCubit>().refresh(),
           child: Scaffold(
             bottomNavigationBar: (state.profile == Profile.manager)
@@ -279,13 +280,10 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                   padding: EdgeInsets.all(24),
                                   decoration: BoxDecoration(
                                     boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                                    gradient: LinearGradient(
-                                        colors: [
-                                          Colors.green,
-                                          Colors.lightGreen,
-                                        ],
-                                        begin: Alignment.bottomRight,
-                                        end: Alignment.topLeft),
+                                    gradient: LinearGradient(colors: [
+                                      Colors.green,
+                                      Colors.lightGreen,
+                                    ], begin: Alignment.bottomRight, end: Alignment.topLeft),
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.green.shade200,
                                   ),

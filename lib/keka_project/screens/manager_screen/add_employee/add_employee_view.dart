@@ -43,7 +43,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   @override
   void initState() {
     context.read<AddEmployeeCubit>().getDepartmentApi();
-    context.read<AddEmployeeCubit>().getEmployeeApi();
     super.initState();
   }
 
@@ -238,8 +237,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                               state.selectedValue!.id.toString(),
                               state.dateController.text,
                             );
-                    context.read<AddEmployeeCubit>().navigatorToEmployee(context);
-                    context.read<AddEmployeeCubit>().getEmployeeApi();
+                    // context.read<AddEmployeeCubit>().navigatorToEmployee(context);
                   },
                   minWidth: 300,
                   child: (state.profile == Profile.employee)
