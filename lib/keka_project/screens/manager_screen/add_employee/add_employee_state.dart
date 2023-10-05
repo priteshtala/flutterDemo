@@ -21,8 +21,9 @@ class AddEmployeeState extends Equatable {
         roleController,
         loginData,
         profile,
-    filtterdUserList,
-    employeeList
+        filtterdUserList,
+        employeeList,
+        formKey,
       ];
   TextEditingController nameController;
   TextEditingController emailController;
@@ -38,7 +39,8 @@ class AddEmployeeState extends Equatable {
   bool iconShowHide;
   EmployeeLoginDetails? loginData;
   Profile? profile;
-
+  bool isValidation;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   // dynamic token;
 
@@ -57,6 +59,8 @@ class AddEmployeeState extends Equatable {
     this.iconShowHide = false,
     this.loginData,
     this.profile,
+    required this.formKey,
+    this.isValidation = false,
     // required this.token
   });
 
@@ -75,6 +79,8 @@ class AddEmployeeState extends Equatable {
     bool? iconShowHide,
     EmployeeLoginDetails? loginData,
     Profile? profile,
+    GlobalKey<FormState>? formKey,
+    bool? isValidation,
 
     // dynamic token,
   }) {
@@ -93,6 +99,8 @@ class AddEmployeeState extends Equatable {
       iconShowHide: iconShowHide ?? this.iconShowHide,
       loginData: loginData ?? this.loginData,
       profile: profile ?? this.profile,
+      formKey: formKey ?? this.formKey,
+      isValidation: isValidation ?? this.isValidation,
       // token: token ?? this.token,
     );
   }

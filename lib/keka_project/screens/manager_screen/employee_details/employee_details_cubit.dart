@@ -12,7 +12,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   EmployeeDetailsCubit(this.context, super.initialState);
 
   BuildContext context;
-  String baseurl = "https://57af-136-232-118-126.ngrok-free.app";
+  String baseurl = "https://42da-136-232-118-126.ngrok-free.app";
 
   void dropdownSelected(Department value) {
     List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
@@ -102,7 +102,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       if (value == true) {
         debugPrint("State::${state.selectedValue?.id}");
         debugPrint("name::${state.selectedValue?.name}");
-        debugPrint("dep::${selectDep.name}");
+        // debugPrint("dep::${selectDep.name}");
         getEmployeeApi(department: selectDep);
       }
     });

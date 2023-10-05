@@ -13,7 +13,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   AddEmployeeCubit(this.context, super.initialState);
 
   final BuildContext context;
-  String baseurl = "https://57af-136-232-118-126.ngrok-free.app";
+  String baseurl = "https://42da-136-232-118-126.ngrok-free.app";
 
   void visibility() {
     emit(state.copyWith(iconShowHide: !state.iconShowHide));
@@ -21,7 +21,10 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   void dateTime(context) async {
     DateTime? pikedDate = await showDatePicker(
-        context: context, initialDate: DateTime.now().subtract(Duration(days: 7500)), firstDate: DateTime(2000), lastDate: DateTime(2025));
+        context: context,
+        initialDate: DateTime.now().subtract(Duration(days: 7500)),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2025));
     // DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1),
     if (pikedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pikedDate);
@@ -42,8 +45,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       "department_id": department,
       "birth_date": birthdate,
     };
-
-
 
     var response = await Dio().post(
       "$baseurl/api/user",
@@ -88,40 +89,46 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void validation(context) {
-    if (state.nameController.text.isEmpty ||
-        state.roleController.text.isEmpty ||
-        state.emailController.text.isEmpty ||
-        state.locationController.text.isEmpty ||
-        state.passwordController.text.isEmpty ||
-        state.selectedValue.toString().isEmpty ||
-        state.mobileController.text.isEmpty ||
-        state.dateController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 1),
-          padding: EdgeInsets.all(3),
-          backgroundColor: Colors.red,
-          content: Text(
-            "Please fill all the fields",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
-            textScaleFactor: 1.3,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    } else if (state.nameController.text.isNotEmpty ||
-        state.roleController.text.isNotEmpty ||
-        state.emailController.text.isNotEmpty ||
-        state.locationController.text.isNotEmpty ||
-        state.passwordController.text.isNotEmpty ||
-        state.selectedValue.toString().isNotEmpty ||
-        state.mobileController.text.isNotEmpty ||
-        state.dateController.text.isNotEmpty) {
-      Navigator.pop(context);
+    if (state.formKey.currentState!.validate()) {
+      state.formKey.currentState?.save();
+    } else {
+      Navigator.of(context).pop();
     }
+
+    // if (state.nameController.text.isEmpty ||
+    //     state.roleController.text.isEmpty ||
+    //     state.emailController.text.isEmpty ||
+    //     state.locationController.text.isEmpty ||
+    //     state.passwordController.text.isEmpty ||
+    //     state.selectedValue.toString().isEmpty ||
+    //     state.mobileController.text.isEmpty ||
+    //     state.dateController.text.isEmpty) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       duration: Duration(seconds: 1),
+    //       padding: EdgeInsets.all(3),
+    //       backgroundColor: Colors.red,
+    //       content: Text(
+    //         "Please fill all the fields",
+    //         style: TextStyle(
+    //           color: Colors.white,
+    //           fontWeight: FontWeight.w500,
+    //         ),
+    //         textScaleFactor: 1.3,
+    //         textAlign: TextAlign.center,
+    //       ),
+    //     ),
+    //   );
+    // } else if (state.nameController.text.isNotEmpty ||
+    //     state.roleController.text.isNotEmpty ||
+    //     state.emailController.text.isNotEmpty ||
+    //     state.locationController.text.isNotEmpty ||
+    //     state.passwordController.text.isNotEmpty ||
+    //     state.selectedValue.toString().isNotEmpty ||
+    //     state.mobileController.text.isNotEmpty ||
+    //     state.dateController.text.isNotEmpty) {
+    //   Navigator.pop(context);
+    // }
   }
 
   void getEmployeeDetails() async {
