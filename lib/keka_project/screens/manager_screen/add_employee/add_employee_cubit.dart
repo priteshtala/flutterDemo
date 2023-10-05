@@ -19,15 +19,20 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   void dateTime(context) async {
-    DateTime? pikedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now().subtract(Duration(days: 7519)),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2025));
-    if (pikedDate != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(pikedDate);
+    DateTime currentDate = DateTime.now();
+    DateTime eighteenYearsAgo = currentDate.subtract(Duration(days: 365 * 18));
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: eighteenYearsAgo,
+      firstDate: DateTime(1900),
+      lastDate: currentDate,
+    );
+
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       state.dateController.text = formattedDate;
     }
+
     emit(state.copyWith(dateController: state.dateController));
   }
 
@@ -91,7 +96,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     print("status code================${response.data}");
   }
 
-
   void submit() {
     final isValid = state.formKey.currentState!.validate();
     if (!isValid) {
@@ -99,7 +103,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     }
     Navigator.of(context).pop(true);
   }
-
 
   void getEmployeeDetails() async {
     print("GetEmp::::");
