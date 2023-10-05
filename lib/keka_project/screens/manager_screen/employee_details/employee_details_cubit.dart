@@ -95,11 +95,11 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   }
 
   addEmployee(Profile? arg) {
-    Department selectDep = state.departmentList.firstWhere((element) => element.name == state.selectedValue?.name);
-    emit(state.copyWith(selectedValue: selectDep));
+        Department selectDep = state.departmentList.firstWhere((element) => element.name == state.selectedValue?.name);
 
     Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: arg).then((value) {
       if (value == true) {
+        // emit(state.copyWith(selectedValue: selectDep));
         debugPrint("State::${state.selectedValue?.id}");
         debugPrint("name::${state.selectedValue?.name}");
         // debugPrint("dep::${selectDep.name}");

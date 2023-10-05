@@ -34,9 +34,6 @@ class AddLeaveView extends StatefulWidget {
 }
 
 class _AddLeaveViewState extends State<AddLeaveView> {
-
-
-
   @override
   void initState() {
     super.initState();
@@ -80,7 +77,6 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                             );
                     print("manager=================== ${state.profile == Profile.manager}");
                     print("id:::::::::${state.filtterdUserList.map((e) => e.id).firstOrNull}");
-
                     context.read<AddLeaveCubit>().validation(context);
                   },
                 ),
