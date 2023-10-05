@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:finaldemo/keka_project/model/login_details/login_details.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +21,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   void dateTime(context) async {
     DateTime? pikedDate = await showDatePicker(
         context: context,
-        initialDate: DateTime.now().subtract(Duration(days: 7500)),
+        initialDate: DateTime.now().subtract(Duration(days: 7519)),
         firstDate: DateTime(2000),
         lastDate: DateTime(2025));
-    // DateFormat("yyyy-MM-dd").format(DateTime.now().subtract(const Duration(days: 1),
     if (pikedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pikedDate);
       state.dateController.text = formattedDate;
@@ -58,8 +56,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       ),
     );
     debugPrint("response ::${response.statusCode}");
-    Navigator.of(context).pop(true);
-
+    submit();
     print("status code================${response.statusCode}");
   }
 
@@ -84,52 +81,19 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         contentType: Headers.jsonContentType,
       ),
     );
-    Navigator.of(context).pop(true);
+    submit();
     print("status code================${response.data}");
   }
 
-  void validation(context) {
-    if (state.formKey.currentState!.validate()) {
-      state.formKey.currentState?.save();
-    } else {
-      Navigator.of(context).pop();
-    }
 
-    // if (state.nameController.text.isEmpty ||
-    //     state.roleController.text.isEmpty ||
-    //     state.emailController.text.isEmpty ||
-    //     state.locationController.text.isEmpty ||
-    //     state.passwordController.text.isEmpty ||
-    //     state.selectedValue.toString().isEmpty ||
-    //     state.mobileController.text.isEmpty ||
-    //     state.dateController.text.isEmpty) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       duration: Duration(seconds: 1),
-    //       padding: EdgeInsets.all(3),
-    //       backgroundColor: Colors.red,
-    //       content: Text(
-    //         "Please fill all the fields",
-    //         style: TextStyle(
-    //           color: Colors.white,
-    //           fontWeight: FontWeight.w500,
-    //         ),
-    //         textScaleFactor: 1.3,
-    //         textAlign: TextAlign.center,
-    //       ),
-    //     ),
-    //   );
-    // } else if (state.nameController.text.isNotEmpty ||
-    //     state.roleController.text.isNotEmpty ||
-    //     state.emailController.text.isNotEmpty ||
-    //     state.locationController.text.isNotEmpty ||
-    //     state.passwordController.text.isNotEmpty ||
-    //     state.selectedValue.toString().isNotEmpty ||
-    //     state.mobileController.text.isNotEmpty ||
-    //     state.dateController.text.isNotEmpty) {
-    //   Navigator.pop(context);
-    // }
+  void submit() {
+    final isValid = state.formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    Navigator.of(context).pop(true);
   }
+
 
   void getEmployeeDetails() async {
     print("GetEmp::::");
