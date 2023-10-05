@@ -21,28 +21,46 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
     emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList));
   }
 
+  // void runFilter(String query) {
+  //   List<Employee> filtterdUserList = [];
+  //
+  //   if (query.isEmpty) {
+  //     if (state.selectedValue?.id != 0) {
+  //       filtterdUserList = state.employeeList.where((e) => e.departmentId == state.selectedValue?.id).toList();
+  //     } else {
+  //       filtterdUserList = state.employeeList;
+  //     }
+  //   } else {
+  //     if (state.selectedValue?.id != 0) {
+  //       filtterdUserList = state.employeeList
+  //           .where(
+  //               (e) => e.departmentId == state.selectedValue?.id && e.name.toLowerCase().contains(query.toLowerCase()))
+  //           .toList();
+  //     } else {
+  //       filtterdUserList = state.employeeList.where((e) {
+  //         return e.name.toString().toLowerCase().contains(query.toLowerCase());
+  //       }).toList();
+  //     }
+  //   }
+  //
+  //   emit(state.copyWith(filtterdUserList: filtterdUserList));
+  // }
   void runFilter(String query) {
-    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
+    List<Employee> filteredUserList = List<Employee>.from(state.employeeList);
 
-    if (query.isEmpty) {
-      if (state.selectedValue?.id != 0) {
-        filtterdUserList = state.employeeList.where((e) => e.departmentId == state.selectedValue?.id).toList();
-      } else {
-        filtterdUserList = state.employeeList;
-      }
-    } else {
-      if (state.selectedValue?.id != 0) {
-        filtterdUserList = filtterdUserList.where((e) {
-          return e.name.toString().toLowerCase().contains(query.toLowerCase());
-        }).toList();
-      } else {
-        filtterdUserList = state.employeeList.where((e) {
-          return e.name.toString().toLowerCase().contains(query.toLowerCase());
-        }).toList();
-      }
+    if (query.isNotEmpty) {
+      filteredUserList = filteredUserList.where((e) {
+        return e.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
     }
 
-    emit(state.copyWith(filtterdUserList: filtterdUserList));
+    if (state.selectedValue?.id != 0) {
+      filteredUserList = filteredUserList.where((e) {
+        return e.departmentId == state.selectedValue?.id;
+      }).toList();
+    }
+
+    emit(state.copyWith(filtterdUserList: filteredUserList));
   }
 
   void getEmployeeApi({Department? department}) async {
@@ -66,7 +84,10 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
         emit(state.copyWith(
             filtterdUserList: selectedEmployeeList, employeeList: employeeDetails, selectedValue: department));
       } else {
-        emit(state.copyWith(filtterdUserList: employeeDetails, employeeList: employeeDetails));
+        emit(state.copyWith(
+            filtterdUserList: employeeDetails,
+            employeeList: employeeDetails,
+            selectedValue: state.departmentList.firstWhere((element) => element.name == "All")));
       }
     } else {
       Text("No-Data");
