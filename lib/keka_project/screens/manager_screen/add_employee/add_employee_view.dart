@@ -77,6 +77,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     prefixIcon: const Icon(Icons.person),
                   ),
                   CustomTextForm(
+                    validator: emptyName(context),
                     keyboardType: TextInputType.visiblePassword,
                     controller: state.roleController,
                     readOnly: state.profile == Profile.employee ? true : false,
@@ -86,6 +87,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     prefixIcon: Icon(Icons.accessibility_sharp),
                   ),
                   CustomTextForm(
+                    validator: emptyName(context),
                     controller: state.emailController,
                     readOnly: state.profile == Profile.employee ? true : false,
                     textCapitalization: TextCapitalization.none,
@@ -95,6 +97,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     prefixIcon: const Icon(Icons.email),
                   ),
                   CustomTextForm(
+                    validator: emptyName(context),
                     controller: state.locationController,
                     readOnly: state.profile == Profile.employee ? true : false,
                     textCapitalization: TextCapitalization.none,
@@ -104,6 +107,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   ),
                   (state.profile == Profile.manager)
                       ? CustomTextForm(
+                    validator: emptyName(context),
                           keyboardType: TextInputType.visiblePassword,
                           controller: state.passwordController,
                           readOnly: state.profile == Profile.employee ? true : false,
@@ -135,6 +139,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                         ),
                       ),
                       child: DropdownButtonFormField<Department>(
+                        validator:  (value) => value == null ? 'please enter filed' : null,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -171,12 +176,13 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       validator: (index) {
-                        if (index == null) {
-                          return 'please fill First Name';
+                        if (state.mobileController.text.isEmpty) {
+                          return 'please fill valid number';
                         } else {
                           return null;
                         }
                       },
+
                       flagsButtonPadding: const EdgeInsets.all(8),
                       dropdownIconPosition: IconPosition.trailing,
                       decoration: InputDecoration(
@@ -203,6 +209,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     ),
                   ),
                   CustomTextForm(
+                    validator: emptyName(context),
                     controller: state.dateController,
                     readOnly: state.profile == Profile.employee ? true : false,
                     textCapitalization: TextCapitalization.none,
@@ -242,7 +249,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                               state.selectedValue!.id.toString(),
                               state.dateController.text,
                             );
-                    context.read<AddEmployeeCubit>().validation(context);
+                    context.read<AddEmployeeCubit>().submit();
                   },
                   minWidth: 300,
                   child: (state.profile == Profile.employee)
