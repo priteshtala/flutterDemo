@@ -52,9 +52,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       filteredUserList = filteredUserList.where((e) {
         return e.name.toLowerCase().contains(query.toLowerCase());
       }).toList();
-    }
-
-    if (state.selectedValue?.id != 0) {
+    } else if (state.selectedValue?.id != 0) {
       filteredUserList = filteredUserList.where((e) {
         return e.departmentId == state.selectedValue?.id;
       }).toList();
