@@ -100,7 +100,11 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                                 ),
                               ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(14),
+                                borderSide: BorderSide(
+                                  color: Colors.green,
+                                  width: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(5),
                               ),
                             ),
                             isDense: true,

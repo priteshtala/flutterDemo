@@ -54,14 +54,14 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].startDate.toString()));
                         String endDate =
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].endDate.toString()));
+                        context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(), index).then(
+                              (value) => context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
+                        );
                         return Slidable(
                           endActionPane: ActionPane(motion: DrawerMotion(), children: [
                             SlidableAction(
                               borderRadius: BorderRadius.circular(14),
                               onPressed: (v) {
-                                context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(), index).then(
-                                      (value) => context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                                    );
                               },
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,
@@ -100,42 +100,6 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                                   Text("End Date : ${endDate}"),
                                   Text("Reason : ${state.pendingLeaveList[index].reason}"),
                                   const Gap(10),
-                                  // Row(
-                                  //   mainAxisAlignment: MainAxisAlignment.start,
-                                  //   children: [
-                                  //     CustomButtonChange(
-                                  //       color: Colors.green.shade100,
-                                  //       child: Icon(Icons.done),
-                                  //       onPressed: () {
-                                  //         context
-                                  //             .read<ManagerLeaveRequestCubit>()
-                                  //             .updateLeaveRequests(0.toString(), index)
-                                  //             .then(
-                                  //               (value) =>
-                                  //                   context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                                  //             );
-                                  //       },
-                                  //       height: 35,
-                                  //       width: 50,
-                                  //     ),
-                                  //     Gap(15),
-                                  //     CustomButtonChange(
-                                  //       color: Colors.red.shade100,
-                                  //       child: Icon(Icons.close),
-                                  //       onPressed: () {
-                                  //         context
-                                  //             .read<ManagerLeaveRequestCubit>()
-                                  //             .updateLeaveRequests(2.toString(), index)
-                                  //             .then(
-                                  //               (value) =>
-                                  //                   context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                                  //             );
-                                  //       },
-                                  //       width: 50,
-                                  //       height: 35,
-                                  //     ),
-                                  //   ],
-                                  // ),
                                 ],
                               ),
                             ),
