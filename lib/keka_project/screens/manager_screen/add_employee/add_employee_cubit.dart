@@ -63,8 +63,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     debugPrint("response ::${response.statusCode}");
     // Navigator.of(context).pop(true);
 
-    // submit();
-    Navigator.of(context).pop(true);
+    submit();
+    // Navigator.of(context).pop(true);
 
     print("status code================${response.statusCode}");
   }
@@ -90,8 +90,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         contentType: Headers.jsonContentType,
       ),
     );
-    // submit();
-    Navigator.of(context).pop(true);
+    submit();
+    // Navigator.of(context).pop(true);
 
     print("status code================${response.data}");
   }
