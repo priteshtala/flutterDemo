@@ -108,7 +108,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                               ),
                             ),
                             isDense: true,
-                            hint: const Text('All'),
+                            hint: const Text('select one'),
                             value: state.selectedValue,
                             onChanged: (value) {
                               context.read<EmployeeDetailsCubit>().dropdownSelected(value!);

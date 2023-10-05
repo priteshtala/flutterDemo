@@ -15,7 +15,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
   String baseurl = "https://42da-136-232-118-126.ngrok-free.app";
 
   void dropdownSelected(Department value) {
-    List<Employee> filtterdUserList = List<Employee>.from(state.filtterdUserList);
+    List<Employee> filtterdUserList;
     filtterdUserList =
         value.id == 0 ? state.employeeList : state.employeeList.where((e) => e.departmentId == value.id).toList();
     emit(state.copyWith(selectedValue: value, filtterdUserList: filtterdUserList));
