@@ -6,7 +6,7 @@ class ManagerLeaveRequestState extends Equatable {
   @override
   List<Object?> get props => [pendingLeaveList, startDate, endDate, hasError, loginData, profile];
 
-  List<TodayLeave> pendingLeaveList = [];
+  List<TodayLeave> pendingLeaveList;
   String? startDate;
   String? endDate;
   bool? hasError;
@@ -14,7 +14,7 @@ class ManagerLeaveRequestState extends Equatable {
   Profile? profile;
 
   ManagerLeaveRequestState({
-    required this.pendingLeaveList,
+     this.pendingLeaveList =const [],
     this.startDate,
     this.endDate,
     this.hasError = false,

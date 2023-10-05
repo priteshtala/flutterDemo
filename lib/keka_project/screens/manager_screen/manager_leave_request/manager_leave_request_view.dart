@@ -12,7 +12,9 @@ class ManagerLeaveRequest extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return BlocProvider(
-      create: (context) => ManagerLeaveRequestCubit(ManagerLeaveRequestState(pendingLeaveList: [])),
+      create: (context) => ManagerLeaveRequestCubit(
+        ManagerLeaveRequestState(),
+      ),
       child: ManagerLeaveRequest(),
     );
   }
@@ -54,14 +56,13 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].startDate.toString()));
                         String endDate =
                             dateFormat.format(DateTime.parse(state.pendingLeaveList[index].endDate.toString()));
-                        context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(), index).then(
-                              (value) => context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                        );
                         return Slidable(
                           endActionPane: ActionPane(motion: DrawerMotion(), children: [
                             SlidableAction(
                               borderRadius: BorderRadius.circular(14),
                               onPressed: (v) {
+                                context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(0.toString(), index);
+                                Navigator.of(context).pop();
                               },
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,
@@ -71,9 +72,8 @@ class _ManagerLeaveRequestState extends State<ManagerLeaveRequest> {
                             SlidableAction(
                               borderRadius: BorderRadius.circular(14),
                               onPressed: (v) {
-                                context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString(), index).then(
-                                      (value) => context.read<ManagerLeaveRequestCubit>().navigateToManager(context),
-                                    );
+                                context.read<ManagerLeaveRequestCubit>().updateLeaveRequests(2.toString(), index);
+                                Navigator.of(context).pop();
                               },
                               backgroundColor: Color(0xFFFE4A49),
                               foregroundColor: Colors.white,

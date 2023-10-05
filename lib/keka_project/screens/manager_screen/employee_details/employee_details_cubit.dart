@@ -52,7 +52,9 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       filteredUserList = filteredUserList.where((e) {
         return e.name.toLowerCase().contains(query.toLowerCase());
       }).toList();
-    } else if (state.selectedValue?.id != 0) {
+    }
+
+    if (state.selectedValue?.id != 0) {
       filteredUserList = filteredUserList.where((e) {
         return e.departmentId == state.selectedValue?.id;
       }).toList();
@@ -75,7 +77,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
         debugPrint("employeeDetails :${employeeDetails.first.department.name}");
 
         var selectedEmployeeList =
-            employeeDetails.where((element) => element.department.name == department.name).toList();
+        employeeDetails.where((element) => element.department.name == department.name).toList();
 
         debugPrint("selectedEmployeeList ::${selectedEmployeeList.length}");
 
@@ -91,6 +93,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       Text("No-Data");
     }
   }
+
 
   void getDepartmentApi() async {
     final response = await Dio().get("$baseurl/api/department");
