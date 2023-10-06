@@ -27,7 +27,6 @@ class MainScreenView extends StatefulWidget {
 class _MainScreenViewState extends State<MainScreenView> {
 
 
-   int value = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +69,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                   InkWell(
                     onTap: () async{
                       context.read<MainScreenCubit>().isSelectedColor(0);
-                      await Helper().saveRole(value);
-
+                      Helper().saveRole(0);
                     },
                     child: AnimatedContainer(
                       duration: Duration(seconds: 1),

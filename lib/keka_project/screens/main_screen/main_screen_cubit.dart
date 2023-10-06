@@ -39,14 +39,13 @@ class MainScreenCubit extends Cubit<MainScreenState> {
         ),
       );
     } else if (state.isSelected == 0) {
-      // print("managerLogin${Helper().getRole()}");
-      Navigator.of(context).pushNamed(ManagerLeaveView.routeName).then((value) => Helper().saveRole(0));
+      Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
     } else {
       print("employee");
       var getToken = await Helper().getToken();
       getToken.isNotEmpty
           ? Navigator.of(context).pushNamed(ManagerLeaveView.routeName)
-          : Navigator.of(context).pushNamed(EmployeeLoginView.routeName).then((value) => Helper().saveRole(1));
+          : Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
     }
   }
 }
