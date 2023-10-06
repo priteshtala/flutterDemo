@@ -358,6 +358,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           ),
                         )
                       : SizedBox.shrink(),
+
                 ],
               ),
             ),
