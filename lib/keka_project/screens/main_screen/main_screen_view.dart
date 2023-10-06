@@ -25,9 +25,6 @@ class MainScreenView extends StatefulWidget {
 }
 
 class _MainScreenViewState extends State<MainScreenView> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainScreenCubit, MainScreenState>(
@@ -67,7 +64,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
-                    onTap: () async{
+                    onTap: () async {
                       context.read<MainScreenCubit>().isSelectedColor(0);
                       Helper().saveRole(0);
                     },

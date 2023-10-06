@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/date_by_leave_model/date_by_leave_model.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
@@ -182,7 +181,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   Future<void> getToken() async {
     var userToken = await Helper().getToken();
-    // print("${userToken}");
+    print("${userToken}");
   }
 
   Future<void> getRole() async {

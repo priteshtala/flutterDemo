@@ -59,7 +59,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   Widget build(BuildContext context) {
     var name = Helper().getRole();
     print("role:::::${name}");
-    print("dfgdsgdfgdfg:::::${Helper().getRole()}");
+    print("getRole:::::${Helper().getRole()}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return RefreshIndicator(

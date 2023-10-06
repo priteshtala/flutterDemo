@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
-import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model.dart';
 
 class ManagerLeaveRequestState extends Equatable {

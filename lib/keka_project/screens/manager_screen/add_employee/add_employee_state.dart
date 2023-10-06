@@ -67,27 +67,27 @@ class AddEmployeeState extends Equatable {
     // required this.token
   });
 
-  AddEmployeeState copyWith(
-      {TextEditingController? nameController,
-      TextEditingController? emailController,
-      TextEditingController? passwordController,
-      TextEditingController? roleController,
-      TextEditingController? mobileController,
-      TextEditingController? dateController,
-      TextEditingController? locationController,
-      List<Department>? departmentList,
-      List<Employee>? filtterdUserList,
-      List<Employee>? employeeList,
-      Department? selectedValue,
-      bool? iconShowHide,
-      EmployeeLoginDetails? loginData,
-      Profile? profile,
-      GlobalKey<FormState>? formKey,
-      bool? isValidation,
-      int? role,
+  AddEmployeeState copyWith({
+    TextEditingController? nameController,
+    TextEditingController? emailController,
+    TextEditingController? passwordController,
+    TextEditingController? roleController,
+    TextEditingController? mobileController,
+    TextEditingController? dateController,
+    TextEditingController? locationController,
+    List<Department>? departmentList,
+    List<Employee>? filtterdUserList,
+    List<Employee>? employeeList,
+    Department? selectedValue,
+    bool? iconShowHide,
+    EmployeeLoginDetails? loginData,
+    Profile? profile,
+    GlobalKey<FormState>? formKey,
+    bool? isValidation,
+    int? role,
 
-      // dynamic token,
-      }) {
+    // dynamic token,
+  }) {
     return AddEmployeeState(
       nameController: nameController ?? this.nameController,
       emailController: emailController ?? this.emailController,

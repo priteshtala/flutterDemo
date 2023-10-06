@@ -19,7 +19,7 @@ class ManagerScreenState extends Equatable {
         departmentCount,
         name,
         loginData,
-    role
+        role
       ];
 
   List<TodayLeave> leaveTodayList = [];
@@ -47,38 +47,36 @@ class ManagerScreenState extends Equatable {
     this.name,
     this.loginData,
     this.hasError = false,
-    this.role
+    this.role,
   });
 
-  ManagerScreenState copyWith({
-    List<TodayLeave>? leaveTodayList,
-    List<TodayLeave>? pendingLeaveList,
-    List<DateByLeave>? dateList,
-    List<DateByLeave>? leaveByDateList,
-    TextEditingController? dateController,
-    TextEditingController? searchController,
-    Profile? profile,
-    int? employeeCount,
-    int? departmentCount,
-    String? name,
-    EmployeeLoginDetails? loginData,
-    String? Name,
-    bool? hasError,
-    int? role
-  }) {
+  ManagerScreenState copyWith(
+      {List<TodayLeave>? leaveTodayList,
+      List<TodayLeave>? pendingLeaveList,
+      List<DateByLeave>? dateList,
+      List<DateByLeave>? leaveByDateList,
+      TextEditingController? dateController,
+      TextEditingController? searchController,
+      Profile? profile,
+      int? employeeCount,
+      int? departmentCount,
+      String? name,
+      EmployeeLoginDetails? loginData,
+      String? Name,
+      bool? hasError,
+      int? role}) {
     return ManagerScreenState(
-      leaveTodayList: leaveTodayList ?? this.leaveTodayList,
-      leaveByDateList: leaveByDateList ?? this.leaveByDateList,
-      dateList: dateList ?? this.dateList,
-      dateController: dateController ?? this.dateController,
-      searchController: searchController ?? this.searchController,
-      profile: profile ?? this.profile,
-      employeeCount: employeeCount ?? this.employeeCount,
-      departmentCount: departmentCount ?? this.departmentCount,
-      name: name ?? this.name,
-      loginData: loginData ?? this.loginData,
-      hasError: hasError ?? this.hasError,
-      role: role ?? this.role
-    );
+        leaveTodayList: leaveTodayList ?? this.leaveTodayList,
+        leaveByDateList: leaveByDateList ?? this.leaveByDateList,
+        dateList: dateList ?? this.dateList,
+        dateController: dateController ?? this.dateController,
+        searchController: searchController ?? this.searchController,
+        profile: profile ?? this.profile,
+        employeeCount: employeeCount ?? this.employeeCount,
+        departmentCount: departmentCount ?? this.departmentCount,
+        name: name ?? this.name,
+        loginData: loginData ?? this.loginData,
+        hasError: hasError ?? this.hasError,
+        role: role ?? this.role);
   }
 }

@@ -4,7 +4,6 @@ import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/common/validation.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,7 +108,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   ),
                   (state.role == 0)
                       ? CustomTextForm(
-                    validator: emptyName(context),
+                          validator: emptyName(context),
                           keyboardType: TextInputType.visiblePassword,
                           controller: state.passwordController,
                           readOnly: state.role == 1 ? true : false,
@@ -141,7 +140,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                         ),
                       ),
                       child: DropdownButtonFormField<Department>(
-                        validator:  (value) => value == null ? 'please enter filed' : null,
+                        validator: (value) => value == null ? 'please enter filed' : null,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide.none,
@@ -184,7 +183,6 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                           return null;
                         }
                       },
-
                       flagsButtonPadding: const EdgeInsets.all(8),
                       dropdownIconPosition: IconPosition.trailing,
                       decoration: InputDecoration(

@@ -13,8 +13,9 @@ class EmployeeDetailsState extends Equatable {
         selectedValue,
         filtterdUserList,
         employeeList,
-        profile,departmentList,
-    searchController
+        profile,
+        departmentList,
+        searchController
       ];
 
   List<Department> filterDepartmentList;
