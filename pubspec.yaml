@@ -47,6 +47,7 @@ dependencies:
   dio: ^5.3.2
   shared_preferences: ^2.2.1
   flutter_slidable: ^3.0.0
+  injectable: ^2.3.1
 
 
 

@@ -165,7 +165,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void navigateToApplyLeave(context) {
-    Navigator.of(context).pushNamed(AddLeaveView.routeName, arguments: state.profile);
+    Navigator.of(context).pushNamed(AddLeaveView.routeName);
   }
 
   void navigateToManagerRequest(context) {
@@ -173,15 +173,21 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   void navigateToEmployeeView(context) {
-    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName, arguments: state.profile);
+    Navigator.of(context).pushNamed(EmployeeDetailsView.routeName);
   }
 
   void navigateToEdit(context) {
-    Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: state.profile);
+    Navigator.of(context).pushNamed(AddEmployeeView.routeName);
   }
 
   Future<void> getToken() async {
     var userToken = await Helper().getToken();
+    // print("${userToken}");
+  }
+
+  Future<void> getRole() async {
+    String userRole = await Helper().getRole().toString();
+    print("object:::$userRole");
     // print("${userToken}");
   }
 }

@@ -4,6 +4,7 @@ import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_l
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_view.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'main_screen_state.dart';
 
 class MainScreenCubit extends Cubit<MainScreenState> {
@@ -20,6 +21,7 @@ class MainScreenCubit extends Cubit<MainScreenState> {
   }
 
   void validation(context) async {
+    // String role = await Helper().getRole().toString();
     if (state.isSelected == -1) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -38,15 +40,15 @@ class MainScreenCubit extends Cubit<MainScreenState> {
         ),
       );
     } else if (state.isSelected == 0) {
-      Helper().saveRole(0);
       print("managerLogin");
-      Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
+      Navigator.of(context).pushNamed(ManagerLeaveView.routeName).then((value) async=> await Helper().getRole() == 0);
     } else {
       var getToken = await Helper().getToken();
       getToken.isNotEmpty
           ? Navigator.of(context).pushNamed(ManagerLeaveView.routeName)
-      
-          : Navigator.of(context).pushNamed(EmployeeLoginView.routeName).then((value) => Helper().saveRole(1));
+          : Navigator.of(context)
+              .pushNamed(EmployeeLoginView.routeName)
+              .then((value) async => Helper().getRole() == 1);
     }
   }
 }

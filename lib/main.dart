@@ -1,3 +1,4 @@
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:flutter/material.dart';
 import 'keka_project/screens/employee_screen/add_leave/add_leave_view.dart';
 import 'keka_project/screens/employee_screen/employee_screen_login/employee_login_view.dart';
@@ -9,7 +10,8 @@ import 'keka_project/screens/manager_screen/manager_leave/manager_leave_view.dar
 import 'keka_project/screens/manager_screen/manager_leave_request/manager_leave_request_view.dart';
 import 'keka_project/screens/splash/splash_screen_view.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

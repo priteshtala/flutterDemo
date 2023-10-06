@@ -312,6 +312,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  get_it:
+    dependency: transitive
+    description:
+      name: get_it
+      sha256: f79870884de16d689cf9a7d15eedf31ed61d750e813c538a6efb92660fea83c3
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.6.4"
   glob:
     dependency: transitive
     description:
@@ -352,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.17"
+  injectable:
+    dependency: "direct main"
+    description:
+      name: injectable
+      sha256: "6c67a3e405a498becc7fde5ac8c6e817338f0b5abc07da2de1e6c3156991d8ce"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   intl:
     dependency: "direct main"
     description:

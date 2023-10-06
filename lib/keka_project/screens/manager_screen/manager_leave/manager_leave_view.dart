@@ -47,6 +47,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   void initState() {
     super.initState();
     cubit.getToken();
+    cubit.getRole();
     cubit.getLeaveToday();
     cubit.getLeaveByDate(cubit.state.dateController.text);
     cubit.employeeCount();
@@ -358,7 +359,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           ),
                         )
                       : SizedBox.shrink(),
-
                 ],
               ),
             ),
