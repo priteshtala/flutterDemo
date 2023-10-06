@@ -24,7 +24,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       var data = response.data;
       emit(state.copyWith(employeeCount: data["total"]));
     } else {
-      Text("No-Data");
+      print(Text("No-Data"));
     }
   }
 
@@ -34,7 +34,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
       var data = response.data;
       emit(state.copyWith(departmentCount: data["total"]));
     } else {
-      Text("No-Data");
+      print(Text("No-Data"));
     }
   }
 

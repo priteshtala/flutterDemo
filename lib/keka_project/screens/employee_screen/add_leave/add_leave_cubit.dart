@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/get_api_model/get_api_model.dart';
 import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +120,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
         notifyEmployee.add(Employee.fromJson(entry));
       }
     } else {
-      Text("No-data");
+      print(Text("No-Data"));
     }
     emit(state.copyWith(employeeList: notifyEmployee, filtterdUserList: notifyEmployee));
   }
@@ -143,7 +142,7 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
         print("getLoginDetails::${state.name}");
         print("getLoginId::${state.id}");
       } else {
-        Text("No-Data");
+        print(Text("No-Data"));
       }
     } on Exception catch (e) {
       print("error => ${e}");

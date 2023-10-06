@@ -151,7 +151,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         DepartmentListData.add(Department.fromJson(entry));
       }
     } else {
-      Text("No-Data");
+      print(Text("No-Data"));
     }
     emit(state.copyWith(departmentList: DepartmentListData));
   }

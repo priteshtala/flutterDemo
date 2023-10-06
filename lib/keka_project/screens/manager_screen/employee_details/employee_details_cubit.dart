@@ -90,7 +90,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
             selectedValue: state.departmentList.firstWhere((element) => element.name == "All")));
       }
     } else {
-      Text("No-Data");
+      print(Text("No-Data"));
     }
   }
 
@@ -104,7 +104,7 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       }
       DepartmentListData.insert(0, Department(id: 0, name: "All", createAt: '', updateAt: ''));
     } else {
-      Text("No-Data");
+      print(Text("No-Data"));
     }
     emit(state.copyWith(departmentList: DepartmentListData, filterDepartmentList: DepartmentListData));
   }
