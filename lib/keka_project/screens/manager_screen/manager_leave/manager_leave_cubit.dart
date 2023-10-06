@@ -73,7 +73,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
                   splashColor: Colors.red,
                   shape: Border.all(color: Colors.black),
                   onPressed: () {
-                    if (state.profile == Profile.manager) {
+                    if (state.role == 0) {
                       Navigator.of(context).pushReplacementNamed(MainScreenView.routeName);
                     } else {
                       Helper().remove();
@@ -186,8 +186,9 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
   }
 
   Future<void> getRole() async {
-    String userRole = await Helper().getRole().toString();
+    var userRole = await Helper().getRole();
     print("object:::$userRole");
+    emit(state.copyWith(role: userRole));
     // print("${userToken}");
   }
 }

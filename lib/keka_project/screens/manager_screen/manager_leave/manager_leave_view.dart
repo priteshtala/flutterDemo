@@ -59,13 +59,14 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   Widget build(BuildContext context) {
     var name = Helper().getRole();
     print("role:::::${name}");
+    print("dfgdsgdfgdfg:::::${Helper().getRole()}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return RefreshIndicator(
           color: Colors.green,
           onRefresh: () => context.read<ManagerScreenCubit>().refresh(),
           child: Scaffold(
-            bottomNavigationBar: (state.profile == Profile.manager)
+            bottomNavigationBar: (state.role == 0)
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -123,7 +124,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   ),
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: (state.profile == Profile.manager) ? Text("Elaunch Solution") : Text(state.name.toString()),
+              title: (state.role == 0) ? Text("Elaunch Solution") : Text(state.name.toString()),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -270,7 +271,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       ],
                     ),
                   ),
-                  (Helper().getRole() == 0)
+                  (state.role == 0)
                       ? Padding(
                           padding: const EdgeInsets.all(10),
                           child: Row(

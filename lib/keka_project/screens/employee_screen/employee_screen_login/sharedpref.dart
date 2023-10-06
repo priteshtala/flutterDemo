@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+
 class Helper {
   static String valueSharedPreferences = "userToken";
   static String roles = "roleName";
@@ -37,15 +39,63 @@ class Helper {
   }
 
   Future<void> saveRole(int role) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setInt(roles, role);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(roles, role);
   }
 
+// get TOKEN
   Future<int> getRole() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    return pref.getInt(roles) ?? 0;
+    final prefs = await SharedPreferences.getInstance();
+    final value = await prefs.getInt(roles) ?? 0;
+    return value;
   }
+  // Future<void> saveRole(int? role) async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   pref.setInt(roles, role ?? 0);
+  // }
+  //
+  // Future<int> getRole() async {
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getInt(roles) ?? 0;
+  // }
 }
+
+// class UserPreferences {
+//   static final UserPreferences _instance = UserPreferences._ctor();
+//   factory UserPreferences() {
+//     return _instance;
+//   }
+//
+//   UserPreferences._ctor();
+//
+//   static SharedPreferences? _prefs;
+//
+//   reset() {
+//     print("==============shared prefs cleared===============");
+//     _prefs!.clear();
+//   }
+//
+//   init() async {
+//     _prefs = await SharedPreferences.getInstance();
+//     print("shared preference instance created===================");
+//   }
+//
+//   static getRole() {
+//     print("+++++=======Token Got");
+//     return _prefs?.getInt("role") ?? "";
+//   }
+//
+//   void setRole(int token) {
+//     _prefs?.setInt("role", token);
+//     print("userToken set=======");
+//   }
+//
+//   removeToken() {
+//     print("======== User Logout ========>");
+//     return _prefs!.clear();
+//   }
+//
+// }
 
 // @lazySingleton
 // class AppPreference {

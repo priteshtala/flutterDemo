@@ -1,4 +1,5 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:finaldemo/keka_project/screens/main_screen/main_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,10 @@ class MainScreenView extends StatefulWidget {
 }
 
 class _MainScreenViewState extends State<MainScreenView> {
+
+
+   int value = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainScreenCubit, MainScreenState>(
@@ -63,8 +68,10 @@ class _MainScreenViewState extends State<MainScreenView> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   InkWell(
-                    onTap: () {
+                    onTap: () async{
                       context.read<MainScreenCubit>().isSelectedColor(0);
+                      await Helper().saveRole(value);
+
                     },
                     child: AnimatedContainer(
                       duration: Duration(seconds: 1),
@@ -87,6 +94,7 @@ class _MainScreenViewState extends State<MainScreenView> {
                   InkWell(
                     onTap: () {
                       context.read<MainScreenCubit>().isSelectedColor(1);
+                      Helper().saveRole(1);
                     },
                     child: AnimatedContainer(
                       duration: Duration(seconds: 1),

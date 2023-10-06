@@ -19,6 +19,7 @@ class ManagerScreenState extends Equatable {
         departmentCount,
         name,
         loginData,
+    role
       ];
 
   List<TodayLeave> leaveTodayList = [];
@@ -32,6 +33,7 @@ class ManagerScreenState extends Equatable {
   String? name;
   EmployeeLoginDetails? loginData;
   bool? hasError;
+  int? role;
 
   ManagerScreenState({
     required this.dateList,
@@ -45,6 +47,7 @@ class ManagerScreenState extends Equatable {
     this.name,
     this.loginData,
     this.hasError = false,
+    this.role
   });
 
   ManagerScreenState copyWith({
@@ -61,6 +64,7 @@ class ManagerScreenState extends Equatable {
     EmployeeLoginDetails? loginData,
     String? Name,
     bool? hasError,
+    int? role
   }) {
     return ManagerScreenState(
       leaveTodayList: leaveTodayList ?? this.leaveTodayList,
@@ -74,6 +78,7 @@ class ManagerScreenState extends Equatable {
       name: name ?? this.name,
       loginData: loginData ?? this.loginData,
       hasError: hasError ?? this.hasError,
+      role: role ?? this.role
     );
   }
 }
