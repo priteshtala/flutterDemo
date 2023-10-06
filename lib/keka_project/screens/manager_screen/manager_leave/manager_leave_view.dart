@@ -16,7 +16,6 @@ class ManagerLeaveView extends StatefulWidget {
     return BlocProvider(
       create: (context) => ManagerScreenCubit(
         ManagerScreenState(
-
           profile: arg,
           leaveTodayList: [],
           dateList: [],
@@ -75,7 +74,10 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       children: [
                         CustomButtonChange(
                           color: Colors.green,
-                          child: const Text("Add Leave", style: TextStyle(color: Colors.white)),
+                          child: const Text(
+                            "Add Leave",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onPressed: () {
                             context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
                           },
@@ -104,7 +106,12 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       children: [
                         CustomButtonChange(
                           color: Colors.green,
-                          child: const Text("Apply Leave", style: TextStyle(color: Colors.white)),
+                          child: const Text(
+                            "Apply Leave",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                           onPressed: () {
                             context.read<ManagerScreenCubit>().navigateToApplyLeave(context);
                           },
@@ -118,14 +125,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           },
                           width: 150,
                           height: 40,
-                          child: const Text("Edit", style: TextStyle(color: Colors.white)),
+                          child: const Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
                   ),
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: (state.role == 0) ? Text("Elaunch Solution") : Text(state.name.toString()),
+              title: (state.role == 0)
+                  ? Text("Elaunch Solution")
+                  : Text(
+                      state.name.toString(),
+                    ),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -146,7 +160,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(color: Colors.black),
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +171,10 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                           padding: EdgeInsets.all(16),
                           child: Text(
                             "On Leave Today",
-                            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                            ),
                           ),
                         ),
                         Container(
@@ -184,15 +203,17 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                         ),
                                       ),
                                       onTap: () {
-                                        context.read<ManagerScreenCubit>().tapToOpenDetail(context,index);
+                                        context.read<ManagerScreenCubit>().tapToOpenDetail(context, index);
                                       },
                                     ),
                                   ),
                                   Column(
                                     children: [
                                       const Gap(5),
-                                      Text("${state.leaveTodayList[index].user.name}..",
-                                          overflow: TextOverflow.ellipsis),
+                                      Text(
+                                        "${state.leaveTodayList[index].user.name}..",
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -206,7 +227,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   const Gap(10),
                   Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
+                      border: Border.all(
+                        color: Colors.black,
+                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +252,10 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 child: TextField(
                                   controller: state.dateController,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.calendar_today, color: Colors.green),
+                                    icon: Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.green,
+                                    ),
                                   ),
                                   readOnly: true,
                                   onTap: () {
@@ -254,15 +280,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
                                           child: GestureDetector(
-
                                             child: CircleAvatar(
-                                                radius: 27,
-                                                backgroundColor: Colors.green,
-                                                child: Text(state.leaveByDateList[index].user.name[0].toUpperCase(),
-                                                    style: const TextStyle(color: Colors.white, fontSize: 20))),
-                                          onTap: () {
-                                            context.read<ManagerScreenCubit>().leaveByDateDetail(context,index);
-                                          },),
+                                              radius: 27,
+                                              backgroundColor: Colors.green,
+                                              child: Text(
+                                                state.leaveByDateList[index].user.name[0].toUpperCase(),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              context.read<ManagerScreenCubit>().leaveByDateDetail(context, index);
+                                            },
+                                          ),
                                         ),
                                         Column(
                                           children: [
@@ -277,7 +309,9 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                     );
                                   },
                                 )
-                              : Center(child: Text("no leave on this date", textAlign: TextAlign.center)),
+                              : Center(
+                                  child: Text("no leave on this date", textAlign: TextAlign.center),
+                                ),
                         ),
                       ],
                     ),
@@ -295,11 +329,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 child: Container(
                                   padding: EdgeInsets.all(24),
                                   decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                                    gradient: LinearGradient(colors: [
-                                      Colors.green,
-                                      Colors.lightGreen,
-                                    ], begin: Alignment.bottomRight, end: Alignment.topLeft),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black38,
+                                        offset: Offset(4, 5),
+                                        blurRadius: 6,
+                                      ),
+                                    ],
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.green,
+                                        Colors.lightGreen,
+                                      ],
+                                      begin: Alignment.bottomRight,
+                                      end: Alignment.topLeft,
+                                    ),
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.green.shade200,
                                   ),
@@ -336,11 +380,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 child: Container(
                                   padding: EdgeInsets.all(13),
                                   decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(color: Colors.black38, offset: Offset(4, 5), blurRadius: 6)],
-                                    gradient: LinearGradient(colors: [
-                                      Colors.green,
-                                      Colors.lightGreen,
-                                    ], begin: Alignment.bottomRight, end: Alignment.topLeft),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black38,
+                                        offset: Offset(4, 5),
+                                        blurRadius: 6,
+                                      ),
+                                    ],
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.green,
+                                        Colors.lightGreen,
+                                      ],
+                                      begin: Alignment.bottomRight,
+                                      end: Alignment.topLeft,
+                                    ),
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.green.shade200,
                                   ),
@@ -351,8 +405,11 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                     children: [
                                       const Text(
                                         "Department",
-                                        style:
-                                            TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                       Divider(color: Colors.white),
                                       Text(
