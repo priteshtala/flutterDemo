@@ -2,10 +2,8 @@ import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/common_search.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
-import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_view.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_cubit.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/employee_details/employee_details_state.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -53,6 +51,7 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(8),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomSearch(
                   controller: state.searchController,
@@ -126,6 +125,19 @@ class _EmployeeDetailsViewState extends State<EmployeeDetailsView> {
                       ),
                     ],
                   ),
+                ),
+                const Gap(8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(color: Colors.black, endIndent: 10),
+                    ),
+                    Text("Employee Count : ${state.filtterdUserList.length}",
+                        style: TextStyle(fontWeight: FontWeight.w500), textAlign: TextAlign.left),
+                    Expanded(
+                      child: Divider(color: Colors.black, indent: 10),
+                    ),
+                  ],
                 ),
                 const Gap(8),
                 if (state.filtterdUserList.isNotEmpty) ...[
