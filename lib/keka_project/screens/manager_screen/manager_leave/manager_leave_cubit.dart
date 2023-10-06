@@ -96,14 +96,14 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   tapToOpenDetail(BuildContext context, index) {
     showDialog(
-      barrierColor: Colors.white60,
+      barrierColor: Colors.white38,
       context: context,
       builder: (context) {
         final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
         String startDate = dateFormat.format(DateTime.parse(state.leaveTodayList[index].startDate.toString()));
         String endDate = dateFormat.format(DateTime.parse(state.leaveTodayList[index].endDate.toString()));
 
-        return AlertDialog(
+        return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding: EdgeInsets.all(0),
           alignment: Alignment.center,
           title: Column(
@@ -135,7 +135,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
 
   leaveByDateDetail(BuildContext context, index) {
     showDialog(
-      barrierColor: Colors.white60,
+      barrierColor: Colors.white38,
       context: context,
       builder: (context) {
         final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
@@ -143,6 +143,7 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
         String endDate = dateFormat.format(DateTime.parse(state.leaveByDateList[index].endDate.toString()));
 
         return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding: EdgeInsets.all(0),
           alignment: Alignment.center,
           title: Column(
