@@ -4,6 +4,7 @@ import 'package:finaldemo/keka_project/common/const.dart';
 import 'package:finaldemo/keka_project/common/validation.dart';
 import 'package:finaldemo/keka_project/model/department_model/department_model.dart';
 import 'package:finaldemo/keka_project/screens/manager_screen/add_employee/add_employee_cubit.dart';
+import 'package:finaldemo/keka_project/screens/manager_screen/manager_leave/manager_leave_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class AddEmployeeView extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as Profile?;
-    print("add employee::$args");
+    // print("add employee::$args");
     return BlocProvider(
       create: (context) => AddEmployeeCubit(
         context,
@@ -45,6 +46,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
   @override
   void initState() {
     context.read<AddEmployeeCubit>().getDepartmentApi();
+    context.read<AddEmployeeCubit>().getRole();
     super.initState();
   }
 
@@ -54,7 +56,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: (state.profile == Profile.employee) ? Text("Update Employee Details") : Text("Add Employee Details"),
+            title: (state.role == 1) ? Text("Update Employee Details") : Text("Add Employee Details"),
           ),
           body: SingleChildScrollView(
             child: Form(
@@ -80,7 +82,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     validator: emptyName(context),
                     keyboardType: TextInputType.visiblePassword,
                     controller: state.roleController,
-                    readOnly: state.profile == Profile.employee ? true : false,
+                    readOnly: state.role == 1 ? true : false,
                     textCapitalization: TextCapitalization.none,
                     obscureText: false,
                     hintText: "Enter Your Role",
@@ -89,7 +91,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   CustomTextForm(
                     validator: emptyName(context),
                     controller: state.emailController,
-                    readOnly: state.profile == Profile.employee ? true : false,
+                    readOnly: state.role == 1 ? true : false,
                     textCapitalization: TextCapitalization.none,
                     obscureText: false,
                     hintText: "Enter Your Email",
@@ -99,18 +101,18 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   CustomTextForm(
                     validator: emptyName(context),
                     controller: state.locationController,
-                    readOnly: state.profile == Profile.employee ? true : false,
+                    readOnly: state.role == 1 ? true : false,
                     textCapitalization: TextCapitalization.none,
                     obscureText: false,
                     hintText: "Enter Your Location",
                     prefixIcon: const Icon(Icons.location_pin),
                   ),
-                  (state.profile == Profile.manager)
+                  (state.role == 0)
                       ? CustomTextForm(
                     validator: emptyName(context),
                           keyboardType: TextInputType.visiblePassword,
                           controller: state.passwordController,
-                          readOnly: state.profile == Profile.employee ? true : false,
+                          readOnly: state.role == 1 ? true : false,
                           textCapitalization: TextCapitalization.none,
                           obscureText: state.iconShowHide,
                           hintText: "Enter Your Password",
@@ -211,7 +213,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                   CustomTextForm(
                     validator: emptyName(context),
                     controller: state.dateController,
-                    readOnly: state.profile == Profile.employee ? true : false,
+                    readOnly: state.role == 1 ? true : false,
                     textCapitalization: TextCapitalization.none,
                     obscureText: false,
                     prefixIcon: const Icon(Icons.calendar_month),
@@ -229,7 +231,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
               children: [
                 CustomButton(
                   onPressed: () {
-                    (state.profile == Profile.manager)
+                    (state.role == 0)
                         ? context.read<AddEmployeeCubit>().postEmployeeDetails(
                               state.nameController.text,
                               state.roleController.text,
@@ -252,7 +254,7 @@ class _AddEmployeeViewState extends State<AddEmployeeView> {
                     // context.read<AddEmployeeCubit>().submit();
                   },
                   minWidth: 300,
-                  child: (state.profile == Profile.employee)
+                  child: (state.role == 1)
                       ? Text(
                           "Update Details",
                           style: TextStyle(color: Colors.white, fontSize: 20),

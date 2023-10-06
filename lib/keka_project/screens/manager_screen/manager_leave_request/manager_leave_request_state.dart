@@ -4,22 +4,30 @@ import 'package:finaldemo/keka_project/model/leave_today_model/leave_today_model
 
 class ManagerLeaveRequestState extends Equatable {
   @override
-  List<Object?> get props => [pendingLeaveList, startDate, endDate, hasError, loginData, profile];
+  List<Object?> get props => [
+        pendingLeaveList,
+        startDate,
+        endDate,
+        hasError,
+        loginData,
+        // profile,
+      ];
 
   List<TodayLeave> pendingLeaveList;
   String? startDate;
   String? endDate;
   bool? hasError;
   TodayLeave? loginData;
-  Profile? profile;
+
+  // Profile? profile;
 
   ManagerLeaveRequestState({
-     this.pendingLeaveList =const [],
+    this.pendingLeaveList = const [],
     this.startDate,
     this.endDate,
     this.hasError = false,
     this.loginData,
-    this.profile,
+    // this.profile,
   });
 
   ManagerLeaveRequestState copyWith({
@@ -28,7 +36,7 @@ class ManagerLeaveRequestState extends Equatable {
     String? endDate,
     bool? hasError,
     TodayLeave? loginData,
-    Profile? profile,
+    // Profile? profile,
   }) {
     return ManagerLeaveRequestState(
       pendingLeaveList: pendingLeaveList ?? this.pendingLeaveList,
@@ -36,7 +44,7 @@ class ManagerLeaveRequestState extends Equatable {
       endDate: endDate ?? this.endDate,
       hasError: hasError ?? this.hasError,
       loginData: loginData ?? this.loginData,
-      profile: profile ?? this.profile,
+      // profile: profile ?? this.profile,
     );
   }
 }

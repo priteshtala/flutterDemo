@@ -130,14 +130,4 @@ class EmployeeDetailsCubit extends Cubit<EmployeeDetailsState> {
       }
     });
   }
-// void addEmployee(Profile? arg) async {
-//   bool? result = await Navigator.of(context).pushNamed(AddEmployeeView.routeName, arguments: state.profile);
-//
-//   if (result == true) {
-//     Department selectedDepartment = state.departmentList.firstWhere((element) => element.name == state.selectedValue?.name);
-//
-//     emit(state.copyWith(selectedValue: selectedDepartment));
-//     getEmployeeApi(department: selectedDepartment);
-//   }
-// }
 }

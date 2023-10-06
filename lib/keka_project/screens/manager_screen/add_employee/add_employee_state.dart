@@ -24,6 +24,7 @@ class AddEmployeeState extends Equatable {
         filtterdUserList,
         employeeList,
         formKey,
+        role,
       ];
   TextEditingController nameController;
   TextEditingController emailController;
@@ -41,6 +42,7 @@ class AddEmployeeState extends Equatable {
   Profile? profile;
   bool isValidation;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  int? role;
 
   // dynamic token;
 
@@ -61,29 +63,31 @@ class AddEmployeeState extends Equatable {
     this.profile,
     required this.formKey,
     this.isValidation = false,
+    this.role,
     // required this.token
   });
 
-  AddEmployeeState copyWith({
-    TextEditingController? nameController,
-    TextEditingController? emailController,
-    TextEditingController? passwordController,
-    TextEditingController? roleController,
-    TextEditingController? mobileController,
-    TextEditingController? dateController,
-    TextEditingController? locationController,
-    List<Department>? departmentList,
-    List<Employee>? filtterdUserList,
-    List<Employee>? employeeList,
-    Department? selectedValue,
-    bool? iconShowHide,
-    EmployeeLoginDetails? loginData,
-    Profile? profile,
-    GlobalKey<FormState>? formKey,
-    bool? isValidation,
+  AddEmployeeState copyWith(
+      {TextEditingController? nameController,
+      TextEditingController? emailController,
+      TextEditingController? passwordController,
+      TextEditingController? roleController,
+      TextEditingController? mobileController,
+      TextEditingController? dateController,
+      TextEditingController? locationController,
+      List<Department>? departmentList,
+      List<Employee>? filtterdUserList,
+      List<Employee>? employeeList,
+      Department? selectedValue,
+      bool? iconShowHide,
+      EmployeeLoginDetails? loginData,
+      Profile? profile,
+      GlobalKey<FormState>? formKey,
+      bool? isValidation,
+      int? role,
 
-    // dynamic token,
-  }) {
+      // dynamic token,
+      }) {
     return AddEmployeeState(
       nameController: nameController ?? this.nameController,
       emailController: emailController ?? this.emailController,
@@ -101,6 +105,7 @@ class AddEmployeeState extends Equatable {
       profile: profile ?? this.profile,
       formKey: formKey ?? this.formKey,
       isValidation: isValidation ?? this.isValidation,
+      role: role ?? this.role,
       // token: token ?? this.token,
     );
   }

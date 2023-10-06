@@ -115,7 +115,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       print(response.data);
       var selectedDepartment;
 
-      if (state.profile != Profile.manager) {
+      if (state.role != 0) {
         state.nameController.text = employeeLoginDetails.name;
         state.roleController.text = employeeLoginDetails.role.toString();
         state.emailController.text = employeeLoginDetails.email;
@@ -160,5 +160,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   void dropdownSelected(Department value) {
     List<Department> department = List<Department>.from(state.departmentList);
     emit(state.copyWith(departmentList: department, selectedValue: value));
+  }
+
+  Future<void> getRole() async {
+    var userRole = await Helper().getRole();
+    print("object:::$userRole");
+    emit(state.copyWith(role: userRole));
   }
 }

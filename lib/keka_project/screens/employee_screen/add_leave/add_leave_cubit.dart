@@ -171,4 +171,11 @@ class AddLeaveCubit extends Cubit<AddLeaveState> {
   void navigateToManagerLeave(context) {
     Navigator.of(context).pop();
   }
+
+  Future<void> getRole() async {
+    var userRole = await Helper().getRole();
+    print("object:::$userRole");
+    emit(state.copyWith(role: userRole));
+    // print("${userToken}");
+  }
 }

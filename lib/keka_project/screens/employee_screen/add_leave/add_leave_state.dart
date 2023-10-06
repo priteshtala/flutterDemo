@@ -23,6 +23,7 @@ class AddLeaveState extends Equatable {
         loginData,
         name,
         id,
+        role,
       ];
   TextEditingController searchController;
   TextEditingController dateController;
@@ -37,6 +38,7 @@ class AddLeaveState extends Equatable {
   EmployeeLoginDetails? loginData;
   String? name;
   int? id;
+  int? role;
 
   AddLeaveState({
     required this.searchController,
@@ -52,6 +54,7 @@ class AddLeaveState extends Equatable {
     this.loginData,
     this.name,
     this.id,
+    this.role,
   });
 
   AddLeaveState copyWith({
@@ -68,6 +71,7 @@ class AddLeaveState extends Equatable {
     EmployeeLoginDetails? loginData,
     String? name,
     int? id,
+    int? role,
   }) {
     return AddLeaveState(
       searchController: searchController ?? this.searchController,
@@ -83,6 +87,7 @@ class AddLeaveState extends Equatable {
       loginData: loginData ?? this.loginData,
       name: name ?? this.name,
       id: id ?? this.id,
+      role : role ??this.role,
     );
   }
 }

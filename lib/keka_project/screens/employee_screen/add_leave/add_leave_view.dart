@@ -39,6 +39,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
     super.initState();
     context.read<AddLeaveCubit>().getNotifyEmployee();
     context.read<AddLeaveCubit>().getLoginDetails();
+    context.read<AddLeaveCubit>().getRole();
   }
 
   @override
@@ -60,7 +61,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
-                    (state.profile == Profile.manager)
+                    (state.role == 0)
                         ? context.read<AddLeaveCubit>().postAddLeave(
                               0.toString(),
                               state.dateController.text,
@@ -75,7 +76,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                               state.reasonController.text,
                               state.id,
                             );
-                    print("manager=================== ${state.profile == Profile.manager}");
+                    print("manager=================== ${state.role == 0}");
                     print("id:::::::::${state.filtterdUserList.map((e) => e.id).firstOrNull}");
                     context.read<AddLeaveCubit>().validation(context);
                   },
@@ -98,7 +99,7 @@ class _AddLeaveViewState extends State<AddLeaveView> {
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                     const Gap(6),
-                    (state.profile == Profile.manager)
+                    (state.role == 0)
                         ? state.notifyEmployee.isEmpty
                             ? CustomSearch(
                                 controller: state.searchController,
