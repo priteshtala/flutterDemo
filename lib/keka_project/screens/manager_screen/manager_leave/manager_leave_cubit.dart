@@ -103,7 +103,8 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
         String startDate = dateFormat.format(DateTime.parse(state.leaveTodayList[index].startDate.toString()));
         String endDate = dateFormat.format(DateTime.parse(state.leaveTodayList[index].endDate.toString()));
 
-        return AlertDialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           contentPadding: EdgeInsets.all(0),
           alignment: Alignment.center,
           title: Column(
@@ -149,21 +150,13 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
           title: Column(
             children: [
               Text(state.leaveByDateList[index].user.name),
-              Divider(
-                color: Colors.black,
-              ),
+              Divider(color: Colors.black),
               Text("Role : ${state.leaveByDateList[index].user.role}", style: TextStyle(fontSize: 15)),
-              Divider(
-                color: Colors.black,
-              ),
+              Divider(color: Colors.black),
               Text("Start Date : ${startDate}", style: TextStyle(fontSize: 15)),
-              Divider(
-                color: Colors.black,
-              ),
+              Divider(color: Colors.black),
               Text("End Date : ${endDate}", style: TextStyle(fontSize: 15)),
-              Divider(
-                color: Colors.black,
-              ),
+              Divider(color: Colors.black),
               Text("Reason : ${state.leaveByDateList[index].reason}", style: TextStyle(fontSize: 15)),
             ],
           ),
@@ -267,6 +260,5 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     var userRole = await Helper().getRole();
     print("object:::$userRole");
     emit(state.copyWith(role: userRole));
-    // print("${userToken}");
   }
 }
