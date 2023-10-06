@@ -16,6 +16,7 @@ class ManagerLeaveView extends StatefulWidget {
     return BlocProvider(
       create: (context) => ManagerScreenCubit(
         ManagerScreenState(
+
           profile: arg,
           leaveTodayList: [],
           dateList: [],
@@ -170,16 +171,21 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: CircleAvatar(
-                                      radius: 27,
-                                      backgroundColor: Colors.green,
-                                      child: Text(
-                                        "${state.leaveTodayList[index].user.name[0].toUpperCase()}",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
+                                    child: GestureDetector(
+                                      child: CircleAvatar(
+                                        radius: 27,
+                                        backgroundColor: Colors.green,
+                                        child: Text(
+                                          "${state.leaveTodayList[index].user.name[0].toUpperCase()}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                          ),
                                         ),
                                       ),
+                                      onTap: () {
+                                        context.read<ManagerScreenCubit>().tapToOpenDetail(context,index);
+                                      },
                                     ),
                                   ),
                                   Column(
@@ -247,11 +253,16 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                                          child: CircleAvatar(
-                                              radius: 27,
-                                              backgroundColor: Colors.green,
-                                              child: Text(state.leaveByDateList[index].user.name[0].toUpperCase(),
-                                                  style: const TextStyle(color: Colors.white, fontSize: 20))),
+                                          child: GestureDetector(
+
+                                            child: CircleAvatar(
+                                                radius: 27,
+                                                backgroundColor: Colors.green,
+                                                child: Text(state.leaveByDateList[index].user.name[0].toUpperCase(),
+                                                    style: const TextStyle(color: Colors.white, fontSize: 20))),
+                                          onTap: () {
+                                            context.read<ManagerScreenCubit>().leaveByDateDetail(context,index);
+                                          },),
                                         ),
                                         Column(
                                           children: [

@@ -94,6 +94,84 @@ class ManagerScreenCubit extends Cubit<ManagerScreenState> {
     );
   }
 
+  tapToOpenDetail(BuildContext context, index) {
+    showDialog(
+      barrierColor: Colors.white60,
+      context: context,
+      builder: (context) {
+        final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+        String startDate = dateFormat.format(DateTime.parse(state.leaveTodayList[index].startDate.toString()));
+        String endDate = dateFormat.format(DateTime.parse(state.leaveTodayList[index].endDate.toString()));
+
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(0),
+          alignment: Alignment.center,
+          title: Column(
+            children: [
+              Text(state.leaveTodayList[index].user.name),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("Role : ${state.leaveTodayList[index].user.role}", style: TextStyle(fontSize: 15)),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("Start Date : ${startDate}", style: TextStyle(fontSize: 15)),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("End Date : ${endDate}", style: TextStyle(fontSize: 15)),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("Reason : ${state.leaveTodayList[index].reason}", style: TextStyle(fontSize: 15)),
+            ],
+          ),
+          icon: Icon(Icons.account_circle_outlined, size: 40),
+        );
+      },
+    );
+  }
+
+  leaveByDateDetail(BuildContext context, index) {
+    showDialog(
+      barrierColor: Colors.white60,
+      context: context,
+      builder: (context) {
+        final DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+        String startDate = dateFormat.format(DateTime.parse(state.leaveByDateList[index].startDate.toString()));
+        String endDate = dateFormat.format(DateTime.parse(state.leaveByDateList[index].endDate.toString()));
+
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(0),
+          alignment: Alignment.center,
+          title: Column(
+            children: [
+              Text(state.leaveByDateList[index].user.name),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("Role : ${state.leaveByDateList[index].user.role}", style: TextStyle(fontSize: 15)),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("Start Date : ${startDate}", style: TextStyle(fontSize: 15)),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("End Date : ${endDate}", style: TextStyle(fontSize: 15)),
+              Divider(
+                color: Colors.black,
+              ),
+              Text("Reason : ${state.leaveByDateList[index].reason}", style: TextStyle(fontSize: 15)),
+            ],
+          ),
+          icon: Icon(Icons.account_circle_outlined, size: 40),
+        );
+      },
+    );
+  }
+
   void getLeaveToday() async {
     final response = await Dio().get('$baseurl/api/today_leave_user');
     var leaveTodayData = List<TodayLeave>.from(state.leaveTodayList);
