@@ -1,5 +1,6 @@
 import 'package:finaldemo/keka_project/common/common_button.dart';
 import 'package:finaldemo/keka_project/common/const.dart';
+import 'package:finaldemo/keka_project/screens/employee_screen/employee_screen_login/sharedpref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -55,6 +56,8 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
 
   @override
   Widget build(BuildContext context) {
+    var name = Helper().getRole();
+    print("role:::::${name}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return RefreshIndicator(
@@ -266,7 +269,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       ],
                     ),
                   ),
-                  (state.profile == Profile.manager)
+                  (Helper().getRole() == 0)
                       ? Padding(
                           padding: const EdgeInsets.all(10),
                           child: Row(

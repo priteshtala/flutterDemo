@@ -38,12 +38,15 @@ class MainScreenCubit extends Cubit<MainScreenState> {
         ),
       );
     } else if (state.isSelected == 0) {
-      Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: Profile.manager);
+      Helper().saveRole(0);
+      print("managerLogin");
+      Navigator.of(context).pushNamed(ManagerLeaveView.routeName);
     } else {
       var getToken = await Helper().getToken();
       getToken.isNotEmpty
-          ? Navigator.of(context).pushNamed(ManagerLeaveView.routeName, arguments: Profile.employee)
-          : Navigator.of(context).pushNamed(EmployeeLoginView.routeName);
+          ? Navigator.of(context).pushNamed(ManagerLeaveView.routeName)
+      
+          : Navigator.of(context).pushNamed(EmployeeLoginView.routeName).then((value) => Helper().saveRole(1));
     }
   }
 }
