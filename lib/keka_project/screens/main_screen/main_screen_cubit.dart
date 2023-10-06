@@ -21,7 +21,6 @@ class MainScreenCubit extends Cubit<MainScreenState> {
   }
 
   void validation(context) async {
-    // String role = await Helper().getRole().toString();
     if (state.isSelected == -1) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

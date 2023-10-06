@@ -47,7 +47,6 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
   void initState() {
     super.initState();
     cubit.getToken();
-    cubit.getRole();
     cubit.getLeaveToday();
     cubit.getLeaveByDate(cubit.state.dateController.text);
     cubit.employeeCount();
@@ -57,16 +56,13 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
 
   @override
   Widget build(BuildContext context) {
-    var name = Helper().getRole();
-    print("role:::::${name}");
-    print("dfgdsgdfgdfg:::::${Helper().getRole()}");
     return BlocBuilder<ManagerScreenCubit, ManagerScreenState>(
       builder: (context, state) {
         return RefreshIndicator(
           color: Colors.green,
           onRefresh: () => context.read<ManagerScreenCubit>().refresh(),
           child: Scaffold(
-            bottomNavigationBar: (state.role == 0)
+            bottomNavigationBar: (state.profile == Profile.manager)
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -124,7 +120,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                   ),
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              title: (state.role == 0) ? Text("Elaunch Solution") : Text(state.name.toString()),
+              title: (state.profile == Profile.manager) ? Text("Elaunch Solution") : Text(state.name.toString()),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -271,7 +267,7 @@ class _ManagerLeaveViewState extends State<ManagerLeaveView> {
                       ],
                     ),
                   ),
-                  (state.role == 0)
+                  (Helper().getRole() == 0)
                       ? Padding(
                           padding: const EdgeInsets.all(10),
                           child: Row(

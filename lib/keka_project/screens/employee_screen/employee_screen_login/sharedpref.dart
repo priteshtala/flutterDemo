@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class Helper {
   static String valueSharedPreferences = "userToken";
   static String roles = "roleName";
